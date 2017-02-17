@@ -35,7 +35,7 @@ namespace Hotel
                         {
                             while (dr.Read())
                             {
-                                foreach (Button b in flowLayoutPanel1.Controls)
+                                foreach (Button b in tableLayoutPanel1.Controls)
                                 {
                                     if (dr["estado"].ToString() == "disponible")
                                     {
