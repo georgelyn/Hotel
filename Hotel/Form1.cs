@@ -105,14 +105,20 @@ namespace Hotel
             habitaciones.CargarHuespedPorHabitacion(16);
         }
 
-        private void button1_MouseClick(object sender, MouseEventArgs e)
+        private void button1_Click(object sender, MouseEventArgs e)
         {
-            int numero_habitacion = int.Parse(((Button)sender).Text);
-            habitaciones = new Habitaciones();
-           
-            habitaciones.CargarHuespedPorHabitacion(numero_habitacion);
-            habitaciones.ShowDialog();
+            if (((Button)sender).BackColor == Color.Gray)
+            {
+                MessageBox.Show("Limpieza - Falta implementar");
+            }
+            else
+            {
+                int numero_habitacion = int.Parse(((Button)sender).Text);
+                habitaciones = new Habitaciones();
 
+                habitaciones.CargarHuespedPorHabitacion(numero_habitacion);
+                habitaciones.ShowDialog();
+            }
             //MessageBox.Show(((Button)sender).Name + " was pressed!");
         }
     }
