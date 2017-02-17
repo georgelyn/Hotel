@@ -105,7 +105,7 @@ namespace Hotel
             habitaciones.CargarHuespedPorHabitacion(16);
         }
 
-        private void button1_Click(object sender, MouseEventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
             if (((Button)sender).BackColor == Color.Gray)
             {
