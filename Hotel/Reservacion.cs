@@ -26,10 +26,12 @@ namespace Hotel
             // Llamada a métodos
             CargarNumHabitaciones("disponible");
             CargarTipoHabitacion();
+
+            ChequearCedula(true);
+            //panelContenedor.Visible = false;
         }
 
         double total; // El total a pagar
-
 
         public void CargarNumHabitaciones(string estado)
         {
@@ -61,7 +63,7 @@ namespace Hotel
                     }
                 }
 
-                comboHabitacion.SelectedIndex = 0;
+                comboHabitacion.SelectedIndex = -1;
             }
             catch (Exception ex)
             {
@@ -97,10 +99,23 @@ namespace Hotel
             }
         }
 
-        public void CargarHuespedPorHabitacion(int numero_hab)
+        public void CargarHuespedPorHabitacion(int numero_hab, string estado)
         {
+            ChequearCedula(true);
+
             CargarNumHabitaciones("todas"); // Cargar todas las habitaciones
             comboHabitacion.SelectedIndex = (numero_hab - 1);
+
+            if (estado == "ocupada")
+            {
+                ChequearCedula(false);
+
+                btnModificar.Location = new Point(704, 10);
+                btnModificar.Visible = true;
+                btnAceptar.Visible = false;
+
+                this.Text = "Modificar Reservación";
+            }
 
             try
             {
@@ -188,6 +203,48 @@ namespace Hotel
             } catch (SQLiteException ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        public void ChequearCedula(bool chequear)
+        {
+            // Estado por default // if (chequear)
+
+            panelCedula.Visible = true;
+            lblCedula.Location = new Point(50, 40);
+            panelCedula.Controls.Add(lblCedula);
+            //lblCedula.Visible = true;
+            txtCedula.Location = new Point(135, 37);
+            panelCedula.Controls.Add(txtCedula);
+            //txtCedula.Visible = true;
+
+            btnAceptar.Visible = false;
+
+            if (!chequear)
+            {
+                lblCedula.Location = new Point(91, 179);
+                txtCedula.Location = new Point(184, 176);
+                panelContenedor.Controls.Add(lblCedula);
+                panelContenedor.Controls.Add(txtCedula);
+
+                btnAceptar.Visible = true;
+            }
+
+            foreach (Control c in panelContenedor.Controls)
+            {
+                if (chequear)
+                {
+                    if (c.Name != "panelCedula")
+                    // if (!(c.Name == "lblCedula" || c.Name == "txtCedula" || c.Name == "btnCheckCedula"))
+                    {
+                        c.Visible = false;
+                    }
+                }
+                else // Ya se evaluó la cédula
+                {
+                    panelCedula.Visible = false;
+                    c.Visible = true;
+                }
             }
         }
 
@@ -325,6 +382,16 @@ namespace Hotel
 
         public bool ValidacionCamposTexto()
         {
+            lblHab.ForeColor = Color.Black;
+
+            if (comboHabitacion.SelectedIndex == -1)
+            {
+                MessageBox.Show(this, "No ha seleccionado el número de habitación.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                lblHab.ForeColor = Color.Red;
+                comboHabitacion.DroppedDown = true;
+                return false;
+            }
+
             TextBox[] txtBox = { txtNombre, txtCedula, txtTotal };
             Label[] txtLabel = { lblNombre, lblCedula, lblTotal };
 
@@ -354,16 +421,6 @@ namespace Hotel
             if (ValidacionCamposTexto()) // Si la validación se realizó efectivamente
             {
                 //NuevaReservacion("nueva");
-            }
-        }
-
-        private void button1_Click(object sender, EventArgs e) // Botón prueba Check cédula
-        {
-            if (BuscarPorCedula(txtCedula.Text.Replace(".", "")))
-            {
-                btnAceptar.Visible = false;
-                btnModificar.Visible = true;
-                txtCedula.Enabled = false;
             }
         }
 
@@ -435,8 +492,21 @@ namespace Hotel
 
             //txtTotal.Text = total.ToString();
         }
+
         #endregion
 
+        private void btnCheckCedula_Click(object sender, EventArgs e)
+        {
+            if (BuscarPorCedula(txtCedula.Text.Replace(".", ""))) // Si existe el número de cédula (cliente)
+            {
+                btnModificar.Location = new Point(704, 10);
+                btnModificar.Visible = true;
+                btnAceptar.Visible = false;
+            }
 
+            ChequearCedula(false);
+            txtCedula.Enabled = false;
+            btnAceptar.Visible = true;
+        }
     }
 }

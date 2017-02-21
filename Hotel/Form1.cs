@@ -102,7 +102,7 @@ namespace Hotel
                 reservacion.Activate();
             }
 
-            reservacion.CargarHuespedPorHabitacion(16);
+            //reservacion.CargarHuespedPorHabitacion(16);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -116,7 +116,17 @@ namespace Hotel
                 int numero_habitacion = int.Parse(((Button)sender).Text);
                 reservacion = new Reservacion();
 
-                reservacion.CargarHuespedPorHabitacion(numero_habitacion);
+                reservacion.ChequearCedula(false);
+
+                if (((Button)sender).BackColor == Color.Red)
+                {
+                    reservacion.CargarHuespedPorHabitacion(numero_habitacion, "ocupada");
+                }
+                else if (((Button)sender).BackColor == Color.Green)
+                {
+                    reservacion.CargarHuespedPorHabitacion(numero_habitacion, "disponible");
+                }
+
                 reservacion.ShowDialog();
             }
             //MessageBox.Show(((Button)sender).Name + " was pressed!");
