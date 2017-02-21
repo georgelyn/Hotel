@@ -38,6 +38,8 @@
             this.lblFechaIngrso = new System.Windows.Forms.Label();
             this.lblFechaSalida = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnEliminar = new System.Windows.Forms.Button();
+            this.btnModificar = new System.Windows.Forms.Button();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
@@ -64,8 +66,6 @@
             this.txtNotas = new System.Windows.Forms.RichTextBox();
             this.listboxHabitaciones = new System.Windows.Forms.ListBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.btnModificar = new System.Windows.Forms.Button();
-            this.btnEliminar = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -181,6 +181,26 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(912, 55);
             this.panel1.TabIndex = 54;
+            // 
+            // btnEliminar
+            // 
+            this.btnEliminar.Location = new System.Drawing.Point(611, 10);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(87, 34);
+            this.btnEliminar.TabIndex = 58;
+            this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Visible = false;
+            // 
+            // btnModificar
+            // 
+            this.btnModificar.Location = new System.Drawing.Point(518, 10);
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(87, 34);
+            this.btnModificar.TabIndex = 57;
+            this.btnModificar.Text = "Modificar";
+            this.btnModificar.UseVisualStyleBackColor = true;
+            this.btnModificar.Visible = false;
             // 
             // btnAceptar
             // 
@@ -432,24 +452,6 @@
             this.label3.TabIndex = 70;
             this.label3.Text = "Tipo de habitación:";
             // 
-            // btnModificar
-            // 
-            this.btnModificar.Location = new System.Drawing.Point(518, 10);
-            this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(87, 34);
-            this.btnModificar.TabIndex = 57;
-            this.btnModificar.Text = "Modificar";
-            this.btnModificar.UseVisualStyleBackColor = true;
-            // 
-            // btnEliminar
-            // 
-            this.btnEliminar.Location = new System.Drawing.Point(611, 10);
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(87, 34);
-            this.btnEliminar.TabIndex = 58;
-            this.btnEliminar.Text = "Eliminar";
-            this.btnEliminar.UseVisualStyleBackColor = true;
-            // 
             // Reservacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -481,7 +483,7 @@
             this.MaximizeBox = false;
             this.Name = "Reservacion";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Nuevo registro";
+            this.Text = "Nueva Reservación";
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);

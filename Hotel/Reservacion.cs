@@ -191,7 +191,7 @@ namespace Hotel
             }
         }
 
-        public void IngresarHuesped()
+        public void NuevaReservacion(string cliente)
         {
             using (TransactionScope transactionScope = new TransactionScope()) // Si falla un insert, se anulan todos los cambio
             {
@@ -199,12 +199,24 @@ namespace Hotel
                 {
                     string query = "";
 
-                    using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
+                    if (cliente == "nuevo") // Cliente existe
                     {
                         query = "INSERT INTO cliente (nombre, cedula, edad, telefono, telefono2) VALUES (@nombre, @cedula, @edad, @telefono1, @telefono2); " +
-                            "UPDATE habitacion SET estado=@estado WHERE numero_hab='" + comboHabitacion.Text + "';" +
+                            "UPDATE habitacion SET estado=@estado WHERE numero_hab=@numero_habitacion;" +
                             "INSERT INTO reservacion (numero_hab, cedula_cliente, fecha_ingreso, fecha_salida, costo_total) VALUES (@numero_habitacion, @cedula, @fechaIngreso, @fechaSalida, @costoTotal); " +
                             "INSERT INTO vehiculo (cedula_cliente, es_camion, marca, modelo, placa) VALUES (@cedula, @camion, @marca, @modelo, @placa)";
+                    }
+                    else if (cliente == "existe") // Cliente nuevo
+                    {
+                        query = "UPDATE cliente SET nombre=@nombre, edad=@edad, telefono=@telefono1, telefono2=@telefono2 WHERE cedula=@cedula;" +
+                           "UPDATE habitacion SET estado=@estado WHERE numero_hab=@numero_habitacion;" +
+                           "INSERT INTO reservacion (numero_hab, cedula_cliente, fecha_ingreso, fecha_salida, costo_total) VALUES (@numero_habitacion, @cedula, @fechaIngreso, @fechaSalida, @costoTotal); " +
+                           "UPDATE vehiculo SET es_camion=@camion, marca=@marca, modelo=@modelo, placa=@placa WHERE cedula_cliente=@cedula";
+                    }
+
+                    using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
+                    {
+                        
 
                         using (SQLiteCommand cmd = new SQLiteCommand(query, conn))
                         {
@@ -278,7 +290,7 @@ namespace Hotel
 
         }
 
-        public void BuscarPorCedula(string cedula)
+        public bool BuscarPorCedula(string cedula)
         {
             try
             {
@@ -292,8 +304,10 @@ namespace Hotel
                         {
                             if (dr.HasRows)
                             {
-                                MessageBox.Show("Existe");
+                                //MessageBox.Show("Existe");
                                 CargarDatosCliente(cedula);
+
+                                return true; // Cliente existe
 
                                 //CargarHuesped(10);
                             }
@@ -305,6 +319,8 @@ namespace Hotel
             {
                 MessageBox.Show(ex.Message);
             }
+
+            return false; // CLiente no existe
         }
 
         public bool ValidacionCamposTexto()
@@ -337,13 +353,18 @@ namespace Hotel
         {
             if (ValidacionCamposTexto()) // Si la validación se realizó efectivamente
             {
-                IngresarHuesped();
+                //NuevaReservacion("nueva");
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e) // Botón prueba Check cédula
         {
-            BuscarPorCedula(txtCedula.Text.Replace(".", ""));
+            if (BuscarPorCedula(txtCedula.Text.Replace(".", "")))
+            {
+                btnAceptar.Visible = false;
+                btnModificar.Visible = true;
+                txtCedula.Enabled = false;
+            }
         }
 
         private void listboxHabitaciones_SelectedIndexChanged(object sender, EventArgs e)
