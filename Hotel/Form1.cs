@@ -16,7 +16,7 @@ namespace Hotel
         }
 
         // Clases
-        Habitaciones habitaciones;
+        Reservacion reservacion;
 
         public void ActualizarColores()
         {
@@ -79,8 +79,8 @@ namespace Hotel
 
             //if (habitaciones == null || habitaciones.IsDisposed)
             //{
-                habitaciones = new Habitaciones();
-                habitaciones.ShowDialog();
+                reservacion = new Reservacion();
+                reservacion.ShowDialog();
             //}
             //else
             //{
@@ -92,17 +92,17 @@ namespace Hotel
 
         private void button54_Click(object sender, EventArgs e)
         {
-            if (habitaciones == null || habitaciones.IsDisposed)
+            if (reservacion == null || reservacion.IsDisposed)
             {
-                habitaciones = new Habitaciones();
-                habitaciones.Show();
+                reservacion = new Reservacion();
+                reservacion.Show();
             }
             else
             {
-                habitaciones.Activate();
+                reservacion.Activate();
             }
 
-            habitaciones.CargarHuespedPorHabitacion(16);
+            reservacion.CargarHuespedPorHabitacion(16);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -114,10 +114,10 @@ namespace Hotel
             else
             {
                 int numero_habitacion = int.Parse(((Button)sender).Text);
-                habitaciones = new Habitaciones();
+                reservacion = new Reservacion();
 
-                habitaciones.CargarHuespedPorHabitacion(numero_habitacion);
-                habitaciones.ShowDialog();
+                reservacion.CargarHuespedPorHabitacion(numero_habitacion);
+                reservacion.ShowDialog();
             }
             //MessageBox.Show(((Button)sender).Name + " was pressed!");
         }

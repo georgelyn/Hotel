@@ -4,17 +4,20 @@ using System.Transactions;
 //using System.Globalization;
 //using System.Threading;
 using System.Data.SQLite;
+using System.Drawing;
+using System.Text.RegularExpressions;
 
 namespace Hotel
 {
-    public partial class Habitaciones : Form
+    public partial class Reservacion : Form
     {
-        public Habitaciones()
+        public Reservacion()
         {
             //Thread.CurrentThread.CurrentCulture = new CultureInfo("es-VE");
             InitializeComponent();
 
             //dtSalida.Value = DateTime.Now.AddDays(1);
+
             // Un día después de fecha actual, con hora 2:00 pm
             DateTime fechaSalida = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 14, 0, 0);
             fechaSalida = fechaSalida.AddDays(1);
@@ -22,7 +25,11 @@ namespace Hotel
 
             // Llamada a métodos
             CargarNumHabitaciones("disponible");
+            CargarTipoHabitacion();
         }
+
+        double total; // El total a pagar
+
 
         public void CargarNumHabitaciones(string estado)
         {
@@ -62,9 +69,37 @@ namespace Hotel
             }
         }
 
+        public void CargarTipoHabitacion()
+        {
+            try
+            {
+                using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
+                {
+                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT tipo FROM tipo_habitacion", conn))
+                    {
+                        conn.Open();
+
+                        using (SQLiteDataReader dr = cmd.ExecuteReader())
+                        {
+                            if (dr.HasRows)
+                            {
+                                while (dr.Read())
+                                {
+                                    listboxHabitaciones.Items.Add(dr["tipo"].ToString());
+                                }
+                            }
+                        }
+                    }
+                }
+            } catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
         public void CargarHuespedPorHabitacion(int numero_hab)
         {
-            CargarNumHabitaciones(null);
+            CargarNumHabitaciones("todas"); // Cargar todas las habitaciones
             comboHabitacion.SelectedIndex = (numero_hab - 1);
 
             try
@@ -272,14 +307,115 @@ namespace Hotel
             }
         }
 
+        public bool ValidacionCamposTexto()
+        {
+            TextBox[] txtBox = { txtNombre, txtCedula, txtTotal };
+            Label[] txtLabel = { lblNombre, lblCedula, lblTotal };
+
+            for (int i = 0; i < txtBox.Length; i++)
+            {
+                string text = txtBox[i].Text;
+                txtLabel[i].ForeColor = Color.Black;
+
+                if (String.IsNullOrEmpty(text.Trim()))
+                {                   
+                    MessageBox.Show(this, $"El campo de texto \"{txtLabel[i].Text.Replace(":", "")}\" no puede estar vacío.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txtBox[i].Clear();
+                    txtBox[i].Select();
+                    txtLabel[i].ForeColor = Color.Red;
+                    return false; // No es válido
+                }
+            }
+            return true; // Es valido, se puede proceder
+        }
+
+        /* 
+        ** EVENTOS
+        */
+
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            IngresarHuesped();
+            if (ValidacionCamposTexto()) // Si la validación se realizó efectivamente
+            {
+                IngresarHuesped();
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             BuscarPorCedula(txtCedula.Text.Replace(".", ""));
         }
+
+        private void listboxHabitaciones_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
+                {
+                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT tipo, costo FROM tipo_habitacion WHERE tipo=@tipo", conn))
+                    {
+                        cmd.Parameters.AddWithValue("tipo", listboxHabitaciones.Text);
+                        conn.Open();
+
+                        using (SQLiteDataReader dr = cmd.ExecuteReader())
+                        {
+                            if (dr.HasRows)
+                            {
+                                if (dr.Read())
+                                {
+                                    total = Convert.ToDouble(dr["costo"].ToString());
+                                    //if (checkCamion.Checked)
+                                    //    total += 5000;
+                                    txtTotal.Text = total.ToString();
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        #region NO IMPLEMENTADOS TODAVIA
+
+        private void txtEdad_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //if (!char.IsDigit(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != 13 && !char.IsPunctuation(e.KeyChar)) // 8 = backspace, 13 = enter
+            //{
+            //    //MessageBox.Show("Carácter inválido.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //    e.Handled = true;
+            //}
+        }
+
+        private void txtTelefono1_Leave(object sender, EventArgs e)
+        {
+            //long getphn = Convert.ToInt64(txtTelefono1.Text);
+            //string formatString = String.Format("{0:0000-000-0000}", getphn);
+            //txtTelefono1.Text = formatString;
+        }
+
+        private void checkCamion_CheckedChanged(object sender, EventArgs e)
+        {
+
+            // El problema de hacerlo así es que el valor por camión no se podrá cambiar fácilmente
+
+            //if (checkCamion.Checked)
+            //{
+            //    total += 5000;
+            //}
+            //else
+            //{
+            //    total -= 5000;
+            //}
+
+            //txtTotal.Text = total.ToString();
+        }
+        #endregion
+
+
     }
 }
