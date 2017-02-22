@@ -154,7 +154,8 @@
             // 
             // panelCedula
             // 
-            this.panelCedula.BackColor = System.Drawing.Color.Silver;
+            this.panelCedula.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.panelCedula.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelCedula.Controls.Add(this.btnCheckCedula);
             this.panelCedula.Controls.Add(this.txtCedula);
             this.panelCedula.Controls.Add(this.lblCedula);
@@ -165,12 +166,13 @@
             // 
             // btnCheckCedula
             // 
-            this.btnCheckCedula.Location = new System.Drawing.Point(288, 31);
+            this.btnCheckCedula.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnCheckCedula.Location = new System.Drawing.Point(287, 20);
             this.btnCheckCedula.Name = "btnCheckCedula";
-            this.btnCheckCedula.Size = new System.Drawing.Size(105, 38);
+            this.btnCheckCedula.Size = new System.Drawing.Size(105, 61);
             this.btnCheckCedula.TabIndex = 112;
             this.btnCheckCedula.Text = "Aceptar";
-            this.btnCheckCedula.UseVisualStyleBackColor = true;
+            this.btnCheckCedula.UseVisualStyleBackColor = false;
             this.btnCheckCedula.Click += new System.EventHandler(this.btnCheckCedula_Click);
             // 
             // txtCedula
@@ -286,6 +288,7 @@
             this.listboxHabitaciones.Name = "listboxHabitaciones";
             this.listboxHabitaciones.Size = new System.Drawing.Size(185, 164);
             this.listboxHabitaciones.TabIndex = 109;
+            this.listboxHabitaciones.SelectedIndexChanged += new System.EventHandler(this.listboxHabitaciones_SelectedIndexChanged);
             // 
             // txtNotas
             // 
@@ -344,6 +347,7 @@
             this.checkCamion.TabIndex = 49;
             this.checkCamion.Text = "Camión";
             this.checkCamion.UseVisualStyleBackColor = true;
+            this.checkCamion.CheckedChanged += new System.EventHandler(this.checkCamion_CheckedChanged);
             // 
             // txtPlaca
             // 

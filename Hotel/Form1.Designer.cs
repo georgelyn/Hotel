@@ -339,7 +339,7 @@
             this.button48.Name = "button48";
             this.button48.Size = new System.Drawing.Size(93, 72);
             this.button48.TabIndex = 47;
-            this.button48.Text = "8";
+            this.button48.Text = "48";
             this.button48.UseVisualStyleBackColor = true;
             this.button48.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -353,7 +353,7 @@
             this.button47.Name = "button47";
             this.button47.Size = new System.Drawing.Size(93, 72);
             this.button47.TabIndex = 46;
-            this.button47.Text = "4";
+            this.button47.Text = "47";
             this.button47.UseVisualStyleBackColor = true;
             this.button47.Click += new System.EventHandler(this.button1_Click);
             // 

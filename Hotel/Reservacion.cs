@@ -6,6 +6,7 @@ using System.Transactions;
 using System.Data.SQLite;
 using System.Drawing;
 using System.Text.RegularExpressions;
+using System.Text;
 
 namespace Hotel
 {
@@ -27,7 +28,7 @@ namespace Hotel
             CargarNumHabitaciones("disponible");
             CargarTipoHabitacion();
 
-            ChequearCedula(true);
+            PanelCedula(true);
             //panelContenedor.Visible = false;
         }
 
@@ -101,14 +102,14 @@ namespace Hotel
 
         public void CargarHuespedPorHabitacion(int numero_hab, string estado)
         {
-            ChequearCedula(true);
+            PanelCedula(true);
 
             CargarNumHabitaciones("todas"); // Cargar todas las habitaciones
             comboHabitacion.SelectedIndex = (numero_hab - 1);
 
             if (estado == "ocupada")
             {
-                ChequearCedula(false);
+                PanelCedula(false);
 
                 btnModificar.Location = new Point(704, 10);
                 btnModificar.Visible = true;
@@ -175,7 +176,8 @@ namespace Hotel
             {
                 using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
                 {
-                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT cliente.*, modelo, marca, es_camion, placa FROM cliente INNER JOIN vehiculo on cedula = cedula_cliente WHERE cedula ='" + cedula + "'", conn))
+                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM cliente WHERE cedula ='" + cedula + "'", conn))
+                    //"SELECT cliente.*, modelo, marca, es_camion, placa FROM cliente INNER JOIN vehiculo on cedula = cedula_cliente WHERE cedula ='" + cedula + "'", conn))
                     {
                         conn.Open();
 
@@ -184,17 +186,19 @@ namespace Hotel
                             while (dr.Read())
                             {
                                 txtNombre.Text = dr["nombre"].ToString();
-                                txtCedula.Text = cedula;
+                                txtCedula.Text = cedula; // Hasta ahora no es realmente necesario. Se carga en btnCheckCedula
                                 txtEdad.Text = dr["edad"].ToString();
                                 txtTelefono1.Text = dr["telefono"].ToString();
                                 txtTelefono2.Text = dr["telefono2"].ToString();
 
-                                if (Convert.ToBoolean(dr["es_camion"]) == true)
-                                    checkCamion.Checked = true;
+                                ////// Implementar de otra manera. Permitiendo elegir entre varios vehículos
 
-                                txtMarca.Text = dr["marca"].ToString();
-                                txtModelo.Text = dr["modelo"].ToString();
-                                txtPlaca.Text = dr["placa"].ToString();
+                                //if (Convert.ToBoolean(dr["es_camion"]) == true)
+                                //    checkCamion.Checked = true;
+
+                                //txtMarca.Text = dr["marca"].ToString();
+                                //txtModelo.Text = dr["modelo"].ToString();
+                                //txtPlaca.Text = dr["placa"].ToString();
 
                             }
                         }
@@ -206,21 +210,20 @@ namespace Hotel
             }
         }
 
-        public void ChequearCedula(bool chequear)
+        public void PanelCedula(bool visible)
         {
             // Estado por default // if (chequear)
 
             panelCedula.Visible = true;
             lblCedula.Location = new Point(50, 40);
             panelCedula.Controls.Add(lblCedula);
-            //lblCedula.Visible = true;
             txtCedula.Location = new Point(135, 37);
             panelCedula.Controls.Add(txtCedula);
-            //txtCedula.Visible = true;
 
+            txtCedula.Select();
             btnAceptar.Visible = false;
 
-            if (!chequear)
+            if (!visible)
             {
                 lblCedula.Location = new Point(91, 179);
                 txtCedula.Location = new Point(184, 176);
@@ -232,7 +235,7 @@ namespace Hotel
 
             foreach (Control c in panelContenedor.Controls)
             {
-                if (chequear)
+                if (visible)
                 {
                     if (c.Name != "panelCedula")
                     // if (!(c.Name == "lblCedula" || c.Name == "txtCedula" || c.Name == "btnCheckCedula"))
@@ -248,33 +251,41 @@ namespace Hotel
             }
         }
 
-        public void NuevaReservacion(string cliente)
+        public void NuevaReservacion(bool clienteNuevo)
         {
             using (TransactionScope transactionScope = new TransactionScope()) // Si falla un insert, se anulan todos los cambio
             {
                 try
                 {
                     string query = "";
+                    bool conVehiculo = true;
 
-                    if (cliente == "nuevo") // Cliente existe
+                    if ((!checkCamion.Checked) && (String.IsNullOrEmpty(txtMarca.Text.Trim()))
+                         && (String.IsNullOrEmpty(txtModelo.Text.Trim())) && (String.IsNullOrEmpty(txtPlaca.Text.Trim())))
                     {
-                        query = "INSERT INTO cliente (nombre, cedula, edad, telefono, telefono2) VALUES (@nombre, @cedula, @edad, @telefono1, @telefono2); " +
-                            "UPDATE habitacion SET estado=@estado WHERE numero_hab=@numero_habitacion;" +
-                            "INSERT INTO reservacion (numero_hab, cedula_cliente, fecha_ingreso, fecha_salida, costo_total) VALUES (@numero_habitacion, @cedula, @fechaIngreso, @fechaSalida, @costoTotal); " +
-                            "INSERT INTO vehiculo (cedula_cliente, es_camion, marca, modelo, placa) VALUES (@cedula, @camion, @marca, @modelo, @placa)";
+                        conVehiculo = false; // Si campos vacíos, no tiene vehículo
                     }
-                    else if (cliente == "existe") // Cliente nuevo
+
+                    if (clienteNuevo)
                     {
-                        query = "UPDATE cliente SET nombre=@nombre, edad=@edad, telefono=@telefono1, telefono2=@telefono2 WHERE cedula=@cedula;" +
+                        query = "INSERT INTO cliente (nombre, cedula, edad, telefono, telefono2, cliente_desde) VALUES (@nombre, @cedula, @edad, @telefono1, @telefono2, @cliente_desde); " +
+                            "UPDATE habitacion SET estado=@estado WHERE numero_hab=@numero_habitacion;" +
+                            "INSERT INTO reservacion (numero_hab, cedula_cliente, fecha_ingreso, fecha_salida, tipo_habitacion, costo_total) VALUES (@numero_habitacion, @cedula, @fechaIngreso, @fechaSalida, @tipo_habitacion, @costoTotal)";
+                    }
+                    else if (!clienteNuevo)
+                    {
+                        query = query = "UPDATE cliente SET nombre=@nombre, edad=@edad, telefono=@telefono1, telefono2=@telefono2 WHERE cedula=@cedula;" +
                            "UPDATE habitacion SET estado=@estado WHERE numero_hab=@numero_habitacion;" +
-                           "INSERT INTO reservacion (numero_hab, cedula_cliente, fecha_ingreso, fecha_salida, costo_total) VALUES (@numero_habitacion, @cedula, @fechaIngreso, @fechaSalida, @costoTotal); " +
-                           "UPDATE vehiculo SET es_camion=@camion, marca=@marca, modelo=@modelo, placa=@placa WHERE cedula_cliente=@cedula";
+                           "INSERT INTO reservacion (numero_hab, cedula_cliente, fecha_ingreso, fecha_salida, tipo_habitacion, costo_total) VALUES (@numero_habitacion, @cedula, @fechaIngreso, @fechaSalida, @tipo_habitacion, @costoTotal)";
+                    }
+
+                    if (conVehiculo) // Sólo almacenar vehículo si los campos no están vacíos
+                    {
+                        query += "; INSERT INTO vehiculo(cedula_cliente, es_camion, marca, modelo, placa) VALUES(@cedula, @camion, @marca, @modelo, @placa)";
                     }
 
                     using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
-                    {
-                        
-
+                    {                      
                         using (SQLiteCommand cmd = new SQLiteCommand(query, conn))
                         {
                             #region Clientes
@@ -284,6 +295,11 @@ namespace Hotel
                             cmd.Parameters.AddWithValue("@edad", StringExtensions.NullString(txtEdad.Text.Trim()));
                             cmd.Parameters.AddWithValue("@telefono1", StringExtensions.NullString(txtTelefono1.Text.Trim()));
                             cmd.Parameters.AddWithValue("@telefono2", StringExtensions.NullString(txtTelefono2.Text.Trim()));
+
+                            if (clienteNuevo)
+                            {
+                                cmd.Parameters.AddWithValue("@cliente_desde", dtEntrada.Value);
+                            }
 
                             #endregion
 
@@ -299,22 +315,27 @@ namespace Hotel
                             //cmd.Parameters.AddWithValue("@cedula_cliente", txtCedula.Text.Trim().Replace(".", ""));
                             cmd.Parameters.AddWithValue("@fechaIngreso", dtEntrada.Value);//.ToString("dd-MM-yyyy h:mm tt", CultureInfo.InvariantCulture));
                             cmd.Parameters.AddWithValue("@fechaSalida", dtSalida.Value);//.ToString("yyyy-MM-dd h:mm tt", CultureInfo.InvariantCulture));
+                            cmd.Parameters.AddWithValue("@tipo_habitacion", listboxHabitaciones.Text);
                             cmd.Parameters.AddWithValue("@costoTotal", txtTotal.Text.Trim().Replace(".", "").Replace(",", ""));
 
                             #endregion
 
                             #region Vehiculo
 
-                            bool esCamion = false;
+                            if (conVehiculo)
+                            {
+                                bool esCamion = false;
 
-                            if (checkCamion.Checked)
-                                esCamion = true;
+                                if (checkCamion.Checked)
+                                    esCamion = true;
 
-                            cmd.Parameters.AddWithValue("@camion", esCamion);
-                            cmd.Parameters.AddWithValue("@marca", StringExtensions.NullString(txtMarca.Text.Trim()));
-                            cmd.Parameters.AddWithValue("@modelo", StringExtensions.NullString(txtModelo.Text.Trim()));
-                            cmd.Parameters.AddWithValue("@placa", StringExtensions.NullString(txtPlaca.Text.Trim()));
+                                cmd.Parameters.AddWithValue("@camion", esCamion);
+                                cmd.Parameters.AddWithValue("@marca", StringExtensions.NullString(txtMarca.Text.Trim()));
+                                cmd.Parameters.AddWithValue("@modelo", StringExtensions.NullString(txtModelo.Text.Trim()));
+                                cmd.Parameters.AddWithValue("@placa", StringExtensions.NullString(txtPlaca.Text.Trim()));
 
+                            }
+                           
                             //cmd.Parameters.AddWithValue("@marca", txtMarca.Text.Trim().NullString());
                             //cmd.Parameters.AddWithValue("@modelo", txtModelo.Text.Trim().NullString());
                             //cmd.Parameters.AddWithValue("@placa", txtPlaca.Text.Trim().NullString());
@@ -362,7 +383,7 @@ namespace Hotel
                             if (dr.HasRows)
                             {
                                 //MessageBox.Show("Existe");
-                                CargarDatosCliente(cedula);
+                                //CargarDatosCliente(cedula);
 
                                 return true; // Cliente existe
 
@@ -420,7 +441,14 @@ namespace Hotel
         {
             if (ValidacionCamposTexto()) // Si la validación se realizó efectivamente
             {
-                //NuevaReservacion("nueva");
+                if (BuscarPorCedula(txtCedula.Text.Replace(".", "").Trim())) // Si el cliente existe
+                {
+                    NuevaReservacion(false); // clienteNuevo = false
+                }
+                else // Es un cliente nuevo
+                {
+                    NuevaReservacion(true); // clienteNuevo = true
+                }
             }
         }
 
@@ -478,6 +506,7 @@ namespace Hotel
 
         private void checkCamion_CheckedChanged(object sender, EventArgs e)
         {
+            MessageBox.Show("No he implementado el incremento del monto total");
 
             // El problema de hacerlo así es que el valor por camión no se podrá cambiar fácilmente
 
@@ -497,16 +526,31 @@ namespace Hotel
 
         private void btnCheckCedula_Click(object sender, EventArgs e)
         {
-            if (BuscarPorCedula(txtCedula.Text.Replace(".", ""))) // Si existe el número de cédula (cliente)
+            if (!String.IsNullOrEmpty(txtCedula.Text.Trim()))
             {
-                btnModificar.Location = new Point(704, 10);
-                btnModificar.Visible = true;
-                btnAceptar.Visible = false;
+                txtCedula.Text = txtCedula.Text.Replace(".", "").Trim();
+                if (BuscarPorCedula(txtCedula.Text))//.Replace(".", ""))) // Si existe el número de cédula (cliente)
+                {
+                    CargarDatosCliente(txtCedula.Text);//.Replace(".", "").Trim());
+                    //btnModificar.Location = new Point(704, 10);
+                    //btnModificar.Visible = true;
+                    //btnAceptar.Visible = false;
+
+                    // No... Nada con botón Modificar. Más bien debo modificar la parte de ingreso para que sea update en lugar de insert
+                }
+
+                PanelCedula(false);
+                txtCedula.Enabled = false;
+                btnAceptar.Visible = true;
+
+                lblCedula.ForeColor = Color.Black;
+
+                return;
             }
 
-            ChequearCedula(false);
-            txtCedula.Enabled = false;
-            btnAceptar.Visible = true;
+            lblCedula.ForeColor = Color.Red;
+            txtCedula.Select();
+
         }
     }
 }

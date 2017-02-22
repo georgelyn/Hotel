@@ -116,7 +116,7 @@ namespace Hotel
                 int numero_habitacion = int.Parse(((Button)sender).Text);
                 reservacion = new Reservacion();
 
-                reservacion.ChequearCedula(false);
+                reservacion.PanelCedula(false);
 
                 if (((Button)sender).BackColor == Color.Red)
                 {
