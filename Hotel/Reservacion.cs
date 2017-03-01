@@ -7,6 +7,7 @@ using System.Data.SQLite;
 using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Text;
+using System.Configuration;
 
 namespace Hotel
 {
@@ -27,18 +28,22 @@ namespace Hotel
             // Llamada a métodos
             CargarNumHabitaciones("disponible");
             CargarTipoHabitacion();
-
             PanelCedula(true);
-            //panelContenedor.Visible = false;
+
         }
+
+        Form1 f1 = (Form1)Application.OpenForms["Form1"];
 
         /* 
         ** VARIABLES
         */
 
         double total; // El total a pagar
+        double montoCamion = double.Parse(ConfigurationManager.AppSettings["MontoCamion"]);
+
         bool vehiculoAlmacenado = false; // Se evalúa al cargar reservación (si tiene vehículo agregado). Útil para query de modificar reservación
         int habitacionActual = 0; // Toma su valor en CargarHuespedPorHabitacion. Útil para cambiar habitación en Modificar Reservación
+
 
         /* 
         ** METODOS
@@ -127,8 +132,8 @@ namespace Hotel
                 comboHabitacion.Enabled = false;
                 habitacionActual = numero_hab;
 
-                CargarNumHabitaciones("disponible");
-                comboHabitacion.Items.Add(habitacionActual);
+                //CargarNumHabitaciones("disponible"); // No es necesario. Ya se carga al iniciar el formulario
+                comboHabitacion.Items.Add(habitacionActual); // Agregar tambbién la habitación actual
                 comboHabitacion.Text = numero_hab.ToString();
 
                 PanelCedula(false);
@@ -137,6 +142,8 @@ namespace Hotel
                 btnModificar.Location = new Point(704, 10);
                 btnModificar.Visible = true;
                 btnAceptar.Visible = false;
+
+                btnEliminar.Visible = true;
 
                 this.Text = "Modificar Reservación";
             }
@@ -149,7 +156,7 @@ namespace Hotel
                     //    " r.numero_hab, r.fecha_ingreso, fecha_salida FROM cliente c, reservacion r ON cedula = r.cedula_cliente " +
                     //    " INNER JOIN habitacion h on h.numero_hab = r.numero_hab WHERE h.numero_hab = '" + numero_hab + "' ", conn))
                     using (SQLiteCommand cmd = new SQLiteCommand("SELECT nombre, cedula, edad, telefono, telefono2, " + 
-                        " r.id, r.numero_hab, fecha_ingreso, fecha_salida, tipo_habitacion, costo_total, marca, modelo, placa, es_camion " + 
+                        " r.id, r.numero_hab, r.notas, fecha_ingreso, fecha_salida, tipo_habitacion, costo_total, marca, modelo, placa, es_camion " + 
                         " FROM cliente INNER JOIN reservacion r ON cedula = r.cedula_cliente " + 
                         " LEFT JOIN vehiculo v ON r.id = v.reservacion_id "+ 
                         " WHERE r.numero_hab ='" + numero_hab + "'", conn))
@@ -182,9 +189,12 @@ namespace Hotel
                                 dtEntrada.Value = Convert.ToDateTime(dr["fecha_ingreso"].ToString());
                                 dtSalida.Value = Convert.ToDateTime(dr["fecha_salida"].ToString());
 
+                                txtNotas.Text = dr["notas"].ToString();
+
                                 listboxHabitaciones.Text = dr["tipo_habitacion"].ToString();
 
                                 txtTotal.Text = dr["costo_total"].ToString();
+                                total = double.Parse(txtTotal.Text);
                                 
                             }
                         }
@@ -243,7 +253,7 @@ namespace Hotel
 
         public void PanelCedula(bool visible)
         {
-            // Estado por default // if (chequear)
+            // Estado por default // if (visible)
 
             panelCedula.Visible = true;
             lblCedula.Location = new Point(50, 40);
@@ -284,6 +294,8 @@ namespace Hotel
 
         public void NuevaReservacion(bool clienteNuevo)
         {
+            int x = 0; // Controla que se llame al método ActualizarColores (Form1) si se completó la transacción
+
             using (TransactionScope transactionScope = new TransactionScope()) // Si falla un insert, se anulan todos los cambio
             {
                 try
@@ -301,13 +313,13 @@ namespace Hotel
                     {
                         query = "INSERT INTO cliente (nombre, cedula, edad, telefono, telefono2, cliente_desde) VALUES (@nombre, @cedula, @edad, @telefono1, @telefono2, @clienteDesde); " +
                             "UPDATE habitacion SET estado=@estado WHERE numero_hab=@numeroHabitacion;" +
-                            "INSERT INTO reservacion (numero_hab, cedula_cliente, fecha_ingreso, fecha_salida, tipo_habitacion, costo_total) VALUES (@numeroHabitacion, @cedula, @fechaIngreso, @fechaSalida, @tipoHabitacion, @costoTotal)";
+                            "INSERT INTO reservacion (numero_hab, cedula_cliente, fecha_ingreso, fecha_salida, tipo_habitacion, costo_total, notas) VALUES (@numeroHabitacion, @cedula, @fechaIngreso, @fechaSalida, @tipoHabitacion, @costoTotal, @notasReservacion)";
                     }
                     else if (!clienteNuevo)
                     {
                         query = "UPDATE cliente SET nombre=@nombre, edad=@edad, telefono=@telefono1, telefono2=@telefono2 WHERE cedula=@cedula;" +
                            "UPDATE habitacion SET estado=@estado WHERE numero_hab=@numeroHabitacion;" +
-                           "INSERT INTO reservacion (numero_hab, cedula_cliente, fecha_ingreso, fecha_salida, tipo_habitacion, costo_total) VALUES (@numeroHabitacion, @cedula, @fechaIngreso, @fechaSalida, @tipoHabitacion, @costoTotal)";
+                           "INSERT INTO reservacion (numero_hab, cedula_cliente, fecha_ingreso, fecha_salida, tipo_habitacion, costo_total, notas) VALUES (@numeroHabitacion, @cedula, @fechaIngreso, @fechaSalida, @tipoHabitacion, @costoTotal, @notasReservacion)";
                     }
 
                     if (conVehiculo) // Sólo almacenar vehículo si los campos no están vacíos
@@ -348,6 +360,7 @@ namespace Hotel
                             cmd.Parameters.AddWithValue("@fechaSalida", dtSalida.Value);//.ToString("yyyy-MM-dd h:mm tt", CultureInfo.InvariantCulture));
                             cmd.Parameters.AddWithValue("@tipoHabitacion", listboxHabitaciones.Text);
                             cmd.Parameters.AddWithValue("@costoTotal", txtTotal.Text.Trim().Replace(".", "").Replace(",", ""));
+                            cmd.Parameters.AddWithValue("@notasReservacion", StringExtensions.NullString(txtNotas.Text.Trim()));
 
                             #endregion
 
@@ -374,7 +387,7 @@ namespace Hotel
                             #endregion
 
                             conn.Open();
-                            cmd.ExecuteNonQuery();
+                            x = cmd.ExecuteNonQuery();
                             transactionScope.Complete();
 
                             MessageBox.Show("Datos ingresados correctamente.");
@@ -397,10 +410,17 @@ namespace Hotel
                 }
             }
 
+            if (x > 0) // Se complettó la transacción
+            {
+                f1.ActualizarColores();
+            }
+
         }
 
         public void ModificarReservacion()
-        {               
+        {
+            int x = 0; // Controla que se llame al método ActualizarColores (Form1) si se completó la transacción
+
             using (TransactionScope transactionScope = new TransactionScope()) // Si falla un insert, se anulan todos los cambio
             {
                 try
@@ -414,7 +434,7 @@ namespace Hotel
                     }
 
                     string query = "UPDATE cliente SET nombre=@nombre, edad=@edad, telefono=@telefono1, telefono2=@telefono2 WHERE cedula=@cedula;" +
-                        "UPDATE reservacion SET numero_hab=@numeroHabitacion, fecha_ingreso=@fechaIngreso, fecha_salida=@fechaSalida, tipo_habitacion=@tipoHabitacion, costo_total=@costoTotal WHERE id=(SELECT id FROM reservacion WHERE numero_hab=@habitacionActual)";
+                        "UPDATE reservacion SET numero_hab=@numeroHabitacion, fecha_ingreso=@fechaIngreso, fecha_salida=@fechaSalida, tipo_habitacion=@tipoHabitacion, costo_total=@costoTotal, notas=@notasReservacion WHERE id=(SELECT id FROM reservacion WHERE numero_hab=@habitacionActual)";
 
                     if (habitacionActual != (comboHabitacion.SelectedIndex + 1)) // En pocas palabras, si se cambió número habtiación
                     {
@@ -455,6 +475,7 @@ namespace Hotel
                             cmd.Parameters.AddWithValue("@fechaSalida", dtSalida.Value);
                             cmd.Parameters.AddWithValue("@tipoHabitacion", listboxHabitaciones.Text);
                             cmd.Parameters.AddWithValue("@costoTotal", txtTotal.Text.Trim().Replace(".", "").Replace(",", ""));
+                            cmd.Parameters.AddWithValue("@notasReservacion", StringExtensions.NullString(txtNotas.Text.Trim()));
 
                             // VEHICULO
 
@@ -473,7 +494,7 @@ namespace Hotel
                             }
 
                             conn.Open();
-                            cmd.ExecuteNonQuery();
+                            x = cmd.ExecuteNonQuery();
                             transactionScope.Complete();
 
                             MessageBox.Show("Datos modificados correctamente.");
@@ -486,6 +507,40 @@ namespace Hotel
                 {
                     MessageBox.Show("Se ha presentado un error.\nDetalles:\n\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+            }
+
+            if (x > 0) // Se complettó la transacción
+            {
+                f1.ActualizarColores();
+            }
+        }
+
+        public void EliminarReservacion()
+        {
+            string query = "DELETE FROM reservacion WHERE numero_hab=@numeroHabitacion;" +
+                "UPDATE habitacion SET estado='disponible' WHERE numero_hab=@numeroHabitacion";
+
+            try
+            {
+                using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
+                {
+                    using (SQLiteCommand cmd = new SQLiteCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@numeroHabitacion", habitacionActual);
+
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+
+                        MessageBox.Show("Datos eliminados correctamente.");
+
+                        f1.ActualizarColores();
+
+                        Close();
+                    }
+                }
+            } catch (Exception ex)
+            {
+                MessageBox.Show("Se ha presentado un error.\nDetalles:\n\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -591,8 +646,8 @@ namespace Hotel
                                 if (dr.Read())
                                 {
                                     total = Convert.ToDouble(dr["costo"].ToString());
-                                    //if (checkCamion.Checked)
-                                    //    total += 5000;
+                                    if (checkCamion.Checked)
+                                        total += montoCamion;
                                     txtTotal.Text = total.ToString();
                                 }
                             }
@@ -623,24 +678,6 @@ namespace Hotel
             //long getphn = Convert.ToInt64(txtTelefono1.Text);
             //string formatString = String.Format("{0:0000-000-0000}", getphn);
             //txtTelefono1.Text = formatString;
-        }
-
-        private void checkCamion_CheckedChanged(object sender, EventArgs e)
-        {
-            MessageBox.Show("No he implementado el incremento del monto total");
-
-            // El problema de hacerlo así es que el valor por camión no se podrá cambiar fácilmente
-
-            //if (checkCamion.Checked)
-            //{
-            //    total += 5000;
-            //}
-            //else
-            //{
-            //    total -= 5000;
-            //}
-
-            //txtTotal.Text = total.ToString();
         }
 
         #endregion
@@ -684,17 +721,41 @@ namespace Hotel
 
         private void linkLblCambiarNumHab_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (!comboHabitacion.Enabled)
+            if (linkLblCambiarNumHab.Text == "Cambiar")
             {
+                linkLblCambiarNumHab.Text = "Cancelar";
                 comboHabitacion.Enabled = true;
-            }
-
-            if (!lblHabitacionActual.Visible && !lblHabitacionNumero.Visible)
-            {
                 lblHabitacionActual.Visible = true;
                 lblHabitacionNumero.Visible = true;
                 lblHabitacionNumero.Text = habitacionActual.ToString();
             }
+            else
+            {
+                linkLblCambiarNumHab.Text = "Cambiar";
+                comboHabitacion.Enabled = false;
+                lblHabitacionActual.Visible = false;
+                lblHabitacionNumero.Visible = false;
+                comboHabitacion.Text = habitacionActual.ToString();
+            }
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            EliminarReservacion();
+        }
+
+        private void checkCamion_Click(object sender, EventArgs e)
+        {
+            if (checkCamion.Checked)
+            {
+                total += montoCamion;
+            }
+            else
+            {
+                total -= montoCamion;
+            }
+
+            txtTotal.Text = total.ToString();
         }
     }
 }
