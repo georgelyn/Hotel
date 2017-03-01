@@ -39,6 +39,7 @@
             this.txtCedula = new System.Windows.Forms.TextBox();
             this.lblCedula = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.linkLblCambiarNumHab = new System.Windows.Forms.LinkLabel();
             this.dtEntrada = new System.Windows.Forms.DateTimePicker();
             this.dtSalida = new System.Windows.Forms.DateTimePicker();
             this.lblHab = new System.Windows.Forms.Label();
@@ -68,6 +69,8 @@
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.lblTelefono = new System.Windows.Forms.Label();
             this.lblNombre = new System.Windows.Forms.Label();
+            this.lblHabitacionActual = new System.Windows.Forms.Label();
+            this.lblHabitacionNumero = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panelContenedor.SuspendLayout();
             this.panelCedula.SuspendLayout();
@@ -196,6 +199,9 @@
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.lblHabitacionNumero);
+            this.panel2.Controls.Add(this.lblHabitacionActual);
+            this.panel2.Controls.Add(this.linkLblCambiarNumHab);
             this.panel2.Controls.Add(this.dtEntrada);
             this.panel2.Controls.Add(this.dtSalida);
             this.panel2.Controls.Add(this.lblHab);
@@ -207,6 +213,18 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(859, 93);
             this.panel2.TabIndex = 91;
+            // 
+            // linkLblCambiarNumHab
+            // 
+            this.linkLblCambiarNumHab.AutoSize = true;
+            this.linkLblCambiarNumHab.Location = new System.Drawing.Point(235, 29);
+            this.linkLblCambiarNumHab.Name = "linkLblCambiarNumHab";
+            this.linkLblCambiarNumHab.Size = new System.Drawing.Size(68, 20);
+            this.linkLblCambiarNumHab.TabIndex = 18;
+            this.linkLblCambiarNumHab.TabStop = true;
+            this.linkLblCambiarNumHab.Text = "Cambiar";
+            this.linkLblCambiarNumHab.Visible = false;
+            this.linkLblCambiarNumHab.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLblCambiarNumHab_LinkClicked);
             // 
             // dtEntrada
             // 
@@ -491,6 +509,29 @@
             this.lblNombre.TabIndex = 92;
             this.lblNombre.Text = "Nombre completo:";
             // 
+            // lblHabitacionActual
+            // 
+            this.lblHabitacionActual.AutoSize = true;
+            this.lblHabitacionActual.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHabitacionActual.Location = new System.Drawing.Point(10, 65);
+            this.lblHabitacionActual.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.lblHabitacionActual.Name = "lblHabitacionActual";
+            this.lblHabitacionActual.Size = new System.Drawing.Size(123, 15);
+            this.lblHabitacionActual.TabIndex = 19;
+            this.lblHabitacionActual.Text = "Habitación actual:";
+            this.lblHabitacionActual.Visible = false;
+            // 
+            // lblHabitacionNumero
+            // 
+            this.lblHabitacionNumero.AutoSize = true;
+            this.lblHabitacionNumero.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHabitacionNumero.Location = new System.Drawing.Point(154, 65);
+            this.lblHabitacionNumero.Name = "lblHabitacionNumero";
+            this.lblHabitacionNumero.Size = new System.Drawing.Size(74, 15);
+            this.lblHabitacionNumero.TabIndex = 20;
+            this.lblHabitacionNumero.Text = "habitacion";
+            this.lblHabitacionNumero.Visible = false;
+            // 
             // Reservacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -558,5 +599,8 @@
         private System.Windows.Forms.ComboBox comboHabitacion;
         private System.Windows.Forms.Label lblFechaIngrso;
         private System.Windows.Forms.Label lblFechaSalida;
+        private System.Windows.Forms.LinkLabel linkLblCambiarNumHab;
+        private System.Windows.Forms.Label lblHabitacionNumero;
+        private System.Windows.Forms.Label lblHabitacionActual;
     }
 }

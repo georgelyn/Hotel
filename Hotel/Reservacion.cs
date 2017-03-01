@@ -37,6 +37,8 @@ namespace Hotel
         */
 
         double total; // El total a pagar
+        bool vehiculoAlmacenado = false; // Se evalúa al cargar reservación (si tiene vehículo agregado). Útil para query de modificar reservación
+        int habitacionActual = 0; // Toma su valor en CargarHuespedPorHabitacion. Útil para cambiar habitación en Modificar Reservación
 
         /* 
         ** METODOS
@@ -121,10 +123,16 @@ namespace Hotel
 
             if (estado == "ocupada")
             {
+                linkLblCambiarNumHab.Visible = true;
                 comboHabitacion.Enabled = false;
-                CargarNumHabitaciones("todas");
+                habitacionActual = numero_hab;
+
+                CargarNumHabitaciones("disponible");
+                comboHabitacion.Items.Add(habitacionActual);
                 comboHabitacion.Text = numero_hab.ToString();
+
                 PanelCedula(false);
+                txtCedula.Enabled = false;
 
                 btnModificar.Location = new Point(704, 10);
                 btnModificar.Visible = true;
@@ -162,6 +170,9 @@ namespace Hotel
                                 {
                                     if (Convert.ToBoolean(dr["es_camion"]) == true)
                                         checkCamion.Checked = true;
+
+                                    vehiculoAlmacenado = true;
+                                    //MessageBox.Show("No es null");
                                 }
 
                                 txtMarca.Text = dr["marca"].ToString();
@@ -288,20 +299,20 @@ namespace Hotel
 
                     if (clienteNuevo)
                     {
-                        query = "INSERT INTO cliente (nombre, cedula, edad, telefono, telefono2, cliente_desde) VALUES (@nombre, @cedula, @edad, @telefono1, @telefono2, @cliente_desde); " +
-                            "UPDATE habitacion SET estado=@estado WHERE numero_hab=@numero_habitacion;" +
-                            "INSERT INTO reservacion (numero_hab, cedula_cliente, fecha_ingreso, fecha_salida, tipo_habitacion, costo_total) VALUES (@numero_habitacion, @cedula, @fechaIngreso, @fechaSalida, @tipo_habitacion, @costoTotal)";
+                        query = "INSERT INTO cliente (nombre, cedula, edad, telefono, telefono2, cliente_desde) VALUES (@nombre, @cedula, @edad, @telefono1, @telefono2, @clienteDesde); " +
+                            "UPDATE habitacion SET estado=@estado WHERE numero_hab=@numeroHabitacion;" +
+                            "INSERT INTO reservacion (numero_hab, cedula_cliente, fecha_ingreso, fecha_salida, tipo_habitacion, costo_total) VALUES (@numeroHabitacion, @cedula, @fechaIngreso, @fechaSalida, @tipoHabitacion, @costoTotal)";
                     }
                     else if (!clienteNuevo)
                     {
-                        query = query = "UPDATE cliente SET nombre=@nombre, edad=@edad, telefono=@telefono1, telefono2=@telefono2 WHERE cedula=@cedula;" +
-                           "UPDATE habitacion SET estado=@estado WHERE numero_hab=@numero_habitacion;" +
-                           "INSERT INTO reservacion (numero_hab, cedula_cliente, fecha_ingreso, fecha_salida, tipo_habitacion, costo_total) VALUES (@numero_habitacion, @cedula, @fechaIngreso, @fechaSalida, @tipo_habitacion, @costoTotal)";
+                        query = "UPDATE cliente SET nombre=@nombre, edad=@edad, telefono=@telefono1, telefono2=@telefono2 WHERE cedula=@cedula;" +
+                           "UPDATE habitacion SET estado=@estado WHERE numero_hab=@numeroHabitacion;" +
+                           "INSERT INTO reservacion (numero_hab, cedula_cliente, fecha_ingreso, fecha_salida, tipo_habitacion, costo_total) VALUES (@numeroHabitacion, @cedula, @fechaIngreso, @fechaSalida, @tipoHabitacion, @costoTotal)";
                     }
 
                     if (conVehiculo) // Sólo almacenar vehículo si los campos no están vacíos
                     {
-                        query += "; INSERT INTO vehiculo(cedula_cliente, reservacion_id, es_camion, marca, modelo, placa) VALUES(@cedula, (SELECT id FROM reservacion WHERE numero_hab = @numero_habitacion), @camion, @marca, @modelo, @placa)";
+                        query += "; INSERT INTO vehiculo (cedula_cliente, reservacion_id, es_camion, marca, modelo, placa) VALUES (@cedula, (SELECT id FROM reservacion WHERE numero_hab = @numeroHabitacion), @camion, @marca, @modelo, @placa)";
                     }
 
                     using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
@@ -318,7 +329,7 @@ namespace Hotel
 
                             if (clienteNuevo)
                             {
-                                cmd.Parameters.AddWithValue("@cliente_desde", dtEntrada.Value);
+                                cmd.Parameters.AddWithValue("@clienteDesde", dtEntrada.Value);
                             }
 
                             #endregion
@@ -331,11 +342,11 @@ namespace Hotel
 
                             #region Reservacion
 
-                            cmd.Parameters.AddWithValue("@numero_habitacion", comboHabitacion.Text);
+                            cmd.Parameters.AddWithValue("@numeroHabitacion", comboHabitacion.Text);
                             //cmd.Parameters.AddWithValue("@cedula_cliente", txtCedula.Text.Trim().Replace(".", ""));
                             cmd.Parameters.AddWithValue("@fechaIngreso", dtEntrada.Value);//.ToString("dd-MM-yyyy h:mm tt", CultureInfo.InvariantCulture));
                             cmd.Parameters.AddWithValue("@fechaSalida", dtSalida.Value);//.ToString("yyyy-MM-dd h:mm tt", CultureInfo.InvariantCulture));
-                            cmd.Parameters.AddWithValue("@tipo_habitacion", listboxHabitaciones.Text);
+                            cmd.Parameters.AddWithValue("@tipoHabitacion", listboxHabitaciones.Text);
                             cmd.Parameters.AddWithValue("@costoTotal", txtTotal.Text.Trim().Replace(".", "").Replace(",", ""));
 
                             #endregion
@@ -388,8 +399,8 @@ namespace Hotel
 
         }
 
-        public void ModificarReservacion(string habitacionActual)
-        {
+        public void ModificarReservacion()
+        {               
             using (TransactionScope transactionScope = new TransactionScope()) // Si falla un insert, se anulan todos los cambio
             {
                 try
@@ -403,9 +414,9 @@ namespace Hotel
                     }
 
                     string query = "UPDATE cliente SET nombre=@nombre, edad=@edad, telefono=@telefono1, telefono2=@telefono2 WHERE cedula=@cedula;" +
-                        "UPDATE reservacion SET numero_hab=@numeroHabitacion, fecha_ingreso=@fechaIngreso, fecha_salida=@fechaSalida, tipo_habitacion=@tipoHabitacion, costo_total=@costoTotal WHERE id=(SELECT id FROM reservacion WHERE cedula_cliente=@cedula)";
+                        "UPDATE reservacion SET numero_hab=@numeroHabitacion, fecha_ingreso=@fechaIngreso, fecha_salida=@fechaSalida, tipo_habitacion=@tipoHabitacion, costo_total=@costoTotal WHERE id=(SELECT id FROM reservacion WHERE numero_hab=@habitacionActual)";
 
-                    if (habitacionActual != comboHabitacion.Text)
+                    if (habitacionActual != (comboHabitacion.SelectedIndex + 1)) // En pocas palabras, si se cambió número habtiación
                     {
                         query += "; UPDATE habitacion SET estado='disponible' WHERE numero_hab ='" + habitacionActual + "';" +
                             "UPDATE habitacion SET estado='ocupada' WHERE numero_hab='" + comboHabitacion.Text + "'";
@@ -413,7 +424,14 @@ namespace Hotel
 
                     if (conVehiculo)
                     {
-                        query += "; UPDATE vehiculo SET es_camion=@camion, marca=@marca, modelo=@modelo, palce=@place WHERE reservacion_id=(SELECT id FROM reservacion WHERE numero_habitacion='" + comboHabitacion.Text + "'";
+                        if (vehiculoAlmacenado)
+                        {
+                            query += "; UPDATE vehiculo SET es_camion=@camion, marca=@marca, modelo=@modelo, placa=@placa WHERE reservacion_id=(SELECT id FROM reservacion WHERE numero_hab=@numeroHabitacion)";
+                        }
+                        else
+                        {
+                            query += "; INSERT INTO vehiculo (cedula_cliente, reservacion_id, es_camion, marca, modelo, placa) VALUES (@cedula, (SELECT id FROM reservacion WHERE numero_hab = @numeroHabitacion), @camion, @marca, @modelo, @placa)";
+                        }
                     }
 
 
@@ -432,6 +450,7 @@ namespace Hotel
                             // RESERVACION
 
                             cmd.Parameters.AddWithValue("@numeroHabitacion", comboHabitacion.Text);
+                            cmd.Parameters.AddWithValue("@habitacionActual", habitacionActual);
                             cmd.Parameters.AddWithValue("@fechaIngreso", dtEntrada.Value);
                             cmd.Parameters.AddWithValue("@fechaSalida", dtSalida.Value);
                             cmd.Parameters.AddWithValue("@tipoHabitacion", listboxHabitaciones.Text);
@@ -659,7 +678,22 @@ namespace Hotel
         {
             if (ValidacionCamposTexto())
             {
-                ModificarReservacion(comboHabitacion.Text);
+                ModificarReservacion();
+            }
+        }
+
+        private void linkLblCambiarNumHab_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (!comboHabitacion.Enabled)
+            {
+                comboHabitacion.Enabled = true;
+            }
+
+            if (!lblHabitacionActual.Visible && !lblHabitacionNumero.Visible)
+            {
+                lblHabitacionActual.Visible = true;
+                lblHabitacionNumero.Visible = true;
+                lblHabitacionNumero.Text = habitacionActual.ToString();
             }
         }
     }
