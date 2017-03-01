@@ -44,6 +44,8 @@ namespace Hotel
 
         public void CargarNumHabitaciones(string estado)
         {
+            // habitacionActual = Si se desea incluir en el combobox la habitación actual. Útil si se quiere modificar reservación
+
             comboHabitacion.Items.Clear();
 
             string query = "SELECT numero_hab FROM habitacion";
@@ -52,8 +54,6 @@ namespace Hotel
             {
                 query = "SELECT numero_hab FROM habitacion WHERE estado ='" + estado + "' ";
             }
-
-
             try
             {
                 using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
@@ -114,13 +114,16 @@ namespace Hotel
         {
             PanelCedula(true);
 
-            CargarNumHabitaciones("disponible");
+            //CargarNumHabitaciones("disponible");
             //CargarNumHabitaciones("todas"); // Cargar todas las habitaciones
-            comboHabitacion.SelectedIndex = (numero_hab - 1);
+            //comboHabitacion.SelectedIndex = (numero_hab - 1);
+            comboHabitacion.Text = numero_hab.ToString();
 
             if (estado == "ocupada")
             {
                 comboHabitacion.Enabled = false;
+                CargarNumHabitaciones("todas");
+                comboHabitacion.Text = numero_hab.ToString();
                 PanelCedula(false);
 
                 btnModificar.Location = new Point(704, 10);
@@ -399,8 +402,8 @@ namespace Hotel
                         conVehiculo = false; // Si campos están vacíos, no tiene vehículo
                     }
 
-                    string query = "UPDATE cliente SET nombre=@nombre, cedula=@cedula, edad=@edad, telefono=@telefono1, telefono2=@telefono2" +
-                        "UPDATE reservacion SET num_habitacion=@numero_habitacion, fecha_ingreso=@fechaIngreso, fecha_salida=@fechaSalida, tipo_habitacion=@tipoHabitacion, costo_total=@costoTotal";
+                    string query = "UPDATE cliente SET nombre=@nombre, edad=@edad, telefono=@telefono1, telefono2=@telefono2 WHERE cedula=@cedula;" +
+                        "UPDATE reservacion SET numero_hab=@numeroHabitacion, fecha_ingreso=@fechaIngreso, fecha_salida=@fechaSalida, tipo_habitacion=@tipoHabitacion, costo_total=@costoTotal WHERE id=(SELECT id FROM reservacion WHERE cedula_cliente=@cedula)";
 
                     if (habitacionActual != comboHabitacion.Text)
                     {
@@ -428,10 +431,10 @@ namespace Hotel
 
                             // RESERVACION
 
-                            cmd.Parameters.AddWithValue("@numero_habitacion", comboHabitacion.Text);
+                            cmd.Parameters.AddWithValue("@numeroHabitacion", comboHabitacion.Text);
                             cmd.Parameters.AddWithValue("@fechaIngreso", dtEntrada.Value);
                             cmd.Parameters.AddWithValue("@fechaSalida", dtSalida.Value);
-                            cmd.Parameters.AddWithValue("@tipo_habitacion", listboxHabitaciones.Text);
+                            cmd.Parameters.AddWithValue("@tipoHabitacion", listboxHabitaciones.Text);
                             cmd.Parameters.AddWithValue("@costoTotal", txtTotal.Text.Trim().Replace(".", "").Replace(",", ""));
 
                             // VEHICULO
@@ -654,13 +657,10 @@ namespace Hotel
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            //if (ValidacionCamposTexto())
-            //{
-            //    MessageBox.Show("h");
-            //    ModificarReservacion(comboHabitacion.Text);
-            //}
-
-            MessageBox.Show("Modificar");
+            if (ValidacionCamposTexto())
+            {
+                ModificarReservacion(comboHabitacion.Text);
+            }
         }
     }
 }
