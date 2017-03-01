@@ -109,7 +109,7 @@ namespace Hotel
         {
             if (((Button)sender).BackColor == Color.Gray)
             {
-                MessageBox.Show("Limpieza - Falta implementar");
+                MessageBox.Show("Limpieza - Falta implementar o.ó");
             }
             else
             {

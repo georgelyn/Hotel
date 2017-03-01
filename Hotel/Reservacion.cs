@@ -32,7 +32,15 @@ namespace Hotel
             //panelContenedor.Visible = false;
         }
 
+        /* 
+        ** VARIABLES
+        */
+
         double total; // El total a pagar
+
+        /* 
+        ** METODOS
+        */
 
         public void CargarNumHabitaciones(string estado)
         {
@@ -98,17 +106,21 @@ namespace Hotel
             {
                 MessageBox.Show(ex.Message);
             }
+
+            listboxHabitaciones.SelectedIndex = 0;
         }
 
         public void CargarHuespedPorHabitacion(int numero_hab, string estado)
         {
             PanelCedula(true);
 
-            CargarNumHabitaciones("todas"); // Cargar todas las habitaciones
+            CargarNumHabitaciones("disponible");
+            //CargarNumHabitaciones("todas"); // Cargar todas las habitaciones
             comboHabitacion.SelectedIndex = (numero_hab - 1);
 
             if (estado == "ocupada")
             {
+                comboHabitacion.Enabled = false;
                 PanelCedula(false);
 
                 btnModificar.Location = new Point(704, 10);
@@ -126,9 +138,9 @@ namespace Hotel
                     //    " r.numero_hab, r.fecha_ingreso, fecha_salida FROM cliente c, reservacion r ON cedula = r.cedula_cliente " +
                     //    " INNER JOIN habitacion h on h.numero_hab = r.numero_hab WHERE h.numero_hab = '" + numero_hab + "' ", conn))
                     using (SQLiteCommand cmd = new SQLiteCommand("SELECT nombre, cedula, edad, telefono, telefono2, " + 
-                        " r.numero_hab, fecha_ingreso, fecha_salida, costo_total, marca, modelo, placa, es_camion " + 
+                        " r.id, r.numero_hab, fecha_ingreso, fecha_salida, tipo_habitacion, costo_total, marca, modelo, placa, es_camion " + 
                         " FROM cliente INNER JOIN reservacion r ON cedula = r.cedula_cliente " + 
-                        " INNER JOIN vehiculo v ON cedula = v.cedula_cliente "+ 
+                        " LEFT JOIN vehiculo v ON r.id = v.reservacion_id "+ 
                         " WHERE r.numero_hab ='" + numero_hab + "'", conn))
                     {
                         conn.Open();
@@ -143,8 +155,11 @@ namespace Hotel
                                 txtTelefono1.Text = dr["telefono"].ToString();
                                 txtTelefono2.Text = dr["telefono2"].ToString();
 
-                                if (Convert.ToBoolean(dr["es_camion"]) == true)
-                                    checkCamion.Checked = true;
+                                if (dr["es_camion"] != DBNull.Value)
+                                {
+                                    if (Convert.ToBoolean(dr["es_camion"]) == true)
+                                        checkCamion.Checked = true;
+                                }
 
                                 txtMarca.Text = dr["marca"].ToString();
                                 txtModelo.Text = dr["modelo"].ToString();
@@ -152,6 +167,8 @@ namespace Hotel
 
                                 dtEntrada.Value = Convert.ToDateTime(dr["fecha_ingreso"].ToString());
                                 dtSalida.Value = Convert.ToDateTime(dr["fecha_salida"].ToString());
+
+                                listboxHabitaciones.Text = dr["tipo_habitacion"].ToString();
 
                                 txtTotal.Text = dr["costo_total"].ToString();
                                 
@@ -263,7 +280,7 @@ namespace Hotel
                     if ((!checkCamion.Checked) && (String.IsNullOrEmpty(txtMarca.Text.Trim()))
                          && (String.IsNullOrEmpty(txtModelo.Text.Trim())) && (String.IsNullOrEmpty(txtPlaca.Text.Trim())))
                     {
-                        conVehiculo = false; // Si campos vacíos, no tiene vehículo
+                        conVehiculo = false; // Si campos están vacíos, no tiene vehículo
                     }
 
                     if (clienteNuevo)
@@ -281,7 +298,7 @@ namespace Hotel
 
                     if (conVehiculo) // Sólo almacenar vehículo si los campos no están vacíos
                     {
-                        query += "; INSERT INTO vehiculo(cedula_cliente, es_camion, marca, modelo, placa) VALUES(@cedula, @camion, @marca, @modelo, @placa)";
+                        query += "; INSERT INTO vehiculo(cedula_cliente, reservacion_id, es_camion, marca, modelo, placa) VALUES(@cedula, (SELECT id FROM reservacion WHERE numero_hab = @numero_habitacion), @camion, @marca, @modelo, @placa)";
                     }
 
                     using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
@@ -366,6 +383,88 @@ namespace Hotel
                 }
             }
 
+        }
+
+        public void ModificarReservacion(string habitacionActual)
+        {
+            using (TransactionScope transactionScope = new TransactionScope()) // Si falla un insert, se anulan todos los cambio
+            {
+                try
+                {
+                    bool conVehiculo = true;
+
+                    if ((!checkCamion.Checked) && (String.IsNullOrEmpty(txtMarca.Text.Trim()))
+                         && (String.IsNullOrEmpty(txtModelo.Text.Trim())) && (String.IsNullOrEmpty(txtPlaca.Text.Trim())))
+                    {
+                        conVehiculo = false; // Si campos están vacíos, no tiene vehículo
+                    }
+
+                    string query = "UPDATE cliente SET nombre=@nombre, cedula=@cedula, edad=@edad, telefono=@telefono1, telefono2=@telefono2" +
+                        "UPDATE reservacion SET num_habitacion=@numero_habitacion, fecha_ingreso=@fechaIngreso, fecha_salida=@fechaSalida, tipo_habitacion=@tipoHabitacion, costo_total=@costoTotal";
+
+                    if (habitacionActual != comboHabitacion.Text)
+                    {
+                        query += "; UPDATE habitacion SET estado='disponible' WHERE numero_hab ='" + habitacionActual + "';" +
+                            "UPDATE habitacion SET estado='ocupada' WHERE numero_hab='" + comboHabitacion.Text + "'";
+                    }
+
+                    if (conVehiculo)
+                    {
+                        query += "; UPDATE vehiculo SET es_camion=@camion, marca=@marca, modelo=@modelo, palce=@place WHERE reservacion_id=(SELECT id FROM reservacion WHERE numero_habitacion='" + comboHabitacion.Text + "'";
+                    }
+
+
+                    using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
+                    {
+                        using (SQLiteCommand cmd = new SQLiteCommand(query, conn))
+                        {
+                            // CLIENTE
+
+                            cmd.Parameters.AddWithValue("@nombre", txtNombre.Text.Trim());
+                            cmd.Parameters.AddWithValue("@cedula", txtCedula.Text.Replace(".", "").Trim());
+                            cmd.Parameters.AddWithValue("@edad", StringExtensions.NullString(txtEdad.Text.Trim()));
+                            cmd.Parameters.AddWithValue("@telefono1", StringExtensions.NullString(txtTelefono1.Text.Trim()));
+                            cmd.Parameters.AddWithValue("@telefono2", StringExtensions.NullString(txtTelefono2.Text.Trim()));
+
+                            // RESERVACION
+
+                            cmd.Parameters.AddWithValue("@numero_habitacion", comboHabitacion.Text);
+                            cmd.Parameters.AddWithValue("@fechaIngreso", dtEntrada.Value);
+                            cmd.Parameters.AddWithValue("@fechaSalida", dtSalida.Value);
+                            cmd.Parameters.AddWithValue("@tipo_habitacion", listboxHabitaciones.Text);
+                            cmd.Parameters.AddWithValue("@costoTotal", txtTotal.Text.Trim().Replace(".", "").Replace(",", ""));
+
+                            // VEHICULO
+
+                            if (conVehiculo)
+                            {
+                                bool esCamion = false;
+
+                                if (checkCamion.Checked)
+                                    esCamion = true;
+
+                                cmd.Parameters.AddWithValue("@camion", esCamion);
+                                cmd.Parameters.AddWithValue("@marca", StringExtensions.NullString(txtMarca.Text.Trim()));
+                                cmd.Parameters.AddWithValue("@modelo", StringExtensions.NullString(txtModelo.Text.Trim()));
+                                cmd.Parameters.AddWithValue("@placa", StringExtensions.NullString(txtPlaca.Text.Trim()));
+
+                            }
+
+                            conn.Open();
+                            cmd.ExecuteNonQuery();
+                            transactionScope.Complete();
+
+                            MessageBox.Show("Datos modificados correctamente.");
+
+                            Close();
+                        }
+                    }
+
+                } catch (Exception ex)
+                {
+                    MessageBox.Show("Se ha presentado un error.\nDetalles:\n\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
         public bool BuscarPorCedula(string cedula)
@@ -551,6 +650,17 @@ namespace Hotel
             lblCedula.ForeColor = Color.Red;
             txtCedula.Select();
 
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            //if (ValidacionCamposTexto())
+            //{
+            //    MessageBox.Show("h");
+            //    ModificarReservacion(comboHabitacion.Text);
+            //}
+
+            MessageBox.Show("Modificar");
         }
     }
 }
