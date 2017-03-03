@@ -52,6 +52,7 @@
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
             this.btnActDesactivar = new System.Windows.Forms.ToolStripButton();
             this.btnMostrarHabitaciones = new System.Windows.Forms.ToolStripButton();
+            this.label9 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -69,6 +70,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.panel2.Controls.Add(this.label9);
             this.panel2.Controls.Add(this.label8);
             this.panel2.Controls.Add(this.label7);
             this.panel2.Controls.Add(this.btnCancelar);
@@ -186,10 +188,11 @@
             // 
             // txtCosto
             // 
-            this.txtCosto.Location = new System.Drawing.Point(219, 183);
+            this.txtCosto.Location = new System.Drawing.Point(249, 183);
             this.txtCosto.Name = "txtCosto";
             this.txtCosto.Size = new System.Drawing.Size(131, 26);
             this.txtCosto.TabIndex = 4;
+            this.txtCosto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtCosto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCosto_KeyPress);
             // 
             // txtTipo
@@ -232,8 +235,8 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnAgregar,
             this.btnModificar,
-            this.btnEliminar,
             this.btnActDesactivar,
+            this.btnEliminar,
             this.btnMostrarHabitaciones});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
@@ -251,6 +254,7 @@
             this.btnAgregar.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.btnAgregar.Size = new System.Drawing.Size(86, 22);
             this.btnAgregar.Text = "Agregar";
+            this.btnAgregar.ToolTipText = "Agregar un nuevo tipo de habitación";
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // btnModificar
@@ -263,18 +267,21 @@
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(84, 22);
             this.btnModificar.Text = "Modificar";
+            this.btnModificar.ToolTipText = "Modificar el tipo de habitación seleccionado";
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
             // btnEliminar
             // 
             this.btnEliminar.Enabled = false;
             this.btnEliminar.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEliminar.ForeColor = System.Drawing.Color.Red;
             this.btnEliminar.Image = ((System.Drawing.Image)(resources.GetObject("btnEliminar.Image")));
             this.btnEliminar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(74, 22);
             this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.ToolTipText = "Eliminar el tipo de habitación seleccionado";
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // btnActDesactivar
@@ -287,6 +294,7 @@
             this.btnActDesactivar.Name = "btnActDesactivar";
             this.btnActDesactivar.Size = new System.Drawing.Size(132, 22);
             this.btnActDesactivar.Text = "Activar/Desactivar";
+            this.btnActDesactivar.ToolTipText = "Activar/Desactivar el tipo de habitación seleccionado";
             this.btnActDesactivar.Click += new System.EventHandler(this.btnActDesactivar_Click);
             // 
             // btnMostrarHabitaciones
@@ -299,7 +307,18 @@
             this.btnMostrarHabitaciones.Name = "btnMostrarHabitaciones";
             this.btnMostrarHabitaciones.Size = new System.Drawing.Size(152, 22);
             this.btnMostrarHabitaciones.Text = "Mostrar habitaciones";
+            this.btnMostrarHabitaciones.ToolTipText = "Mostrar todos los tipos de habitaciones";
             this.btnMostrarHabitaciones.Click += new System.EventHandler(this.btnMostrarHabitaciones_Click);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(216, 189);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(27, 16);
+            this.label9.TabIndex = 15;
+            this.label9.Text = "Bs.";
             // 
             // Habitacion
             // 
@@ -350,5 +369,6 @@
         private System.Windows.Forms.ToolStripButton btnActDesactivar;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label9;
     }
 }

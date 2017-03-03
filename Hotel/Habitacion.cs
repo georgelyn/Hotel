@@ -64,9 +64,9 @@ namespace Hotel
             panel2.Visible = false;
 
             btnAgregar.Enabled = true;
-            //btnModificar.Enabled = true;
-            //btnEliminar.Enabled = true;
-            //btnActDesactivar.Enabled = true;
+            btnModificar.Enabled = false;
+            btnEliminar.Enabled = false;
+            btnActDesactivar.Enabled = false;
 
             if (!panel1.Contains(lst))
             {
@@ -304,16 +304,17 @@ namespace Hotel
             {
                 if (!panel2.Visible)
                 {
+                    idHabitacion = lst.SelectedItems[0].SubItems[0].Text.ToString();
+                    CargarHabitacion(idHabitacion);
+
                     panel1.Controls.Remove(lst);
                     btnAgregar.Enabled = false;
-                    btnEliminar.Enabled = false;
+                    btnModificar.Enabled = false;
+                    btnEliminar.Enabled = true;
                     btnActDesactivar.Enabled = false;
 
                     panel2.Visible = true;
-                    panel2.BringToFront();
-
-                    idHabitacion = lst.SelectedItems[0].SubItems[0].Text.ToString();
-                    CargarHabitacion(idHabitacion);
+                    //panel2.BringToFront();
                     txtTipo.Focus();
                 }
             }
@@ -351,6 +352,9 @@ namespace Hotel
                     CambiarEstadoHabitacion(lst.SelectedItems[0].SubItems[0].Text.ToString(), true);
 
                 CargarListViewHabitaciones();
+                //lst_SelectedIndexChanged(null, null);
+
+
             }
         }
 
@@ -393,11 +397,6 @@ namespace Hotel
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             CargarListViewHabitaciones();
-
-            if (btnModificar.Enabled)
-            {
-                btnModificar.Enabled = false;
-            }
         }
 
         private void txtCosto_KeyPress(object sender, KeyPressEventArgs e)
