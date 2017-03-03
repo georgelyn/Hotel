@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Text;
 using System.Configuration;
+using System.Globalization;
 
 namespace Hotel
 {
@@ -33,6 +34,7 @@ namespace Hotel
         }
 
         Form1 f1 = (Form1)Application.OpenForms["Form1"];
+        Msg msg;
 
         /* 
         ** VARIABLES
@@ -152,9 +154,6 @@ namespace Hotel
             {
                 using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
                 {
-                    //using (SQLiteCommand cmd = new SQLiteCommand("SELECT c.nombre, c.apellido, c.cedula, edad, telefono, telefono2, " +
-                    //    " r.numero_hab, r.fecha_ingreso, fecha_salida FROM cliente c, reservacion r ON cedula = r.cedula_cliente " +
-                    //    " INNER JOIN habitacion h on h.numero_hab = r.numero_hab WHERE h.numero_hab = '" + numero_hab + "' ", conn))
                     using (SQLiteCommand cmd = new SQLiteCommand("SELECT nombre, cedula, edad, telefono, telefono2, " + 
                         " r.id, r.numero_hab, r.notas, fecha_ingreso, fecha_salida, tipo_habitacion, costo_total, marca, modelo, placa, es_camion " + 
                         " FROM cliente INNER JOIN reservacion r ON cedula = r.cedula_cliente " + 
@@ -194,8 +193,11 @@ namespace Hotel
                                 listboxHabitaciones.Text = dr["tipo_habitacion"].ToString();
 
                                 txtTotal.Text = dr["costo_total"].ToString();
-                                total = double.Parse(txtTotal.Text);
-                                
+                                //txtTotal.Text = string.Format(new CultureInfo("es-VE"), "{0:#,##0.00}", dr["costo_total"]);
+
+                                total = double.Parse(dr["costo_total"].ToString());
+                                    //total = double.Parse(txtTotal.Text);
+
                             }
                         }
                     }
@@ -649,6 +651,7 @@ namespace Hotel
                                     if (checkCamion.Checked)
                                         total += montoCamion;
                                     txtTotal.Text = total.ToString();
+                                    //txtTotal.Text = string.Format(new CultureInfo("es-VE"), "{0:#,##0.00}", total);
                                 }
                             }
                         }
@@ -663,15 +666,6 @@ namespace Hotel
         }
 
         #region NO IMPLEMENTADOS TODAVIA
-
-        private void txtEdad_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //if (!char.IsDigit(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != 13 && !char.IsPunctuation(e.KeyChar)) // 8 = backspace, 13 = enter
-            //{
-            //    //MessageBox.Show("Carácter inválido.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //    e.Handled = true;
-            //}
-        }
 
         private void txtTelefono1_Leave(object sender, EventArgs e)
         {
@@ -715,7 +709,20 @@ namespace Hotel
         {
             if (ValidacionCamposTexto())
             {
-                ModificarReservacion();
+                msg = new Msg();
+
+                msg.lblMsg.Text = "¿Está seguro de que desea modificar la reservación?";
+                DialogResult dlgres = msg.ShowDialog();
+                {
+                    if (dlgres == DialogResult.Yes)
+                    {
+                        ModificarReservacion();
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
             }
         }
 
@@ -741,7 +748,19 @@ namespace Hotel
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            EliminarReservacion();
+            msg = new Msg();
+            msg.lblMsg.Text = "¿Está seguro de que desea eliminar la reservación?";
+            DialogResult dlgres = msg.ShowDialog();
+            {
+                if (dlgres == DialogResult.Yes)
+                {
+                    EliminarReservacion();
+                }
+                else
+                {
+                    return;
+                }
+            }
         }
 
         private void checkCamion_Click(object sender, EventArgs e)
@@ -756,6 +775,43 @@ namespace Hotel
             }
 
             txtTotal.Text = total.ToString();
+            //txtTotal.Text = string.Format(new CultureInfo("es-VE"), "{0:#,##0.00}", total);
+        }
+
+        private void txtEdad_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (txtCedula.Focused)
+            {
+                if (!char.IsLetterOrDigit(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != 13) // 8 = backspace, 13 = enter
+                {
+                    e.Handled = true;
+                }
+            }
+
+            if (txtEdad.Focused || txtTelefono1.Focused || txtTelefono2.Focused)
+            {
+                if (!char.IsDigit(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != 13) 
+                {
+                    e.Handled = true;
+                }
+            }
+
+            if (txtTotal.Focused)
+            {
+                if (!char.IsDigit(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != 13 && e.KeyChar != '.' && e.KeyChar != ',')
+                {
+                    e.Handled = true;  
+                }
+            }
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            //if (ValidacionCamposTexto())
+            //{
+
+            //}
+            Close();
         }
     }
 }
