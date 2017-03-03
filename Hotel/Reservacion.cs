@@ -95,7 +95,7 @@ namespace Hotel
             {
                 using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
                 {
-                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT tipo FROM tipo_habitacion", conn))
+                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT tipo FROM tipo_habitacion WHERE activa='1'", conn))
                     {
                         conn.Open();
 
