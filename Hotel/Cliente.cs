@@ -20,6 +20,8 @@ namespace Hotel
 
         Msg msg;
         ListView lst;
+        Vehiculo vehiculo;
+        Reservacion reservacion;
 
         Font font_verdana = new Font("Verdana", 12);
 
@@ -128,13 +130,51 @@ namespace Hotel
                                 {
                                     btnVerVehiculos.Visible = true;
                                 }
+                                else
+                                {
+                                    btnVerVehiculos.Visible = false;
+                                }
                                 lblVehiculos.Text = dr["vehiculos"].ToString();
 
                                 if (int.Parse(dr["reservaciones"].ToString()) > 0)
                                 {
                                     btnVerReservaciones.Visible = true;
                                 }
+                                else
+                                {
+                                    btnVerReservaciones.Visible = false;
+                                }
                                 lblReservaciones.Text = dr["reservaciones"].ToString();
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Se ha presentado un problema.\nDetalles:\n\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void CargarReservacionCliente(string cedula)
+        {
+            listboxReservaciones.Items.Clear();
+
+            try
+            {
+                using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
+                {
+                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT numero_hab FROM reservacion WHERE cedula_cliente=@cedula ORDER BY numero_hab", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@cedula", cedula);
+
+                        conn.Open();
+
+                        using (SQLiteDataReader dr = cmd.ExecuteReader())
+                        {
+                            while (dr.Read())
+                            {
+                                listboxReservaciones.Items.Add(dr["numero_hab"].ToString());
                             }
                         }
                     }
@@ -296,6 +336,17 @@ namespace Hotel
             }
         }
 
+        private void OcultarListbox()
+        {
+            label8.Visible = false;
+            label9.Visible = false;
+            label10.Visible = false;
+            label11.Visible = false;
+
+            listboxReservaciones.Visible = false;
+
+        }
+
         private void btnNuevoCliente_Click(object sender, EventArgs e)
         {
             nuevoCliente = true;
@@ -316,11 +367,16 @@ namespace Hotel
                     {
                         if (c.Name == "lblReservaciones" || c.Name == "lblVehiculos")
                             c.Text = "0";
+                        //if (c.Name == "label8" || c.Name == "label9" || c.Name == "label10")
+                        //{
+                        //    c.Visible = false;
+                        //}
                     }
                 }
                 //
 
                 panel2.Visible = true;
+                //btnVerReservaciones.Visible = false;
 
                 txtNombre.Select();
             }
@@ -363,6 +419,7 @@ namespace Hotel
                     {
                         EliminarCliente(lst.SelectedItems[0].SubItems[0].Text.ToString());
                         CargarListViewClientes();
+                        OcultarListbox();
                     }
                     else
                     {
@@ -377,6 +434,7 @@ namespace Hotel
             if (panel2.Visible)
             {
                 CargarListViewClientes();
+                OcultarListbox();
             }
         }
 
@@ -395,6 +453,7 @@ namespace Hotel
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             CargarListViewClientes();
+            OcultarListbox();
         }
 
         private void lst_SelectedIndexChanged(object sender, EventArgs e)
@@ -412,6 +471,52 @@ namespace Hotel
         private void lst_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             btnModificar_Click(null, null);
+        }
+
+        private void btnVerVehiculos_Click(object sender, EventArgs e)
+        {
+            vehiculo = new Vehiculo();
+            //vehiculo.CargarVehiculosPorCedula(txtCedula.Text);
+            vehiculo.comboCedula.Text = txtCedula.Text;
+            vehiculo.ShowDialog();
+        }
+
+        private void btnVerReservaciones_Click(object sender, EventArgs e)
+        {
+            if (label8.Visible)
+            {
+                OcultarListbox();
+            }
+            else
+            {
+                label8.Visible = true;
+                label9.Visible = true;
+                label10.Visible = true;
+                label11.Visible = true;
+                listboxReservaciones.Visible = true;
+                CargarReservacionCliente(txtCedula.Text.Trim());
+            }
+        }
+
+        private void listboxReservaciones_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            //reservacion = new Reservacion();
+
+            //reservacion.CargarReservacion(int.Parse(listboxReservaciones.Text), "ocupada");
+            //reservacion.ShowDialog();
+
+            MessageBox.Show("De momento da error el método de Actualizar Colores porque Form1 no está activa. Verificar si sigue siendo el caso una vez que cambie Application.Run a Form1 nuevamente.");
+        }
+
+        private void btnNuevaReservacion_Click(object sender, EventArgs e)
+        {
+            //reservacion = new Reservacion();
+
+            //reservacion.txtCedula.Text = txtCedula.Text.Trim();
+            //reservacion.ShowDialog();
+
+            MessageBox.Show("De momento da error el método de Actualizar Colores porque Form1 no está activa. Verificar si sigue siendo el caso una vez que cambie Application.Run a Form1 nuevamente.");
+
         }
     }
 }

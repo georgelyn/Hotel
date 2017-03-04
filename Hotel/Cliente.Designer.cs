@@ -36,12 +36,16 @@
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.listboxReservaciones = new System.Windows.Forms.ListBox();
             this.btnNuevaReservacion = new System.Windows.Forms.Button();
             this.btnVerReservaciones = new System.Windows.Forms.Button();
             this.lblReservaciones = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.btnRegistrarVehiculo = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.btnCancelar = new System.Windows.Forms.Button();
@@ -135,12 +139,16 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.label11);
+            this.panel2.Controls.Add(this.label10);
+            this.panel2.Controls.Add(this.label9);
+            this.panel2.Controls.Add(this.label8);
+            this.panel2.Controls.Add(this.listboxReservaciones);
             this.panel2.Controls.Add(this.btnNuevaReservacion);
             this.panel2.Controls.Add(this.btnVerReservaciones);
             this.panel2.Controls.Add(this.lblReservaciones);
             this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.panel3);
-            this.panel2.Controls.Add(this.btnRegistrarVehiculo);
             this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this.panel4);
             this.panel2.Controls.Add(this.btnCancelar);
@@ -171,30 +179,85 @@
             this.panel2.TabIndex = 0;
             this.panel2.Visible = false;
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(619, 330);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(105, 15);
+            this.label11.TabIndex = 150;
+            this.label11.Text = "Reservaciones:";
+            this.label11.Visible = false;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(638, 433);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(14, 20);
+            this.label10.TabIndex = 149;
+            this.label10.Text = "|";
+            this.label10.Visible = false;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(328, 433);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(14, 20);
+            this.label9.TabIndex = 148;
+            this.label9.Text = "|";
+            this.label9.Visible = false;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(337, 453);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(304, 20);
+            this.label8.TabIndex = 147;
+            this.label8.Text = "-----------------------------------------------------------";
+            this.label8.Visible = false;
+            // 
+            // listboxReservaciones
+            // 
+            this.listboxReservaciones.FormattingEnabled = true;
+            this.listboxReservaciones.ItemHeight = 20;
+            this.listboxReservaciones.Location = new System.Drawing.Point(622, 348);
+            this.listboxReservaciones.Name = "listboxReservaciones";
+            this.listboxReservaciones.Size = new System.Drawing.Size(105, 84);
+            this.listboxReservaciones.TabIndex = 146;
+            this.listboxReservaciones.Visible = false;
+            this.listboxReservaciones.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listboxReservaciones_MouseDoubleClick);
+            // 
             // btnNuevaReservacion
             // 
-            this.btnNuevaReservacion.Location = new System.Drawing.Point(355, 368);
+            this.btnNuevaReservacion.Location = new System.Drawing.Point(730, 11);
             this.btnNuevaReservacion.Name = "btnNuevaReservacion";
-            this.btnNuevaReservacion.Size = new System.Drawing.Size(221, 28);
-            this.btnNuevaReservacion.TabIndex = 147;
+            this.btnNuevaReservacion.Size = new System.Drawing.Size(188, 28);
+            this.btnNuevaReservacion.TabIndex = 8;
             this.btnNuevaReservacion.Text = "Nueva reservación";
             this.btnNuevaReservacion.UseVisualStyleBackColor = true;
+            this.btnNuevaReservacion.Click += new System.EventHandler(this.btnNuevaReservacion_Click);
             // 
             // btnVerReservaciones
             // 
-            this.btnVerReservaciones.Location = new System.Drawing.Point(293, 368);
+            this.btnVerReservaciones.Location = new System.Drawing.Point(303, 404);
             this.btnVerReservaciones.Name = "btnVerReservaciones";
             this.btnVerReservaciones.Size = new System.Drawing.Size(56, 28);
-            this.btnVerReservaciones.TabIndex = 146;
+            this.btnVerReservaciones.TabIndex = 7;
             this.btnVerReservaciones.Text = "Ver";
             this.btnVerReservaciones.UseVisualStyleBackColor = true;
             this.btnVerReservaciones.Visible = false;
+            this.btnVerReservaciones.Click += new System.EventHandler(this.btnVerReservaciones_Click);
             // 
             // lblReservaciones
             // 
             this.lblReservaciones.AutoSize = true;
             this.lblReservaciones.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblReservaciones.Location = new System.Drawing.Point(250, 372);
+            this.lblReservaciones.Location = new System.Drawing.Point(260, 408);
             this.lblReservaciones.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblReservaciones.Name = "lblReservaciones";
             this.lblReservaciones.Size = new System.Drawing.Size(20, 22);
@@ -204,7 +267,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(66, 372);
+            this.label5.Location = new System.Drawing.Point(76, 408);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(171, 20);
@@ -218,15 +281,6 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(10, 399);
             this.panel3.TabIndex = 140;
-            // 
-            // btnRegistrarVehiculo
-            // 
-            this.btnRegistrarVehiculo.Location = new System.Drawing.Point(355, 402);
-            this.btnRegistrarVehiculo.Name = "btnRegistrarVehiculo";
-            this.btnRegistrarVehiculo.Size = new System.Drawing.Size(221, 28);
-            this.btnRegistrarVehiculo.TabIndex = 143;
-            this.btnRegistrarVehiculo.Text = "Registrar nuevo vehículo";
-            this.btnRegistrarVehiculo.UseVisualStyleBackColor = true;
             // 
             // label4
             // 
@@ -252,7 +306,7 @@
             this.btnCancelar.Location = new System.Drawing.Point(827, 465);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(91, 32);
-            this.btnCancelar.TabIndex = 139;
+            this.btnCancelar.TabIndex = 11;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
@@ -262,26 +316,27 @@
             this.btnGuardar.Location = new System.Drawing.Point(730, 465);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(91, 32);
-            this.btnGuardar.TabIndex = 138;
+            this.btnGuardar.TabIndex = 10;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // btnVerVehiculos
             // 
-            this.btnVerVehiculos.Location = new System.Drawing.Point(293, 402);
+            this.btnVerVehiculos.Location = new System.Drawing.Point(303, 370);
             this.btnVerVehiculos.Name = "btnVerVehiculos";
             this.btnVerVehiculos.Size = new System.Drawing.Size(56, 28);
-            this.btnVerVehiculos.TabIndex = 137;
+            this.btnVerVehiculos.TabIndex = 9;
             this.btnVerVehiculos.Text = "Ver";
             this.btnVerVehiculos.UseVisualStyleBackColor = true;
             this.btnVerVehiculos.Visible = false;
+            this.btnVerVehiculos.Click += new System.EventHandler(this.btnVerVehiculos_Click);
             // 
             // lblVehiculos
             // 
             this.lblVehiculos.AutoSize = true;
             this.lblVehiculos.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblVehiculos.Location = new System.Drawing.Point(250, 406);
+            this.lblVehiculos.Location = new System.Drawing.Point(260, 374);
             this.lblVehiculos.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVehiculos.Name = "lblVehiculos";
             this.lblVehiculos.Size = new System.Drawing.Size(20, 22);
@@ -291,7 +346,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(66, 406);
+            this.label3.Location = new System.Drawing.Point(76, 374);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(165, 20);
@@ -303,7 +358,7 @@
             this.txtNotas.Location = new System.Drawing.Point(280, 226);
             this.txtNotas.Name = "txtNotas";
             this.txtNotas.Size = new System.Drawing.Size(455, 67);
-            this.txtNotas.TabIndex = 133;
+            this.txtNotas.TabIndex = 6;
             this.txtNotas.Text = "";
             // 
             // label2
@@ -321,7 +376,7 @@
             this.txtCedula.Location = new System.Drawing.Point(280, 140);
             this.txtCedula.Name = "txtCedula";
             this.txtCedula.Size = new System.Drawing.Size(180, 26);
-            this.txtCedula.TabIndex = 132;
+            this.txtCedula.TabIndex = 2;
             // 
             // lblCedula
             // 
@@ -360,7 +415,7 @@
             this.txtApellido.Location = new System.Drawing.Point(280, 98);
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.Size = new System.Drawing.Size(425, 26);
-            this.txtApellido.TabIndex = 128;
+            this.txtApellido.TabIndex = 1;
             // 
             // lblApellido
             // 
@@ -377,7 +432,7 @@
             this.txtEdad.Location = new System.Drawing.Point(554, 140);
             this.txtEdad.Name = "txtEdad";
             this.txtEdad.Size = new System.Drawing.Size(77, 26);
-            this.txtEdad.TabIndex = 119;
+            this.txtEdad.TabIndex = 3;
             // 
             // lblEdad
             // 
@@ -404,21 +459,21 @@
             this.txtTelefono2.Location = new System.Drawing.Point(469, 183);
             this.txtTelefono2.Name = "txtTelefono2";
             this.txtTelefono2.Size = new System.Drawing.Size(162, 26);
-            this.txtTelefono2.TabIndex = 121;
+            this.txtTelefono2.TabIndex = 5;
             // 
             // txtTelefono1
             // 
             this.txtTelefono1.Location = new System.Drawing.Point(280, 183);
             this.txtTelefono1.Name = "txtTelefono1";
             this.txtTelefono1.Size = new System.Drawing.Size(162, 26);
-            this.txtTelefono1.TabIndex = 120;
+            this.txtTelefono1.TabIndex = 4;
             // 
             // txtNombre
             // 
             this.txtNombre.Location = new System.Drawing.Point(280, 56);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(425, 26);
-            this.txtNombre.TabIndex = 118;
+            this.txtNombre.TabIndex = 0;
             // 
             // lblTelefono
             // 
@@ -496,10 +551,14 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Button btnRegistrarVehiculo;
         private System.Windows.Forms.Button btnNuevaReservacion;
         private System.Windows.Forms.Button btnVerReservaciones;
         private System.Windows.Forms.Label lblReservaciones;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ListBox listboxReservaciones;
+        private System.Windows.Forms.Label label11;
     }
 }

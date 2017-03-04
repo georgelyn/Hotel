@@ -120,11 +120,11 @@ namespace Hotel
 
                 if (((Button)sender).BackColor == Color.Red)
                 {
-                    reservacion.CargarHuespedPorHabitacion(numero_habitacion, "ocupada");
+                    reservacion.CargarReservacion(numero_habitacion, "ocupada");
                 }
                 else if (((Button)sender).BackColor == Color.Green)
                 {
-                    reservacion.CargarHuespedPorHabitacion(numero_habitacion, "disponible");
+                    reservacion.CargarReservacion(numero_habitacion, "disponible");
                 }
 
                 reservacion.ShowDialog();

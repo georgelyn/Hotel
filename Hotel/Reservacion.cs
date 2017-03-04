@@ -119,7 +119,7 @@ namespace Hotel
             listboxHabitaciones.SelectedIndex = 0;
         }
 
-        public void CargarHuespedPorHabitacion(int numero_hab, string estado)
+        public void CargarReservacion(int numero_hab, string estado)
         {
             PanelCedula(true);
 
