@@ -29,7 +29,7 @@ namespace Hotel
             try
             {
                 comboCedula.Items.Clear();
-                comboVehiculos.Items.Clear();
+                comboVehiculo.Items.Clear();
 
                 using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
                 {
@@ -53,9 +53,9 @@ namespace Hotel
             }
         }
 
-        private void CargarVehiculosPorCedula(string cedula)
+        public void CargarVehiculosPorCedula(string cedula)
         {
-            comboVehiculos.Items.Clear();
+            comboVehiculo.Items.Clear();
 
             try
             {
@@ -67,6 +67,7 @@ namespace Hotel
                         idVehiculo.Clear();
 
                         cmd.Parameters.AddWithValue("@cedula", cedula);
+                        comboCedula.Text = cedula;
                         conn.Open();
 
                         using (SQLiteDataReader dr = cmd.ExecuteReader())
@@ -74,7 +75,7 @@ namespace Hotel
                             while (dr.Read())
                             {
                                 idVehiculo.Add(dr["id"].ToString());
-                                comboVehiculos.Items.Add(dr["marca"].ToString() + " - " + dr["modelo"].ToString());
+                                comboVehiculo.Items.Add(dr["marca"].ToString() + " - " + dr["modelo"].ToString());
                             }
                         }
                     }
@@ -199,11 +200,11 @@ namespace Hotel
             //comboVehiculos.SelectedIndex = -1;
         }
 
-        private void comboVehiculos_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboVehiculo_SelectedIndexChanged(object sender, EventArgs e)
         {
             //if (comboVehiculos.SelectedIndex >= 0)
             //{
-                CargarDatosVehiculo(idVehiculo[comboVehiculos.SelectedIndex].ToString());
+                CargarDatosVehiculo(idVehiculo[comboVehiculo.SelectedIndex].ToString());
                 //MessageBox.Show(idVehiculo[comboVehiculos.SelectedIndex].ToString());
 
                 btnEliminar.Visible = true;
@@ -219,7 +220,7 @@ namespace Hotel
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            ModificarVehiculo(idVehiculo[comboVehiculos.SelectedIndex].ToString());
+            ModificarVehiculo(idVehiculo[comboVehiculo.SelectedIndex].ToString());
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -230,7 +231,7 @@ namespace Hotel
             {
                 if (dlgres == DialogResult.Yes)
                 {
-                    EliminarVehiculo(idVehiculo[comboVehiculos.SelectedIndex].ToString());
+                    EliminarVehiculo(idVehiculo[comboVehiculo.SelectedIndex].ToString());
                 }
                 else
                 {

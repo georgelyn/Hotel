@@ -30,7 +30,7 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.comboVehiculos = new System.Windows.Forms.ComboBox();
+            this.comboVehiculo = new System.Windows.Forms.ComboBox();
             this.checkCamion = new System.Windows.Forms.CheckBox();
             this.txtPlaca = new System.Windows.Forms.TextBox();
             this.lblMarca = new System.Windows.Forms.Label();
@@ -66,15 +66,15 @@
             this.label3.TabIndex = 3;
             this.label3.Text = "Elija uno de la lista:";
             // 
-            // comboVehiculos
+            // comboVehiculo
             // 
-            this.comboVehiculos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboVehiculos.FormattingEnabled = true;
-            this.comboVehiculos.Location = new System.Drawing.Point(243, 78);
-            this.comboVehiculos.Name = "comboVehiculos";
-            this.comboVehiculos.Size = new System.Drawing.Size(266, 28);
-            this.comboVehiculos.TabIndex = 0;
-            this.comboVehiculos.SelectedIndexChanged += new System.EventHandler(this.comboVehiculos_SelectedIndexChanged);
+            this.comboVehiculo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboVehiculo.FormattingEnabled = true;
+            this.comboVehiculo.Location = new System.Drawing.Point(243, 78);
+            this.comboVehiculo.Name = "comboVehiculo";
+            this.comboVehiculo.Size = new System.Drawing.Size(266, 28);
+            this.comboVehiculo.TabIndex = 0;
+            this.comboVehiculo.SelectedIndexChanged += new System.EventHandler(this.comboVehiculo_SelectedIndexChanged);
             // 
             // checkCamion
             // 
@@ -229,7 +229,7 @@
             this.Controls.Add(this.checkCamion);
             this.Controls.Add(this.txtPlaca);
             this.Controls.Add(this.lblMarca);
-            this.Controls.Add(this.comboVehiculos);
+            this.Controls.Add(this.comboVehiculo);
             this.Controls.Add(this.txtModelo);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtMarca);
@@ -254,7 +254,7 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox comboVehiculos;
+        private System.Windows.Forms.ComboBox comboVehiculo;
         private System.Windows.Forms.CheckBox checkCamion;
         private System.Windows.Forms.TextBox txtPlaca;
         private System.Windows.Forms.Label lblMarca;
@@ -266,8 +266,8 @@
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnEliminar;
-        private System.Windows.Forms.ComboBox comboCedula;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.RichTextBox txtNotas;
+        internal System.Windows.Forms.ComboBox comboCedula;
     }
 }
