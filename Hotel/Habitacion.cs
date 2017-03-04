@@ -88,7 +88,7 @@ namespace Hotel
                         {
                             while (dr.Read())
                             {
-                                double costo = double.Parse(dr["costo"].ToString());
+                                //double costo = double.Parse(dr["costo"].ToString());
 
                                 ListViewItem item = new ListViewItem(dr["id"].ToString());
                                 item.SubItems.Add(dr["tipo"].ToString());

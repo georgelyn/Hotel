@@ -404,7 +404,7 @@ namespace Hotel
                 }
                 catch (SQLiteException ex)
                 {
-                    if (ex.Message.Contains("cedula"))
+                    if (ex.Message.Contains("cedula")) // Ya esto no es necesario, pues se verifica la cédula antes de llamar al método
                         MessageBox.Show("El número de cédula ingresado ya existe en el sistema.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     else
                         MessageBox.Show("No se pudo conectar con la base de datos. \nDescripción del error: \n\n>> " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -621,7 +621,7 @@ namespace Hotel
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            if (ValidacionCamposTexto()) // Si la validación se realizó efectivamente
+            if (ValidacionCamposTexto()) // Si la validación se realizó con éxito
             {
                 if (BuscarPorCedula(txtCedula.Text.Replace(".", "").Trim())) // Si el cliente existe
                 {
