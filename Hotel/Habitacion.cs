@@ -64,9 +64,10 @@ namespace Hotel
             panel2.Visible = false;
 
             btnAgregar.Enabled = true;
-            btnModificar.Enabled = false;
-            btnEliminar.Enabled = false;
-            btnActDesactivar.Enabled = false;
+            ActivarBotones(false);
+            //btnModificar.Enabled = false;
+            //btnEliminar.Enabled = false;
+            //btnActDesactivar.Enabled = false;
 
             if (!panel1.Contains(lst))
             {
@@ -268,6 +269,26 @@ namespace Hotel
             }
         }
 
+        public void ActivarBotones(bool verdadero)
+        {
+            if (!verdadero)
+            {
+                btnModificar.Enabled = false;
+                btnEliminar.Enabled = false;
+                btnEliminar.ForeColor = Color.Black;
+                btnEliminar.BackColor = Color.Transparent;
+                btnActDesactivar.Enabled = false;
+            }
+            else
+            {
+                btnModificar.Enabled = true;
+                btnEliminar.Enabled = true;
+                btnEliminar.ForeColor = Color.White;
+                btnEliminar.BackColor = Color.Red;
+                btnActDesactivar.Enabled = true;
+            }
+        }
+
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             habitacionExiste = false;
@@ -275,9 +296,7 @@ namespace Hotel
             if (!panel2.Visible)
             {
                 panel1.Controls.Remove(lst);
-                btnModificar.Enabled = false;
-                btnEliminar.Enabled = false;
-                btnActDesactivar.Enabled = false;
+                ActivarBotones(false);
 
                 // Restaurar/reinicializar valores
                 foreach (Control c in panel2.Controls)
@@ -411,15 +430,21 @@ namespace Hotel
         {
             if (lst.SelectedItems.Count > 0)
             {
-                btnModificar.Enabled = true;
-                btnEliminar.Enabled = true;
-                btnActDesactivar.Enabled = true;
+                ActivarBotones(true);
+                //btnModificar.Enabled = true;
+                //btnEliminar.Enabled = true;
+                //btnEliminar.ForeColor = Color.White;
+                //btnEliminar.BackColor = Color.Red;
+                //btnActDesactivar.Enabled = true;
             }
             else
             {
-                btnModificar.Enabled = false;
-                btnEliminar.Enabled = false;
-                btnActDesactivar.Enabled = false;
+                ActivarBotones(false);
+                //btnModificar.Enabled = false;
+                //btnEliminar.Enabled = false;
+                //btnEliminar.ForeColor = Color.Black;
+                //btnEliminar.BackColor = Color.Transparent;
+                //btnActDesactivar.Enabled = false;
             }
         }
 

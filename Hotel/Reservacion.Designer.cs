@@ -71,6 +71,11 @@
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.lblTelefono = new System.Windows.Forms.Label();
             this.lblNombre = new System.Windows.Forms.Label();
+            this.lblApellido = new System.Windows.Forms.Label();
+            this.txtApellido = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panelContenedor.SuspendLayout();
             this.panelCedula.SuspendLayout();
@@ -80,7 +85,7 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.panel1.BackColor = System.Drawing.Color.LightBlue;
             this.panel1.Controls.Add(this.btnEliminar);
             this.panel1.Controls.Add(this.btnModificar);
             this.panel1.Controls.Add(this.btnAceptar);
@@ -138,7 +143,12 @@
             // 
             // panelContenedor
             // 
+            this.panelContenedor.Controls.Add(this.label8);
+            this.panelContenedor.Controls.Add(this.label7);
+            this.panelContenedor.Controls.Add(this.label6);
+            this.panelContenedor.Controls.Add(this.txtApellido);
             this.panelContenedor.Controls.Add(this.panelCedula);
+            this.panelContenedor.Controls.Add(this.lblApellido);
             this.panelContenedor.Controls.Add(this.panel2);
             this.panelContenedor.Controls.Add(this.label3);
             this.panelContenedor.Controls.Add(this.listboxHabitaciones);
@@ -163,11 +173,11 @@
             // 
             // panelCedula
             // 
-            this.panelCedula.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.panelCedula.BackColor = System.Drawing.Color.LightBlue;
             this.panelCedula.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelCedula.Controls.Add(this.btnCheckCedula);
-            this.panelCedula.Controls.Add(this.txtCedula);
             this.panelCedula.Controls.Add(this.lblCedula);
+            this.panelCedula.Controls.Add(this.txtCedula);
             this.panelCedula.Location = new System.Drawing.Point(253, 216);
             this.panelCedula.Name = "panelCedula";
             this.panelCedula.Size = new System.Drawing.Size(415, 104);
@@ -186,16 +196,16 @@
             // 
             // txtCedula
             // 
-            this.txtCedula.Location = new System.Drawing.Point(135, 37);
+            this.txtCedula.Location = new System.Drawing.Point(95, 37);
             this.txtCedula.Name = "txtCedula";
-            this.txtCedula.Size = new System.Drawing.Size(130, 26);
+            this.txtCedula.Size = new System.Drawing.Size(180, 26);
             this.txtCedula.TabIndex = 97;
             this.txtCedula.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtEdad_KeyPress);
             // 
             // lblCedula
             // 
             this.lblCedula.AutoSize = true;
-            this.lblCedula.Location = new System.Drawing.Point(50, 40);
+            this.lblCedula.Location = new System.Drawing.Point(25, 40);
             this.lblCedula.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCedula.Name = "lblCedula";
             this.lblCedula.Size = new System.Drawing.Size(63, 20);
@@ -378,9 +388,9 @@
             this.groupBox1.Controls.Add(this.lblModelo);
             this.groupBox1.Controls.Add(this.lblPlaca);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(29, 264);
+            this.groupBox1.Location = new System.Drawing.Point(23, 297);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(521, 157);
+            this.groupBox1.Size = new System.Drawing.Size(521, 135);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Información sobre el vehículo";
@@ -433,7 +443,7 @@
             // 
             this.lblModelo.AutoSize = true;
             this.lblModelo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblModelo.Location = new System.Drawing.Point(24, 99);
+            this.lblModelo.Location = new System.Drawing.Point(28, 101);
             this.lblModelo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblModelo.Name = "lblModelo";
             this.lblModelo.Size = new System.Drawing.Size(65, 20);
@@ -444,7 +454,7 @@
             // 
             this.lblPlaca.AutoSize = true;
             this.lblPlaca.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPlaca.Location = new System.Drawing.Point(265, 62);
+            this.lblPlaca.Location = new System.Drawing.Point(264, 64);
             this.lblPlaca.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPlaca.Name = "lblPlaca";
             this.lblPlaca.Size = new System.Drawing.Size(52, 20);
@@ -453,7 +463,7 @@
             // 
             // txtEdad
             // 
-            this.txtEdad.Location = new System.Drawing.Point(460, 176);
+            this.txtEdad.Location = new System.Drawing.Point(399, 219);
             this.txtEdad.Name = "txtEdad";
             this.txtEdad.Size = new System.Drawing.Size(77, 26);
             this.txtEdad.TabIndex = 1;
@@ -462,7 +472,7 @@
             // lblEdad
             // 
             this.lblEdad.AutoSize = true;
-            this.lblEdad.Location = new System.Drawing.Point(402, 179);
+            this.lblEdad.Location = new System.Drawing.Point(341, 222);
             this.lblEdad.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblEdad.Name = "lblEdad";
             this.lblEdad.Size = new System.Drawing.Size(51, 20);
@@ -492,7 +502,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(353, 211);
+            this.label1.Location = new System.Drawing.Point(292, 254);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(13, 20);
@@ -501,7 +511,7 @@
             // 
             // txtTelefono2
             // 
-            this.txtTelefono2.Location = new System.Drawing.Point(375, 208);
+            this.txtTelefono2.Location = new System.Drawing.Point(314, 251);
             this.txtTelefono2.Name = "txtTelefono2";
             this.txtTelefono2.Size = new System.Drawing.Size(162, 26);
             this.txtTelefono2.TabIndex = 3;
@@ -509,7 +519,7 @@
             // 
             // txtTelefono1
             // 
-            this.txtTelefono1.Location = new System.Drawing.Point(184, 208);
+            this.txtTelefono1.Location = new System.Drawing.Point(125, 251);
             this.txtTelefono1.Name = "txtTelefono1";
             this.txtTelefono1.Size = new System.Drawing.Size(162, 26);
             this.txtTelefono1.TabIndex = 2;
@@ -517,7 +527,7 @@
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(184, 144);
+            this.txtNombre.Location = new System.Drawing.Point(125, 155);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(425, 26);
             this.txtNombre.TabIndex = 0;
@@ -525,7 +535,7 @@
             // lblTelefono
             // 
             this.lblTelefono.AutoSize = true;
-            this.lblTelefono.Location = new System.Drawing.Point(70, 211);
+            this.lblTelefono.Location = new System.Drawing.Point(19, 254);
             this.lblTelefono.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTelefono.Name = "lblTelefono";
             this.lblTelefono.Size = new System.Drawing.Size(93, 20);
@@ -535,12 +545,62 @@
             // lblNombre
             // 
             this.lblNombre.AutoSize = true;
-            this.lblNombre.Location = new System.Drawing.Point(25, 147);
+            this.lblNombre.Location = new System.Drawing.Point(25, 158);
             this.lblNombre.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNombre.Name = "lblNombre";
-            this.lblNombre.Size = new System.Drawing.Size(138, 20);
+            this.lblNombre.Size = new System.Drawing.Size(87, 20);
             this.lblNombre.TabIndex = 92;
-            this.lblNombre.Text = "Nombre completo:";
+            this.lblNombre.Text = "Nombre(s):";
+            // 
+            // lblApellido
+            // 
+            this.lblApellido.AutoSize = true;
+            this.lblApellido.Location = new System.Drawing.Point(25, 190);
+            this.lblApellido.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblApellido.Name = "lblApellido";
+            this.lblApellido.Size = new System.Drawing.Size(87, 20);
+            this.lblApellido.TabIndex = 114;
+            this.lblApellido.Text = "Apellido(s):";
+            // 
+            // txtApellido
+            // 
+            this.txtApellido.Location = new System.Drawing.Point(125, 187);
+            this.txtApellido.Name = "txtApellido";
+            this.txtApellido.Size = new System.Drawing.Size(425, 26);
+            this.txtApellido.TabIndex = 115;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.ForeColor = System.Drawing.Color.Red;
+            this.label6.Location = new System.Drawing.Point(557, 158);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(15, 20);
+            this.label6.TabIndex = 116;
+            this.label6.Text = "*";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.ForeColor = System.Drawing.Color.Red;
+            this.label7.Location = new System.Drawing.Point(557, 190);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(15, 20);
+            this.label7.TabIndex = 117;
+            this.label7.Text = "*";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.ForeColor = System.Drawing.Color.Red;
+            this.label8.Location = new System.Drawing.Point(893, 492);
+            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(15, 20);
+            this.label8.TabIndex = 118;
+            this.label8.Text = "*";
             // 
             // Reservacion
             // 
@@ -551,6 +611,7 @@
             this.Controls.Add(this.panelContenedor);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximizeBox = false;
             this.Name = "Reservacion";
@@ -613,5 +674,10 @@
         private System.Windows.Forms.LinkLabel linkLblCambiarNumHab;
         private System.Windows.Forms.Label lblHabitacionNumero;
         private System.Windows.Forms.Label lblHabitacionActual;
+        private System.Windows.Forms.Label lblApellido;
+        private System.Windows.Forms.TextBox txtApellido;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
     }
 }

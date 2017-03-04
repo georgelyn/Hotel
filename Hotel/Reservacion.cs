@@ -154,7 +154,7 @@ namespace Hotel
             {
                 using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
                 {
-                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT nombre, cedula, edad, telefono, telefono2, " + 
+                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT nombre, apellido, cedula, edad, telefono, telefono2, " + 
                         " r.id, r.numero_hab, r.notas, fecha_ingreso, fecha_salida, tipo_habitacion, costo_total, marca, modelo, placa, es_camion " + 
                         " FROM cliente INNER JOIN reservacion r ON cedula = r.cedula_cliente " + 
                         " LEFT JOIN vehiculo v ON r.id = v.reservacion_id "+ 
@@ -167,6 +167,7 @@ namespace Hotel
                             if (dr.Read())
                             {
                                 txtNombre.Text = dr["nombre"].ToString();
+                                txtApellido.Text = dr["apellido"].ToString();
                                 txtCedula.Text = dr["cedula"].ToString();
                                 txtEdad.Text = dr["edad"].ToString();
                                 txtTelefono1.Text = dr["telefono"].ToString();
@@ -229,6 +230,7 @@ namespace Hotel
                             while (dr.Read())
                             {
                                 txtNombre.Text = dr["nombre"].ToString();
+                                txtApellido.Text = dr["apellido"].ToString();
                                 txtCedula.Text = cedula; // Hasta ahora no es realmente necesario. Se carga en btnCheckCedula
                                 txtEdad.Text = dr["edad"].ToString();
                                 txtTelefono1.Text = dr["telefono"].ToString();
@@ -258,9 +260,9 @@ namespace Hotel
             // Estado por default // if (visible)
 
             panelCedula.Visible = true;
-            lblCedula.Location = new Point(50, 40);
+            lblCedula.Location = new Point(25, 40);
             panelCedula.Controls.Add(lblCedula);
-            txtCedula.Location = new Point(135, 37);
+            txtCedula.Location = new Point(95, 37);
             panelCedula.Controls.Add(txtCedula);
 
             txtCedula.Select();
@@ -268,8 +270,8 @@ namespace Hotel
 
             if (!visible)
             {
-                lblCedula.Location = new Point(91, 179);
-                txtCedula.Location = new Point(184, 176);
+                lblCedula.Location = new Point(49, 222);
+                txtCedula.Location = new Point(125, 219);
                 panelContenedor.Controls.Add(lblCedula);
                 panelContenedor.Controls.Add(txtCedula);
 
@@ -313,13 +315,13 @@ namespace Hotel
 
                     if (clienteNuevo)
                     {
-                        query = "INSERT INTO cliente (nombre, cedula, edad, telefono, telefono2, cliente_desde) VALUES (@nombre, @cedula, @edad, @telefono1, @telefono2, @clienteDesde); " +
+                        query = "INSERT INTO cliente (nombre, apellido, cedula, edad, telefono, telefono2, cliente_desde) VALUES (@nombre, @apellido, @cedula, @edad, @telefono1, @telefono2, @clienteDesde); " +
                             "UPDATE habitacion SET estado=@estado WHERE numero_hab=@numeroHabitacion;" +
                             "INSERT INTO reservacion (numero_hab, cedula_cliente, fecha_ingreso, fecha_salida, tipo_habitacion, costo_total, notas) VALUES (@numeroHabitacion, @cedula, @fechaIngreso, @fechaSalida, @tipoHabitacion, @costoTotal, @notasReservacion)";
                     }
                     else if (!clienteNuevo)
                     {
-                        query = "UPDATE cliente SET nombre=@nombre, edad=@edad, telefono=@telefono1, telefono2=@telefono2 WHERE cedula=@cedula;" +
+                        query = "UPDATE cliente SET nombre=@nombre, apellido=@apellido, edad=@edad, telefono=@telefono1, telefono2=@telefono2 WHERE cedula=@cedula;" +
                            "UPDATE habitacion SET estado=@estado WHERE numero_hab=@numeroHabitacion;" +
                            "INSERT INTO reservacion (numero_hab, cedula_cliente, fecha_ingreso, fecha_salida, tipo_habitacion, costo_total, notas) VALUES (@numeroHabitacion, @cedula, @fechaIngreso, @fechaSalida, @tipoHabitacion, @costoTotal, @notasReservacion)";
                     }
@@ -336,6 +338,7 @@ namespace Hotel
                             #region Clientes
 
                             cmd.Parameters.AddWithValue("@nombre", txtNombre.Text.Trim());
+                            cmd.Parameters.AddWithValue("@apellido", txtApellido.Text.Trim());
                             cmd.Parameters.AddWithValue("@cedula", txtCedula.Text.Replace(".", "").Trim());
                             cmd.Parameters.AddWithValue("@edad", StringExtensions.NullString(txtEdad.Text.Trim()));
                             cmd.Parameters.AddWithValue("@telefono1", StringExtensions.NullString(txtTelefono1.Text.Trim()));
@@ -435,7 +438,7 @@ namespace Hotel
                         conVehiculo = false; // Si campos están vacíos, no tiene vehículo
                     }
 
-                    string query = "UPDATE cliente SET nombre=@nombre, edad=@edad, telefono=@telefono1, telefono2=@telefono2 WHERE cedula=@cedula;" +
+                    string query = "UPDATE cliente SET nombre=@nombre, apellido=@apellido, edad=@edad, telefono=@telefono1, telefono2=@telefono2 WHERE cedula=@cedula;" +
                         "UPDATE reservacion SET numero_hab=@numeroHabitacion, fecha_ingreso=@fechaIngreso, fecha_salida=@fechaSalida, tipo_habitacion=@tipoHabitacion, costo_total=@costoTotal, notas=@notasReservacion WHERE id=(SELECT id FROM reservacion WHERE numero_hab=@habitacionActual)";
 
                     if (habitacionActual != (comboHabitacion.SelectedIndex + 1)) // En pocas palabras, si se cambió número habtiación
@@ -464,6 +467,7 @@ namespace Hotel
                             // CLIENTE
 
                             cmd.Parameters.AddWithValue("@nombre", txtNombre.Text.Trim());
+                            cmd.Parameters.AddWithValue("@apellido", txtApellido.Text.Trim());
                             cmd.Parameters.AddWithValue("@cedula", txtCedula.Text.Replace(".", "").Trim());
                             cmd.Parameters.AddWithValue("@edad", StringExtensions.NullString(txtEdad.Text.Trim()));
                             cmd.Parameters.AddWithValue("@telefono1", StringExtensions.NullString(txtTelefono1.Text.Trim()));
@@ -591,8 +595,8 @@ namespace Hotel
                 return false;
             }
 
-            TextBox[] txtBox = { txtNombre, txtCedula, txtTotal };
-            Label[] txtLabel = { lblNombre, lblCedula, lblTotal };
+            TextBox[] txtBox = { txtNombre, txtApellido, txtCedula, txtTotal };
+            Label[] txtLabel = { lblNombre, lblApellido, lblCedula, lblTotal };
 
             for (int i = 0; i < txtBox.Length; i++)
             {

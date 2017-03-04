@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Habitacion));
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.btnCancelar = new System.Windows.Forms.Button();
@@ -46,13 +47,12 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnAgregar = new System.Windows.Forms.ToolStripButton();
             this.btnModificar = new System.Windows.Forms.ToolStripButton();
-            this.btnEliminar = new System.Windows.Forms.ToolStripButton();
             this.btnActDesactivar = new System.Windows.Forms.ToolStripButton();
+            this.btnEliminar = new System.Windows.Forms.ToolStripButton();
             this.btnMostrarHabitaciones = new System.Windows.Forms.ToolStripButton();
-            this.label9 = new System.Windows.Forms.Label();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -62,9 +62,9 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.FloralWhite;
             this.panel1.Controls.Add(this.panel2);
-            this.panel1.Location = new System.Drawing.Point(0, 28);
+            this.panel1.Location = new System.Drawing.Point(0, 37);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(723, 479);
+            this.panel1.Size = new System.Drawing.Size(723, 472);
             this.panel1.TabIndex = 0;
             // 
             // panel2
@@ -89,9 +89,19 @@
             this.panel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panel2.Location = new System.Drawing.Point(22, 12);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(678, 456);
+            this.panel2.Size = new System.Drawing.Size(678, 445);
             this.panel2.TabIndex = 0;
             this.panel2.Visible = false;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(216, 189);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(27, 16);
+            this.label9.TabIndex = 15;
+            this.label9.Text = "Bs.";
             // 
             // label8
             // 
@@ -115,7 +125,7 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(582, 415);
+            this.btnCancelar.Location = new System.Drawing.Point(581, 403);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(84, 29);
             this.btnCancelar.TabIndex = 12;
@@ -125,7 +135,7 @@
             // 
             // btnAceptar
             // 
-            this.btnAceptar.Location = new System.Drawing.Point(492, 415);
+            this.btnAceptar.Location = new System.Drawing.Point(491, 403);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(84, 29);
             this.btnAceptar.TabIndex = 11;
@@ -229,21 +239,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Tipo:";
             // 
-            // toolStrip1
-            // 
-            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnAgregar,
-            this.btnModificar,
-            this.btnActDesactivar,
-            this.btnEliminar,
-            this.btnMostrarHabitaciones});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(723, 25);
-            this.toolStrip1.TabIndex = 1;
-            this.toolStrip1.Text = "toolStrip1";
-            // 
             // btnAgregar
             // 
             this.btnAgregar.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -252,7 +247,7 @@
             this.btnAgregar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnAgregar.Size = new System.Drawing.Size(86, 22);
+            this.btnAgregar.Size = new System.Drawing.Size(86, 21);
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.ToolTipText = "Agregar un nuevo tipo de habitación";
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
@@ -270,20 +265,6 @@
             this.btnModificar.ToolTipText = "Modificar el tipo de habitación seleccionado";
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
-            // btnEliminar
-            // 
-            this.btnEliminar.Enabled = false;
-            this.btnEliminar.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEliminar.ForeColor = System.Drawing.Color.Red;
-            this.btnEliminar.Image = ((System.Drawing.Image)(resources.GetObject("btnEliminar.Image")));
-            this.btnEliminar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnEliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(74, 22);
-            this.btnEliminar.Text = "Eliminar";
-            this.btnEliminar.ToolTipText = "Eliminar el tipo de habitación seleccionado";
-            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
-            // 
             // btnActDesactivar
             // 
             this.btnActDesactivar.Enabled = false;
@@ -297,34 +278,57 @@
             this.btnActDesactivar.ToolTipText = "Activar/Desactivar el tipo de habitación seleccionado";
             this.btnActDesactivar.Click += new System.EventHandler(this.btnActDesactivar_Click);
             // 
+            // btnEliminar
+            // 
+            this.btnEliminar.Enabled = false;
+            this.btnEliminar.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEliminar.Image = ((System.Drawing.Image)(resources.GetObject("btnEliminar.Image")));
+            this.btnEliminar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnEliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(74, 22);
+            this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.ToolTipText = "Eliminar el tipo de habitación seleccionado";
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+            // 
             // btnMostrarHabitaciones
             // 
             this.btnMostrarHabitaciones.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnMostrarHabitaciones.BackColor = System.Drawing.Color.White;
+            this.btnMostrarHabitaciones.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.btnMostrarHabitaciones.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMostrarHabitaciones.Image = ((System.Drawing.Image)(resources.GetObject("btnMostrarHabitaciones.Image")));
             this.btnMostrarHabitaciones.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnMostrarHabitaciones.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnMostrarHabitaciones.Name = "btnMostrarHabitaciones";
-            this.btnMostrarHabitaciones.Size = new System.Drawing.Size(152, 22);
+            this.btnMostrarHabitaciones.Padding = new System.Windows.Forms.Padding(0, 0, 50, 0);
+            this.btnMostrarHabitaciones.Size = new System.Drawing.Size(186, 21);
             this.btnMostrarHabitaciones.Text = "Mostrar habitaciones";
             this.btnMostrarHabitaciones.ToolTipText = "Mostrar todos los tipos de habitaciones";
             this.btnMostrarHabitaciones.Click += new System.EventHandler(this.btnMostrarHabitaciones_Click);
             // 
-            // label9
+            // toolStrip1
             // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(216, 189);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(27, 16);
-            this.label9.TabIndex = 15;
-            this.label9.Text = "Bs.";
+            this.toolStrip1.BackColor = System.Drawing.Color.LightBlue;
+            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnAgregar,
+            this.btnModificar,
+            this.btnActDesactivar,
+            this.btnEliminar,
+            this.btnMostrarHabitaciones});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 5, 5, 10);
+            this.toolStrip1.Size = new System.Drawing.Size(723, 39);
+            this.toolStrip1.TabIndex = 1;
+            this.toolStrip1.Text = "toolStrip1";
             // 
             // Habitacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.BackColor = System.Drawing.Color.LightBlue;
             this.ClientSize = new System.Drawing.Size(723, 508);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
@@ -347,11 +351,6 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton btnMostrarHabitaciones;
-        private System.Windows.Forms.ToolStripButton btnAgregar;
-        private System.Windows.Forms.ToolStripButton btnModificar;
-        private System.Windows.Forms.ToolStripButton btnEliminar;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.RichTextBox txtNotas;
@@ -366,9 +365,14 @@
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.RichTextBox txtDescripcion;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ToolStripButton btnActDesactivar;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ToolStripButton btnAgregar;
+        private System.Windows.Forms.ToolStripButton btnModificar;
+        private System.Windows.Forms.ToolStripButton btnActDesactivar;
+        private System.Windows.Forms.ToolStripButton btnEliminar;
+        private System.Windows.Forms.ToolStripButton btnMostrarHabitaciones;
+        private System.Windows.Forms.ToolStrip toolStrip1;
     }
 }
