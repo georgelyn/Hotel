@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.button53 = new System.Windows.Forms.Button();
-            this.button54 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -99,24 +98,13 @@
             // button53
             // 
             this.button53.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button53.Location = new System.Drawing.Point(649, 37);
+            this.button53.Location = new System.Drawing.Point(715, 37);
             this.button53.Name = "button53";
             this.button53.Size = new System.Drawing.Size(111, 71);
             this.button53.TabIndex = 52;
             this.button53.Text = "Form2";
             this.button53.UseVisualStyleBackColor = true;
             this.button53.Click += new System.EventHandler(this.button53_Click);
-            // 
-            // button54
-            // 
-            this.button54.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button54.Location = new System.Drawing.Point(475, 37);
-            this.button54.Name = "button54";
-            this.button54.Size = new System.Drawing.Size(168, 71);
-            this.button54.TabIndex = 53;
-            this.button54.Text = "Prueba";
-            this.button54.UseVisualStyleBackColor = true;
-            this.button54.Click += new System.EventHandler(this.button54_Click);
             // 
             // panel1
             // 
@@ -1017,7 +1005,6 @@
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.button54);
             this.Controls.Add(this.button53);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -1037,7 +1024,6 @@
 
         #endregion
         private System.Windows.Forms.Button button53;
-        private System.Windows.Forms.Button button54;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;

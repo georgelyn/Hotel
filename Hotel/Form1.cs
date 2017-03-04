@@ -39,21 +39,21 @@ namespace Hotel
                                 {
                                     if (dr["estado"].ToString() == "disponible")
                                     {
-                                        if (dr["numero_hab"].ToString() == b.Text)
+                                        if (dr["numero_hab"].ToString() == b.Name.Remove(0, 6)) //b.Text) // Remove 0,6 -> button
                                         {
                                             b.BackColor = Color.Green;
                                         }
                                     }
                                     else if (dr["estado"].ToString() == "ocupada")
                                     {
-                                        if (dr["numero_hab"].ToString() == b.Text)
+                                        if (dr["numero_hab"].ToString() == b.Name.Remove(0, 6))
                                         {
                                             b.BackColor = Color.Red;
                                         }
                                     }
                                     else if (dr["estado"].ToString() == "limpieza")
                                     {
-                                        if (dr["numero_hab"].ToString() == b.Text)
+                                        if (dr["numero_hab"].ToString() == b.Name.Remove(0, 6))
                                         {
                                             b.BackColor = Color.Gray;
                                         }
@@ -90,26 +90,12 @@ namespace Hotel
 
         }
 
-        private void button54_Click(object sender, EventArgs e)
-        {
-            if (reservacion == null || reservacion.IsDisposed)
-            {
-                reservacion = new Reservacion();
-                reservacion.Show();
-            }
-            else
-            {
-                reservacion.Activate();
-            }
-
-            //reservacion.CargarHuespedPorHabitacion(16);
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             if (((Button)sender).BackColor == Color.Gray)
             {
                 MessageBox.Show("Limpieza - Falta implementar o.ó");
+                //MessageBox.Show(((Button)sender).Name.Remove(0, 6).ToString());
             }
             else
             {

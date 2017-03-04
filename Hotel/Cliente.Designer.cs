@@ -86,8 +86,8 @@
             this.btnEliminar});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Padding = new System.Windows.Forms.Padding(5, 4, 5, 10);
-            this.toolStrip1.Size = new System.Drawing.Size(970, 41);
+            this.toolStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 5, 5);
+            this.toolStrip1.Size = new System.Drawing.Size(970, 34);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -377,6 +377,7 @@
             this.txtCedula.Name = "txtCedula";
             this.txtCedula.Size = new System.Drawing.Size(180, 26);
             this.txtCedula.TabIndex = 2;
+            this.txtCedula.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCedula_KeyPress);
             // 
             // lblCedula
             // 
@@ -433,6 +434,7 @@
             this.txtEdad.Name = "txtEdad";
             this.txtEdad.Size = new System.Drawing.Size(77, 26);
             this.txtEdad.TabIndex = 3;
+            this.txtEdad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCedula_KeyPress);
             // 
             // lblEdad
             // 
@@ -460,6 +462,7 @@
             this.txtTelefono2.Name = "txtTelefono2";
             this.txtTelefono2.Size = new System.Drawing.Size(162, 26);
             this.txtTelefono2.TabIndex = 5;
+            this.txtTelefono2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCedula_KeyPress);
             // 
             // txtTelefono1
             // 
@@ -467,6 +470,7 @@
             this.txtTelefono1.Name = "txtTelefono1";
             this.txtTelefono1.Size = new System.Drawing.Size(162, 26);
             this.txtTelefono1.TabIndex = 4;
+            this.txtTelefono1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCedula_KeyPress);
             // 
             // txtNombre
             // 

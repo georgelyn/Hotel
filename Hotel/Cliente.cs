@@ -518,5 +518,24 @@ namespace Hotel
             MessageBox.Show("De momento da error el método de Actualizar Colores porque Form1 no está activa. Verificar si sigue siendo el caso una vez que cambie Application.Run a Form1 nuevamente.");
 
         }
+
+        private void txtCedula_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (txtCedula.Focused)
+            {
+                if (!char.IsLetterOrDigit(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != 13) // 8 = backspace, 13 = enter
+                {
+                    e.Handled = true;
+                }
+            }
+
+            if (txtEdad.Focused || txtTelefono1.Focused || txtTelefono2.Focused)
+            {
+                if (!char.IsDigit(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != 13)
+                {
+                    e.Handled = true;
+                }
+            }
+        }
     }
 }
