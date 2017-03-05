@@ -32,7 +32,8 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnNuevoCliente = new System.Windows.Forms.ToolStripButton();
             this.btnModificar = new System.Windows.Forms.ToolStripButton();
-            this.btnMostrarClientes = new System.Windows.Forms.ToolStripButton();
+            this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -82,7 +83,8 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnNuevoCliente,
             this.btnModificar,
-            this.btnMostrarClientes,
+            this.toolStripComboBox1,
+            this.toolStripLabel1,
             this.btnEliminar});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
@@ -109,15 +111,24 @@
             this.btnModificar.Text = "Modificar";
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
-            // btnMostrarClientes
+            // toolStripComboBox1
             // 
-            this.btnMostrarClientes.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnMostrarClientes.Image = ((System.Drawing.Image)(resources.GetObject("btnMostrarClientes.Image")));
-            this.btnMostrarClientes.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnMostrarClientes.Name = "btnMostrarClientes";
-            this.btnMostrarClientes.Size = new System.Drawing.Size(134, 24);
-            this.btnMostrarClientes.Text = "Mostrar clientes";
-            this.btnMostrarClientes.Click += new System.EventHandler(this.btnMostrarClientes_Click);
+            this.toolStripComboBox1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.toolStripComboBox1.Items.AddRange(new object[] {
+            "Todos los clientes",
+            "Habitaciones ocupadas"});
+            this.toolStripComboBox1.Name = "toolStripComboBox1";
+            this.toolStripComboBox1.Size = new System.Drawing.Size(200, 27);
+            this.toolStripComboBox1.SelectedIndexChanged += new System.EventHandler(this.toolStripComboBox1_SelectedIndexChanged);
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripLabel1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(61, 24);
+            this.toolStripLabel1.Text = "Mostrar:";
             // 
             // btnEliminar
             // 
@@ -186,9 +197,9 @@
             this.label11.Location = new System.Drawing.Point(619, 330);
             this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(105, 15);
+            this.label11.Size = new System.Drawing.Size(95, 15);
             this.label11.TabIndex = 150;
-            this.label11.Text = "Reservaciones:";
+            this.label11.Text = "Habitaciones:";
             this.label11.Visible = false;
             // 
             // label10
@@ -227,7 +238,7 @@
             this.listboxReservaciones.ItemHeight = 20;
             this.listboxReservaciones.Location = new System.Drawing.Point(622, 348);
             this.listboxReservaciones.Name = "listboxReservaciones";
-            this.listboxReservaciones.Size = new System.Drawing.Size(105, 84);
+            this.listboxReservaciones.Size = new System.Drawing.Size(92, 84);
             this.listboxReservaciones.TabIndex = 146;
             this.listboxReservaciones.Visible = false;
             this.listboxReservaciones.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listboxReservaciones_MouseDoubleClick);
@@ -525,7 +536,6 @@
         #endregion
 
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton btnMostrarClientes;
         private System.Windows.Forms.ToolStripButton btnNuevoCliente;
         private System.Windows.Forms.ToolStripButton btnModificar;
         private System.Windows.Forms.ToolStripButton btnEliminar;
@@ -564,5 +574,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ListBox listboxReservaciones;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ToolStripComboBox toolStripComboBox1;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
     }
 }

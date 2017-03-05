@@ -117,5 +117,12 @@ namespace Hotel
             }
             //MessageBox.Show(((Button)sender).Name + " was pressed!");
         }
+
+        private void button55_Click(object sender, EventArgs e)
+        {
+            Cliente cliente = new Cliente();
+            cliente.CargarListView("habitacion");
+            cliente.ShowDialog();
+        }
     }
 }

@@ -90,19 +90,23 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.button54 = new System.Windows.Forms.Button();
+            this.button55 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // button53
             // 
             this.button53.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button53.Location = new System.Drawing.Point(715, 37);
+            this.button53.Location = new System.Drawing.Point(201, 10);
             this.button53.Name = "button53";
-            this.button53.Size = new System.Drawing.Size(111, 71);
+            this.button53.Size = new System.Drawing.Size(176, 64);
             this.button53.TabIndex = 52;
-            this.button53.Text = "Form2";
+            this.button53.Text = "Nueva Reservación";
             this.button53.UseVisualStyleBackColor = true;
             this.button53.Click += new System.EventHandler(this.button53_Click);
             // 
@@ -997,15 +1001,47 @@
             this.statusStrip1.TabIndex = 57;
             this.statusStrip1.Text = "statusStrip1";
             // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.LightBlue;
+            this.panel2.Controls.Add(this.button55);
+            this.panel2.Controls.Add(this.button54);
+            this.panel2.Controls.Add(this.button53);
+            this.panel2.Location = new System.Drawing.Point(52, 27);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(894, 83);
+            this.panel2.TabIndex = 58;
+            // 
+            // button54
+            // 
+            this.button54.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button54.Location = new System.Drawing.Point(19, 10);
+            this.button54.Name = "button54";
+            this.button54.Size = new System.Drawing.Size(176, 64);
+            this.button54.TabIndex = 59;
+            this.button54.Text = "Lista de Clientes";
+            this.button54.UseVisualStyleBackColor = true;
+            // 
+            // button55
+            // 
+            this.button55.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button55.Location = new System.Drawing.Point(584, 3);
+            this.button55.Name = "button55";
+            this.button55.Size = new System.Drawing.Size(176, 64);
+            this.button55.TabIndex = 60;
+            this.button55.Text = "Habitaciones Ocupadas";
+            this.button55.UseVisualStyleBackColor = true;
+            this.button55.Click += new System.EventHandler(this.button55_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1008, 729);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.button53);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(1024, 768);
@@ -1017,6 +1053,7 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1085,6 +1122,9 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button button54;
+        private System.Windows.Forms.Button button55;
     }
 }
 

@@ -15,7 +15,7 @@ namespace Hotel
         {
             InitializeComponent();
 
-            CargarListViewClientes();
+            CargarListView("cliente");
         }
 
         Msg msg;
@@ -27,10 +27,48 @@ namespace Hotel
 
         bool nuevoCliente = true; // Controlar si estoy agregando un nuevo cliente, o modificando uno existente
         string idCliente;
+        string opcion = ""; // Para que al dar click en Cancelar, cargue el último ListView creado según la opción dada. Toma valor en CargarListview
 
-        private void CrearListView()
+        //private void CrearListView()
+        //{
+        //    lst = new ListView();
+
+        //    if (panel1.Contains(lstPorHabitacion))
+        //    {
+        //        panel1.Controls.Remove(lstPorHabitacion);
+        //    }
+
+        //    lst.View = View.Details;
+        //    lst.FullRowSelect = true;
+        //    lst.GridLines = true;
+        //    lst.MultiSelect = false;
+        //    lst.ShowItemToolTips = true;
+        //    //lst.Alignment = ListViewAlignment.SnapToGrid;
+        //    lst.Dock = DockStyle.Fill;
+        //    lst.Font = font_verdana;
+
+        //    lst.Columns.Add("ID", 0, HorizontalAlignment.Left);
+        //    lst.Columns.Add("Nombre completo", 400, HorizontalAlignment.Left);
+        //    lst.Columns.Add("Cédula", 150, HorizontalAlignment.Left);
+        //    lst.Columns.Add("Reservaciones activas", 220, HorizontalAlignment.Left);
+        //    lst.Columns.Add("Cliente desde", 150, HorizontalAlignment.Left);
+
+        //    panel1.Controls.Add(lst);
+
+        //    lst.BringToFront();
+
+        //    lst.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lst_MouseDoubleClick);
+        //    this.lst.SelectedIndexChanged += new System.EventHandler(this.lst_SelectedIndexChanged);
+        //}
+
+        private void CrearListView(string opcion)
         {
             lst = new ListView();
+
+            //if (panel1.Contains(lstPorHabitacion))
+            //{
+            //    panel1.Controls.Remove(lstPorHabitacion);
+            //}
 
             lst.View = View.Details;
             lst.FullRowSelect = true;
@@ -41,11 +79,22 @@ namespace Hotel
             lst.Dock = DockStyle.Fill;
             lst.Font = font_verdana;
 
-            lst.Columns.Add("ID", 0, HorizontalAlignment.Left);
-            lst.Columns.Add("Nombre completo", 400, HorizontalAlignment.Left);
-            lst.Columns.Add("Cédula", 150, HorizontalAlignment.Left);
-            lst.Columns.Add("Reservaciones activas", 220, HorizontalAlignment.Left);
-            lst.Columns.Add("Cliente desde", 150, HorizontalAlignment.Left);
+            if (opcion == "cliente")
+            {
+                lst.Columns.Add("ID", 0, HorizontalAlignment.Left);
+                lst.Columns.Add("Nombre completo", 400, HorizontalAlignment.Left);
+                lst.Columns.Add("Cédula", 150, HorizontalAlignment.Left);
+                lst.Columns.Add("Reservaciones activas", 220, HorizontalAlignment.Left);
+                lst.Columns.Add("Cliente desde", 150, HorizontalAlignment.Left);
+            }
+
+            else if (opcion == "habitacion")
+            {
+                lst.Columns.Add("ID", 0, HorizontalAlignment.Left);
+                lst.Columns.Add("Nro. Habitación", 150, HorizontalAlignment.Left);
+                lst.Columns.Add("Cliente", 400, HorizontalAlignment.Left);
+                lst.Columns.Add("Cédula", 150, HorizontalAlignment.Left);
+            }
 
             panel1.Controls.Add(lst);
 
@@ -55,16 +104,33 @@ namespace Hotel
             this.lst.SelectedIndexChanged += new System.EventHandler(this.lst_SelectedIndexChanged);
         }
 
-        private void CargarListViewClientes()
+        public void CargarListView(string opcion)
         {
+            string query = "";
+
+            this.opcion = opcion;
+
             panel2.Visible = false;
 
             btnNuevoCliente.Enabled = true;
             ActivarBotones(false);
 
-            if (!panel1.Contains(lst))
+            if (panel1.Contains(lst))
             {
-                CrearListView();
+                panel1.Controls.Remove(lst);
+            }
+
+            CrearListView(opcion);
+
+            if (opcion == "cliente")
+            {
+                query = "SELECT *, COUNT(r.id) AS reservaciones FROM cliente LEFT JOIN reservacion r ON cedula = cedula_cliente GROUP BY nombre ORDER BY id";
+                toolStripComboBox1.SelectedIndex = 0;
+            }
+            else if (opcion == "habitacion")
+            {
+                query = "SELECT reservacion.id, numero_hab, nombre, apellido, cedula FROM cliente INNER JOIN reservacion ON cedula=cedula_cliente ORDER BY numero_hab";
+                toolStripComboBox1.SelectedIndex = 1;
             }
 
             lst.Items.Clear();
@@ -73,7 +139,7 @@ namespace Hotel
             {
                 using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
                 {
-                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT *, COUNT(r.id) AS reservaciones FROM cliente LEFT JOIN reservacion r ON cedula=cedula_cliente GROUP BY nombre ORDER BY id", conn))
+                    using (SQLiteCommand cmd = new SQLiteCommand(query, conn))
                     {
                         conn.Open();
 
@@ -82,14 +148,22 @@ namespace Hotel
                             while (dr.Read())
                             {
                                 ListViewItem item = new ListViewItem(dr["id"].ToString());
-                                item.SubItems.Add(dr["apellido"].ToString() + ", " + dr["nombre"].ToString());
 
-                                item.SubItems.Add(dr["cedula"].ToString());
+                                if (opcion == "cliente")
+                                {
+                                    item.SubItems.Add(dr["apellido"].ToString() + ", " + dr["nombre"].ToString());                                
+                                    item.SubItems.Add(dr["cedula"].ToString());
+                                    item.SubItems.Add(dr["reservaciones"].ToString());
 
-                                item.SubItems.Add(dr["reservaciones"].ToString());
-
-                                var dt = DateTime.Parse(dr["cliente_desde"].ToString());
-                                item.SubItems.Add(dt.ToString("dd/MMM/yyyy"));
+                                    var dt = DateTime.Parse(dr["cliente_desde"].ToString());
+                                    item.SubItems.Add(dt.ToString("dd/MMM/yyyy"));
+                                }
+                                else if (opcion == "habitacion")
+                                {
+                                    item.SubItems.Add(dr["numero_hab"].ToString());
+                                    item.SubItems.Add(dr["nombre"].ToString() + " " + dr["apellido"].ToString());
+                                    item.SubItems.Add(dr["cedula"].ToString());
+                                }
 
                                 lst.Items.Add(item);
                             }
@@ -102,6 +176,128 @@ namespace Hotel
                 MessageBox.Show("Se ha presentado un problema.\nDetalles:\n\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
+        //private void CargarListViewClientes()
+        //{
+        //    panel2.Visible = false;
+
+        //    btnNuevoCliente.Enabled = true;
+        //    ActivarBotones(false);
+
+        //    if (!panel1.Contains(lst))
+        //    {
+        //        CrearListView();
+        //    }
+
+        //    lst.Items.Clear();
+
+        //    try
+        //    {
+        //        using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
+        //        {
+        //            using (SQLiteCommand cmd = new SQLiteCommand("SELECT *, COUNT(r.id) AS reservaciones FROM cliente LEFT JOIN reservacion r ON cedula=cedula_cliente GROUP BY nombre ORDER BY id", conn))
+        //            {
+        //                conn.Open();
+
+        //                using (SQLiteDataReader dr = cmd.ExecuteReader())
+        //                {
+        //                    while (dr.Read())
+        //                    {
+        //                        ListViewItem item = new ListViewItem(dr["id"].ToString());
+        //                        item.SubItems.Add(dr["apellido"].ToString() + ", " + dr["nombre"].ToString());
+
+        //                        item.SubItems.Add(dr["cedula"].ToString());
+
+        //                        item.SubItems.Add(dr["reservaciones"].ToString());
+
+        //                        var dt = DateTime.Parse(dr["cliente_desde"].ToString());
+        //                        item.SubItems.Add(dt.ToString("dd/MMM/yyyy"));
+
+        //                        lst.Items.Add(item);
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show("Se ha presentado un problema.\nDetalles:\n\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    }
+        //}
+
+        //private void CrearListViewPorHabitacion()
+        //{
+        //    lstPorHabitacion = new ListView();
+
+        //    if (panel1.Contains(lst))
+        //    {
+        //        panel1.Controls.Remove(lst);
+        //    }
+
+        //    lstPorHabitacion.View = View.Details;
+        //    lstPorHabitacion.FullRowSelect = true;
+        //    lstPorHabitacion.GridLines = true;
+        //    lstPorHabitacion.MultiSelect = false;
+        //    lstPorHabitacion.ShowItemToolTips = true;
+        //    //lst.Alignment = ListViewAlignment.SnapToGrid;
+        //    lstPorHabitacion.Dock = DockStyle.Fill;
+        //    lstPorHabitacion.Font = font_verdana;
+
+        //    lstPorHabitacion.Columns.Add("ID", 0, HorizontalAlignment.Left);
+        //    lstPorHabitacion.Columns.Add("Nro. Habitación", 150, HorizontalAlignment.Left);
+        //    lstPorHabitacion.Columns.Add("Nombre completo", 400, HorizontalAlignment.Left);
+        //    lstPorHabitacion.Columns.Add("Cédula", 150, HorizontalAlignment.Left);
+
+        //    panel1.Controls.Add(lstPorHabitacion);
+
+        //    lstPorHabitacion.BringToFront();
+        //}
+
+        //public void CargarListViewPorHabitacion()
+        //{
+        //    panel2.Visible = false;
+
+        //    btnNuevoCliente.Enabled = true;
+        //    ActivarBotones(false);
+
+        //    if (!panel1.Contains(lstPorHabitacion))
+        //    {
+        //        CrearListViewPorHabitacion();
+        //    }
+
+        //    lstPorHabitacion.Items.Clear();
+
+        //    try
+        //    {
+        //        using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
+        //        {
+        //            using (SQLiteCommand cmd = new SQLiteCommand("SELECT reservacion.id, numero_hab, nombre, apellido, cedula FROM cliente INNER JOIN reservacion ON cedula=cedula_cliente ORDER BY numero_hab", conn))
+        //            {
+        //                conn.Open();
+
+        //                using (SQLiteDataReader dr = cmd.ExecuteReader())
+        //                {
+        //                    while (dr.Read())
+        //                    {
+        //                        ListViewItem item = new ListViewItem(dr["id"].ToString());
+
+        //                        item.SubItems.Add(dr["numero_hab"].ToString());
+        //                        item.SubItems.Add(dr["nombre"].ToString() + " " + dr["apellido"].ToString());
+        //                        item.SubItems.Add(dr["cedula"].ToString());
+
+        //                        lstPorHabitacion.Items.Add(item);
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show("Se ha presentado un problema.\nDetalles:\n\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    }
+        //}
+
 
         private void CargarCliente(string id)
         {
@@ -209,7 +405,7 @@ namespace Hotel
                         cmd.ExecuteNonQuery();
 
                         MessageBox.Show("Cliente almacenado satisfactoriamente.");
-                        CargarListViewClientes();
+                        CargarListView("cliente");
                     }
                 }
             }
@@ -251,7 +447,7 @@ namespace Hotel
                         cmd.ExecuteNonQuery();
 
                         MessageBox.Show("Los datos del cliente fueron modificados satisfactoriamente.");
-                        CargarListViewClientes();
+                        CargarListView("cliente");
 
                     }
 
@@ -320,19 +516,47 @@ namespace Hotel
 
         public void ActivarBotones(bool verdadero)
         {
-            if (!verdadero)
+            if (opcion == "cliente")
             {
-                btnModificar.Enabled = false;
-                btnEliminar.Enabled = false;
-                btnEliminar.ForeColor = Color.Black;
-                btnEliminar.BackColor = Color.Transparent;
+                btnNuevoCliente.Visible = true;
+                btnModificar.Visible = true;
+
+                //btnEliminar.Visible = true;
+                btnEliminar.Text = "Eliminar";
+
+                if (!verdadero)
+                {
+                    btnModificar.Enabled = false;
+                    btnEliminar.Enabled = false;
+                    btnEliminar.ForeColor = Color.Black;
+                    btnEliminar.BackColor = Color.Transparent;
+                }
+                else
+                {
+                    btnModificar.Enabled = true;
+                    btnEliminar.Enabled = true;
+                    btnEliminar.ForeColor = Color.White;
+                    btnEliminar.BackColor = Color.Red;
+                }
             }
             else
             {
-                btnModificar.Enabled = true;
-                btnEliminar.Enabled = true;
-                btnEliminar.ForeColor = Color.White;
-                btnEliminar.BackColor = Color.Red;
+                btnNuevoCliente.Visible = false;
+                btnModificar.Visible = false;
+                //btnEliminar.Visible = false;
+
+                btnEliminar.Text = "Ver reservación";
+                btnEliminar.ForeColor = Color.Black;
+                btnEliminar.BackColor = Color.Transparent;
+
+                if (!verdadero)
+                {
+                    btnEliminar.Enabled = false;
+                }
+                else
+                {
+                    btnEliminar.Enabled = true;
+                }
             }
         }
 
@@ -410,31 +634,35 @@ namespace Hotel
         {
             if (lst.SelectedItems.Count > 0)
             {
-                msg = new Msg();
-
-                msg.lblMsg.Text = $"¿Está seguro de que desea eliminar el registro? \nAdvertencia: Se eliminarán todos los datos asociados (reservaciones y vehículos). \n\nCliente a eliminar: \"{lst.SelectedItems[0].SubItems[1].Text}\" - Cédula: \"{lst.SelectedItems[0].SubItems[2].Text}\".";
-                DialogResult dlgres = msg.ShowDialog();
+                if (opcion == "cliente")
                 {
-                    if (dlgres == DialogResult.Yes)
+                    msg = new Msg();
+
+                    msg.lblMsg.Text = $"¿Está seguro de que desea eliminar el registro? \nAdvertencia: Se eliminarán todos los datos asociados (reservaciones y vehículos). \n\nCliente a eliminar: \"{lst.SelectedItems[0].SubItems[1].Text}\" - Cédula: \"{lst.SelectedItems[0].SubItems[2].Text}\".";
+                    DialogResult dlgres = msg.ShowDialog();
                     {
-                        EliminarCliente(lst.SelectedItems[0].SubItems[0].Text.ToString());
-                        CargarListViewClientes();
-                        OcultarListbox();
-                    }
-                    else
-                    {
-                        return;
+                        if (dlgres == DialogResult.Yes)
+                        {
+                            EliminarCliente(lst.SelectedItems[0].SubItems[0].Text.ToString());
+                            CargarListView("cliente");
+                            OcultarListbox();
+                        }
+                        else
+                        {
+                            return;
+                        }
                     }
                 }
-            }
-        }
+                else // Habitacion
+                {
+                    //reservacion = new Reservacion();
 
-        private void btnMostrarClientes_Click(object sender, EventArgs e)
-        {
-            if (panel2.Visible)
-            {
-                CargarListViewClientes();
-                OcultarListbox();
+                    //reservacion.CargarReservacion(int.Parse(lst.SelectedItems[0].SubItems[1].Text.ToString()), "ocupada");
+                    //reservacion.ShowDialog();
+
+                    MessageBox.Show("De momento da error el método de Actualizar Colores porque Form1 no está activa. Verificar si sigue siendo el caso una vez que cambie Application.Run a Form1 nuevamente.");
+
+                }
             }
         }
 
@@ -452,7 +680,7 @@ namespace Hotel
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            CargarListViewClientes();
+            CargarListView(opcion);
             OcultarListbox();
         }
 
@@ -470,7 +698,19 @@ namespace Hotel
 
         private void lst_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            btnModificar_Click(null, null);
+            if (opcion == "cliente")
+            {
+                btnModificar_Click(null, null);
+            }
+            else // Habitacion
+            {
+                //reservacion = new Reservacion();
+
+                //reservacion.CargarReservacion(int.Parse(lst.SelectedItems[0].SubItems[1].Text.ToString()), "ocupada");
+                //reservacion.ShowDialog();
+
+                MessageBox.Show("De momento da error el método de Actualizar Colores porque Form1 no está activa. Verificar si sigue siendo el caso una vez que cambie Application.Run a Form1 nuevamente.");
+            }
         }
 
         private void btnVerVehiculos_Click(object sender, EventArgs e)
@@ -536,6 +776,38 @@ namespace Hotel
                     e.Handled = true;
                 }
             }
+        }
+
+        private void toolStripComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (toolStripComboBox1.SelectedIndex == 0) // Clientes
+            {
+                CargarListView("cliente");
+            }
+            else // Habitación
+            {
+                CargarListView("habitacion");
+            }
+
+            OcultarListbox();
+            ActivarBotones(false);
+
+            //if (toolStripComboBox1.SelectedIndex == 0)
+            //{
+            //    if (panel2.Visible || panel1.Contains(lstPorHabitacion))
+            //    {
+            //        CargarListViewClientes();
+            //        OcultarListbox();
+            //    }
+            //}
+            //else
+            //{
+            //    if (panel2.Visible || panel1.Contains(lst))
+            //    {
+            //        CargarListViewPorHabitacion();
+            //        OcultarListbox();
+            //    }
+            //}
         }
     }
 }
