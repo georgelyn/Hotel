@@ -29,46 +29,9 @@ namespace Hotel
         string idCliente;
         string opcion = ""; // Para que al dar click en Cancelar, cargue el último ListView creado según la opción dada. Toma valor en CargarListview
 
-        //private void CrearListView()
-        //{
-        //    lst = new ListView();
-
-        //    if (panel1.Contains(lstPorHabitacion))
-        //    {
-        //        panel1.Controls.Remove(lstPorHabitacion);
-        //    }
-
-        //    lst.View = View.Details;
-        //    lst.FullRowSelect = true;
-        //    lst.GridLines = true;
-        //    lst.MultiSelect = false;
-        //    lst.ShowItemToolTips = true;
-        //    //lst.Alignment = ListViewAlignment.SnapToGrid;
-        //    lst.Dock = DockStyle.Fill;
-        //    lst.Font = font_verdana;
-
-        //    lst.Columns.Add("ID", 0, HorizontalAlignment.Left);
-        //    lst.Columns.Add("Nombre completo", 400, HorizontalAlignment.Left);
-        //    lst.Columns.Add("Cédula", 150, HorizontalAlignment.Left);
-        //    lst.Columns.Add("Reservaciones activas", 220, HorizontalAlignment.Left);
-        //    lst.Columns.Add("Cliente desde", 150, HorizontalAlignment.Left);
-
-        //    panel1.Controls.Add(lst);
-
-        //    lst.BringToFront();
-
-        //    lst.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lst_MouseDoubleClick);
-        //    this.lst.SelectedIndexChanged += new System.EventHandler(this.lst_SelectedIndexChanged);
-        //}
-
         private void CrearListView(string opcion)
         {
             lst = new ListView();
-
-            //if (panel1.Contains(lstPorHabitacion))
-            //{
-            //    panel1.Controls.Remove(lstPorHabitacion);
-            //}
 
             lst.View = View.Details;
             lst.FullRowSelect = true;
@@ -150,7 +113,7 @@ namespace Hotel
             }
             else if (opcion == "buscar")
             {
-                query = "SELECT *, COUNT(r.id) AS reservaciones FROM cliente LEFT JOIN reservacion r ON cedula = cedula_cliente WHERE nombre LIKE '%" + txtBuscar.Text.Trim() + "%' OR apellido LIKE '%" + txtBuscar.Text.Trim() + "%' OR cedula LIKE '%" + txtBuscar.Text.Trim() + "%' GROUP BY nombre";
+                query = "SELECT *, COUNT(r.id) AS reservaciones FROM cliente LEFT JOIN reservacion r ON cedula = cedula_cliente WHERE nombre LIKE '%" + txtBuscar.Text.Trim() + "%' OR apellido LIKE '%" + txtBuscar.Text.Trim() + "%' OR cedula LIKE '%" + txtBuscar.Text.Trim().Replace(".", "").Replace(",", "").Replace("-", "") + "%' GROUP BY nombre";
                 //nombre like '%" + txtBuscar.Text.Trim()  + "% ' or apellido like '%" + txtBuscar.Text.Trim()  + "% ' or cedula like '%" + txtBuscar.Text.Trim() + "% ' GROUP BY nombre ORDER BY id";
             }
             else if (opcion == "habitacion")
@@ -207,128 +170,6 @@ namespace Hotel
                 MessageBox.Show("Se ha presentado un problema.\nDetalles:\n\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-
-        //private void CargarListViewClientes()
-        //{
-        //    panel2.Visible = false;
-
-        //    btnNuevoCliente.Enabled = true;
-        //    ActivarBotones(false);
-
-        //    if (!panel1.Contains(lst))
-        //    {
-        //        CrearListView();
-        //    }
-
-        //    lst.Items.Clear();
-
-        //    try
-        //    {
-        //        using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
-        //        {
-        //            using (SQLiteCommand cmd = new SQLiteCommand("SELECT *, COUNT(r.id) AS reservaciones FROM cliente LEFT JOIN reservacion r ON cedula=cedula_cliente GROUP BY nombre ORDER BY id", conn))
-        //            {
-        //                conn.Open();
-
-        //                using (SQLiteDataReader dr = cmd.ExecuteReader())
-        //                {
-        //                    while (dr.Read())
-        //                    {
-        //                        ListViewItem item = new ListViewItem(dr["id"].ToString());
-        //                        item.SubItems.Add(dr["apellido"].ToString() + ", " + dr["nombre"].ToString());
-
-        //                        item.SubItems.Add(dr["cedula"].ToString());
-
-        //                        item.SubItems.Add(dr["reservaciones"].ToString());
-
-        //                        var dt = DateTime.Parse(dr["cliente_desde"].ToString());
-        //                        item.SubItems.Add(dt.ToString("dd/MMM/yyyy"));
-
-        //                        lst.Items.Add(item);
-        //                    }
-        //                }
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show("Se ha presentado un problema.\nDetalles:\n\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //    }
-        //}
-
-        //private void CrearListViewPorHabitacion()
-        //{
-        //    lstPorHabitacion = new ListView();
-
-        //    if (panel1.Contains(lst))
-        //    {
-        //        panel1.Controls.Remove(lst);
-        //    }
-
-        //    lstPorHabitacion.View = View.Details;
-        //    lstPorHabitacion.FullRowSelect = true;
-        //    lstPorHabitacion.GridLines = true;
-        //    lstPorHabitacion.MultiSelect = false;
-        //    lstPorHabitacion.ShowItemToolTips = true;
-        //    //lst.Alignment = ListViewAlignment.SnapToGrid;
-        //    lstPorHabitacion.Dock = DockStyle.Fill;
-        //    lstPorHabitacion.Font = font_verdana;
-
-        //    lstPorHabitacion.Columns.Add("ID", 0, HorizontalAlignment.Left);
-        //    lstPorHabitacion.Columns.Add("Nro. Habitación", 150, HorizontalAlignment.Left);
-        //    lstPorHabitacion.Columns.Add("Nombre completo", 400, HorizontalAlignment.Left);
-        //    lstPorHabitacion.Columns.Add("Cédula", 150, HorizontalAlignment.Left);
-
-        //    panel1.Controls.Add(lstPorHabitacion);
-
-        //    lstPorHabitacion.BringToFront();
-        //}
-
-        //public void CargarListViewPorHabitacion()
-        //{
-        //    panel2.Visible = false;
-
-        //    btnNuevoCliente.Enabled = true;
-        //    ActivarBotones(false);
-
-        //    if (!panel1.Contains(lstPorHabitacion))
-        //    {
-        //        CrearListViewPorHabitacion();
-        //    }
-
-        //    lstPorHabitacion.Items.Clear();
-
-        //    try
-        //    {
-        //        using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
-        //        {
-        //            using (SQLiteCommand cmd = new SQLiteCommand("SELECT reservacion.id, numero_hab, nombre, apellido, cedula FROM cliente INNER JOIN reservacion ON cedula=cedula_cliente ORDER BY numero_hab", conn))
-        //            {
-        //                conn.Open();
-
-        //                using (SQLiteDataReader dr = cmd.ExecuteReader())
-        //                {
-        //                    while (dr.Read())
-        //                    {
-        //                        ListViewItem item = new ListViewItem(dr["id"].ToString());
-
-        //                        item.SubItems.Add(dr["numero_hab"].ToString());
-        //                        item.SubItems.Add(dr["nombre"].ToString() + " " + dr["apellido"].ToString());
-        //                        item.SubItems.Add(dr["cedula"].ToString());
-
-        //                        lstPorHabitacion.Items.Add(item);
-        //                    }
-        //                }
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show("Se ha presentado un problema.\nDetalles:\n\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //    }
-        //}
-
 
         private void CargarCliente(string id)
         {
@@ -752,8 +593,10 @@ namespace Hotel
                 reservacion = new Reservacion();
 
                 reservacion.CargarReservacion(int.Parse(lst.SelectedItems[0].SubItems[2].Text.ToString()), "ocupada");
-                reservacion.Show();
                 //this.Hide();
+                reservacion.ShowDialog();
+                CargarListView("habitacion");
+                //this.Show();
 
                 //MessageBox.Show("De momento da error el método de Actualizar Colores porque Form1 no está activa. Verificar si sigue siendo el caso una vez que cambie Application.Run a Form1 nuevamente.");
             }

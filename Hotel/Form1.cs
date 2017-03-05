@@ -17,6 +17,7 @@ namespace Hotel
 
         // Clases
         Reservacion reservacion;
+        Cliente cliente;
 
         public void ActualizarColores()
         {
@@ -120,16 +121,30 @@ namespace Hotel
 
         private void button55_Click(object sender, EventArgs e)
         {
-            Cliente cliente = new Cliente();
-            cliente.CargarListView("habitacion");
-            cliente.ShowDialog();
+            if (cliente == null || cliente.IsDisposed)
+            {
+                cliente = new Cliente();
+                cliente.CargarListView("habitacion");
+                cliente.Show();
+            }
+            else
+            {
+                cliente.Activate();
+            }
         }
 
         private void button54_Click(object sender, EventArgs e)
         {
-            Cliente cliente = new Cliente();
-            cliente.CargarListView("cliente");
-            cliente.ShowDialog();
+            if (cliente == null || cliente.IsDisposed)
+            {
+                cliente = new Cliente();
+                cliente.CargarListView("cliente");
+                cliente.Show();
+            }
+            else
+            {
+                cliente.Activate();
+            }
         }
     }
 }
