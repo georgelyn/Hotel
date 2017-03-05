@@ -124,5 +124,12 @@ namespace Hotel
             cliente.CargarListView("habitacion");
             cliente.ShowDialog();
         }
+
+        private void button54_Click(object sender, EventArgs e)
+        {
+            Cliente cliente = new Cliente();
+            cliente.CargarListView("cliente");
+            cliente.ShowDialog();
+        }
     }
 }

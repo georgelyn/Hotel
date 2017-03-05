@@ -79,7 +79,7 @@ namespace Hotel
             lst.Dock = DockStyle.Fill;
             lst.Font = font_verdana;
 
-            if (opcion == "cliente")
+            if (opcion == "cliente" || opcion == "actual" || opcion == "buscar")
             {
                 lst.Columns.Add("ID", 0, HorizontalAlignment.Left);
                 lst.Columns.Add("Nombre completo", 400, HorizontalAlignment.Left);
@@ -90,7 +90,8 @@ namespace Hotel
 
             else if (opcion == "habitacion")
             {
-                lst.Columns.Add("ID", 0, HorizontalAlignment.Left);
+                lst.Columns.Add("IDCliente", 0, HorizontalAlignment.Left);
+                lst.Columns.Add("IDHab", 0, HorizontalAlignment.Left);
                 lst.Columns.Add("Nro. Habitación", 150, HorizontalAlignment.Left);
                 lst.Columns.Add("Cliente", 400, HorizontalAlignment.Left);
                 lst.Columns.Add("Cédula", 150, HorizontalAlignment.Left);
@@ -110,6 +111,21 @@ namespace Hotel
 
             this.opcion = opcion;
 
+            if (opcion != "habitacion")
+            {
+                btnBuscar.Visible = true;
+                txtBuscar.Visible = true;
+                lblBuscar.Visible = true;
+                toolStripSeparator1.Visible = true;
+            }
+            else
+            {
+                btnBuscar.Visible = false;
+                txtBuscar.Visible = false;
+                lblBuscar.Visible = false;
+                toolStripSeparator1.Visible = false;
+            }
+
             panel2.Visible = false;
 
             btnNuevoCliente.Enabled = true;
@@ -127,10 +143,20 @@ namespace Hotel
                 query = "SELECT *, COUNT(r.id) AS reservaciones FROM cliente LEFT JOIN reservacion r ON cedula = cedula_cliente GROUP BY nombre ORDER BY id";
                 toolStripComboBox1.SelectedIndex = 0;
             }
+            else if (opcion == "actual")
+            {
+                query = "SELECT *, COUNT(r.id) AS reservaciones FROM cliente INNER JOIN reservacion r ON cedula = cedula_cliente GROUP BY nombre ORDER BY id";
+                toolStripComboBox1.SelectedIndex = 1;
+            }
+            else if (opcion == "buscar")
+            {
+                query = "SELECT *, COUNT(r.id) AS reservaciones FROM cliente LEFT JOIN reservacion r ON cedula = cedula_cliente WHERE nombre LIKE '%" + txtBuscar.Text.Trim() + "%' OR apellido LIKE '%" + txtBuscar.Text.Trim() + "%' OR cedula LIKE '%" + txtBuscar.Text.Trim() + "%' GROUP BY nombre";
+                //nombre like '%" + txtBuscar.Text.Trim()  + "% ' or apellido like '%" + txtBuscar.Text.Trim()  + "% ' or cedula like '%" + txtBuscar.Text.Trim() + "% ' GROUP BY nombre ORDER BY id";
+            }
             else if (opcion == "habitacion")
             {
-                query = "SELECT reservacion.id, numero_hab, nombre, apellido, cedula FROM cliente INNER JOIN reservacion ON cedula=cedula_cliente ORDER BY numero_hab";
-                toolStripComboBox1.SelectedIndex = 1;
+                query = "SELECT reservacion.id as reservacionID, cliente.id as id, numero_hab, nombre, apellido, cedula FROM cliente INNER JOIN reservacion ON cedula=cedula_cliente ORDER BY numero_hab";
+                toolStripComboBox1.SelectedIndex = 2;
             }
 
             lst.Items.Clear();
@@ -141,6 +167,10 @@ namespace Hotel
                 {
                     using (SQLiteCommand cmd = new SQLiteCommand(query, conn))
                     {
+                        //if (opcion == "buscar")
+                        //{
+                        //    cmd.Parameters.AddWithValue("@criterio", txtBuscar.Text.Trim());
+                        //}
                         conn.Open();
 
                         using (SQLiteDataReader dr = cmd.ExecuteReader())
@@ -149,7 +179,7 @@ namespace Hotel
                             {
                                 ListViewItem item = new ListViewItem(dr["id"].ToString());
 
-                                if (opcion == "cliente")
+                                if (opcion == "cliente" || opcion == "actual" || opcion == "buscar")
                                 {
                                     item.SubItems.Add(dr["apellido"].ToString() + ", " + dr["nombre"].ToString());                                
                                     item.SubItems.Add(dr["cedula"].ToString());
@@ -160,6 +190,7 @@ namespace Hotel
                                 }
                                 else if (opcion == "habitacion")
                                 {
+                                    item.SubItems.Add(dr["ReservacionID"].ToString());
                                     item.SubItems.Add(dr["numero_hab"].ToString());
                                     item.SubItems.Add(dr["nombre"].ToString() + " " + dr["apellido"].ToString());
                                     item.SubItems.Add(dr["cedula"].ToString());
@@ -516,13 +547,14 @@ namespace Hotel
 
         public void ActivarBotones(bool verdadero)
         {
-            if (opcion == "cliente")
+            if (opcion == "cliente" || opcion == "actual" || opcion == "buscar")
             {
                 btnNuevoCliente.Visible = true;
-                btnModificar.Visible = true;
+                //btnModificar.Visible = true;
 
                 //btnEliminar.Visible = true;
                 btnEliminar.Text = "Eliminar";
+                btnModificar.Text = "Modificar";
 
                 if (!verdadero)
                 {
@@ -542,20 +574,24 @@ namespace Hotel
             else
             {
                 btnNuevoCliente.Visible = false;
-                btnModificar.Visible = false;
+                //btnModificar.Visible = false;
                 //btnEliminar.Visible = false;
 
                 btnEliminar.Text = "Ver reservación";
                 btnEliminar.ForeColor = Color.Black;
                 btnEliminar.BackColor = Color.Transparent;
 
+                btnModificar.Text = "Ver cliente";
+
                 if (!verdadero)
                 {
                     btnEliminar.Enabled = false;
+                    btnModificar.Enabled = false;
                 }
                 else
                 {
                     btnEliminar.Enabled = true;
+                    btnModificar.Enabled = true;
                 }
             }
         }
@@ -574,6 +610,7 @@ namespace Hotel
         private void btnNuevoCliente_Click(object sender, EventArgs e)
         {
             nuevoCliente = true;
+            //btnNuevaReservacion.Visible = false;
 
             if (!panel2.Visible)
             {
@@ -599,6 +636,10 @@ namespace Hotel
                 }
                 //
 
+                btnBuscar.Visible = false;
+                txtBuscar.Visible = false;
+                lblBuscar.Visible = false;
+
                 panel2.Visible = true;
                 //btnVerReservaciones.Visible = false;
 
@@ -623,6 +664,10 @@ namespace Hotel
                     btnModificar.Enabled = false;
                     btnEliminar.Enabled = true;
 
+                    btnBuscar.Visible = false;
+                    txtBuscar.Visible = false;
+                    lblBuscar.Visible = false;
+
                     panel2.Visible = true;
                     //panel2.BringToFront();
                     txtNombre.Focus();
@@ -634,7 +679,7 @@ namespace Hotel
         {
             if (lst.SelectedItems.Count > 0)
             {
-                if (opcion == "cliente")
+                if (opcion == "cliente" || opcion == "actual")
                 {
                     msg = new Msg();
 
@@ -655,12 +700,12 @@ namespace Hotel
                 }
                 else // Habitacion
                 {
-                    //reservacion = new Reservacion();
+                    reservacion = new Reservacion();
 
-                    //reservacion.CargarReservacion(int.Parse(lst.SelectedItems[0].SubItems[1].Text.ToString()), "ocupada");
-                    //reservacion.ShowDialog();
+                    reservacion.CargarReservacion(int.Parse(lst.SelectedItems[0].SubItems[2].Text.ToString()), "ocupada");
+                    reservacion.ShowDialog();
 
-                    MessageBox.Show("De momento da error el método de Actualizar Colores porque Form1 no está activa. Verificar si sigue siendo el caso una vez que cambie Application.Run a Form1 nuevamente.");
+                    //MessageBox.Show("De momento da error el método de Actualizar Colores porque Form1 no está activa. Verificar si sigue siendo el caso una vez que cambie Application.Run a Form1 nuevamente.");
 
                 }
             }
@@ -698,18 +743,19 @@ namespace Hotel
 
         private void lst_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (opcion == "cliente")
+            if (opcion == "cliente" || opcion == "actual" || opcion == "buscar")
             {
                 btnModificar_Click(null, null);
             }
             else // Habitacion
             {
-                //reservacion = new Reservacion();
+                reservacion = new Reservacion();
 
-                //reservacion.CargarReservacion(int.Parse(lst.SelectedItems[0].SubItems[1].Text.ToString()), "ocupada");
-                //reservacion.ShowDialog();
+                reservacion.CargarReservacion(int.Parse(lst.SelectedItems[0].SubItems[2].Text.ToString()), "ocupada");
+                reservacion.Show();
+                //this.Hide();
 
-                MessageBox.Show("De momento da error el método de Actualizar Colores porque Form1 no está activa. Verificar si sigue siendo el caso una vez que cambie Application.Run a Form1 nuevamente.");
+                //MessageBox.Show("De momento da error el método de Actualizar Colores porque Form1 no está activa. Verificar si sigue siendo el caso una vez que cambie Application.Run a Form1 nuevamente.");
             }
         }
 
@@ -740,22 +786,24 @@ namespace Hotel
 
         private void listboxReservaciones_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            //reservacion = new Reservacion();
+            reservacion = new Reservacion();
 
-            //reservacion.CargarReservacion(int.Parse(listboxReservaciones.Text), "ocupada");
-            //reservacion.ShowDialog();
+            reservacion.CargarReservacion(int.Parse(listboxReservaciones.Text), "ocupada");
+            reservacion.ShowDialog();
+            //this.Hide();
 
-            MessageBox.Show("De momento da error el método de Actualizar Colores porque Form1 no está activa. Verificar si sigue siendo el caso una vez que cambie Application.Run a Form1 nuevamente.");
+            //MessageBox.Show("De momento da error el método de Actualizar Colores porque Form1 no está activa. Verificar si sigue siendo el caso una vez que cambie Application.Run a Form1 nuevamente.");
         }
 
         private void btnNuevaReservacion_Click(object sender, EventArgs e)
         {
-            //reservacion = new Reservacion();
+            reservacion = new Reservacion();
 
-            //reservacion.txtCedula.Text = txtCedula.Text.Trim();
-            //reservacion.ShowDialog();
+            reservacion.txtCedula.Text = txtCedula.Text.Trim();
+            reservacion.ShowDialog();
+            //Hide();
 
-            MessageBox.Show("De momento da error el método de Actualizar Colores porque Form1 no está activa. Verificar si sigue siendo el caso una vez que cambie Application.Run a Form1 nuevamente.");
+            //MessageBox.Show("De momento da error el método de Actualizar Colores porque Form1 no está activa. Verificar si sigue siendo el caso una vez que cambie Application.Run a Form1 nuevamente.");
 
         }
 
@@ -784,6 +832,10 @@ namespace Hotel
             {
                 CargarListView("cliente");
             }
+            else if (toolStripComboBox1.SelectedIndex == 1)
+            {
+                CargarListView("actual");
+            }
             else // Habitación
             {
                 CargarListView("habitacion");
@@ -808,6 +860,19 @@ namespace Hotel
             //        OcultarListbox();
             //    }
             //}
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            CargarListView("buscar");
+        }
+
+        private void txtBuscar_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13)
+            {
+                btnBuscar_Click(null, null);
+            }
         }
     }
 }

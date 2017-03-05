@@ -91,8 +91,8 @@
             this.button1 = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.button54 = new System.Windows.Forms.Button();
             this.button55 = new System.Windows.Forms.Button();
+            this.button54 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -1012,6 +1012,17 @@
             this.panel2.Size = new System.Drawing.Size(894, 83);
             this.panel2.TabIndex = 58;
             // 
+            // button55
+            // 
+            this.button55.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button55.Location = new System.Drawing.Point(383, 10);
+            this.button55.Name = "button55";
+            this.button55.Size = new System.Drawing.Size(176, 64);
+            this.button55.TabIndex = 60;
+            this.button55.Text = "Habitaciones Ocupadas";
+            this.button55.UseVisualStyleBackColor = true;
+            this.button55.Click += new System.EventHandler(this.button55_Click);
+            // 
             // button54
             // 
             this.button54.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1021,17 +1032,7 @@
             this.button54.TabIndex = 59;
             this.button54.Text = "Lista de Clientes";
             this.button54.UseVisualStyleBackColor = true;
-            // 
-            // button55
-            // 
-            this.button55.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button55.Location = new System.Drawing.Point(584, 3);
-            this.button55.Name = "button55";
-            this.button55.Size = new System.Drawing.Size(176, 64);
-            this.button55.TabIndex = 60;
-            this.button55.Text = "Habitaciones Ocupadas";
-            this.button55.UseVisualStyleBackColor = true;
-            this.button55.Click += new System.EventHandler(this.button55_Click);
+            this.button54.Click += new System.EventHandler(this.button54_Click);
             // 
             // Form1
             // 

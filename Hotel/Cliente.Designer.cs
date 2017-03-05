@@ -34,7 +34,11 @@
             this.btnModificar = new System.Windows.Forms.ToolStripButton();
             this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.lblBuscar = new System.Windows.Forms.ToolStripLabel();
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
+            this.txtBuscar = new System.Windows.Forms.ToolStripTextBox();
+            this.btnBuscar = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label11 = new System.Windows.Forms.Label();
@@ -85,7 +89,11 @@
             this.btnModificar,
             this.toolStripComboBox1,
             this.toolStripLabel1,
-            this.btnEliminar});
+            this.toolStripSeparator1,
+            this.lblBuscar,
+            this.btnEliminar,
+            this.txtBuscar,
+            this.btnBuscar});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 5, 5);
@@ -117,6 +125,7 @@
             this.toolStripComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.toolStripComboBox1.Items.AddRange(new object[] {
             "Todos los clientes",
+            "Clientes actuales",
             "Habitaciones ocupadas"});
             this.toolStripComboBox1.Name = "toolStripComboBox1";
             this.toolStripComboBox1.Size = new System.Drawing.Size(200, 27);
@@ -130,6 +139,18 @@
             this.toolStripLabel1.Size = new System.Drawing.Size(61, 24);
             this.toolStripLabel1.Text = "Mostrar:";
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 27);
+            // 
+            // lblBuscar
+            // 
+            this.lblBuscar.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBuscar.Name = "lblBuscar";
+            this.lblBuscar.Size = new System.Drawing.Size(53, 24);
+            this.lblBuscar.Text = "Buscar:";
+            // 
             // btnEliminar
             // 
             this.btnEliminar.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
@@ -139,6 +160,23 @@
             this.btnEliminar.Size = new System.Drawing.Size(83, 24);
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+            // 
+            // txtBuscar
+            // 
+            this.txtBuscar.Name = "txtBuscar";
+            this.txtBuscar.Size = new System.Drawing.Size(180, 27);
+            this.txtBuscar.ToolTipText = "Buscar cliente por nombre o cédula";
+            this.txtBuscar.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBuscar_KeyPress);
+            // 
+            // btnBuscar
+            // 
+            this.btnBuscar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnBuscar.Image = ((System.Drawing.Image)(resources.GetObject("btnBuscar.Image")));
+            this.btnBuscar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(23, 24);
+            this.btnBuscar.Text = "toolStripButton1";
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // panel1
             // 
@@ -575,6 +613,10 @@
         private System.Windows.Forms.ListBox listboxReservaciones;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ToolStripComboBox toolStripComboBox1;
+        private System.Windows.Forms.ToolStripLabel lblBuscar;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripTextBox txtBuscar;
+        private System.Windows.Forms.ToolStripButton btnBuscar;
     }
 }
