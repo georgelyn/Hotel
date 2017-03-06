@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Text;
 using System.Configuration;
+using System.Collections.Generic;
 using System.Globalization;
 
 namespace Hotel
@@ -35,6 +36,7 @@ namespace Hotel
 
         Form1 f1 = (Form1)Application.OpenForms["Form1"];
         Msg msg;
+        Vehiculo vehiculo;
 
         /* 
         ** VARIABLES
@@ -46,6 +48,8 @@ namespace Hotel
         bool vehiculoAlmacenado = false; // Se evalúa al cargar reservación (si tiene vehículo agregado). Útil para query de modificar reservación
         int habitacionActual = 0; // Toma su valor en CargarHuespedPorHabitacion. Útil para cambiar habitación en Modificar Reservación
 
+        List<String> idVehiculo; // Para almacenar los IDs de cada vehículo del cliente
+        int numeroVehiculos = 0; // Útil para llevar cuenta de cuántos vehículos tiene registrado el cliente.
 
         /* 
         ** METODOS
@@ -328,7 +332,12 @@ namespace Hotel
 
                     if (conVehiculo) // Sólo almacenar vehículo si los campos no están vacíos
                     {
-                        query += "; INSERT INTO vehiculo (cedula_cliente, reservacion_id, es_camion, marca, modelo, placa) VALUES (@cedula, (SELECT id FROM reservacion WHERE numero_hab = @numeroHabitacion), @camion, @marca, @modelo, @placa)";
+                        query += "; INSERT INTO vehiculo (cedula_cliente, reservacion_id, es_camion, marca, modelo, placa, existe) VALUES (@cedula, (SELECT id FROM reservacion WHERE numero_hab = @numeroHabitacion), @camion, @marca, @modelo, @placa, @existe)";
+
+                        if (vehiculoAlmacenado) // Si el vehículo ya está almacenado
+                        {
+                            query += "; UPDATE vehiculo SET es_camion=@camion, marca=@marca, modelo=@modelo, existe=@existe, placa=@placa WHERE id=@id";
+                        }
                     }
 
                     using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
@@ -373,6 +382,14 @@ namespace Hotel
 
                             if (conVehiculo)
                             {
+                                cmd.Parameters.AddWithValue("@existe", false);  // El vehículo no existe, es nuevo.                   
+
+                                if (vehiculoAlmacenado)
+                                {
+                                    cmd.Parameters.AddWithValue("@id", idVehiculo[comboVehiculo.SelectedIndex].ToString());
+                                    cmd.Parameters.AddWithValue("@existe", true);
+                                }
+
                                 bool esCamion = false;
 
                                 if (checkCamion.Checked)
@@ -574,6 +591,7 @@ namespace Hotel
                         }
                     }
                 }
+
             }
             catch (SQLiteException ex)
             {
@@ -581,6 +599,88 @@ namespace Hotel
             }
 
             return false; // CLiente no existe
+        }
+
+        private bool TieneVehiculo(string cedula)
+        {
+            try
+            {
+                using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
+                {
+                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT cedula, es_camion, cedula_cliente, COUNT(distinct v.id) AS vehiculos FROM cliente INNER JOIN vehiculo v ON cedula=cedula_cliente WHERE cedula=@cedula", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@cedula", cedula);
+                        conn.Open();
+
+                        using (SQLiteDataReader dr = cmd.ExecuteReader())
+                        {
+                            if (dr.HasRows)
+                            {
+                                if (dr.Read())
+                                {
+                                    if (dr["es_camion"] != DBNull.Value) // Si es_camion es NULL, o no existe, pues no tiene vehículo. En la base de datos es_camion siempre tiene un valor de 0 o 1
+                                    {
+                                        numeroVehiculos = int.Parse(dr["vehiculos"].ToString());
+                                        return true; // Tiene vehículo
+                                    }
+                                    return false;
+                                }
+                            }
+
+
+                            //if (dr.HasRows) // El probblema es que siempre da verdadero porque el Count regresa un valor, así sea 0
+                            //{
+                            //    if (dr.Read())
+                            //    {
+                            //        numeroVehiculos = int.Parse(dr["vehiculos"].ToString());
+                            //    }
+                            //    return true; // Tiene al menos un vehículo registrado
+                            //}
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Se ha presentado un problema.\nDetalles:\n\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return false;
+        }
+
+        public void CargarDatosVehiculo(string id)
+        {
+            try
+            {
+                using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
+                {
+                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM vehiculo WHERE id=@id", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@id", id);
+
+                        conn.Open();
+
+                        using (SQLiteDataReader dr = cmd.ExecuteReader())
+                        {
+                            while (dr.Read())
+                            {
+                                txtMarca.Text = dr["marca"].ToString();
+                                txtModelo.Text = dr["modelo"].ToString();
+                                txtPlaca.Text = dr["placa"].ToString();
+
+                                if (Convert.ToBoolean(dr["es_camion"]) == true)
+                                    checkCamion.Checked = true;
+                                else
+                                    checkCamion.Checked = false;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Se ha presentado un error.\nDetalles:\n\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         public bool ValidacionCamposTexto()
@@ -687,6 +787,25 @@ namespace Hotel
                 txtCedula.Text = txtCedula.Text.Replace(".", "").Trim();
                 if (BuscarPorCedula(txtCedula.Text))//.Replace(".", ""))) // Si existe el número de cédula (cliente)
                 {
+                    if (TieneVehiculo(txtCedula.Text))
+                    {
+                        comboVehiculo.Visible = true;
+                        vehiculo = new Vehiculo();
+                        idVehiculo = vehiculo.CargarVehiculosPorCedula(txtCedula.Text, comboVehiculo);
+                    }
+
+                    lblVehiculosAlmacenados.Visible = true;
+
+                    if (numeroVehiculos == 0 || numeroVehiculos > 1)
+                    {
+                        lblVehiculosAlmacenados.Text = $"[{numeroVehiculos}] vehículos almacenados.";
+                    }
+                    else
+                    {
+                        lblVehiculosAlmacenados.Text = $"[{numeroVehiculos}] vehículo almacenado.";
+                    }
+
+
                     CargarDatosCliente(txtCedula.Text);//.Replace(".", "").Trim());
                     //btnModificar.Location = new Point(704, 10);
                     //btnModificar.Visible = true;
@@ -816,6 +935,40 @@ namespace Hotel
 
             //}
             Close();
+        }
+
+        private void comboVehiculo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboVehiculo.SelectedIndex >= 0)
+            {
+                CargarDatosVehiculo(idVehiculo[comboVehiculo.SelectedIndex].ToString());
+
+                if (!lblAvisoVehiculo.Visible)
+                {
+                    lblAvisoVehiculo.Visible = true;
+                    linklblNuevoVehiculo.Visible = true;
+                }
+
+                vehiculoAlmacenado = true; // El vehículo se encuentra almacenado.
+            }
+
+            //MessageBox.Show(idVehiculo[comboVehiculo.SelectedIndex].ToString());
+        }
+
+        private void linklblNuevoVehiculo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            vehiculoAlmacenado = false; // Nuevo vehículo. No se encuentra almacenado.
+
+            txtMarca.Text = "";
+            txtModelo.Text = "";
+            txtPlaca.Text = "";
+            checkCamion.Checked = false;
+
+            comboVehiculo.SelectedIndex = -1;
+            txtMarca.Select();
+
+            lblAvisoVehiculo.Visible = false;
+            linklblNuevoVehiculo.Visible = false;
         }
     }
 }

@@ -23,7 +23,6 @@ namespace Hotel
 
         List<String> idVehiculo; // Toma valor en CargarVehiculosPorCedula
 
-
         private void CargarCedulas()
         {
             try
@@ -53,7 +52,7 @@ namespace Hotel
             }
         }
 
-        public void CargarVehiculosPorCedula(string cedula)
+        public List<String> CargarVehiculosPorCedula(string cedula, ComboBox combo)
         {
             comboVehiculo.Items.Clear();
 
@@ -75,16 +74,21 @@ namespace Hotel
                             while (dr.Read())
                             {
                                 idVehiculo.Add(dr["id"].ToString());
-                                comboVehiculo.Items.Add(dr["marca"].ToString() + " - " + dr["modelo"].ToString());
+                                combo.Items.Add(dr["marca"].ToString() + " - " + dr["modelo"].ToString());
+                                //comboVehiculo.Items.Add(dr["marca"].ToString() + " - " + dr["modelo"].ToString());
                             }
                         }
                     }
+
+                    return idVehiculo;
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Se ha presentado un error.\nDetalles:\n\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+            return null;
         }
 
         private void CargarDatosVehiculo(string id)
@@ -215,7 +219,7 @@ namespace Hotel
         private void comboCedula_SelectedIndexChanged(object sender, EventArgs e)
         {
             RestaurarCampos();
-            CargarVehiculosPorCedula(comboCedula.Text);
+            CargarVehiculosPorCedula(comboCedula.Text, comboVehiculo);
         }
 
         private void btnModificar_Click(object sender, EventArgs e)

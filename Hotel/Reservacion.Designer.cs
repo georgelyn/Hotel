@@ -59,6 +59,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.comboVehiculo = new System.Windows.Forms.ComboBox();
+            this.lblVehiculosAlmacenados = new System.Windows.Forms.Label();
             this.checkCamion = new System.Windows.Forms.CheckBox();
             this.txtPlaca = new System.Windows.Forms.TextBox();
             this.lblMarca = new System.Windows.Forms.Label();
@@ -76,6 +78,8 @@
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.lblTelefono = new System.Windows.Forms.Label();
             this.lblNombre = new System.Windows.Forms.Label();
+            this.linklblNuevoVehiculo = new System.Windows.Forms.LinkLabel();
+            this.lblAvisoVehiculo = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panelContenedor.SuspendLayout();
             this.panelCedula.SuspendLayout();
@@ -400,7 +404,7 @@
             // 
             // txtNotas
             // 
-            this.txtNotas.Location = new System.Drawing.Point(95, 448);
+            this.txtNotas.Location = new System.Drawing.Point(95, 465);
             this.txtNotas.Name = "txtNotas";
             this.txtNotas.Size = new System.Drawing.Size(455, 67);
             this.txtNotas.TabIndex = 5;
@@ -409,7 +413,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(25, 471);
+            this.label2.Location = new System.Drawing.Point(25, 488);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(55, 20);
@@ -430,6 +434,10 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.SystemColors.Control;
+            this.groupBox1.Controls.Add(this.lblAvisoVehiculo);
+            this.groupBox1.Controls.Add(this.linklblNuevoVehiculo);
+            this.groupBox1.Controls.Add(this.comboVehiculo);
+            this.groupBox1.Controls.Add(this.lblVehiculosAlmacenados);
             this.groupBox1.Controls.Add(this.checkCamion);
             this.groupBox1.Controls.Add(this.txtPlaca);
             this.groupBox1.Controls.Add(this.lblMarca);
@@ -440,10 +448,33 @@
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(23, 297);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(521, 135);
+            this.groupBox1.Size = new System.Drawing.Size(521, 162);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Información sobre el vehículo";
+            // 
+            // comboVehiculo
+            // 
+            this.comboVehiculo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboVehiculo.FormattingEnabled = true;
+            this.comboVehiculo.Location = new System.Drawing.Point(199, 25);
+            this.comboVehiculo.Name = "comboVehiculo";
+            this.comboVehiculo.Size = new System.Drawing.Size(201, 26);
+            this.comboVehiculo.TabIndex = 119;
+            this.comboVehiculo.Visible = false;
+            this.comboVehiculo.SelectedIndexChanged += new System.EventHandler(this.comboVehiculo_SelectedIndexChanged);
+            // 
+            // lblVehiculosAlmacenados
+            // 
+            this.lblVehiculosAlmacenados.AutoSize = true;
+            this.lblVehiculosAlmacenados.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblVehiculosAlmacenados.Location = new System.Drawing.Point(8, 30);
+            this.lblVehiculosAlmacenados.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.lblVehiculosAlmacenados.Name = "lblVehiculosAlmacenados";
+            this.lblVehiculosAlmacenados.Size = new System.Drawing.Size(183, 15);
+            this.lblVehiculosAlmacenados.TabIndex = 21;
+            this.lblVehiculosAlmacenados.Text = "Vehículo(s) almacenado(s):";
+            this.lblVehiculosAlmacenados.Visible = false;
             // 
             // checkCamion
             // 
@@ -602,6 +633,32 @@
             this.lblNombre.TabIndex = 92;
             this.lblNombre.Text = "Nombre(s):";
             // 
+            // linklblNuevoVehiculo
+            // 
+            this.linklblNuevoVehiculo.AutoSize = true;
+            this.linklblNuevoVehiculo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linklblNuevoVehiculo.Location = new System.Drawing.Point(367, 140);
+            this.linklblNuevoVehiculo.Name = "linklblNuevoVehiculo";
+            this.linklblNuevoVehiculo.Size = new System.Drawing.Size(131, 16);
+            this.linklblNuevoVehiculo.TabIndex = 21;
+            this.linklblNuevoVehiculo.TabStop = true;
+            this.linklblNuevoVehiculo.Text = "<Nuevo vehículo>";
+            this.linklblNuevoVehiculo.Visible = false;
+            this.linklblNuevoVehiculo.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linklblNuevoVehiculo_LinkClicked);
+            // 
+            // lblAvisoVehiculo
+            // 
+            this.lblAvisoVehiculo.AutoSize = true;
+            this.lblAvisoVehiculo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAvisoVehiculo.Location = new System.Drawing.Point(8, 126);
+            this.lblAvisoVehiculo.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.lblAvisoVehiculo.Name = "lblAvisoVehiculo";
+            this.lblAvisoVehiculo.Size = new System.Drawing.Size(351, 30);
+            this.lblAvisoVehiculo.TabIndex = 120;
+            this.lblAvisoVehiculo.Text = "Se han cargado los datos de un vehículo existente,\r\n si en su lugar se quiere reg" +
+    "istrar uno nuevo, click en:";
+            this.lblAvisoVehiculo.Visible = false;
+            // 
             // Reservacion
             // 
             this.AcceptButton = this.btnCheckCedula;
@@ -679,5 +736,9 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         internal System.Windows.Forms.TextBox txtCedula;
+        private System.Windows.Forms.ComboBox comboVehiculo;
+        private System.Windows.Forms.Label lblVehiculosAlmacenados;
+        private System.Windows.Forms.Label lblAvisoVehiculo;
+        private System.Windows.Forms.LinkLabel linklblNuevoVehiculo;
     }
 }
