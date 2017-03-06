@@ -61,11 +61,11 @@ namespace Hotel
 
             comboHabitacion.Items.Clear();
 
-            string query = "SELECT numero_hab FROM habitacion";
+            string query = "SELECT NumeroHabitacion FROM Habitaciones";
 
             if (estado == "disponible" || estado == "ocupada")
             {
-                query = "SELECT numero_hab FROM habitacion WHERE estado ='" + estado + "' ";
+                query = "SELECT NumeroHabitacion FROM Habitaciones WHERE Estado ='" + estado + "' ";
             }
             try
             {
@@ -79,7 +79,7 @@ namespace Hotel
                         {
                             while (dr.Read())
                             {
-                                comboHabitacion.Items.Add(dr["numero_hab"]);
+                                comboHabitacion.Items.Add(dr["NumeroHabitacion"]);
                             }
                         }
                     }
@@ -99,7 +99,7 @@ namespace Hotel
             {
                 using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
                 {
-                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT tipo FROM tipo_habitacion WHERE activa='1'", conn))
+                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT Tipo FROM TipoHabitacion WHERE Activa='1'", conn))
                     {
                         conn.Open();
 
@@ -109,7 +109,7 @@ namespace Hotel
                             {
                                 while (dr.Read())
                                 {
-                                    listboxHabitaciones.Items.Add(dr["tipo"].ToString());
+                                    listboxHabitaciones.Items.Add(dr["Tipo"].ToString());
                                 }
                             }
                         }
@@ -158,11 +158,11 @@ namespace Hotel
             {
                 using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
                 {
-                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT nombre, apellido, cedula, edad, telefono, telefono2, " + 
-                        " r.id, r.numero_hab, r.notas, fecha_ingreso, fecha_salida, tipo_habitacion, costo_total, marca, modelo, placa, es_camion " + 
-                        " FROM cliente INNER JOIN reservacion r ON cedula = r.cedula_cliente " + 
-                        " LEFT JOIN vehiculo v ON r.id = v.reservacion_id "+ 
-                        " WHERE r.numero_hab ='" + numero_hab + "'", conn))
+                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT Nombre, Apellido, Cedula, Edad, Telefono, TelefonoExtra, " + 
+                        " r.ID, r.NumeroHabitacion, r.Notas, FechaIngreso, FechaSalida, TipoHabitacion, CostoTotal, Marca, Modelo, Placa, EsCamion " + 
+                        " FROM Clientes INNER JOIN Reservaciones r ON Cedula = r.Cliente_Cedula" + 
+                        " LEFT JOIN Vehiculos v ON r.Vehiculo_ID = v.ID "+ 
+                        " WHERE r.NumeroHabitacion='" + numero_hab + "'", conn))
                     {
                         conn.Open();
 
@@ -170,37 +170,37 @@ namespace Hotel
                         {
                             if (dr.Read())
                             {
-                                txtNombre.Text = dr["nombre"].ToString();
-                                txtApellido.Text = dr["apellido"].ToString();
-                                txtCedula.Text = dr["cedula"].ToString();
-                                txtEdad.Text = dr["edad"].ToString();
-                                txtTelefono1.Text = dr["telefono"].ToString();
-                                txtTelefono2.Text = dr["telefono2"].ToString();
+                                txtNombre.Text = dr["Nombre"].ToString();
+                                txtApellido.Text = dr["Apellido"].ToString();
+                                txtCedula.Text = dr["Cedula"].ToString();
+                                txtEdad.Text = dr["Edad"].ToString();
+                                txtTelefono1.Text = dr["Telefono"].ToString();
+                                txtTelefono2.Text = dr["TelefonoExtra"].ToString();
 
-                                if (dr["es_camion"] != DBNull.Value)
+                                if (dr["EsCamion"] != DBNull.Value)
                                 {
-                                    if (Convert.ToBoolean(dr["es_camion"]) == true)
+                                    if (Convert.ToBoolean(dr["EsCamion"]) == true)
                                         checkCamion.Checked = true;
 
                                     vehiculoAlmacenado = true;
                                     //MessageBox.Show("No es null");
                                 }
 
-                                txtMarca.Text = dr["marca"].ToString();
-                                txtModelo.Text = dr["modelo"].ToString();
-                                txtPlaca.Text = dr["placa"].ToString();
+                                txtMarca.Text = dr["Marca"].ToString();
+                                txtModelo.Text = dr["Modelo"].ToString();
+                                txtPlaca.Text = dr["Placa"].ToString();
 
-                                dtEntrada.Value = Convert.ToDateTime(dr["fecha_ingreso"].ToString());
-                                dtSalida.Value = Convert.ToDateTime(dr["fecha_salida"].ToString());
+                                dtEntrada.Value = Convert.ToDateTime(dr["FechaIngreso"].ToString());
+                                dtSalida.Value = Convert.ToDateTime(dr["FechaSalida"].ToString());
 
-                                txtNotas.Text = dr["notas"].ToString();
+                                txtNotas.Text = dr["Notas"].ToString();
 
-                                listboxHabitaciones.Text = dr["tipo_habitacion"].ToString();
+                                listboxHabitaciones.Text = dr["TipoHabitacion"].ToString();
 
-                                txtTotal.Text = dr["costo_total"].ToString();
+                                txtTotal.Text = dr["CostoTotal"].ToString();
                                 //txtTotal.Text = string.Format(new CultureInfo("es-VE"), "{0:#,##0.00}", dr["costo_total"]);
 
-                                total = double.Parse(dr["costo_total"].ToString());
+                                total = double.Parse(dr["CostoTotal"].ToString());
                                     //total = double.Parse(txtTotal.Text);
 
                             }
@@ -224,7 +224,7 @@ namespace Hotel
             {
                 using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
                 {
-                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM cliente WHERE cedula ='" + cedula + "'", conn))
+                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM Clientes WHERE Cedula ='" + cedula + "'", conn))
                     //"SELECT cliente.*, modelo, marca, es_camion, placa FROM cliente INNER JOIN vehiculo on cedula = cedula_cliente WHERE cedula ='" + cedula + "'", conn))
                     {
                         conn.Open();
@@ -233,12 +233,12 @@ namespace Hotel
                         {
                             while (dr.Read())
                             {
-                                txtNombre.Text = dr["nombre"].ToString();
-                                txtApellido.Text = dr["apellido"].ToString();
+                                txtNombre.Text = dr["Nombre"].ToString();
+                                txtApellido.Text = dr["Apellido"].ToString();
                                 txtCedula.Text = cedula; // Hasta ahora no es realmente necesario. Se carga en btnCheckCedula
-                                txtEdad.Text = dr["edad"].ToString();
-                                txtTelefono1.Text = dr["telefono"].ToString();
-                                txtTelefono2.Text = dr["telefono2"].ToString();
+                                txtEdad.Text = dr["Edad"].ToString();
+                                txtTelefono1.Text = dr["Telefono"].ToString();
+                                txtTelefono2.Text = dr["TelefonoExtra"].ToString();
 
                                 ////// Implementar de otra manera. Permitiendo elegir entre varios vehículos
 
@@ -319,24 +319,26 @@ namespace Hotel
 
                     if (clienteNuevo)
                     {
-                        query = "INSERT INTO cliente (nombre, apellido, cedula, edad, telefono, telefono2, cliente_desde) VALUES (@nombre, @apellido, @cedula, @edad, @telefono1, @telefono2, @clienteDesde); " +
-                            "UPDATE habitacion SET estado=@estado WHERE numero_hab=@numeroHabitacion;" +
-                            "INSERT INTO reservacion (numero_hab, cedula_cliente, fecha_ingreso, fecha_salida, tipo_habitacion, costo_total, notas) VALUES (@numeroHabitacion, @cedula, @fechaIngreso, @fechaSalida, @tipoHabitacion, @costoTotal, @notasReservacion)";
+                        query = "INSERT INTO Clientes (Nombre, Apellido, Cedula, Edad, Telefono, TelefonoExtra, ClienteDesde) VALUES (@nombre, @apellido, @cedula, @edad, @telefono1, @telefono2, @clienteDesde); " +
+                            "UPDATE Habitaciones SET Estado=@estado WHERE NumeroHabitacion=@numeroHabitacion;" +
+                            "INSERT INTO Reservaciones (NumeroHabitacion, Cliente_Cedula, Vehiculo_ID, FechaIngreso, FechaSalida, TipoHabitacion, CostoTotal, Notas) VALUES (@numeroHabitacion, @cedula, null, @fechaIngreso, @fechaSalida, @tipoHabitacion, @costoTotal, @notasReservacion)";
                     }
                     else if (!clienteNuevo)
                     {
-                        query = "UPDATE cliente SET nombre=@nombre, apellido=@apellido, edad=@edad, telefono=@telefono1, telefono2=@telefono2 WHERE cedula=@cedula;" +
-                           "UPDATE habitacion SET estado=@estado WHERE numero_hab=@numeroHabitacion;" +
-                           "INSERT INTO reservacion (numero_hab, cedula_cliente, fecha_ingreso, fecha_salida, tipo_habitacion, costo_total, notas) VALUES (@numeroHabitacion, @cedula, @fechaIngreso, @fechaSalida, @tipoHabitacion, @costoTotal, @notasReservacion)";
+                        query = "UPDATE Clientes SET Nombre=@nombre, Apellido=@apellido, Edad=@edad, Telefono=@telefono1, TelefonoExtra=@telefono2 WHERE Cedula=@cedula;" +
+                           "UPDATE Habitaciones SET Estado=@estado WHERE NumeroHabitacion=@numeroHabitacion;" +
+                           "INSERT INTO Reservaciones (NumeroHabitacion, Cliente_Cedula, Vehiculo_ID, FechaIngreso, FechaSalida, TipoHabitacion, CostoTotal, Notas) VALUES (@numeroHabitacion, @cedula, null, @fechaIngreso, @fechaSalida, @tipoHabitacion, @costoTotal, @notasReservacion)";
                     }
 
                     if (conVehiculo) // Sólo almacenar vehículo si los campos no están vacíos
                     {
-                        query += "; INSERT INTO vehiculo (cedula_cliente, reservacion_id, es_camion, marca, modelo, placa, existe) VALUES (@cedula, (SELECT id FROM reservacion WHERE numero_hab = @numeroHabitacion), @camion, @marca, @modelo, @placa, @existe)";
-
                         if (vehiculoAlmacenado) // Si el vehículo ya está almacenado
                         {
-                            query += "; UPDATE vehiculo SET es_camion=@camion, marca=@marca, modelo=@modelo, existe=@existe, placa=@placa WHERE id=@id";
+                            query += "; UPDATE Vehiculos SET EsCamion=@camion, marca=@marca, modelo=@modelo, placa=@placa WHERE ID=@id; UPDATE Reservaciones SET Vehiculo_ID=@id WHERE NumeroHabitacion=@numeroHabitacion";
+                        }
+                        else
+                        {
+                            query += "; INSERT INTO Vehiculos (Cliente_Cedula, EsCamion, Marca, Modelo, Placa) VALUES (@cedula, @camion, @marca, @modelo, @placa); UPDATE Reservaciones SET Vehiculo_ID=last_insert_rowid() WHERE NumeroHabitacion=@numeroHabitacion";
                         }
                     }
 
@@ -382,12 +384,11 @@ namespace Hotel
 
                             if (conVehiculo)
                             {
-                                cmd.Parameters.AddWithValue("@existe", false);  // El vehículo no existe, es nuevo.                   
-
+                                //cmd.Parameters.AddWithValue("@existe", false);  // El vehículo no existe, es nuevo.        
+                                
                                 if (vehiculoAlmacenado)
                                 {
                                     cmd.Parameters.AddWithValue("@id", idVehiculo[comboVehiculo.SelectedIndex].ToString());
-                                    cmd.Parameters.AddWithValue("@existe", true);
                                 }
 
                                 bool esCamion = false;
@@ -455,25 +456,31 @@ namespace Hotel
                         conVehiculo = false; // Si campos están vacíos, no tiene vehículo
                     }
 
-                    string query = "UPDATE cliente SET nombre=@nombre, apellido=@apellido, edad=@edad, telefono=@telefono1, telefono2=@telefono2 WHERE cedula=@cedula;" +
-                        "UPDATE reservacion SET numero_hab=@numeroHabitacion, fecha_ingreso=@fechaIngreso, fecha_salida=@fechaSalida, tipo_habitacion=@tipoHabitacion, costo_total=@costoTotal, notas=@notasReservacion WHERE id=(SELECT id FROM reservacion WHERE numero_hab=@habitacionActual)";
+                    string query = "UPDATE Clientes SET Nombre=@nombre, Apellido=@apellido, Edad=@edad, Telefono=@telefono1, TelefonoExtra=@telefono2 WHERE Cedula=@cedula;" +
+                        "UPDATE Reservaciones SET NumeroHabitacion=@numeroHabitacion, FechaIngreso=@fechaIngreso, FechaSalida=@fechaSalida, TipoHabitacion=@tipoHabitacion, CostoTotal=@costoTotal, Notas=@notasReservacion WHERE ID=(SELECT ID FROM Reservaciones WHERE NumeroHabitacion=@habitacionActual)";
+
 
                     if (habitacionActual != (comboHabitacion.SelectedIndex + 1)) // En pocas palabras, si se cambió número habtiación
                     {
-                        query += "; UPDATE habitacion SET estado='disponible' WHERE numero_hab ='" + habitacionActual + "';" +
-                            "UPDATE habitacion SET estado='ocupada' WHERE numero_hab='" + comboHabitacion.Text + "'";
+                        query += "; UPDATE Habitaciones SET Estado='disponible' WHERE NumeroHabitacion='" + habitacionActual + "';" +
+                            "UPDATE Habitaciones SET Estado='ocupada' WHERE NumeroHabitacion='" + comboHabitacion.Text + "'";
                     }
 
                     if (conVehiculo)
                     {
                         if (vehiculoAlmacenado)
                         {
-                            query += "; UPDATE vehiculo SET es_camion=@camion, marca=@marca, modelo=@modelo, placa=@placa WHERE reservacion_id=(SELECT id FROM reservacion WHERE numero_hab=@numeroHabitacion)";
+                            query += "; UPDATE Vehiculos SET EsCamion=@camion, Marca=@marca, Modelo=@modelo, Placa=@placa WHERE ID=(SELECT Vehiculo_ID FROM Reservaciones WHERE NumeroHabitacion=@numeroHabitacion)";
                         }
                         else
                         {
-                            query += "; INSERT INTO vehiculo (cedula_cliente, reservacion_id, es_camion, marca, modelo, placa) VALUES (@cedula, (SELECT id FROM reservacion WHERE numero_hab = @numeroHabitacion), @camion, @marca, @modelo, @placa)";
+                            query += "; INSERT INTO Vehiculos (Cliente_Cedula, EsCamion, Marca, Modelo, Placa) VALUES (@cedula, @camion, @marca, @modelo, @placa);" +
+                                "UPDATE Reservaciones SET Vehiculo_ID=last_insert_rowid() WHERE NumeroHabitacion=@numeroHabitacion";
                         }
+                    }
+                    else
+                    {
+                        query += "; UPDATE Reservaciones SET Vehiculo_ID=null WHERE NumeroHabitacion=@numeroHabitacion";
                     }
 
 
@@ -540,8 +547,8 @@ namespace Hotel
 
         public void EliminarReservacion()
         {
-            string query = "DELETE FROM reservacion WHERE numero_hab=@numeroHabitacion;" +
-                "UPDATE habitacion SET estado='disponible' WHERE numero_hab=@numeroHabitacion";
+            string query = "DELETE FROM Reservaciones WHERE NumeroHabitacion=@numeroHabitacion;" +
+                "UPDATE Habitaciones SET Estado='disponible' WHERE NumeroHabitacion=@numeroHabitacion";
 
             try
             {
@@ -573,7 +580,7 @@ namespace Hotel
             {
                 using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
                 {
-                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT cedula FROM cliente WHERE cedula='" + cedula + "'", conn))
+                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT Cedula FROM Clientes WHERE Cedula='" + cedula + "'", conn))
                     {
                         conn.Open();
 
@@ -607,7 +614,7 @@ namespace Hotel
             {
                 using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
                 {
-                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT cedula, es_camion, cedula_cliente, COUNT(distinct v.id) AS vehiculos FROM cliente INNER JOIN vehiculo v ON cedula=cedula_cliente WHERE cedula=@cedula", conn))
+                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT Cedula, EsCamion, Cliente_Cedula, COUNT(distinct v.ID) AS vehiculos FROM Clientes INNER JOIN Vehiculos v ON Cedula=Cliente_Cedula WHERE Cedula=@cedula", conn))
                     {
                         cmd.Parameters.AddWithValue("@cedula", cedula);
                         conn.Open();
@@ -618,7 +625,7 @@ namespace Hotel
                             {
                                 if (dr.Read())
                                 {
-                                    if (dr["es_camion"] != DBNull.Value) // Si es_camion es NULL, o no existe, pues no tiene vehículo. En la base de datos es_camion siempre tiene un valor de 0 o 1
+                                    if (dr["EsCamion"] != DBNull.Value) // Si es_camion es NULL, o no existe, pues no tiene vehículo. En la base de datos es_camion siempre tiene un valor de 0 o 1
                                     {
                                         numeroVehiculos = int.Parse(dr["vehiculos"].ToString());
                                         return true; // Tiene vehículo
@@ -654,7 +661,7 @@ namespace Hotel
             {
                 using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
                 {
-                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM vehiculo WHERE id=@id", conn))
+                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM Vehiculos WHERE ID=@id", conn))
                     {
                         cmd.Parameters.AddWithValue("@id", id);
 
@@ -664,11 +671,11 @@ namespace Hotel
                         {
                             while (dr.Read())
                             {
-                                txtMarca.Text = dr["marca"].ToString();
-                                txtModelo.Text = dr["modelo"].ToString();
-                                txtPlaca.Text = dr["placa"].ToString();
+                                txtMarca.Text = dr["Marca"].ToString();
+                                txtModelo.Text = dr["Modelo"].ToString();
+                                txtPlaca.Text = dr["Placa"].ToString();
 
-                                if (Convert.ToBoolean(dr["es_camion"]) == true)
+                                if (Convert.ToBoolean(dr["EsCamion"]) == true)
                                     checkCamion.Checked = true;
                                 else
                                     checkCamion.Checked = false;
@@ -740,9 +747,9 @@ namespace Hotel
             {
                 using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
                 {
-                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT tipo, costo FROM tipo_habitacion WHERE tipo=@tipo", conn))
+                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT Tipo, Costo FROM TipoHabitacion WHERE Tipo=@tipo", conn))
                     {
-                        cmd.Parameters.AddWithValue("tipo", listboxHabitaciones.Text);
+                        cmd.Parameters.AddWithValue("Tipo", listboxHabitaciones.Text);
                         conn.Open();
 
                         using (SQLiteDataReader dr = cmd.ExecuteReader())
@@ -751,7 +758,7 @@ namespace Hotel
                             {
                                 if (dr.Read())
                                 {
-                                    total = Convert.ToDouble(dr["costo"].ToString());
+                                    total = Convert.ToDouble(dr["Costo"].ToString());
                                     if (checkCamion.Checked)
                                         total += montoCamion;
                                     txtTotal.Text = total.ToString();

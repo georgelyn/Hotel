@@ -32,7 +32,7 @@ namespace Hotel
 
                 using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
                 {
-                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT DISTINCT cedula FROM cliente INNER JOIN vehiculo ON cedula=cedula_cliente", conn))
+                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT DISTINCT Cedula FROM Clientes INNER JOIN Vehiculos ON Cedula=Cliente_Cedula", conn))
                     {
                         conn.Open();
 
@@ -40,7 +40,7 @@ namespace Hotel
                         {
                             while (dr.Read())
                             {
-                                comboCedula.Items.Add(dr["cedula"].ToString());
+                                comboCedula.Items.Add(dr["Cedula"].ToString());
                             }
                         }
                     }
@@ -60,7 +60,7 @@ namespace Hotel
             {
                 using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
                 {
-                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM vehiculo WHERE cedula_cliente=@cedula", conn))
+                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM Vehiculos WHERE Cliente_Cedula=@cedula", conn))
                     {
                         idVehiculo = new List<String>();
                         idVehiculo.Clear();
@@ -73,8 +73,8 @@ namespace Hotel
                         {
                             while (dr.Read())
                             {
-                                idVehiculo.Add(dr["id"].ToString());
-                                combo.Items.Add(dr["marca"].ToString() + " - " + dr["modelo"].ToString());
+                                idVehiculo.Add(dr["ID"].ToString());
+                                combo.Items.Add(dr["Marca"].ToString() + " - " + dr["Modelo"].ToString());
                                 //comboVehiculo.Items.Add(dr["marca"].ToString() + " - " + dr["modelo"].ToString());
                             }
                         }
@@ -97,7 +97,7 @@ namespace Hotel
             {
                 using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
                 {
-                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM vehiculo WHERE id=@id", conn))
+                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM Vehiculos WHERE ID=@id", conn))
                     {
                         cmd.Parameters.AddWithValue("@id", id);
 
@@ -107,12 +107,12 @@ namespace Hotel
                         {
                             while (dr.Read())
                             {
-                                txtMarca.Text = dr["marca"].ToString();
-                                txtModelo.Text = dr["modelo"].ToString();
-                                txtPlaca.Text = dr["placa"].ToString();
-                                txtNotas.Text = dr["notas"].ToString();
+                                txtMarca.Text = dr["Marca"].ToString();
+                                txtModelo.Text = dr["Modelo"].ToString();
+                                txtPlaca.Text = dr["Placa"].ToString();
+                                txtNotas.Text = dr["Notas"].ToString();
 
-                                if (Convert.ToBoolean(dr["es_camion"]) == true)
+                                if (Convert.ToBoolean(dr["EsCamion"]) == true)
                                     checkCamion.Checked = true;
                                 else
                                     checkCamion.Checked = false;
@@ -133,7 +133,7 @@ namespace Hotel
             {
                 using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
                 {
-                    using (SQLiteCommand cmd = new SQLiteCommand("UPDATE vehiculo SET es_camion=@esCamion, marca=@marca, modelo=@modelo, placa=@placa, notas=@notas WHERE id=@id", conn))
+                    using (SQLiteCommand cmd = new SQLiteCommand("UPDATE Vehiculos SET EsCamion=@esCamion, Marca=@marca, Modelo=@modelo, Placa=@placa, Notas=@notas WHERE ID=@id", conn))
                     {
                         cmd.Parameters.AddWithValue("@id", id);
 
@@ -168,7 +168,7 @@ namespace Hotel
             {
                 using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
                 {
-                    using (SQLiteCommand cmd = new SQLiteCommand("DELETE FROM vehiculo WHERE id=@id", conn))
+                    using (SQLiteCommand cmd = new SQLiteCommand("DELETE FROM Vehiculos WHERE ID=@id", conn))
                     {
                         cmd.Parameters.AddWithValue("@id", id);
 

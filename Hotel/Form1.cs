@@ -28,7 +28,7 @@ namespace Hotel
 
                 using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
                 {
-                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT numero_hab, estado FROM habitacion", conn))
+                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT NumeroHabitacion, Estado FROM Habitaciones", conn))
                     {
                         conn.Open();
 
@@ -38,23 +38,23 @@ namespace Hotel
                             {
                                 foreach (Button b in tableLayoutPanel1.Controls)
                                 {
-                                    if (dr["estado"].ToString() == "disponible")
+                                    if (dr["Estado"].ToString() == "disponible")
                                     {
-                                        if (dr["numero_hab"].ToString() == b.Name.Remove(0, 6)) //b.Text) // Remove 0,6 -> button
+                                        if (dr["NumeroHabitacion"].ToString() == b.Name.Remove(0, 6)) //b.Text) // Remove 0,6 -> button
                                         {
                                             b.BackColor = Color.Green;
                                         }
                                     }
-                                    else if (dr["estado"].ToString() == "ocupada")
+                                    else if (dr["Estado"].ToString() == "ocupada")
                                     {
-                                        if (dr["numero_hab"].ToString() == b.Name.Remove(0, 6))
+                                        if (dr["NumeroHabitacion"].ToString() == b.Name.Remove(0, 6))
                                         {
                                             b.BackColor = Color.Red;
                                         }
                                     }
-                                    else if (dr["estado"].ToString() == "limpieza")
+                                    else if (dr["Estado"].ToString() == "limpieza")
                                     {
-                                        if (dr["numero_hab"].ToString() == b.Name.Remove(0, 6))
+                                        if (dr["NumeroHabitacion"].ToString() == b.Name.Remove(0, 6))
                                         {
                                             b.BackColor = Color.Gray;
                                         }
