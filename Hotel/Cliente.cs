@@ -103,22 +103,22 @@ namespace Hotel
 
             if (opcion == "cliente")
             {
-                query = "SELECT *, COUNT(r.id) AS reservaciones FROM cliente LEFT JOIN reservacion r ON cedula = cedula_cliente GROUP BY nombre ORDER BY id";
+                query = "SELECT *, COUNT(r.ID) AS reservaciones FROM Clientes LEFT JOIN Reservaciones r ON Cedula = Cliente_Cedula GROUP BY Nombre ORDER BY ID";
                 toolStripComboBox1.SelectedIndex = 0;
             }
             else if (opcion == "actual")
             {
-                query = "SELECT *, COUNT(r.id) AS reservaciones FROM cliente INNER JOIN reservacion r ON cedula = cedula_cliente GROUP BY nombre ORDER BY id";
+                query = "SELECT *, COUNT(r.ID) AS reservaciones FROM Clientes INNER JOIN Reservaciones r ON Cedula = Cliente_Cedula GROUP BY Nombre ORDER BY ID";
                 toolStripComboBox1.SelectedIndex = 1;
             }
             else if (opcion == "buscar")
             {
-                query = "SELECT *, COUNT(r.id) AS reservaciones FROM cliente LEFT JOIN reservacion r ON cedula = cedula_cliente WHERE nombre LIKE '%" + txtBuscar.Text.Trim() + "%' OR apellido LIKE '%" + txtBuscar.Text.Trim() + "%' OR cedula LIKE '%" + txtBuscar.Text.Trim().Replace(".", "").Replace(",", "").Replace("-", "") + "%' GROUP BY nombre";
+                query = "SELECT *, COUNT(r.ID) AS reservaciones FROM Clientes LEFT JOIN Reservaciones r ON Cedula = Cliente_Cedula WHERE Nombre LIKE '%" + txtBuscar.Text.Trim() + "%' OR Apellido LIKE '%" + txtBuscar.Text.Trim() + "%' OR Cedula LIKE '%" + txtBuscar.Text.Trim().Replace(".", "").Replace(",", "").Replace("-", "") + "%' GROUP BY Nombre";
                 //nombre like '%" + txtBuscar.Text.Trim()  + "% ' or apellido like '%" + txtBuscar.Text.Trim()  + "% ' or cedula like '%" + txtBuscar.Text.Trim() + "% ' GROUP BY nombre ORDER BY id";
             }
             else if (opcion == "habitacion")
             {
-                query = "SELECT reservacion.id as reservacionID, cliente.id as id, numero_hab, nombre, apellido, cedula FROM cliente INNER JOIN reservacion ON cedula=cedula_cliente ORDER BY numero_hab";
+                query = "SELECT Reservaciones.ID as reservacionID, Clientes.ID as id, NumeroHabitacion, Nombre, Apellido, Cedula FROM Clientes INNER JOIN Reservaciones ON Cedula = Cliente_Cedula ORDER BY NumeroHabitacion";
                 toolStripComboBox1.SelectedIndex = 2;
             }
 
@@ -144,19 +144,19 @@ namespace Hotel
 
                                 if (opcion == "cliente" || opcion == "actual" || opcion == "buscar")
                                 {
-                                    item.SubItems.Add(dr["apellido"].ToString() + ", " + dr["nombre"].ToString());                                
-                                    item.SubItems.Add(dr["cedula"].ToString());
+                                    item.SubItems.Add(dr["Apellido"].ToString() + ", " + dr["Nombre"].ToString());                                
+                                    item.SubItems.Add(dr["Cedula"].ToString());
                                     item.SubItems.Add(dr["reservaciones"].ToString());
 
-                                    var dt = DateTime.Parse(dr["cliente_desde"].ToString());
+                                    var dt = DateTime.Parse(dr["ClienteDesde"].ToString());
                                     item.SubItems.Add(dt.ToString("dd/MMM/yyyy"));
                                 }
                                 else if (opcion == "habitacion")
                                 {
                                     item.SubItems.Add(dr["ReservacionID"].ToString());
-                                    item.SubItems.Add(dr["numero_hab"].ToString());
-                                    item.SubItems.Add(dr["nombre"].ToString() + " " + dr["apellido"].ToString());
-                                    item.SubItems.Add(dr["cedula"].ToString());
+                                    item.SubItems.Add(dr["NumeroHabitacion"].ToString());
+                                    item.SubItems.Add(dr["Nombre"].ToString() + " " + dr["Apellido"].ToString());
+                                    item.SubItems.Add(dr["Cedula"].ToString());
                                 }
 
                                 lst.Items.Add(item);
@@ -177,7 +177,7 @@ namespace Hotel
             {
                 using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
                 {
-                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT *, COUNT(distinct v.id) AS vehiculos, COUNT(distinct r.id) AS reservaciones FROM cliente LEFT JOIN vehiculo v ON cedula=v.cedula_cliente LEFT JOIN reservacion r ON cedula=r.cedula_cliente WHERE cliente.id=@id", conn))
+                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT *, COUNT(distinct v.ID) AS vehiculos, COUNT(distinct r.ID) AS reservaciones FROM Clientes LEFT JOIN Vehiculos v ON Cedula=v.Cliente_Cedula LEFT JOIN Reservaciones r ON Cedula=r.Cliente_Cedula WHERE Clientes.ID=@id", conn))
                     {
                         cmd.Parameters.AddWithValue("@id", id);
                         conn.Open();
@@ -186,13 +186,13 @@ namespace Hotel
                         {
                             while (dr.Read())
                             {
-                                txtNombre.Text = dr["nombre"].ToString();
-                                txtApellido.Text = dr["apellido"].ToString();
-                                txtCedula.Text = dr["cedula"].ToString();
-                                txtEdad.Text = dr["edad"].ToString();
-                                txtTelefono1.Text = dr["telefono"].ToString();
-                                txtTelefono2.Text = dr["telefono2"].ToString();
-                                txtNotas.Text = dr["notas"].ToString();
+                                txtNombre.Text = dr["Nombre"].ToString();
+                                txtApellido.Text = dr["Apellido"].ToString();
+                                txtCedula.Text = dr["Cedula"].ToString();
+                                txtEdad.Text = dr["Edad"].ToString();
+                                txtTelefono1.Text = dr["Telefono"].ToString();
+                                txtTelefono2.Text = dr["TelefonoExtra"].ToString();
+                                txtNotas.Text = dr["Notas"].ToString();
 
                                 if (int.Parse(dr["vehiculos"].ToString()) > 0)
                                 {
@@ -232,7 +232,7 @@ namespace Hotel
             {
                 using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
                 {
-                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT numero_hab FROM reservacion WHERE cedula_cliente=@cedula ORDER BY numero_hab", conn))
+                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT NumeroHabitacion FROM Reservaciones WHERE Cliente_Cedula=@cedula ORDER BY NumeroHabitacion", conn))
                     {
                         cmd.Parameters.AddWithValue("@cedula", cedula);
 
@@ -242,7 +242,7 @@ namespace Hotel
                         {
                             while (dr.Read())
                             {
-                                listboxReservaciones.Items.Add(dr["numero_hab"].ToString());
+                                listboxReservaciones.Items.Add(dr["NumeroHabitacion"].ToString());
                             }
                         }
                     }
@@ -262,7 +262,7 @@ namespace Hotel
             {
                 using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
                 {
-                    using (SQLiteCommand cmd = new SQLiteCommand("INSERT INTO cliente (nombre, apellido, cedula, edad, telefono, telefono2, cliente_desde, notas) VALUES (@nombre, @apellido, @cedula, @edad, @telefono1, @telefono2, @clienteDesde, @notas)", conn))
+                    using (SQLiteCommand cmd = new SQLiteCommand("INSERT INTO Clientes (Nombre, Apellido, Cedula, Edad, Telefono, TelefonoExtra, ClienteDesde, Notas) VALUES (@nombre, @apellido, @cedula, @edad, @telefono1, @telefono2, @clienteDesde, @notas)", conn))
                     {
                         cmd.Parameters.AddWithValue("@nombre", txtNombre.Text.Trim());
                         cmd.Parameters.AddWithValue("@apellido", txtApellido.Text.Trim());
@@ -303,7 +303,7 @@ namespace Hotel
             {
                 using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
                 {
-                    using (SQLiteCommand cmd = new SQLiteCommand("UPDATE cliente SET nombre=@nombre, apellido=@apellido, cedula=@cedula, edad=@edad, telefono=@telefono1, telefono2=@telefono2, notas=@notas WHERE id=@id", conn))
+                    using (SQLiteCommand cmd = new SQLiteCommand("UPDATE Clientes SET Nombre=@nombre, Apellido=@apellido, Cedula=@cedula, Edad=@edad, Telefono=@telefono1, TelefonoExtra=@telefono2, Notas=@notas WHERE ID=@id", conn))
                     {
                         cmd.Parameters.AddWithValue("@id", id);
 
@@ -347,7 +347,7 @@ namespace Hotel
             {
                 using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
                 {
-                    using (SQLiteCommand cmd = new SQLiteCommand("DELETE FROM cliente WHERE id=@id", conn))
+                    using (SQLiteCommand cmd = new SQLiteCommand("DELETE FROM Clientes WHERE ID=@id", conn))
                     {
                         cmd.Parameters.AddWithValue("@id", id);
 
@@ -439,8 +439,9 @@ namespace Hotel
 
         private void OcultarListbox()
         {
-            label8.Visible = false;
-            label9.Visible = false;
+            panelListboxHabitaciones.Visible = false;
+            //label8.Visible = false;
+            //label9.Visible = false;
             label10.Visible = false;
             label11.Visible = false;
 
@@ -612,14 +613,15 @@ namespace Hotel
 
         private void btnVerReservaciones_Click(object sender, EventArgs e)
         {
-            if (label8.Visible)
+            if (label10.Visible)
             {
                 OcultarListbox();
             }
             else
             {
-                label8.Visible = true;
-                label9.Visible = true;
+                panelListboxHabitaciones.Visible = true;
+                //label8.Visible = true;
+                //label9.Visible = true;
                 label10.Visible = true;
                 label11.Visible = true;
                 listboxReservaciones.Visible = true;

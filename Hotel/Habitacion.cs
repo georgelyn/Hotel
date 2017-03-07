@@ -80,7 +80,7 @@ namespace Hotel
             {
                 using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
                 {
-                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT id, tipo, descripcion, costo, notas, activa FROM tipo_habitacion", conn))
+                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT ID, Tipo, Descripcion, Costo, Notas, Activa FROM TipoHabitacion", conn))
                     {
                         conn.Open();
 
@@ -90,12 +90,12 @@ namespace Hotel
                             {
                                 //double costo = double.Parse(dr["costo"].ToString());
 
-                                ListViewItem item = new ListViewItem(dr["id"].ToString());
-                                item.SubItems.Add(dr["tipo"].ToString());
-                                item.SubItems.Add(dr["descripcion"].ToString());
+                                ListViewItem item = new ListViewItem(dr["ID"].ToString());
+                                item.SubItems.Add(dr["Tipo"].ToString());
+                                item.SubItems.Add(dr["Descripcion"].ToString());
                                 //item.SubItems.Add(string.Format("{0:#,##}", costo).Replace(",", "."));
-                                item.SubItems.Add(dr["costo"].ToString());
-                                if (Convert.ToBoolean(dr["activa"]) == true)
+                                item.SubItems.Add(dr["Costo"].ToString());
+                                if (Convert.ToBoolean(dr["Activa"]) == true)
                                 {
                                     item.SubItems.Add("Activa");
                                 }
@@ -104,7 +104,7 @@ namespace Hotel
                                     item.SubItems[0].BackColor = Color.LightGray;
                                     item.SubItems.Add("Inactiva");
                                 }
-                                item.SubItems.Add(dr["notas"].ToString());
+                                item.SubItems.Add(dr["Notas"].ToString());
                                 lst.Items.Add(item);
                             }
                         }
@@ -123,7 +123,7 @@ namespace Hotel
             {
                 using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
                 {
-                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM tipo_habitacion WHERE id=@id", conn))
+                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM TipoHabitacion WHERE ID=@id", conn))
                     {
                         cmd.Parameters.AddWithValue("id", id);
                         conn.Open();
@@ -132,14 +132,14 @@ namespace Hotel
                         {
                             if (dr.Read())
                             {
-                                txtTipo.Text = dr["tipo"].ToString();
-                                txtDescripcion.Text = dr["descripcion"].ToString();
-                                txtCosto.Text = dr["costo"].ToString();
-                                if (Convert.ToBoolean(dr["activa"]) == true)
+                                txtTipo.Text = dr["Tipo"].ToString();
+                                txtDescripcion.Text = dr["Descripcion"].ToString();
+                                txtCosto.Text = dr["Costo"].ToString();
+                                if (Convert.ToBoolean(dr["Activa"]) == true)
                                     comboEstado.Text = "Activa";
                                 else
                                     comboEstado.Text = "Inactiva";
-                                txtNotas.Text = dr["notas"].ToString();
+                                txtNotas.Text = dr["Notas"].ToString();
                             }
                         }
                     }
@@ -157,19 +157,19 @@ namespace Hotel
             {
                 using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
                 {
-                    using (SQLiteCommand cmd = new SQLiteCommand("INSERT INTO tipo_habitacion (tipo, descripcion, costo, notas, activa) VALUES (@tipo, @descripcion, @costo, @notas, @estado)", conn))
+                    using (SQLiteCommand cmd = new SQLiteCommand("INSERT INTO TipoHabitacion (Tipo, Descripcion, Costo, Notas, Activa) VALUES (@tipo, @descripcion, @costo, @notas, @estado)", conn))
                     {
-                        cmd.Parameters.AddWithValue("tipo", txtTipo.Text.Trim());
-                        cmd.Parameters.AddWithValue("descripcion", StringExtensions.NullString(txtDescripcion.Text.Trim()));
-                        cmd.Parameters.AddWithValue("costo", txtCosto.Text.Trim().Replace(".", "").Replace(",", ""));
-                        cmd.Parameters.AddWithValue("notas", StringExtensions.NullString(txtNotas.Text.Trim()));
+                        cmd.Parameters.AddWithValue("@tipo", txtTipo.Text.Trim());
+                        cmd.Parameters.AddWithValue("@descripcion", StringExtensions.NullString(txtDescripcion.Text.Trim()));
+                        cmd.Parameters.AddWithValue("@costo", txtCosto.Text.Trim().Replace(".", "").Replace(",", ""));
+                        cmd.Parameters.AddWithValue("@notas", StringExtensions.NullString(txtNotas.Text.Trim()));
                         if (comboEstado.Text == "Activa")
                         {
-                            cmd.Parameters.AddWithValue("estado", "1");
+                            cmd.Parameters.AddWithValue("@estado", "1");
                         }
                         else
                         {
-                            cmd.Parameters.AddWithValue("estado", "0");
+                            cmd.Parameters.AddWithValue("@estado", "0");
                         }
 
                         conn.Open();
@@ -191,7 +191,7 @@ namespace Hotel
             {
                 using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
                 {
-                    using (SQLiteCommand cmd = new SQLiteCommand("UPDATE tipo_habitacion SET tipo=@tipo, descripcion=@descripcion, costo=@costo, notas=@notas, activa=@estado WHERE id=@id", conn))
+                    using (SQLiteCommand cmd = new SQLiteCommand("UPDATE TipoHabitacion SET Tipo=@tipo, Descripcion=@descripcion, Costo=@costo, Notas=@notas, Activa=@estado WHERE ID=@id", conn))
                     {
                         cmd.Parameters.AddWithValue("id", id);
                         cmd.Parameters.AddWithValue("tipo", txtTipo.Text.Trim());
@@ -227,7 +227,7 @@ namespace Hotel
             {
                 using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
                 {
-                    using (SQLiteCommand cmd = new SQLiteCommand("DELETE FROM tipo_habitacion WHERE id=@id", conn))
+                    using (SQLiteCommand cmd = new SQLiteCommand("DELETE FROM TipoHabitacion WHERE ID=@id", conn))
                     {
                         cmd.Parameters.AddWithValue("id", id);
 

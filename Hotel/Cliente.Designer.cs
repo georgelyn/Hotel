@@ -42,9 +42,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label11 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
             this.listboxReservaciones = new System.Windows.Forms.ListBox();
             this.btnNuevaReservacion = new System.Windows.Forms.Button();
             this.btnVerReservaciones = new System.Windows.Forms.Button();
@@ -74,9 +71,12 @@
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.lblTelefono = new System.Windows.Forms.Label();
             this.lblNombre = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.panelListboxHabitaciones = new System.Windows.Forms.Panel();
             this.toolStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panelListboxHabitaciones.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -188,11 +188,9 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.label11);
+            this.panel2.Controls.Add(this.panelListboxHabitaciones);
             this.panel2.Controls.Add(this.label10);
-            this.panel2.Controls.Add(this.label9);
-            this.panel2.Controls.Add(this.label8);
-            this.panel2.Controls.Add(this.listboxReservaciones);
+            this.panel2.Controls.Add(this.label11);
             this.panel2.Controls.Add(this.btnNuevaReservacion);
             this.panel2.Controls.Add(this.btnVerReservaciones);
             this.panel2.Controls.Add(this.lblReservaciones);
@@ -232,7 +230,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(619, 330);
+            this.label11.Location = new System.Drawing.Point(619, 339);
             this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(95, 15);
@@ -240,41 +238,11 @@
             this.label11.Text = "Habitaciones:";
             this.label11.Visible = false;
             // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(638, 433);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(14, 20);
-            this.label10.TabIndex = 149;
-            this.label10.Text = "|";
-            this.label10.Visible = false;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(328, 433);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(14, 20);
-            this.label9.TabIndex = 148;
-            this.label9.Text = "|";
-            this.label9.Visible = false;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(337, 453);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(304, 20);
-            this.label8.TabIndex = 147;
-            this.label8.Text = "-----------------------------------------------------------";
-            this.label8.Visible = false;
-            // 
             // listboxReservaciones
             // 
             this.listboxReservaciones.FormattingEnabled = true;
             this.listboxReservaciones.ItemHeight = 20;
-            this.listboxReservaciones.Location = new System.Drawing.Point(622, 348);
+            this.listboxReservaciones.Location = new System.Drawing.Point(8, 0);
             this.listboxReservaciones.Name = "listboxReservaciones";
             this.listboxReservaciones.Size = new System.Drawing.Size(92, 84);
             this.listboxReservaciones.TabIndex = 146;
@@ -548,6 +516,26 @@
             this.lblNombre.TabIndex = 123;
             this.lblNombre.Text = "Nombre(s):";
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(362, 408);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(259, 20);
+            this.label10.TabIndex = 151;
+            this.label10.Text = "|------------------------------------------------|";
+            this.label10.Visible = false;
+            // 
+            // panelListboxHabitaciones
+            // 
+            this.panelListboxHabitaciones.BackColor = System.Drawing.Color.LightBlue;
+            this.panelListboxHabitaciones.Controls.Add(this.listboxReservaciones);
+            this.panelListboxHabitaciones.Location = new System.Drawing.Point(622, 357);
+            this.panelListboxHabitaciones.Name = "panelListboxHabitaciones";
+            this.panelListboxHabitaciones.Size = new System.Drawing.Size(109, 85);
+            this.panelListboxHabitaciones.TabIndex = 152;
+            this.panelListboxHabitaciones.Visible = false;
+            // 
             // Cliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -566,6 +554,7 @@
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.panelListboxHabitaciones.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -607,9 +596,6 @@
         private System.Windows.Forms.Button btnVerReservaciones;
         private System.Windows.Forms.Label lblReservaciones;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ListBox listboxReservaciones;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ToolStripComboBox toolStripComboBox1;
@@ -618,5 +604,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripTextBox txtBuscar;
         private System.Windows.Forms.ToolStripButton btnBuscar;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Panel panelListboxHabitaciones;
     }
 }
