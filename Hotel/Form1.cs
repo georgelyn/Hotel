@@ -17,6 +17,7 @@ namespace Hotel
             foreach (Button b in tableLayoutPanel1.Controls)
             {
                 b.ContextMenuStrip = contextMenuStrip1;
+                b.FlatStyle = FlatStyle.Flat;
             }
 
 
@@ -26,6 +27,12 @@ namespace Hotel
         Reservacion reservacion;
         Cliente cliente;
         Msg msg;
+
+        Color disponible = Color.Green;
+        Color inactiva = Color.LightGray;
+        Color limpieza = Color.LightCyan;
+        Color mantenimiento = Color.DarkKhaki;
+        Color ocupada = Color.Red;
 
         public void ActivarTimerEspera()
         {
@@ -56,35 +63,40 @@ namespace Hotel
                                     {
                                         if (dr["NumeroHabitacion"].ToString() == b.Name.Remove(0, 6)) //b.Text) // Remove 0,6 -> button
                                         {
-                                            b.BackColor = Color.Green;
+                                            //b.FlatStyle = FlatStyle.Flat;
+                                            b.BackColor = disponible;
                                         }
                                     }
                                     else if (dr["Estado"].ToString() == "ocupada")
                                     {
                                         if (dr["NumeroHabitacion"].ToString() == b.Name.Remove(0, 6))
                                         {
-                                            b.BackColor = Color.Red;
+                                            //b.FlatStyle = FlatStyle.Flat;
+                                            b.BackColor = ocupada;
                                         }
                                     }
                                     else if (dr["Estado"].ToString() == "limpieza")
                                     {
                                         if (dr["NumeroHabitacion"].ToString() == b.Name.Remove(0, 6))
                                         {
-                                            b.BackColor = Color.White;
+                                            //b.FlatStyle = FlatStyle.Flat;
+                                            b.BackColor = limpieza;
                                         }
                                     }
                                     else if (dr["Estado"].ToString() == "mantenimiento")
                                     {
                                         if (dr["NumeroHabitacion"].ToString() == b.Name.Remove(0, 6))
                                         {
-                                            b.BackColor = Color.Olive;
+                                            //b.FlatStyle = FlatStyle.Flat;
+                                            b.BackColor = mantenimiento;
                                         }
                                     }
                                     else if (dr["Estado"].ToString() == "inactiva")
                                     {
                                         if (dr["NumeroHabitacion"].ToString() == b.Name.Remove(0, 6))
                                         {
-                                            b.BackColor = Color.LightGray;
+                                            //b.FlatStyle = FlatStyle.System;
+                                            b.BackColor = inactiva;
                                             b.Enabled = false;
                                             //b.BackColor = Color.DarkGray;
                                         }
@@ -156,7 +168,7 @@ namespace Hotel
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (((Button)sender).BackColor == Color.White)
+            if (((Button)sender).BackColor == limpieza)
             {
                 msg = new Msg();
 
@@ -167,7 +179,7 @@ namespace Hotel
                     {
                         if (CambiarEstadoHabitacion(false, "disponible", ((Button)sender).Name.Remove(0, 6)))
                         {
-                            ((Button)sender).BackColor = Color.Green;
+                            ((Button)sender).BackColor = disponible;
                             return;
                         }
                     }
@@ -179,7 +191,7 @@ namespace Hotel
                 //MessageBox.Show("Limpieza - Falta implementar o.ó");
                 ////MessageBox.Show(((Button)sender).Name.Remove(0, 6).ToString());
             }
-            if (((Button)sender).BackColor == Color.Green || (((Button)sender).BackColor == Color.Red))
+            if (((Button)sender).BackColor == disponible || (((Button)sender).BackColor == ocupada))
             {
                 ActivarTimerEspera();
 
@@ -188,11 +200,11 @@ namespace Hotel
 
                 reservacion.PanelCedula(false);
 
-                if (((Button)sender).BackColor == Color.Red)
+                if (((Button)sender).BackColor == ocupada)
                 {
                     reservacion.CargarReservacion(numero_habitacion, "ocupada");
                 }
-                else if (((Button)sender).BackColor == Color.Green)
+                else if (((Button)sender).BackColor == disponible)
                 {
                     reservacion.CargarReservacion(numero_habitacion, "disponible");
                 }
@@ -245,14 +257,14 @@ namespace Hotel
         {
             Button btn = (Button)contextMenuStrip1.SourceControl;
 
-            if (btn.BackColor == Color.Green || btn.BackColor == Color.Olive) // Si estaba disponible o en mantenimiento
+            if (btn.BackColor == disponible || btn.BackColor == mantenimiento) // Si estaba disponible o en mantenimiento
             {
                 if (CambiarEstadoHabitacion(false, "limpieza", btn.Name.Remove(0, 6)))
                 {
-                    btn.BackColor = Color.White;
+                    btn.BackColor = limpieza;
                 }
             }
-            else if (btn.BackColor == Color.Red)
+            else if (btn.BackColor == ocupada)
             {
                 msg = new Msg();
 
@@ -264,7 +276,7 @@ namespace Hotel
                     {
                         if (CambiarEstadoHabitacion(true, "limpieza", btn.Name.Remove(0, 6)))
                         {
-                            btn.BackColor = Color.White;
+                            btn.BackColor = limpieza;
                         }
                     }
                     else
@@ -281,15 +293,15 @@ namespace Hotel
         {
             Button btn = (Button)contextMenuStrip1.SourceControl;
 
-            if (btn.BackColor == Color.White || btn.BackColor == Color.Olive || btn.BackColor == Color.DarkGray) // Estaba en limpieza, en mantenimiento o inactiva
+            if (btn.BackColor == limpieza || btn.BackColor == mantenimiento) // Estaba en limpieza o en mantenimiento
             {
                 if (CambiarEstadoHabitacion(false, "disponible", btn.Name.Remove(0, 6)))
                 {
-                    btn.BackColor = Color.Green;
+                    btn.BackColor = disponible;
                 }
             }
 
-            else if (btn.BackColor == Color.Red) // Esta(ba) ocupada
+            else if (btn.BackColor == ocupada) // Esta(ba) ocupada
             {
                 msg = new Msg();
 
@@ -301,7 +313,7 @@ namespace Hotel
                     {
                         if (CambiarEstadoHabitacion(true, "disponible", btn.Name.Remove(0, 6)))
                         {
-                            btn.BackColor = Color.Green;
+                            btn.BackColor = disponible;
                         }
                     }
                     else
@@ -316,7 +328,7 @@ namespace Hotel
         {
             Button btn = (Button)contextMenuStrip1.SourceControl;
 
-            if (btn.BackColor == Color.Red)
+            if (btn.BackColor == ocupada)
             {
                 msg = new Msg();
 
@@ -328,7 +340,7 @@ namespace Hotel
                     {
                         if (CambiarEstadoHabitacion(true, "mantenimiento", btn.Name.Remove(0, 6)))
                         {
-                            btn.BackColor = Color.Olive;
+                            btn.BackColor = mantenimiento;
                         }
                     }
                     else
@@ -341,7 +353,7 @@ namespace Hotel
             {
                 if (CambiarEstadoHabitacion(false, "mantenimiento", btn.Name.Remove(0, 6)))
                 {
-                    btn.BackColor = Color.Olive;
+                    btn.BackColor = mantenimiento;
                 }
             }
         }
@@ -350,7 +362,7 @@ namespace Hotel
         {
             Button btn = (Button)contextMenuStrip1.SourceControl;
 
-            if (btn.BackColor == Color.Red)
+            if (btn.BackColor == ocupada)
             {
                 msg = new Msg();
 
@@ -362,7 +374,8 @@ namespace Hotel
                     {
                         if (CambiarEstadoHabitacion(true, "inactiva", btn.Name.Remove(0, 6)))
                         {
-                            btn.BackColor = Color.LightGray;
+                            //btn.FlatStyle = FlatStyle.System;
+                            btn.BackColor = inactiva;
                             btn.Enabled = false;
                         }
                     }
@@ -376,7 +389,8 @@ namespace Hotel
             {
                 if (CambiarEstadoHabitacion(false, "inactiva", btn.Name.Remove(0, 6)))
                 {
-                    btn.BackColor = Color.LightGray;
+                    //btn.FlatStyle = FlatStyle.System;
+                    btn.BackColor = inactiva;
                     btn.Enabled = false;
                 }
             }
@@ -401,7 +415,8 @@ namespace Hotel
                     {
                         if (CambiarEstadoHabitacion(false, "disponible", btn.Name.Remove(0, 6)))
                         {
-                            btn.BackColor = Color.Green;
+                            //btn.FlatStyle = FlatStyle.Flat;
+                            btn.BackColor = disponible;
                             btn.Enabled = true;
                         }
                     }
@@ -449,5 +464,6 @@ namespace Hotel
             //    gridPSR.Enabled = true;
             //}
         }
+
     }
 }

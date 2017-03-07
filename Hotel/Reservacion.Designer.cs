@@ -34,6 +34,8 @@
             this.btnAceptar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.panelContenedor = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.listboxHabitaciones = new System.Windows.Forms.ListBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -54,7 +56,6 @@
             this.lblFechaIngrso = new System.Windows.Forms.Label();
             this.lblFechaSalida = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.listboxHabitaciones = new System.Windows.Forms.ListBox();
             this.txtNotas = new System.Windows.Forms.RichTextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -80,13 +81,16 @@
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.lblTelefono = new System.Windows.Forms.Label();
             this.lblNombre = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.txtOrigen = new System.Windows.Forms.TextBox();
+            this.txtDestino = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panelContenedor.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.panelCedula.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -149,12 +153,16 @@
             // 
             // panelContenedor
             // 
+            this.panelContenedor.Controls.Add(this.panelCedula);
+            this.panelContenedor.Controls.Add(this.label9);
+            this.panelContenedor.Controls.Add(this.label5);
+            this.panelContenedor.Controls.Add(this.txtDestino);
+            this.panelContenedor.Controls.Add(this.txtOrigen);
             this.panelContenedor.Controls.Add(this.panel3);
             this.panelContenedor.Controls.Add(this.label8);
             this.panelContenedor.Controls.Add(this.label7);
             this.panelContenedor.Controls.Add(this.label6);
             this.panelContenedor.Controls.Add(this.txtApellido);
-            this.panelContenedor.Controls.Add(this.panelCedula);
             this.panelContenedor.Controls.Add(this.lblApellido);
             this.panelContenedor.Controls.Add(this.panel2);
             this.panelContenedor.Controls.Add(this.label3);
@@ -175,7 +183,26 @@
             this.panelContenedor.Location = new System.Drawing.Point(0, 0);
             this.panelContenedor.Name = "panelContenedor";
             this.panelContenedor.Size = new System.Drawing.Size(912, 541);
-            this.panelContenedor.TabIndex = 55;
+            this.panelContenedor.TabIndex = 0;
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.LightBlue;
+            this.panel3.Controls.Add(this.listboxHabitaciones);
+            this.panel3.Location = new System.Drawing.Point(685, 216);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(203, 164);
+            this.panel3.TabIndex = 119;
+            // 
+            // listboxHabitaciones
+            // 
+            this.listboxHabitaciones.FormattingEnabled = true;
+            this.listboxHabitaciones.ItemHeight = 20;
+            this.listboxHabitaciones.Location = new System.Drawing.Point(9, 0);
+            this.listboxHabitaciones.Name = "listboxHabitaciones";
+            this.listboxHabitaciones.Size = new System.Drawing.Size(185, 164);
+            this.listboxHabitaciones.TabIndex = 109;
+            this.listboxHabitaciones.SelectedIndexChanged += new System.EventHandler(this.listboxHabitaciones_SelectedIndexChanged);
             // 
             // label8
             // 
@@ -192,7 +219,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.ForeColor = System.Drawing.Color.Red;
-            this.label7.Location = new System.Drawing.Point(557, 190);
+            this.label7.Location = new System.Drawing.Point(430, 145);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(15, 20);
@@ -203,7 +230,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.ForeColor = System.Drawing.Color.Red;
-            this.label6.Location = new System.Drawing.Point(557, 158);
+            this.label6.Location = new System.Drawing.Point(858, 145);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(15, 20);
@@ -212,10 +239,10 @@
             // 
             // txtApellido
             // 
-            this.txtApellido.Location = new System.Drawing.Point(125, 187);
+            this.txtApellido.Location = new System.Drawing.Point(547, 142);
             this.txtApellido.Name = "txtApellido";
-            this.txtApellido.Size = new System.Drawing.Size(425, 26);
-            this.txtApellido.TabIndex = 115;
+            this.txtApellido.Size = new System.Drawing.Size(304, 26);
+            this.txtApellido.TabIndex = 1;
             // 
             // panelCedula
             // 
@@ -232,7 +259,7 @@
             // btnCheckCedula
             // 
             this.btnCheckCedula.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnCheckCedula.Location = new System.Drawing.Point(287, 20);
+            this.btnCheckCedula.Location = new System.Drawing.Point(293, 21);
             this.btnCheckCedula.Name = "btnCheckCedula";
             this.btnCheckCedula.Size = new System.Drawing.Size(105, 61);
             this.btnCheckCedula.TabIndex = 0;
@@ -243,7 +270,7 @@
             // lblCedula
             // 
             this.lblCedula.AutoSize = true;
-            this.lblCedula.Location = new System.Drawing.Point(25, 40);
+            this.lblCedula.Location = new System.Drawing.Point(13, 41);
             this.lblCedula.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCedula.Name = "lblCedula";
             this.lblCedula.Size = new System.Drawing.Size(63, 20);
@@ -252,16 +279,16 @@
             // 
             // txtCedula
             // 
-            this.txtCedula.Location = new System.Drawing.Point(95, 37);
+            this.txtCedula.Location = new System.Drawing.Point(83, 38);
             this.txtCedula.Name = "txtCedula";
-            this.txtCedula.Size = new System.Drawing.Size(180, 26);
+            this.txtCedula.Size = new System.Drawing.Size(204, 26);
             this.txtCedula.TabIndex = 97;
             this.txtCedula.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtEdad_KeyPress);
             // 
             // lblApellido
             // 
             this.lblApellido.AutoSize = true;
-            this.lblApellido.Location = new System.Drawing.Point(25, 190);
+            this.lblApellido.Location = new System.Drawing.Point(453, 145);
             this.lblApellido.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblApellido.Name = "lblApellido";
             this.lblApellido.Size = new System.Drawing.Size(87, 20);
@@ -270,6 +297,7 @@
             // 
             // panel2
             // 
+            this.panel2.BackColor = System.Drawing.Color.LightBlue;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.lblHabitacionNumero);
             this.panel2.Controls.Add(this.lblHabitacionActual);
@@ -387,29 +415,19 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(681, 190);
+            this.label3.Location = new System.Drawing.Point(681, 193);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(142, 20);
             this.label3.TabIndex = 110;
             this.label3.Text = "Tipo de habitación:";
             // 
-            // listboxHabitaciones
-            // 
-            this.listboxHabitaciones.FormattingEnabled = true;
-            this.listboxHabitaciones.ItemHeight = 20;
-            this.listboxHabitaciones.Location = new System.Drawing.Point(9, 0);
-            this.listboxHabitaciones.Name = "listboxHabitaciones";
-            this.listboxHabitaciones.Size = new System.Drawing.Size(185, 164);
-            this.listboxHabitaciones.TabIndex = 109;
-            this.listboxHabitaciones.SelectedIndexChanged += new System.EventHandler(this.listboxHabitaciones_SelectedIndexChanged);
-            // 
             // txtNotas
             // 
             this.txtNotas.Location = new System.Drawing.Point(95, 465);
             this.txtNotas.Name = "txtNotas";
             this.txtNotas.Size = new System.Drawing.Size(455, 67);
-            this.txtNotas.TabIndex = 5;
+            this.txtNotas.TabIndex = 8;
             this.txtNotas.Text = "";
             // 
             // label2
@@ -448,10 +466,10 @@
             this.groupBox1.Controls.Add(this.lblModelo);
             this.groupBox1.Controls.Add(this.lblPlaca);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(23, 297);
+            this.groupBox1.Location = new System.Drawing.Point(23, 277);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(521, 162);
-            this.groupBox1.TabIndex = 4;
+            this.groupBox1.Size = new System.Drawing.Size(527, 182);
+            this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Información sobre el vehículo";
             // 
@@ -459,7 +477,7 @@
             // 
             this.lblAvisoVehiculo.AutoSize = true;
             this.lblAvisoVehiculo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAvisoVehiculo.Location = new System.Drawing.Point(8, 126);
+            this.lblAvisoVehiculo.Location = new System.Drawing.Point(8, 137);
             this.lblAvisoVehiculo.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lblAvisoVehiculo.Name = "lblAvisoVehiculo";
             this.lblAvisoVehiculo.Size = new System.Drawing.Size(351, 30);
@@ -472,7 +490,7 @@
             // 
             this.linklblNuevoVehiculo.AutoSize = true;
             this.linklblNuevoVehiculo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linklblNuevoVehiculo.Location = new System.Drawing.Point(367, 140);
+            this.linklblNuevoVehiculo.Location = new System.Drawing.Point(367, 151);
             this.linklblNuevoVehiculo.Name = "linklblNuevoVehiculo";
             this.linklblNuevoVehiculo.Size = new System.Drawing.Size(131, 16);
             this.linklblNuevoVehiculo.TabIndex = 21;
@@ -511,7 +529,7 @@
             this.checkCamion.Location = new System.Drawing.Point(424, 21);
             this.checkCamion.Name = "checkCamion";
             this.checkCamion.Size = new System.Drawing.Size(82, 24);
-            this.checkCamion.TabIndex = 49;
+            this.checkCamion.TabIndex = 0;
             this.checkCamion.Text = "Camión";
             this.checkCamion.UseVisualStyleBackColor = true;
             this.checkCamion.Click += new System.EventHandler(this.checkCamion_Click);
@@ -572,16 +590,16 @@
             // 
             // txtEdad
             // 
-            this.txtEdad.Location = new System.Drawing.Point(399, 219);
+            this.txtEdad.Location = new System.Drawing.Point(423, 174);
             this.txtEdad.Name = "txtEdad";
             this.txtEdad.Size = new System.Drawing.Size(77, 26);
-            this.txtEdad.TabIndex = 1;
+            this.txtEdad.TabIndex = 2;
             this.txtEdad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtEdad_KeyPress);
             // 
             // lblEdad
             // 
             this.lblEdad.AutoSize = true;
-            this.lblEdad.Location = new System.Drawing.Point(341, 222);
+            this.lblEdad.Location = new System.Drawing.Point(365, 177);
             this.lblEdad.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblEdad.Name = "lblEdad";
             this.lblEdad.Size = new System.Drawing.Size(51, 20);
@@ -593,7 +611,7 @@
             this.txtTotal.Location = new System.Drawing.Point(768, 489);
             this.txtTotal.Name = "txtTotal";
             this.txtTotal.Size = new System.Drawing.Size(120, 26);
-            this.txtTotal.TabIndex = 6;
+            this.txtTotal.TabIndex = 9;
             this.txtTotal.Text = "0";
             this.txtTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtTotal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtEdad_KeyPress);
@@ -611,7 +629,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(292, 254);
+            this.label1.Location = new System.Drawing.Point(311, 241);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(13, 20);
@@ -620,31 +638,31 @@
             // 
             // txtTelefono2
             // 
-            this.txtTelefono2.Location = new System.Drawing.Point(314, 251);
+            this.txtTelefono2.Location = new System.Drawing.Point(331, 238);
             this.txtTelefono2.Name = "txtTelefono2";
-            this.txtTelefono2.Size = new System.Drawing.Size(162, 26);
-            this.txtTelefono2.TabIndex = 3;
+            this.txtTelefono2.Size = new System.Drawing.Size(185, 26);
+            this.txtTelefono2.TabIndex = 6;
             this.txtTelefono2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtEdad_KeyPress);
             // 
             // txtTelefono1
             // 
-            this.txtTelefono1.Location = new System.Drawing.Point(125, 251);
+            this.txtTelefono1.Location = new System.Drawing.Point(119, 238);
             this.txtTelefono1.Name = "txtTelefono1";
-            this.txtTelefono1.Size = new System.Drawing.Size(162, 26);
-            this.txtTelefono1.TabIndex = 2;
+            this.txtTelefono1.Size = new System.Drawing.Size(185, 26);
+            this.txtTelefono1.TabIndex = 5;
             this.txtTelefono1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtEdad_KeyPress);
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(125, 155);
+            this.txtNombre.Location = new System.Drawing.Point(119, 142);
             this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(425, 26);
+            this.txtNombre.Size = new System.Drawing.Size(304, 26);
             this.txtNombre.TabIndex = 0;
             // 
             // lblTelefono
             // 
             this.lblTelefono.AutoSize = true;
-            this.lblTelefono.Location = new System.Drawing.Point(19, 254);
+            this.lblTelefono.Location = new System.Drawing.Point(19, 241);
             this.lblTelefono.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTelefono.Name = "lblTelefono";
             this.lblTelefono.Size = new System.Drawing.Size(93, 20);
@@ -654,21 +672,46 @@
             // lblNombre
             // 
             this.lblNombre.AutoSize = true;
-            this.lblNombre.Location = new System.Drawing.Point(25, 158);
+            this.lblNombre.Location = new System.Drawing.Point(25, 145);
             this.lblNombre.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNombre.Name = "lblNombre";
             this.lblNombre.Size = new System.Drawing.Size(87, 20);
             this.lblNombre.TabIndex = 92;
             this.lblNombre.Text = "Nombre(s):";
             // 
-            // panel3
+            // txtOrigen
             // 
-            this.panel3.BackColor = System.Drawing.Color.LightBlue;
-            this.panel3.Controls.Add(this.listboxHabitaciones);
-            this.panel3.Location = new System.Drawing.Point(685, 216);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(203, 164);
-            this.panel3.TabIndex = 119;
+            this.txtOrigen.Location = new System.Drawing.Point(119, 206);
+            this.txtOrigen.Name = "txtOrigen";
+            this.txtOrigen.Size = new System.Drawing.Size(220, 26);
+            this.txtOrigen.TabIndex = 3;
+            // 
+            // txtDestino
+            // 
+            this.txtDestino.Location = new System.Drawing.Point(423, 206);
+            this.txtDestino.Name = "txtDestino";
+            this.txtDestino.Size = new System.Drawing.Size(220, 26);
+            this.txtDestino.TabIndex = 4;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(52, 209);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(60, 20);
+            this.label5.TabIndex = 122;
+            this.label5.Text = "Origen:";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(348, 209);
+            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(68, 20);
+            this.label9.TabIndex = 123;
+            this.label9.Text = "Destino:";
             // 
             // Reservacion
             // 
@@ -688,13 +731,13 @@
             this.panel1.ResumeLayout(false);
             this.panelContenedor.ResumeLayout(false);
             this.panelContenedor.PerformLayout();
+            this.panel3.ResumeLayout(false);
             this.panelCedula.ResumeLayout(false);
             this.panelCedula.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -753,5 +796,9 @@
         private System.Windows.Forms.Label lblAvisoVehiculo;
         private System.Windows.Forms.LinkLabel linklblNuevoVehiculo;
         private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtDestino;
+        private System.Windows.Forms.TextBox txtOrigen;
     }
 }

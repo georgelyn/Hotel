@@ -105,22 +105,22 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.button56 = new System.Windows.Forms.Button();
+            this.button57 = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.panel2 = new System.Windows.Forms.Panel();
             this.button55 = new System.Windows.Forms.Button();
             this.button54 = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.enLimpiezaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.marcarComoDisponibleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.marcarMantenimientoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.marcarInactivaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.button57 = new System.Windows.Forms.Button();
-            this.button56 = new System.Windows.Forms.Button();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.enLimpiezaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.marcarMantenimientoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.marcarInactivaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -131,7 +131,7 @@
             // button53
             // 
             this.button53.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button53.Location = new System.Drawing.Point(201, 10);
+            this.button53.Location = new System.Drawing.Point(12, 10);
             this.button53.Name = "button53";
             this.button53.Size = new System.Drawing.Size(176, 64);
             this.button53.TabIndex = 52;
@@ -141,8 +141,9 @@
             // 
             // panel1
             // 
-            this.panel1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.panel1.BackColor = System.Drawing.Color.SkyBlue;
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.label11);
             this.panel1.Controls.Add(this.label12);
             this.panel1.Controls.Add(this.label9);
@@ -155,7 +156,7 @@
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Location = new System.Drawing.Point(12, 625);
+            this.panel1.Location = new System.Drawing.Point(655, 6);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(341, 71);
             this.panel1.TabIndex = 54;
@@ -208,7 +209,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.Olive;
+            this.label7.ForeColor = System.Drawing.Color.DarkKhaki;
             this.label7.Location = new System.Drawing.Point(102, 40);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(18, 18);
@@ -219,7 +220,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.Color.Olive;
+            this.label8.ForeColor = System.Drawing.Color.DarkKhaki;
             this.label8.Location = new System.Drawing.Point(119, 40);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(118, 18);
@@ -230,7 +231,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.ForeColor = System.Drawing.Color.LightCyan;
             this.label1.Location = new System.Drawing.Point(4, 40);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(18, 18);
@@ -242,7 +243,7 @@
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.Color.Transparent;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.White;
+            this.label6.ForeColor = System.Drawing.Color.LightCyan;
             this.label6.Location = new System.Drawing.Point(21, 40);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(75, 18);
@@ -1173,6 +1174,36 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // button56
+            // 
+            this.button56.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.button56.BackColor = System.Drawing.Color.LightCyan;
+            this.button56.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button56.Location = new System.Drawing.Point(795, 373);
+            this.button56.Name = "button56";
+            this.button56.Size = new System.Drawing.Size(99, 72);
+            this.button56.TabIndex = 52;
+            this.button56.Text = "Extra";
+            this.button56.UseVisualStyleBackColor = false;
+            this.button56.Visible = false;
+            // 
+            // button57
+            // 
+            this.button57.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.button57.BackColor = System.Drawing.Color.DarkKhaki;
+            this.button57.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button57.Location = new System.Drawing.Point(696, 373);
+            this.button57.Name = "button57";
+            this.button57.Size = new System.Drawing.Size(93, 72);
+            this.button57.TabIndex = 53;
+            this.button57.Text = "Extra";
+            this.button57.UseVisualStyleBackColor = false;
+            this.button57.Visible = false;
+            // 
             // statusStrip1
             // 
             this.statusStrip1.Location = new System.Drawing.Point(0, 707);
@@ -1187,15 +1218,17 @@
             this.panel2.Controls.Add(this.button55);
             this.panel2.Controls.Add(this.button54);
             this.panel2.Controls.Add(this.button53);
-            this.panel2.Location = new System.Drawing.Point(52, 27);
+            this.panel2.Controls.Add(this.panel1);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(0, 24);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(894, 83);
+            this.panel2.Size = new System.Drawing.Size(1008, 83);
             this.panel2.TabIndex = 58;
             // 
             // button55
             // 
             this.button55.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button55.Location = new System.Drawing.Point(383, 10);
+            this.button55.Location = new System.Drawing.Point(376, 10);
             this.button55.Name = "button55";
             this.button55.Size = new System.Drawing.Size(176, 64);
             this.button55.TabIndex = 60;
@@ -1206,7 +1239,7 @@
             // button54
             // 
             this.button54.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button54.Location = new System.Drawing.Point(19, 10);
+            this.button54.Location = new System.Drawing.Point(194, 10);
             this.button54.Name = "button54";
             this.button54.Size = new System.Drawing.Size(176, 64);
             this.button54.TabIndex = 59;
@@ -1232,14 +1265,6 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(208, 116);
             // 
-            // enLimpiezaToolStripMenuItem
-            // 
-            this.enLimpiezaToolStripMenuItem.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.enLimpiezaToolStripMenuItem.Name = "enLimpiezaToolStripMenuItem";
-            this.enLimpiezaToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
-            this.enLimpiezaToolStripMenuItem.Text = "Marcar > Limpieza";
-            this.enLimpiezaToolStripMenuItem.Click += new System.EventHandler(this.enLimpiezaToolStripMenuItem_Click);
-            // 
             // marcarComoDisponibleToolStripMenuItem
             // 
             this.marcarComoDisponibleToolStripMenuItem.BackColor = System.Drawing.Color.Green;
@@ -1248,62 +1273,19 @@
             this.marcarComoDisponibleToolStripMenuItem.Text = "Marcar > Disponible";
             this.marcarComoDisponibleToolStripMenuItem.Click += new System.EventHandler(this.marcarComoDisponibleToolStripMenuItem_Click);
             // 
-            // marcarMantenimientoToolStripMenuItem
+            // toolStripSeparator4
             // 
-            this.marcarMantenimientoToolStripMenuItem.BackColor = System.Drawing.Color.Olive;
-            this.marcarMantenimientoToolStripMenuItem.Name = "marcarMantenimientoToolStripMenuItem";
-            this.marcarMantenimientoToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
-            this.marcarMantenimientoToolStripMenuItem.Text = "Marcar > Mantenimiento";
-            this.marcarMantenimientoToolStripMenuItem.Click += new System.EventHandler(this.marcarMantenimientoToolStripMenuItem_Click);
+            this.toolStripSeparator4.ForeColor = System.Drawing.Color.Transparent;
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(204, 6);
             // 
-            // marcarInactivaToolStripMenuItem
+            // enLimpiezaToolStripMenuItem
             // 
-            this.marcarInactivaToolStripMenuItem.BackColor = System.Drawing.Color.Silver;
-            this.marcarInactivaToolStripMenuItem.Name = "marcarInactivaToolStripMenuItem";
-            this.marcarInactivaToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
-            this.marcarInactivaToolStripMenuItem.Text = "Marcar > Inactiva";
-            this.marcarInactivaToolStripMenuItem.Click += new System.EventHandler(this.marcarInactivaToolStripMenuItem_Click);
-            // 
-            // button57
-            // 
-            this.button57.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.button57.BackColor = System.Drawing.Color.White;
-            this.button57.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button57.Location = new System.Drawing.Point(696, 373);
-            this.button57.Name = "button57";
-            this.button57.Size = new System.Drawing.Size(93, 72);
-            this.button57.TabIndex = 53;
-            this.button57.Text = "Extra";
-            this.button57.UseVisualStyleBackColor = false;
-            this.button57.Visible = false;
-            // 
-            // button56
-            // 
-            this.button56.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.button56.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button56.Location = new System.Drawing.Point(795, 373);
-            this.button56.Name = "button56";
-            this.button56.Size = new System.Drawing.Size(99, 72);
-            this.button56.TabIndex = 52;
-            this.button56.Text = "Extra";
-            this.button56.UseVisualStyleBackColor = true;
-            this.button56.Visible = false;
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.ForeColor = System.Drawing.Color.Transparent;
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(204, 6);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.ForeColor = System.Drawing.Color.Transparent;
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(204, 6);
+            this.enLimpiezaToolStripMenuItem.BackColor = System.Drawing.Color.LightCyan;
+            this.enLimpiezaToolStripMenuItem.Name = "enLimpiezaToolStripMenuItem";
+            this.enLimpiezaToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
+            this.enLimpiezaToolStripMenuItem.Text = "Marcar > Limpieza";
+            this.enLimpiezaToolStripMenuItem.Click += new System.EventHandler(this.enLimpiezaToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
@@ -1311,11 +1293,33 @@
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(204, 6);
             // 
-            // toolStripSeparator4
+            // marcarMantenimientoToolStripMenuItem
             // 
-            this.toolStripSeparator4.ForeColor = System.Drawing.Color.Transparent;
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(204, 6);
+            this.marcarMantenimientoToolStripMenuItem.BackColor = System.Drawing.Color.DarkKhaki;
+            this.marcarMantenimientoToolStripMenuItem.Name = "marcarMantenimientoToolStripMenuItem";
+            this.marcarMantenimientoToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
+            this.marcarMantenimientoToolStripMenuItem.Text = "Marcar > Mantenimiento";
+            this.marcarMantenimientoToolStripMenuItem.Click += new System.EventHandler(this.marcarMantenimientoToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.ForeColor = System.Drawing.Color.Transparent;
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(204, 6);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.ForeColor = System.Drawing.Color.Transparent;
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(204, 6);
+            // 
+            // marcarInactivaToolStripMenuItem
+            // 
+            this.marcarInactivaToolStripMenuItem.BackColor = System.Drawing.Color.LightGray;
+            this.marcarInactivaToolStripMenuItem.Name = "marcarInactivaToolStripMenuItem";
+            this.marcarInactivaToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
+            this.marcarInactivaToolStripMenuItem.Text = "Marcar > Inactiva";
+            this.marcarInactivaToolStripMenuItem.Click += new System.EventHandler(this.marcarInactivaToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -1325,13 +1329,12 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(1024, 768);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "Hotel Country";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
