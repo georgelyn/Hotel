@@ -45,7 +45,9 @@ namespace Hotel
             if (opcion == "cliente" || opcion == "actual" || opcion == "buscar")
             {
                 lst.Columns.Add("ID", 0, HorizontalAlignment.Left);
-                lst.Columns.Add("Nombre completo", 400, HorizontalAlignment.Left);
+
+                lst.Columns.Add("Nro.", 50, HorizontalAlignment.Center);
+                lst.Columns.Add("Nombre completo", 350, HorizontalAlignment.Left);
                 lst.Columns.Add("Cédula", 150, HorizontalAlignment.Left);
                 lst.Columns.Add("Reservaciones activas", 220, HorizontalAlignment.Center);
                 lst.Columns.Add("Cliente desde", 126, HorizontalAlignment.Left);
@@ -75,41 +77,22 @@ namespace Hotel
 
             this.opcion = opcion;
 
-            if (opcion != "habitacion")
-            {
-                btnBuscar.Visible = true;
-                txtBuscar.Visible = true;
-                lblBuscar.Visible = true;
-                toolStripSeparator1.Visible = true;
-            }
-            else
-            {
-                btnBuscar.Visible = false;
-                txtBuscar.Visible = false;
-                lblBuscar.Visible = false;
-                toolStripSeparator1.Visible = false;
-            }
-
-            panel2.Visible = false;
-
-            btnNuevoCliente.Enabled = true;
-            ActivarBotones(false);
-
             if (panel1.Contains(lst))
             {
                 panel1.Controls.Remove(lst);
             }
 
             CrearListView(opcion);
+            lst.Items.Clear();
 
             if (opcion == "cliente")
             {
-                query = "SELECT *, COUNT(r.ID) AS reservaciones FROM Clientes LEFT JOIN Reservaciones r ON Cedula = Cliente_Cedula GROUP BY Nombre ORDER BY ID";
+                query = "SELECT *, COUNT(r.ID) AS reservaciones FROM Clientes LEFT JOIN Reservaciones r ON Cedula = Cliente_Cedula GROUP BY Nombre ORDER BY Apellido";
                 toolStripComboBox1.SelectedIndex = 0;
             }
             else if (opcion == "actual")
             {
-                query = "SELECT *, COUNT(r.ID) AS reservaciones FROM Clientes INNER JOIN Reservaciones r ON Cedula = Cliente_Cedula GROUP BY Nombre ORDER BY ID";
+                query = "SELECT *, COUNT(r.ID) AS reservaciones FROM Clientes INNER JOIN Reservaciones r ON Cedula = Cliente_Cedula GROUP BY Nombre ORDER BY Apellido";
                 toolStripComboBox1.SelectedIndex = 1;
             }
             else if (opcion == "buscar")
@@ -123,10 +106,10 @@ namespace Hotel
                 toolStripComboBox1.SelectedIndex = 2;
             }
 
-            lst.Items.Clear();
-
             try
             {
+                int nroClientes = 1;
+
                 using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
                 {
                     using (SQLiteCommand cmd = new SQLiteCommand(query, conn))
@@ -145,6 +128,7 @@ namespace Hotel
 
                                 if (opcion == "cliente" || opcion == "actual" || opcion == "buscar")
                                 {
+                                    item.SubItems.Add(nroClientes.ToString());
                                     item.SubItems.Add(dr["Apellido"].ToString() + ", " + dr["Nombre"].ToString());                                
                                     item.SubItems.Add(dr["Cedula"].ToString());
                                     item.SubItems.Add(dr["reservaciones"].ToString());
@@ -163,10 +147,33 @@ namespace Hotel
                                 }
 
                                 lst.Items.Add(item);
+                                nroClientes++;
                             }
                         }
                     }
                 }
+
+                // Antes estaban al principio, pero creo que 'refresca' mejor la pantalla si se colocan al final
+
+                if (opcion != "habitacion")
+                {
+                    btnBuscar.Visible = true;
+                    txtBuscar.Visible = true;
+                    lblBuscar.Visible = true;
+                    toolStripSeparator1.Visible = true;
+                }
+                else
+                {
+                    btnBuscar.Visible = false;
+                    txtBuscar.Visible = false;
+                    lblBuscar.Visible = false;
+                    toolStripSeparator1.Visible = false;
+                }
+
+                panel2.Visible = false;
+
+                btnNuevoCliente.Enabled = true;
+                ActivarBotones(false);
             }
             catch (Exception ex)
             {
@@ -624,13 +631,11 @@ namespace Hotel
             }
             else
             {
-                panelListboxHabitaciones.Visible = true;
-                //label8.Visible = true;
-                //label9.Visible = true;
+                CargarReservacionCliente(txtCedula.Text.Trim());
                 label10.Visible = true;
                 label11.Visible = true;
+                panelListboxHabitaciones.Visible = true;
                 listboxReservaciones.Visible = true;
-                CargarReservacionCliente(txtCedula.Text.Trim());
             }
         }
 
@@ -693,28 +698,14 @@ namespace Hotel
 
             OcultarListbox();
             ActivarBotones(false);
-
-            //if (toolStripComboBox1.SelectedIndex == 0)
-            //{
-            //    if (panel2.Visible || panel1.Contains(lstPorHabitacion))
-            //    {
-            //        CargarListViewClientes();
-            //        OcultarListbox();
-            //    }
-            //}
-            //else
-            //{
-            //    if (panel2.Visible || panel1.Contains(lst))
-            //    {
-            //        CargarListViewPorHabitacion();
-            //        OcultarListbox();
-            //    }
-            //}
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            CargarListView("buscar");
+            if (!String.IsNullOrEmpty(txtBuscar.Text.Trim()))
+            {
+                CargarListView("buscar");
+            }
         }
 
         private void txtBuscar_KeyPress(object sender, KeyPressEventArgs e)
@@ -722,6 +713,22 @@ namespace Hotel
             if (e.KeyChar == 13)
             {
                 btnBuscar_Click(null, null);
+            }
+        }
+
+        private void btnVerReservacion_Click(object sender, EventArgs e)
+        {
+            if (listboxReservaciones.SelectedIndex >= 0)
+            {
+                listboxReservaciones_MouseDoubleClick(null, null);
+            }
+        }
+
+        private void listboxReservaciones_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!btnVerReservacion.Visible)
+            {
+                btnVerReservacion.Visible = true;
             }
         }
     }
