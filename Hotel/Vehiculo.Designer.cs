@@ -51,7 +51,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(73, 37);
+            this.label1.Location = new System.Drawing.Point(91, 29);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(239, 20);
             this.label1.TabIndex = 0;
@@ -60,7 +60,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(94, 81);
+            this.label3.Location = new System.Drawing.Point(116, 73);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(143, 20);
             this.label3.TabIndex = 3;
@@ -70,7 +70,7 @@
             // 
             this.comboVehiculo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboVehiculo.FormattingEnabled = true;
-            this.comboVehiculo.Location = new System.Drawing.Point(243, 78);
+            this.comboVehiculo.Location = new System.Drawing.Point(265, 69);
             this.comboVehiculo.Name = "comboVehiculo";
             this.comboVehiculo.Size = new System.Drawing.Size(266, 28);
             this.comboVehiculo.TabIndex = 0;
@@ -80,7 +80,7 @@
             // 
             this.checkCamion.AutoSize = true;
             this.checkCamion.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkCamion.Location = new System.Drawing.Point(525, 150);
+            this.checkCamion.Location = new System.Drawing.Point(525, 145);
             this.checkCamion.Name = "checkCamion";
             this.checkCamion.Size = new System.Drawing.Size(82, 24);
             this.checkCamion.TabIndex = 49;
@@ -89,16 +89,16 @@
             // 
             // txtPlaca
             // 
-            this.txtPlaca.Location = new System.Drawing.Point(368, 149);
+            this.txtPlaca.Location = new System.Drawing.Point(330, 144);
             this.txtPlaca.Name = "txtPlaca";
-            this.txtPlaca.Size = new System.Drawing.Size(124, 26);
+            this.txtPlaca.Size = new System.Drawing.Size(157, 26);
             this.txtPlaca.TabIndex = 1;
             // 
             // lblMarca
             // 
             this.lblMarca.AutoSize = true;
             this.lblMarca.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMarca.Location = new System.Drawing.Point(73, 151);
+            this.lblMarca.Location = new System.Drawing.Point(35, 146);
             this.lblMarca.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblMarca.Name = "lblMarca";
             this.lblMarca.Size = new System.Drawing.Size(57, 20);
@@ -107,14 +107,14 @@
             // 
             // txtModelo
             // 
-            this.txtModelo.Location = new System.Drawing.Point(141, 201);
+            this.txtModelo.Location = new System.Drawing.Point(103, 196);
             this.txtModelo.Name = "txtModelo";
-            this.txtModelo.Size = new System.Drawing.Size(351, 26);
+            this.txtModelo.Size = new System.Drawing.Size(384, 26);
             this.txtModelo.TabIndex = 2;
             // 
             // txtMarca
             // 
-            this.txtMarca.Location = new System.Drawing.Point(141, 148);
+            this.txtMarca.Location = new System.Drawing.Point(103, 143);
             this.txtMarca.Name = "txtMarca";
             this.txtMarca.Size = new System.Drawing.Size(156, 26);
             this.txtMarca.TabIndex = 0;
@@ -123,7 +123,7 @@
             // 
             this.lblModelo.AutoSize = true;
             this.lblModelo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblModelo.Location = new System.Drawing.Point(73, 204);
+            this.lblModelo.Location = new System.Drawing.Point(35, 199);
             this.lblModelo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblModelo.Name = "lblModelo";
             this.lblModelo.Size = new System.Drawing.Size(65, 20);
@@ -134,7 +134,7 @@
             // 
             this.lblPlaca.AutoSize = true;
             this.lblPlaca.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPlaca.Location = new System.Drawing.Point(309, 151);
+            this.lblPlaca.Location = new System.Drawing.Point(271, 146);
             this.lblPlaca.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPlaca.Name = "lblPlaca";
             this.lblPlaca.Size = new System.Drawing.Size(52, 20);
@@ -143,7 +143,7 @@
             // 
             // btnModificar
             // 
-            this.btnModificar.Location = new System.Drawing.Point(462, 6);
+            this.btnModificar.Location = new System.Drawing.Point(424, 6);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(95, 35);
             this.btnModificar.TabIndex = 58;
@@ -154,7 +154,7 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(563, 6);
+            this.btnCancelar.Location = new System.Drawing.Point(525, 6);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(95, 35);
             this.btnCancelar.TabIndex = 59;
@@ -171,7 +171,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 357);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(666, 51);
+            this.panel1.Size = new System.Drawing.Size(632, 51);
             this.panel1.TabIndex = 60;
             // 
             // btnEliminar
@@ -192,7 +192,7 @@
             // 
             this.comboCedula.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboCedula.FormattingEnabled = true;
-            this.comboCedula.Location = new System.Drawing.Point(314, 34);
+            this.comboCedula.Location = new System.Drawing.Point(336, 25);
             this.comboCedula.Name = "comboCedula";
             this.comboCedula.Size = new System.Drawing.Size(195, 28);
             this.comboCedula.TabIndex = 61;
@@ -202,7 +202,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(73, 253);
+            this.label2.Location = new System.Drawing.Point(35, 248);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(55, 20);
@@ -211,9 +211,9 @@
             // 
             // txtNotas
             // 
-            this.txtNotas.Location = new System.Drawing.Point(141, 250);
+            this.txtNotas.Location = new System.Drawing.Point(103, 245);
             this.txtNotas.Name = "txtNotas";
-            this.txtNotas.Size = new System.Drawing.Size(351, 73);
+            this.txtNotas.Size = new System.Drawing.Size(384, 73);
             this.txtNotas.TabIndex = 63;
             this.txtNotas.Text = "";
             // 
@@ -221,7 +221,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(666, 408);
+            this.ClientSize = new System.Drawing.Size(632, 408);
             this.Controls.Add(this.txtNotas);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.comboCedula);
@@ -243,7 +243,7 @@
             this.MinimizeBox = false;
             this.Name = "Vehiculo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Vehiculo";
+            this.Text = "Vehículos almacenados";
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

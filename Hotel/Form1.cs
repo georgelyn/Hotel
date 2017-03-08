@@ -26,6 +26,8 @@ namespace Hotel
         // Clases
         Reservacion reservacion;
         Cliente cliente;
+        Vehiculo vehiculo;
+        Habitacion habitacion;
         Msg msg;
 
         Color disponible = Color.Green;
@@ -465,5 +467,43 @@ namespace Hotel
             //}
         }
 
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            lblHora.Text = DateTime.Now.ToString(" dddd" + ", " + "dd/MMM/yyyy" + " - " + "hh:mm:ss tt");
+            timer1.Start();
+        }
+
+        private void clientesAlmacenadosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            button54_Click(null, null);
+        }
+
+        private void habitacionesOcupadasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            button55_Click(null, null);
+        }
+
+        private void vehículosAlmacenadosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ActivarTimerEspera();
+
+            if (vehiculo == null || vehiculo.IsDisposed)
+            {
+                vehiculo = new Vehiculo();
+                vehiculo.Show();
+            }
+            else
+            {
+                vehiculo.Activate();
+            }
+        }
+
+        private void tiposDeHabitacionesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            habitacion = new Habitacion();
+            habitacion.ShowDialog();
+
+        }
     }
 }

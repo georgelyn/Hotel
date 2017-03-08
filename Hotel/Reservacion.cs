@@ -31,7 +31,6 @@ namespace Hotel
             CargarNumHabitaciones("disponible");
             CargarTipoHabitacion();
             PanelCedula(true);
-
         }
 
         Form1 f1 = (Form1)Application.OpenForms["Form1"];
@@ -99,7 +98,7 @@ namespace Hotel
             {
                 using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
                 {
-                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT Tipo FROM TipoHabitacion WHERE Activa='1'", conn))
+                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT Tipo FROM TipoHabitacion WHERE Activa='1' ORDER BY Costo", conn))
                     {
                         conn.Open();
 
@@ -198,7 +197,18 @@ namespace Hotel
 
                                 txtNotas.Text = dr["Notas"].ToString();
 
-                                listboxHabitaciones.Text = dr["TipoHabitacion"].ToString();
+                                if (listboxHabitaciones.Items.Contains(dr["TipoHabitacion"].ToString()))
+                                {
+                                    listboxHabitaciones.Text = dr["TipoHabitacion"].ToString();
+                                }
+                                else
+                                {
+                                    lblX.Visible = true;
+                                    txtTipoHabitacion.Visible = true;
+                                    txtTipoHabitacion.Text = dr["TipoHabitacion"].ToString();
+                                    listboxHabitaciones.SelectedIndex = -1;
+                                }
+
 
                                 txtTotal.Text = dr["CostoTotal"].ToString();
                                 //txtTotal.Text = string.Format(new CultureInfo("es-VE"), "{0:#,##0.00}", dr["costo_total"]);
@@ -277,8 +287,8 @@ namespace Hotel
 
             if (!visible)
             {
-                lblCedula.Location = new Point(49, 177);
-                txtCedula.Location = new Point(119, 174);
+                lblCedula.Location = new Point(49, 172);
+                txtCedula.Location = new Point(119, 169);
                 panelContenedor.Controls.Add(lblCedula);
                 panelContenedor.Controls.Add(txtCedula);
 
@@ -297,8 +307,11 @@ namespace Hotel
                 }
                 else // Ya se evaluó la cédula
                 {
-                    panelCedula.Visible = false;
-                    c.Visible = true;
+                    if (c.Name != "txtTipoHabitacion" && c.Name != "lblX") // Excepto lo relacionado con campos si no se encuentra el Tipo de Habitacion cargado
+                    {
+                        panelCedula.Visible = false;
+                        c.Visible = true;
+                    }
                 }
             }
         }
@@ -510,7 +523,16 @@ namespace Hotel
                             cmd.Parameters.AddWithValue("@ciudadDestino", StringExtensions.NullString(txtDestino.Text.Trim()));
                             cmd.Parameters.AddWithValue("@fechaIngreso", dtEntrada.Value);
                             cmd.Parameters.AddWithValue("@fechaSalida", dtSalida.Value);
-                            cmd.Parameters.AddWithValue("@tipoHabitacion", listboxHabitaciones.Text);
+
+                            if (listboxHabitaciones.SelectedIndex >= 0)
+                            {
+                                cmd.Parameters.AddWithValue("@tipoHabitacion", listboxHabitaciones.Text);
+                            }
+                            else // La habitación no se encuentra en el Listbox (porque fue eliminada o desactivada, etc)
+                            {
+                                cmd.Parameters.AddWithValue("@tipoHabitacion", txtTipoHabitacion.Text);                               
+                            }
+
                             cmd.Parameters.AddWithValue("@costoTotal", txtTotal.Text.Trim().Replace(".", "").Replace(",", ""));
                             cmd.Parameters.AddWithValue("@notasReservacion", StringExtensions.NullString(txtNotas.Text.Trim()));
 

@@ -44,7 +44,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.administraciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cargoPorCamiónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contraseñasDelSistemaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -121,9 +120,21 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.marcarInactivaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.lblHora = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblSmiley = new System.Windows.Forms.ToolStripStatusLabel();
+            this.verToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clientesAlmacenadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.habitacionesOcupadasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.vehículosAlmacenadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.panel5 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -142,7 +153,7 @@
             // panel1
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.panel1.BackColor = System.Drawing.Color.SkyBlue;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.label11);
             this.panel1.Controls.Add(this.label12);
@@ -296,9 +307,10 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.BackColor = System.Drawing.Color.SkyBlue;
             this.menuStrip1.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.archivoToolStripMenuItem,
+            this.verToolStripMenuItem,
             this.administraciónToolStripMenuItem,
             this.baseDeDatosToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -306,12 +318,6 @@
             this.menuStrip1.Size = new System.Drawing.Size(1008, 24);
             this.menuStrip1.TabIndex = 55;
             this.menuStrip1.Text = "menuStrip1";
-            // 
-            // archivoToolStripMenuItem
-            // 
-            this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
-            this.archivoToolStripMenuItem.Size = new System.Drawing.Size(69, 20);
-            this.archivoToolStripMenuItem.Text = "&Archivo";
             // 
             // administraciónToolStripMenuItem
             // 
@@ -340,6 +346,7 @@
             this.tiposDeHabitacionesToolStripMenuItem.Name = "tiposDeHabitacionesToolStripMenuItem";
             this.tiposDeHabitacionesToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
             this.tiposDeHabitacionesToolStripMenuItem.Text = "Tipos de habitaciones";
+            this.tiposDeHabitacionesToolStripMenuItem.Click += new System.EventHandler(this.tiposDeHabitacionesToolStripMenuItem_Click);
             // 
             // baseDeDatosToolStripMenuItem
             // 
@@ -431,7 +438,7 @@
             this.tableLayoutPanel1.Controls.Add(this.button1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.button56, 8, 5);
             this.tableLayoutPanel1.Controls.Add(this.button57, 7, 5);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(52, 130);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(56, 140);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 6;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
@@ -1206,9 +1213,14 @@
             // 
             // statusStrip1
             // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblSmiley,
+            this.toolStripStatusLabel1,
+            this.lblHora});
             this.statusStrip1.Location = new System.Drawing.Point(0, 707);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1008, 22);
+            this.statusStrip1.SizingGrip = false;
             this.statusStrip1.TabIndex = 57;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -1321,11 +1333,101 @@
             this.marcarInactivaToolStripMenuItem.Text = "Marcar > Inactiva";
             this.marcarInactivaToolStripMenuItem.Click += new System.EventHandler(this.marcarInactivaToolStripMenuItem_Click);
             // 
+            // timer2
+            // 
+            this.timer2.Enabled = true;
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            // 
+            // lblHora
+            // 
+            this.lblHora.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHora.Name = "lblHora";
+            this.lblHora.Size = new System.Drawing.Size(39, 17);
+            this.lblHora.Text = "Hora";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(905, 17);
+            this.toolStripStatusLabel1.Spring = true;
+            // 
+            // lblSmiley
+            // 
+            this.lblSmiley.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSmiley.Name = "lblSmiley";
+            this.lblSmiley.Size = new System.Drawing.Size(31, 17);
+            this.lblSmiley.Text = "✲♬ ";
+            // 
+            // verToolStripMenuItem
+            // 
+            this.verToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.clientesAlmacenadosToolStripMenuItem,
+            this.habitacionesOcupadasToolStripMenuItem,
+            this.vehículosAlmacenadosToolStripMenuItem});
+            this.verToolStripMenuItem.Name = "verToolStripMenuItem";
+            this.verToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
+            this.verToolStripMenuItem.Text = "&Ver";
+            // 
+            // clientesAlmacenadosToolStripMenuItem
+            // 
+            this.clientesAlmacenadosToolStripMenuItem.Name = "clientesAlmacenadosToolStripMenuItem";
+            this.clientesAlmacenadosToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.clientesAlmacenadosToolStripMenuItem.Text = "&Clientes almacenados";
+            this.clientesAlmacenadosToolStripMenuItem.Click += new System.EventHandler(this.clientesAlmacenadosToolStripMenuItem_Click);
+            // 
+            // habitacionesOcupadasToolStripMenuItem
+            // 
+            this.habitacionesOcupadasToolStripMenuItem.Name = "habitacionesOcupadasToolStripMenuItem";
+            this.habitacionesOcupadasToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.habitacionesOcupadasToolStripMenuItem.Text = "&Habitaciones ocupadas";
+            this.habitacionesOcupadasToolStripMenuItem.Click += new System.EventHandler(this.habitacionesOcupadasToolStripMenuItem_Click);
+            // 
+            // vehículosAlmacenadosToolStripMenuItem
+            // 
+            this.vehículosAlmacenadosToolStripMenuItem.Name = "vehículosAlmacenadosToolStripMenuItem";
+            this.vehículosAlmacenadosToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.vehículosAlmacenadosToolStripMenuItem.Text = "&Vehículos almacenados";
+            this.vehículosAlmacenadosToolStripMenuItem.Click += new System.EventHandler(this.vehículosAlmacenadosToolStripMenuItem_Click);
+            // 
+            // panel3
+            // 
+            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel3.BackColor = System.Drawing.Color.Teal;
+            this.panel3.Location = new System.Drawing.Point(18, 123);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(10, 495);
+            this.panel3.TabIndex = 59;
+            // 
+            // panel4
+            // 
+            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel4.BackColor = System.Drawing.Color.Teal;
+            this.panel4.Location = new System.Drawing.Point(986, 123);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(10, 495);
+            this.panel4.TabIndex = 60;
+            // 
+            // panel5
+            // 
+            this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel5.BackColor = System.Drawing.Color.Teal;
+            this.panel5.Location = new System.Drawing.Point(34, 613);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(947, 70);
+            this.panel5.TabIndex = 60;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1008, 729);
+            this.Controls.Add(this.panel5);
+            this.Controls.Add(this.panel4);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.tableLayoutPanel1);
@@ -1340,6 +1442,8 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -1355,7 +1459,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem archivoToolStripMenuItem;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Button button52;
         private System.Windows.Forms.Button button51;
@@ -1440,6 +1543,17 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel lblHora;
+        private System.Windows.Forms.ToolStripStatusLabel lblSmiley;
+        private System.Windows.Forms.ToolStripMenuItem verToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem clientesAlmacenadosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem habitacionesOcupadasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem vehículosAlmacenadosToolStripMenuItem;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel panel5;
     }
 }
 

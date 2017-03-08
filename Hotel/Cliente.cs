@@ -47,17 +47,18 @@ namespace Hotel
                 lst.Columns.Add("ID", 0, HorizontalAlignment.Left);
                 lst.Columns.Add("Nombre completo", 400, HorizontalAlignment.Left);
                 lst.Columns.Add("Cédula", 150, HorizontalAlignment.Left);
-                lst.Columns.Add("Reservaciones activas", 220, HorizontalAlignment.Left);
-                lst.Columns.Add("Cliente desde", 150, HorizontalAlignment.Left);
+                lst.Columns.Add("Reservaciones activas", 220, HorizontalAlignment.Center);
+                lst.Columns.Add("Cliente desde", 126, HorizontalAlignment.Left);
             }
 
             else if (opcion == "habitacion")
             {
                 lst.Columns.Add("IDCliente", 0, HorizontalAlignment.Left);
                 lst.Columns.Add("IDHab", 0, HorizontalAlignment.Left);
-                lst.Columns.Add("Nro. Habitación", 150, HorizontalAlignment.Left);
+                lst.Columns.Add("Nro. Habitación", 150, HorizontalAlignment.Center);
                 lst.Columns.Add("Cliente", 400, HorizontalAlignment.Left);
                 lst.Columns.Add("Cédula", 150, HorizontalAlignment.Left);
+                lst.Columns.Add("Fecha de entrada", 180, HorizontalAlignment.Left);
             }
 
             panel1.Controls.Add(lst);
@@ -118,7 +119,7 @@ namespace Hotel
             }
             else if (opcion == "habitacion")
             {
-                query = "SELECT Reservaciones.ID as reservacionID, Clientes.ID as id, NumeroHabitacion, Nombre, Apellido, Cedula FROM Clientes INNER JOIN Reservaciones ON Cedula = Cliente_Cedula ORDER BY NumeroHabitacion";
+                query = "SELECT Reservaciones.ID as reservacionID, Clientes.ID as id, NumeroHabitacion, Nombre, Apellido, Cedula, FechaIngreso FROM Clientes INNER JOIN Reservaciones ON Cedula = Cliente_Cedula ORDER BY NumeroHabitacion";
                 toolStripComboBox1.SelectedIndex = 2;
             }
 
@@ -157,6 +158,8 @@ namespace Hotel
                                     item.SubItems.Add(dr["NumeroHabitacion"].ToString());
                                     item.SubItems.Add(dr["Nombre"].ToString() + " " + dr["Apellido"].ToString());
                                     item.SubItems.Add(dr["Cedula"].ToString());
+                                    var dt = DateTime.Parse(dr["FechaIngreso"].ToString());
+                                    item.SubItems.Add(dt.ToString("dd/MMM/yyyy"));
                                 }
 
                                 lst.Items.Add(item);
@@ -193,6 +196,8 @@ namespace Hotel
                                 txtTelefono1.Text = dr["Telefono"].ToString();
                                 txtTelefono2.Text = dr["TelefonoExtra"].ToString();
                                 txtNotas.Text = dr["Notas"].ToString();
+
+                                dtClienteDesde.Value = Convert.ToDateTime(dr["ClienteDesde"].ToString());
 
                                 if (int.Parse(dr["vehiculos"].ToString()) > 0)
                                 {

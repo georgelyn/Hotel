@@ -46,8 +46,8 @@ namespace Hotel
             lst.Columns.Add("ID", 0, HorizontalAlignment.Left);
             lst.Columns.Add("Tipo", 200, HorizontalAlignment.Left);
             lst.Columns.Add("Descripcion", 300, HorizontalAlignment.Left);
-            lst.Columns.Add("Costo", 130, HorizontalAlignment.Left);
-            lst.Columns.Add("Estado", 100, HorizontalAlignment.Left);
+            lst.Columns.Add("Costo", 130, HorizontalAlignment.Center);
+            lst.Columns.Add("Estado", 100, HorizontalAlignment.Center);
             lst.Columns.Add("Notas", 200, HorizontalAlignment.Left);
 
             panel1.Controls.Add(lst);
@@ -80,7 +80,7 @@ namespace Hotel
             {
                 using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
                 {
-                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT ID, Tipo, Descripcion, Costo, Notas, Activa FROM TipoHabitacion", conn))
+                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT ID, Tipo, Descripcion, Costo, Notas, Activa FROM TipoHabitacion ORDER BY Costo", conn))
                     {
                         conn.Open();
 
@@ -193,18 +193,18 @@ namespace Hotel
                 {
                     using (SQLiteCommand cmd = new SQLiteCommand("UPDATE TipoHabitacion SET Tipo=@tipo, Descripcion=@descripcion, Costo=@costo, Notas=@notas, Activa=@estado WHERE ID=@id", conn))
                     {
-                        cmd.Parameters.AddWithValue("id", id);
-                        cmd.Parameters.AddWithValue("tipo", txtTipo.Text.Trim());
-                        cmd.Parameters.AddWithValue("descripcion", StringExtensions.NullString(txtDescripcion.Text.Trim()));
-                        cmd.Parameters.AddWithValue("costo", txtCosto.Text.Trim().Replace(".", "").Replace(",", ""));
-                        cmd.Parameters.AddWithValue("notas", StringExtensions.NullString(txtNotas.Text.Trim()));
+                        cmd.Parameters.AddWithValue("@id", id);
+                        cmd.Parameters.AddWithValue("@tipo", txtTipo.Text.Trim());
+                        cmd.Parameters.AddWithValue("@descripcion", StringExtensions.NullString(txtDescripcion.Text.Trim()));
+                        cmd.Parameters.AddWithValue("@costo", txtCosto.Text.Trim().Replace(".", "").Replace(",", ""));
+                        cmd.Parameters.AddWithValue("@notas", StringExtensions.NullString(txtNotas.Text.Trim()));
                         if (comboEstado.Text == "Activa")
                         {
-                            cmd.Parameters.AddWithValue("estado", "1");
+                            cmd.Parameters.AddWithValue("@estado", "1");
                         }
                         else
                         {
-                            cmd.Parameters.AddWithValue("estado", "0");
+                            cmd.Parameters.AddWithValue("@estado", "0");
                         }
 
                         conn.Open();
@@ -229,7 +229,7 @@ namespace Hotel
                 {
                     using (SQLiteCommand cmd = new SQLiteCommand("DELETE FROM TipoHabitacion WHERE ID=@id", conn))
                     {
-                        cmd.Parameters.AddWithValue("id", id);
+                        cmd.Parameters.AddWithValue("@id", id);
 
                         conn.Open();
                         cmd.ExecuteReader();
@@ -250,10 +250,10 @@ namespace Hotel
             {
                 using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
                 {
-                    using (SQLiteCommand cmd = new SQLiteCommand("UPDATE tipo_habitacion SET activa=@estado WHERE id=@id", conn))
+                    using (SQLiteCommand cmd = new SQLiteCommand("UPDATE TipoHabitacion SET Activa=@estado WHERE id=@id", conn))
                     {
-                        cmd.Parameters.AddWithValue("id", id);
-                        cmd.Parameters.AddWithValue("estado", estado);
+                        cmd.Parameters.AddWithValue("ID", id);
+                        cmd.Parameters.AddWithValue("Estado", estado);
 
                         conn.Open();
                         cmd.ExecuteNonQuery();
