@@ -209,9 +209,8 @@ namespace Hotel
                                     listboxHabitaciones.SelectedIndex = -1;
                                 }
 
-
-                                txtTotal.Text = dr["CostoTotal"].ToString();
-                                //txtTotal.Text = string.Format(new CultureInfo("es-VE"), "{0:#,##0.00}", dr["costo_total"]);
+                                //txtTotal.Text = dr["CostoTotal"].ToString();
+                                txtTotal.Text = string.Format(new CultureInfo("es-VE"), "{0:#,##0.00}", dr["CostoTotal"]);
 
                                 total = double.Parse(dr["CostoTotal"].ToString());
                                     //total = double.Parse(txtTotal.Text);
@@ -393,7 +392,7 @@ namespace Hotel
                             cmd.Parameters.AddWithValue("@fechaIngreso", dtEntrada.Value);//.ToString("dd-MM-yyyy h:mm tt", CultureInfo.InvariantCulture));
                             cmd.Parameters.AddWithValue("@fechaSalida", dtSalida.Value);//.ToString("yyyy-MM-dd h:mm tt", CultureInfo.InvariantCulture));
                             cmd.Parameters.AddWithValue("@tipoHabitacion", listboxHabitaciones.Text);
-                            cmd.Parameters.AddWithValue("@costoTotal", txtTotal.Text.Trim().Replace(".", "").Replace(",", ""));
+                            cmd.Parameters.AddWithValue("@costoTotal", txtTotal.Text.Trim().Replace(".", "").Replace(",", "."));
                             cmd.Parameters.AddWithValue("@notasReservacion", StringExtensions.NullString(txtNotas.Text.Trim()));
 
                             #endregion
@@ -533,7 +532,7 @@ namespace Hotel
                                 cmd.Parameters.AddWithValue("@tipoHabitacion", txtTipoHabitacion.Text);                               
                             }
 
-                            cmd.Parameters.AddWithValue("@costoTotal", txtTotal.Text.Trim().Replace(".", "").Replace(",", ""));
+                            cmd.Parameters.AddWithValue("@costoTotal", txtTotal.Text.Trim().Replace(".", "").Replace(",", "."));
                             cmd.Parameters.AddWithValue("@notasReservacion", StringExtensions.NullString(txtNotas.Text.Trim()));
 
                             // VEHICULO
@@ -790,8 +789,8 @@ namespace Hotel
                                     total = Convert.ToDouble(dr["Costo"].ToString());
                                     if (checkCamion.Checked)
                                         total += montoCamion;
-                                    txtTotal.Text = total.ToString();
-                                    //txtTotal.Text = string.Format(new CultureInfo("es-VE"), "{0:#,##0.00}", total);
+                                    //txtTotal.Text = total.ToString();
+                                    txtTotal.Text = string.Format(new CultureInfo("es-VE"), "{0:#,##0.00}", total);
                                 }
                             }
                         }
@@ -933,8 +932,8 @@ namespace Hotel
                 total -= montoCamion;
             }
 
-            txtTotal.Text = total.ToString();
-            //txtTotal.Text = string.Format(new CultureInfo("es-VE"), "{0:#,##0.00}", total);
+            //txtTotal.Text = total.ToString();
+            txtTotal.Text = string.Format(new CultureInfo("es-VE"), "{0:#,##0.00}", total);
         }
 
         private void txtEdad_KeyPress(object sender, KeyPressEventArgs e)

@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Data.SQLite;
+using System.Globalization;
 
 namespace Hotel
 {
@@ -94,7 +95,7 @@ namespace Hotel
                                 item.SubItems.Add(dr["Tipo"].ToString());
                                 item.SubItems.Add(dr["Descripcion"].ToString());
                                 //item.SubItems.Add(string.Format("{0:#,##}", costo).Replace(",", "."));
-                                item.SubItems.Add(dr["Costo"].ToString());
+                                item.SubItems.Add("Bs. " + string.Format(new CultureInfo("es-VE"), "{0:#,##0.00}", dr["Costo"]));
                                 if (Convert.ToBoolean(dr["Activa"]) == true)
                                 {
                                     item.SubItems.Add("Activa");
@@ -134,7 +135,7 @@ namespace Hotel
                             {
                                 txtTipo.Text = dr["Tipo"].ToString();
                                 txtDescripcion.Text = dr["Descripcion"].ToString();
-                                txtCosto.Text = dr["Costo"].ToString();
+                                txtCosto.Text = string.Format(new CultureInfo("es-VE"), "{0:#,##0.00}", dr["Costo"]);
                                 if (Convert.ToBoolean(dr["Activa"]) == true)
                                     comboEstado.Text = "Activa";
                                 else
@@ -161,7 +162,7 @@ namespace Hotel
                     {
                         cmd.Parameters.AddWithValue("@tipo", txtTipo.Text.Trim());
                         cmd.Parameters.AddWithValue("@descripcion", StringExtensions.NullString(txtDescripcion.Text.Trim()));
-                        cmd.Parameters.AddWithValue("@costo", txtCosto.Text.Trim().Replace(".", "").Replace(",", ""));
+                        cmd.Parameters.AddWithValue("@costo", txtCosto.Text.Trim().Replace(".", "").Replace(",", "."));
                         cmd.Parameters.AddWithValue("@notas", StringExtensions.NullString(txtNotas.Text.Trim()));
                         if (comboEstado.Text == "Activa")
                         {
@@ -196,7 +197,7 @@ namespace Hotel
                         cmd.Parameters.AddWithValue("@id", id);
                         cmd.Parameters.AddWithValue("@tipo", txtTipo.Text.Trim());
                         cmd.Parameters.AddWithValue("@descripcion", StringExtensions.NullString(txtDescripcion.Text.Trim()));
-                        cmd.Parameters.AddWithValue("@costo", txtCosto.Text.Trim().Replace(".", "").Replace(",", ""));
+                        cmd.Parameters.AddWithValue("@costo", txtCosto.Text.Trim().Replace(".", "").Replace(",", "."));
                         cmd.Parameters.AddWithValue("@notas", StringExtensions.NullString(txtNotas.Text.Trim()));
                         if (comboEstado.Text == "Activa")
                         {
