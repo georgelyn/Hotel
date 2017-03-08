@@ -137,9 +137,17 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\eye-icon.png" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="Resources\warning-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\delete-icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

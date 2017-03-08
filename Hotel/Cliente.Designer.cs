@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Cliente));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.btnNuevoCliente = new System.Windows.Forms.ToolStripButton();
             this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -37,6 +38,10 @@
             this.toolStripButton1 = new System.Windows.Forms.ToolStripSeparator();
             this.txtBuscar = new System.Windows.Forms.ToolStripTextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.btnCancelar = new System.Windows.Forms.Button();
+            this.btnGuardar = new System.Windows.Forms.Button();
+            this.btnNuevaReservacion = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.dtClienteDesde = new System.Windows.Forms.DateTimePicker();
             this.label8 = new System.Windows.Forms.Label();
@@ -67,22 +72,17 @@
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.lblTelefono = new System.Windows.Forms.Label();
             this.lblNombre = new System.Windows.Forms.Label();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.btnCancelar = new System.Windows.Forms.Button();
-            this.btnGuardar = new System.Windows.Forms.Button();
-            this.btnNuevaReservacion = new System.Windows.Forms.Button();
             this.btnVerReservacion = new System.Windows.Forms.Button();
             this.btnVerReservaciones = new System.Windows.Forms.Button();
             this.btnVerVehiculos = new System.Windows.Forms.Button();
-            this.btnNuevoCliente = new System.Windows.Forms.ToolStripButton();
             this.btnModificar = new System.Windows.Forms.ToolStripButton();
             this.btnEliminar = new System.Windows.Forms.ToolStripButton();
             this.btnBuscar = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panelListboxHabitaciones.SuspendLayout();
-            this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -107,6 +107,14 @@
             this.toolStrip1.Size = new System.Drawing.Size(903, 34);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
+            // 
+            // btnNuevoCliente
+            // 
+            this.btnNuevoCliente.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnNuevoCliente.Name = "btnNuevoCliente";
+            this.btnNuevoCliente.Size = new System.Drawing.Size(104, 24);
+            this.btnNuevoCliente.Text = "Nuevo cliente";
+            this.btnNuevoCliente.Click += new System.EventHandler(this.btnNuevoCliente_Click);
             // 
             // toolStripComboBox1
             // 
@@ -163,6 +171,51 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(903, 528);
             this.panel1.TabIndex = 1;
+            // 
+            // panel5
+            // 
+            this.panel5.BackColor = System.Drawing.Color.LightBlue;
+            this.panel5.Controls.Add(this.btnCancelar);
+            this.panel5.Controls.Add(this.btnGuardar);
+            this.panel5.Controls.Add(this.btnNuevaReservacion);
+            this.panel5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.panel5.Location = new System.Drawing.Point(0, 475);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(909, 50);
+            this.panel5.TabIndex = 153;
+            // 
+            // btnCancelar
+            // 
+            this.btnCancelar.Location = new System.Drawing.Point(800, 7);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(91, 36);
+            this.btnCancelar.TabIndex = 11;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            // 
+            // btnGuardar
+            // 
+            this.btnGuardar.Location = new System.Drawing.Point(700, 7);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(91, 36);
+            this.btnGuardar.TabIndex = 10;
+            this.btnGuardar.Text = "Guardar";
+            this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
+            // 
+            // btnNuevaReservacion
+            // 
+            this.btnNuevaReservacion.BackColor = System.Drawing.Color.Teal;
+            this.btnNuevaReservacion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNuevaReservacion.ForeColor = System.Drawing.Color.White;
+            this.btnNuevaReservacion.Location = new System.Drawing.Point(17, 7);
+            this.btnNuevaReservacion.Name = "btnNuevaReservacion";
+            this.btnNuevaReservacion.Size = new System.Drawing.Size(163, 36);
+            this.btnNuevaReservacion.TabIndex = 8;
+            this.btnNuevaReservacion.Text = "Nueva reservación";
+            this.btnNuevaReservacion.UseVisualStyleBackColor = false;
+            this.btnNuevaReservacion.Click += new System.EventHandler(this.btnNuevaReservacion_Click);
             // 
             // panel2
             // 
@@ -253,11 +306,11 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(363, 410);
+            this.label10.Location = new System.Drawing.Point(353, 410);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(354, 20);
+            this.label10.Size = new System.Drawing.Size(364, 20);
             this.label10.TabIndex = 151;
-            this.label10.Text = "|-------------------------------------------------------------------|";
+            this.label10.Text = "|---------------------------------------------------------------------|";
             this.label10.Visible = false;
             // 
             // label11
@@ -487,53 +540,9 @@
             this.lblNombre.TabIndex = 123;
             this.lblNombre.Text = "Nombre(s):";
             // 
-            // panel5
-            // 
-            this.panel5.BackColor = System.Drawing.Color.LightBlue;
-            this.panel5.Controls.Add(this.btnCancelar);
-            this.panel5.Controls.Add(this.btnGuardar);
-            this.panel5.Controls.Add(this.btnNuevaReservacion);
-            this.panel5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel5.Location = new System.Drawing.Point(0, 475);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(909, 50);
-            this.panel5.TabIndex = 153;
-            // 
-            // btnCancelar
-            // 
-            this.btnCancelar.Location = new System.Drawing.Point(800, 7);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(91, 36);
-            this.btnCancelar.TabIndex = 11;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.UseVisualStyleBackColor = true;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
-            // 
-            // btnGuardar
-            // 
-            this.btnGuardar.Location = new System.Drawing.Point(700, 7);
-            this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(91, 36);
-            this.btnGuardar.TabIndex = 10;
-            this.btnGuardar.Text = "Guardar";
-            this.btnGuardar.UseVisualStyleBackColor = true;
-            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
-            // 
-            // btnNuevaReservacion
-            // 
-            this.btnNuevaReservacion.BackColor = System.Drawing.Color.Teal;
-            this.btnNuevaReservacion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNuevaReservacion.ForeColor = System.Drawing.Color.White;
-            this.btnNuevaReservacion.Location = new System.Drawing.Point(17, 7);
-            this.btnNuevaReservacion.Name = "btnNuevaReservacion";
-            this.btnNuevaReservacion.Size = new System.Drawing.Size(163, 36);
-            this.btnNuevaReservacion.TabIndex = 8;
-            this.btnNuevaReservacion.Text = "Nueva reservación";
-            this.btnNuevaReservacion.UseVisualStyleBackColor = false;
-            this.btnNuevaReservacion.Click += new System.EventHandler(this.btnNuevaReservacion_Click);
-            // 
             // btnVerReservacion
             // 
+            this.btnVerReservacion.Image = global::Hotel.Properties.Resources.eye_icon;
             this.btnVerReservacion.Location = new System.Drawing.Point(838, 376);
             this.btnVerReservacion.Name = "btnVerReservacion";
             this.btnVerReservacion.Size = new System.Drawing.Size(34, 28);
@@ -544,12 +553,11 @@
             // 
             // btnVerReservaciones
             // 
-            this.btnVerReservaciones.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnVerReservaciones.Location = new System.Drawing.Point(301, 406);
+            this.btnVerReservaciones.Image = global::Hotel.Properties.Resources.eye_icon;
+            this.btnVerReservaciones.Location = new System.Drawing.Point(299, 406);
             this.btnVerReservaciones.Name = "btnVerReservaciones";
-            this.btnVerReservaciones.Size = new System.Drawing.Size(56, 28);
+            this.btnVerReservaciones.Size = new System.Drawing.Size(47, 28);
             this.btnVerReservaciones.TabIndex = 7;
-            this.btnVerReservaciones.Text = "Ver";
             this.btnVerReservaciones.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnVerReservaciones.UseVisualStyleBackColor = true;
             this.btnVerReservaciones.Visible = false;
@@ -557,24 +565,15 @@
             // 
             // btnVerVehiculos
             // 
-            this.btnVerVehiculos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnVerVehiculos.Location = new System.Drawing.Point(301, 372);
+            this.btnVerVehiculos.Image = global::Hotel.Properties.Resources.eye_icon;
+            this.btnVerVehiculos.Location = new System.Drawing.Point(299, 372);
             this.btnVerVehiculos.Name = "btnVerVehiculos";
-            this.btnVerVehiculos.Size = new System.Drawing.Size(56, 28);
+            this.btnVerVehiculos.Size = new System.Drawing.Size(47, 28);
             this.btnVerVehiculos.TabIndex = 9;
-            this.btnVerVehiculos.Text = "Ver";
             this.btnVerVehiculos.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnVerVehiculos.UseVisualStyleBackColor = true;
             this.btnVerVehiculos.Visible = false;
             this.btnVerVehiculos.Click += new System.EventHandler(this.btnVerVehiculos_Click);
-            // 
-            // btnNuevoCliente
-            // 
-            this.btnNuevoCliente.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnNuevoCliente.Name = "btnNuevoCliente";
-            this.btnNuevoCliente.Size = new System.Drawing.Size(120, 24);
-            this.btnNuevoCliente.Text = "Nuevo cliente";
-            this.btnNuevoCliente.Click += new System.EventHandler(this.btnNuevoCliente_Click);
             // 
             // btnModificar
             // 
@@ -599,7 +598,7 @@
             // btnBuscar
             // 
             this.btnBuscar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            //this.btnBuscar.Image = global::Hotel.Properties.Resources.search16;
+            this.btnBuscar.Image = global::Hotel.Properties.Resources.search16;
             this.btnBuscar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(23, 24);
@@ -622,10 +621,10 @@
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panelListboxHabitaciones.ResumeLayout(false);
-            this.panel5.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
