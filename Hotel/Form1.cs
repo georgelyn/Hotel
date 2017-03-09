@@ -19,8 +19,19 @@ namespace Hotel
                 b.ContextMenuStrip = contextMenuStrip1;
                 b.FlatStyle = FlatStyle.Flat;
             }
+        }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            this.Hide();
+            Inicio inicio = new Inicio();
+            if (inicio.ShowDialog() == DialogResult.OK)
+            {
+                this.Show();
+            }
 
+            //Inicio inicio = new Inicio();
+            //inicio.ShowDialog();
         }
 
         // Clases
@@ -500,10 +511,25 @@ namespace Hotel
 
         private void tiposDeHabitacionesToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Login login = new Login();
 
-            habitacion = new Habitacion();
-            habitacion.ShowDialog();
+            if (login.ShowDialog() == DialogResult.OK)
+            {
+                habitacion = new Habitacion();
+                habitacion.ShowDialog();
+            }
 
+        }
+
+        private void contraseñasDelSistemaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Login login = new Login();
+
+            if (login.ShowDialog() == DialogResult.OK)
+            {
+                Seguridad seguridad = new Seguridad();
+                seguridad.ShowDialog();
+            }
         }
     }
 }

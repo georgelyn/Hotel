@@ -13,7 +13,17 @@ namespace Hotel
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Seguridad());
+            Application.Run(new Form1());
+
+            //Inicio inicio = new Inicio();
+            //if (inicio.ShowDialog() == DialogResult.OK)
+            //{
+            //    Application.Run(new Form1());
+            //}
+            //else
+            //{
+            //    //Application.Exit();
+            //}
         }
     }
 }

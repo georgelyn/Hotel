@@ -9,24 +9,27 @@ using System.Data.SQLite;
 
 namespace Hotel
 {
-    public partial class Login : Form
+    public partial class Inicio : Form
     {
-        public Login()
+        public Inicio()
         {
             InitializeComponent();
+
+            txtContrasena.Select();
         }
+
+        Form1 f1 = (Form1)Application.OpenForms["Form1"];
 
         bool errorConexion = false;
 
-        public bool IngresarAlSistema(string usuario, string contrasena)
+        private bool Ingresar(string contrasena)
         {
             try
             {
                 using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
                 {
-                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM Seguridad WHERE User=@usuario AND Password=@contrasena", conn))
+                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT Password FROM Seguridad WHERE Password=@contrasena", conn))
                     {
-                        cmd.Parameters.AddWithValue("@usuario", usuario);
                         cmd.Parameters.AddWithValue("@contrasena", contrasena);
                         conn.Open();
 
@@ -35,10 +38,6 @@ namespace Hotel
                             if (dr.HasRows)
                             {
                                 return true;
-                            }
-                            else
-                            {
-                                return false;
                             }
                         }
                     }
@@ -55,10 +54,20 @@ namespace Hotel
 
         private void button1_Click(object sender, EventArgs e)
         {
+            Application.Exit();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            f1.ActivarTimerEspera();
+
             if (!String.IsNullOrEmpty(txtContrasena.Text.Trim()))
             {
-                if (IngresarAlSistema("admin", txtContrasena.Text.Trim()))
+                if (Ingresar(txtContrasena.Text.Trim()))
                 {
+                    //f1.Show();
+                    //this.Close();
+
                     this.DialogResult = DialogResult.OK;
                 }
                 else
@@ -71,11 +80,11 @@ namespace Hotel
                     }
                 }
             }
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            Close();
+            else
+            {
+                label1.ForeColor = Color.Red;
+                txtContrasena.Select();
+            }
         }
     }
 }

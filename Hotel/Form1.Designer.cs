@@ -369,6 +369,7 @@
             this.contraseñasDelSistemaToolStripMenuItem.Name = "contraseñasDelSistemaToolStripMenuItem";
             this.contraseñasDelSistemaToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
             this.contraseñasDelSistemaToolStripMenuItem.Text = "Contraseñas del sistema";
+            this.contraseñasDelSistemaToolStripMenuItem.Click += new System.EventHandler(this.contraseñasDelSistemaToolStripMenuItem_Click);
             // 
             // tiposDeHabitacionesToolStripMenuItem
             // 
@@ -1427,6 +1428,7 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Hotel Country";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
