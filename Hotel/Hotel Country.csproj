@@ -68,6 +68,12 @@
     <Compile Include="Habitacion.Designer.cs">
       <DependentUpon>Habitacion.cs</DependentUpon>
     </Compile>
+    <Compile Include="Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
     <Compile Include="Msg.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,6 +92,12 @@
     </Compile>
     <Compile Include="Reservacion.Designer.cs">
       <DependentUpon>Reservacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Seguridad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Seguridad.Designer.cs">
+      <DependentUpon>Seguridad.cs</DependentUpon>
     </Compile>
     <Compile Include="StringExtensions.cs" />
     <Compile Include="TemporalPrueba.cs">
@@ -109,6 +121,9 @@
     <EmbeddedResource Include="Habitacion.resx">
       <DependentUpon>Habitacion.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Msg.resx">
       <DependentUpon>Msg.cs</DependentUpon>
     </EmbeddedResource>
@@ -119,6 +134,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reservacion.resx">
       <DependentUpon>Reservacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Seguridad.resx">
+      <DependentUpon>Seguridad.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TemporalPrueba.resx">
       <DependentUpon>TemporalPrueba.cs</DependentUpon>
