@@ -6,16 +6,21 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Data.SQLite;
+using Excel = Microsoft.Office.Interop.Excel;
+using System.Globalization;
 
 namespace Hotel
 {
     public partial class Cliente : Form
     {
+        //System.Globalization.CultureInfo culturaOriginal = System.Threading.Thread.CurrentThread.CurrentCulture;
+
+
         public Cliente()
         {
             InitializeComponent();
 
-            CargarListView("cliente");
+            //CargarListView("cliente");
         }
 
         Msg msg;
@@ -24,6 +29,8 @@ namespace Hotel
         Reservacion reservacion;
 
         Font font_verdana = new Font("Verdana", 12);
+
+        private ListViewColumnSorter lvwColumnSorter;
 
         bool nuevoCliente = true; // Controlar si estoy agregando un nuevo cliente, o modificando uno existente
         string idCliente;
@@ -68,7 +75,12 @@ namespace Hotel
             lst.BringToFront();
 
             lst.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lst_MouseDoubleClick);
-            this.lst.SelectedIndexChanged += new System.EventHandler(this.lst_SelectedIndexChanged);
+            lst.SelectedIndexChanged += new System.EventHandler(this.lst_SelectedIndexChanged);
+
+            lst.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lst_ColumnClick);
+
+            lvwColumnSorter = new ListViewColumnSorter();
+            this.lst.ListViewItemSorter = lvwColumnSorter;
         }
 
         public void CargarListView(string opcion)
@@ -83,7 +95,6 @@ namespace Hotel
             }
 
             CrearListView(opcion);
-            lst.Items.Clear();
 
             if (opcion == "cliente")
             {
@@ -120,6 +131,8 @@ namespace Hotel
                         //}
                         conn.Open();
 
+                        lst.Items.Clear();
+
                         using (SQLiteDataReader dr = cmd.ExecuteReader())
                         {
                             while (dr.Read())
@@ -140,7 +153,7 @@ namespace Hotel
                                 {
                                     item.SubItems.Add(dr["ReservacionID"].ToString());
                                     item.SubItems.Add(dr["NumeroHabitacion"].ToString());
-                                    item.SubItems.Add(dr["Apellido"].ToString());
+                                    item.SubItems.Add(dr["Nombre"].ToString());
                                     item.SubItems.Add(dr["Cedula"].ToString());
                                     var dt = DateTime.Parse(dr["FechaIngreso"].ToString());
                                     item.SubItems.Add(dt.ToString("dd/MMM/yyyy"));
@@ -278,7 +291,7 @@ namespace Hotel
                 {
                     using (SQLiteCommand cmd = new SQLiteCommand("INSERT INTO Clientes (Nombre, Cedula, Edad, Telefono, TelefonoExtra, ClienteDesde, Notas) VALUES (@nombre, @cedula, @edad, @telefono1, @telefono2, @clienteDesde, @notas)", conn))
                     {
-                        cmd.Parameters.AddWithValue("@nombre", txtNombre.Text.Trim());
+                        cmd.Parameters.AddWithValue("@nombre", StringExtensions.FirstLetterToUpper(txtNombre.Text.Trim()));
                         cmd.Parameters.AddWithValue("@cedula", txtCedula.Text.Trim());
                         cmd.Parameters.AddWithValue("@edad", StringExtensions.NullString(txtEdad.Text.Trim()));
                         cmd.Parameters.AddWithValue("@telefono1", StringExtensions.NullString(txtTelefono1.Text.Trim()));
@@ -320,7 +333,7 @@ namespace Hotel
                     {
                         cmd.Parameters.AddWithValue("@id", id);
 
-                        cmd.Parameters.AddWithValue("@nombre", txtNombre.Text.Trim());
+                        cmd.Parameters.AddWithValue("@nombre", StringExtensions.FirstLetterToUpper(txtNombre.Text.Trim()));
                         cmd.Parameters.AddWithValue("@cedula", txtCedula.Text.Trim());
                         cmd.Parameters.AddWithValue("@edad", StringExtensions.NullString(txtEdad.Text.Trim()));
                         cmd.Parameters.AddWithValue("@telefono1", StringExtensions.NullString(txtTelefono1.Text.Trim()));
@@ -632,6 +645,32 @@ namespace Hotel
             }
         }
 
+        private void lst_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            // Determine if clicked column is already the column that is being sorted.
+            if (e.Column == lvwColumnSorter.SortColumn)
+            {
+                // Reverse the current sort direction for this column.
+                if (lvwColumnSorter.Order == SortOrder.Ascending)
+                {
+                    lvwColumnSorter.Order = SortOrder.Descending;
+                }
+                else
+                {
+                    lvwColumnSorter.Order = SortOrder.Ascending;
+                }
+            }
+            else
+            {
+                // Set the column number that is to be sorted; default to ascending.
+                lvwColumnSorter.SortColumn = e.Column;
+                lvwColumnSorter.Order = SortOrder.Ascending;
+            }
+
+            // Perform the sort with these new sort options.
+            this.lst.Sort();
+        }
+
         private void btnVerVehiculos_Click(object sender, EventArgs e)
         {
             vehiculo = new Vehiculo();
@@ -750,3 +789,5 @@ namespace Hotel
         }
     }
 }
+
+

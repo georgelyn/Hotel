@@ -361,7 +361,7 @@ namespace Hotel
                         {
                             #region Clientes
 
-                            cmd.Parameters.AddWithValue("@nombre", txtNombre.Text.Trim());
+                            cmd.Parameters.AddWithValue("@nombre", StringExtensions.FirstLetterToUpper(txtNombre.Text.Trim()));
                             cmd.Parameters.AddWithValue("@cedula", txtCedula.Text.Replace(".", "").Trim());
                             cmd.Parameters.AddWithValue("@edad", StringExtensions.NullString(txtEdad.Text.Trim()));
                             cmd.Parameters.AddWithValue("@telefono1", StringExtensions.NullString(txtTelefono1.Text.Trim()));
@@ -504,7 +504,7 @@ namespace Hotel
                         {
                             // CLIENTE
 
-                            cmd.Parameters.AddWithValue("@nombre", txtNombre.Text.Trim());
+                            cmd.Parameters.AddWithValue("@nombre", StringExtensions.FirstLetterToUpper(txtNombre.Text.Trim()));
                             cmd.Parameters.AddWithValue("@cedula", txtCedula.Text.Replace(".", "").Trim());
                             cmd.Parameters.AddWithValue("@edad", StringExtensions.NullString(txtEdad.Text.Trim()));
                             cmd.Parameters.AddWithValue("@telefono1", StringExtensions.NullString(txtTelefono1.Text.Trim()));
