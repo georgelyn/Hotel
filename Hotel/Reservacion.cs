@@ -157,7 +157,7 @@ namespace Hotel
             {
                 using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
                 {
-                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT Nombre, Apellido, Cedula, Edad, Telefono, TelefonoExtra, " + 
+                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT Nombre, Cedula, Edad, Telefono, TelefonoExtra, " + 
                         " r.ID, r.NumeroHabitacion, r.Notas, CiudadOrigen, CiudadDestino, FechaIngreso, FechaSalida, TipoHabitacion, CostoTotal, Marca, Modelo, Placa, EsCamion " + 
                         " FROM Clientes INNER JOIN Reservaciones r ON Cedula = r.Cliente_Cedula" + 
                         " LEFT JOIN Vehiculos v ON r.Vehiculo_ID = v.ID "+ 
@@ -170,7 +170,6 @@ namespace Hotel
                             if (dr.Read())
                             {
                                 txtNombre.Text = dr["Nombre"].ToString();
-                                txtApellido.Text = dr["Apellido"].ToString();
                                 txtCedula.Text = dr["Cedula"].ToString();
                                 txtEdad.Text = dr["Edad"].ToString();
                                 txtTelefono1.Text = dr["Telefono"].ToString();
@@ -246,7 +245,6 @@ namespace Hotel
                             while (dr.Read())
                             {
                                 txtNombre.Text = dr["Nombre"].ToString();
-                                txtApellido.Text = dr["Apellido"].ToString();
                                 txtCedula.Text = cedula; // Hasta ahora no es realmente necesario. Se carga en btnCheckCedula
                                 txtEdad.Text = dr["Edad"].ToString();
                                 txtTelefono1.Text = dr["Telefono"].ToString();
@@ -334,13 +332,13 @@ namespace Hotel
 
                     if (clienteNuevo)
                     {
-                        query = "INSERT INTO Clientes (Nombre, Apellido, Cedula, Edad, Telefono, TelefonoExtra, ClienteDesde) VALUES (@nombre, @apellido, @cedula, @edad, @telefono1, @telefono2, @clienteDesde); " +
+                        query = "INSERT INTO Clientes (Nombre, Cedula, Edad, Telefono, TelefonoExtra, ClienteDesde) VALUES (@nombre, @cedula, @edad, @telefono1, @telefono2, @clienteDesde); " +
                             "UPDATE Habitaciones SET Estado=@estado WHERE NumeroHabitacion=@numeroHabitacion;" +
                             "INSERT INTO Reservaciones (NumeroHabitacion, Cliente_Cedula, Vehiculo_ID, CiudadOrigen, CiudadDestino, FechaIngreso, FechaSalida, TipoHabitacion, CostoTotal, Notas) VALUES (@numeroHabitacion, @cedula, null, @ciudadOrigen, @ciudadDestino, @fechaIngreso, @fechaSalida, @tipoHabitacion, @costoTotal, @notasReservacion)";
                     }
                     else if (!clienteNuevo)
                     {
-                        query = "UPDATE Clientes SET Nombre=@nombre, Apellido=@apellido, Edad=@edad, Telefono=@telefono1, TelefonoExtra=@telefono2 WHERE Cedula=@cedula;" +
+                        query = "UPDATE Clientes SET Nombre=@nombre, Edad=@edad, Telefono=@telefono1, TelefonoExtra=@telefono2 WHERE Cedula=@cedula;" +
                            "UPDATE Habitaciones SET Estado=@estado WHERE NumeroHabitacion=@numeroHabitacion;" +
                            "INSERT INTO Reservaciones (NumeroHabitacion, Cliente_Cedula, Vehiculo_ID, CiudadOrigen, CiudadDestino, FechaIngreso, FechaSalida, TipoHabitacion, CostoTotal, Notas) VALUES (@numeroHabitacion, @cedula, null, @ciudadOrigen, @ciudadDestino, @fechaIngreso, @fechaSalida, @tipoHabitacion, @costoTotal, @notasReservacion)";
                     }
@@ -364,7 +362,6 @@ namespace Hotel
                             #region Clientes
 
                             cmd.Parameters.AddWithValue("@nombre", txtNombre.Text.Trim());
-                            cmd.Parameters.AddWithValue("@apellido", txtApellido.Text.Trim());
                             cmd.Parameters.AddWithValue("@cedula", txtCedula.Text.Replace(".", "").Trim());
                             cmd.Parameters.AddWithValue("@edad", StringExtensions.NullString(txtEdad.Text.Trim()));
                             cmd.Parameters.AddWithValue("@telefono1", StringExtensions.NullString(txtTelefono1.Text.Trim()));
@@ -473,7 +470,7 @@ namespace Hotel
                         conVehiculo = false; // Si campos están vacíos, no tiene vehículo
                     }
 
-                    string query = "UPDATE Clientes SET Nombre=@nombre, Apellido=@apellido, Edad=@edad, Telefono=@telefono1, TelefonoExtra=@telefono2 WHERE Cedula=@cedula;" +
+                    string query = "UPDATE Clientes SET Nombre=@nombre, Edad=@edad, Telefono=@telefono1, TelefonoExtra=@telefono2 WHERE Cedula=@cedula;" +
                         "UPDATE Reservaciones SET NumeroHabitacion=@numeroHabitacion, CiudadOrigen=@ciudadOrigen, CiudadDestino=@ciudadDestino, FechaIngreso=@fechaIngreso, FechaSalida=@fechaSalida, TipoHabitacion=@tipoHabitacion, CostoTotal=@costoTotal, Notas=@notasReservacion WHERE ID=(SELECT ID FROM Reservaciones WHERE NumeroHabitacion=@habitacionActual)";
 
 
@@ -508,7 +505,6 @@ namespace Hotel
                             // CLIENTE
 
                             cmd.Parameters.AddWithValue("@nombre", txtNombre.Text.Trim());
-                            cmd.Parameters.AddWithValue("@apellido", txtApellido.Text.Trim());
                             cmd.Parameters.AddWithValue("@cedula", txtCedula.Text.Replace(".", "").Trim());
                             cmd.Parameters.AddWithValue("@edad", StringExtensions.NullString(txtEdad.Text.Trim()));
                             cmd.Parameters.AddWithValue("@telefono1", StringExtensions.NullString(txtTelefono1.Text.Trim()));
@@ -661,16 +657,6 @@ namespace Hotel
                                     return false;
                                 }
                             }
-
-
-                            //if (dr.HasRows) // El probblema es que siempre da verdadero porque el Count regresa un valor, así sea 0
-                            //{
-                            //    if (dr.Read())
-                            //    {
-                            //        numeroVehiculos = int.Parse(dr["vehiculos"].ToString());
-                            //    }
-                            //    return true; // Tiene al menos un vehículo registrado
-                            //}
                         }
                     }
                 }
@@ -730,8 +716,8 @@ namespace Hotel
                 return false;
             }
 
-            TextBox[] txtBox = { txtNombre, txtApellido, txtCedula, txtTotal };
-            Label[] txtLabel = { lblNombre, lblApellido, lblCedula, lblTotal };
+            TextBox[] txtBox = { txtNombre, txtCedula, txtTotal };
+            Label[] txtLabel = { lblNombre, lblCedula, lblTotal };
 
             for (int i = 0; i < txtBox.Length; i++)
             {

@@ -68,10 +68,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtCedula = new System.Windows.Forms.TextBox();
             this.lblCedula = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.txtApellido = new System.Windows.Forms.TextBox();
-            this.lblApellido = new System.Windows.Forms.Label();
             this.txtEdad = new System.Windows.Forms.TextBox();
             this.lblEdad = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -271,10 +268,7 @@
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.txtCedula);
             this.panel2.Controls.Add(this.lblCedula);
-            this.panel2.Controls.Add(this.label7);
             this.panel2.Controls.Add(this.label6);
-            this.panel2.Controls.Add(this.txtApellido);
-            this.panel2.Controls.Add(this.lblApellido);
             this.panel2.Controls.Add(this.txtEdad);
             this.panel2.Controls.Add(this.lblEdad);
             this.panel2.Controls.Add(this.label1);
@@ -435,7 +429,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.ForeColor = System.Drawing.Color.Red;
-            this.label4.Location = new System.Drawing.Point(461, 165);
+            this.label4.Location = new System.Drawing.Point(461, 148);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(15, 20);
@@ -485,7 +479,7 @@
             // 
             // txtNotas
             // 
-            this.txtNotas.Location = new System.Drawing.Point(276, 248);
+            this.txtNotas.Location = new System.Drawing.Point(276, 234);
             this.txtNotas.Name = "txtNotas";
             this.txtNotas.Size = new System.Drawing.Size(455, 67);
             this.txtNotas.TabIndex = 6;
@@ -494,7 +488,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(170, 258);
+            this.label2.Location = new System.Drawing.Point(170, 244);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(55, 20);
@@ -503,7 +497,7 @@
             // 
             // txtCedula
             // 
-            this.txtCedula.Location = new System.Drawing.Point(276, 162);
+            this.txtCedula.Location = new System.Drawing.Point(276, 145);
             this.txtCedula.Name = "txtCedula";
             this.txtCedula.Size = new System.Drawing.Size(180, 26);
             this.txtCedula.TabIndex = 2;
@@ -512,55 +506,27 @@
             // lblCedula
             // 
             this.lblCedula.AutoSize = true;
-            this.lblCedula.Location = new System.Drawing.Point(170, 165);
+            this.lblCedula.Location = new System.Drawing.Point(170, 148);
             this.lblCedula.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCedula.Name = "lblCedula";
             this.lblCedula.Size = new System.Drawing.Size(63, 20);
             this.lblCedula.TabIndex = 131;
             this.lblCedula.Text = "Cédula:";
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.ForeColor = System.Drawing.Color.Red;
-            this.label7.Location = new System.Drawing.Point(708, 123);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(15, 20);
-            this.label7.TabIndex = 130;
-            this.label7.Text = "*";
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.ForeColor = System.Drawing.Color.Red;
-            this.label6.Location = new System.Drawing.Point(708, 81);
+            this.label6.Location = new System.Drawing.Point(738, 105);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(15, 20);
             this.label6.TabIndex = 129;
             this.label6.Text = "*";
             // 
-            // txtApellido
-            // 
-            this.txtApellido.Location = new System.Drawing.Point(276, 120);
-            this.txtApellido.Name = "txtApellido";
-            this.txtApellido.Size = new System.Drawing.Size(425, 26);
-            this.txtApellido.TabIndex = 1;
-            // 
-            // lblApellido
-            // 
-            this.lblApellido.AutoSize = true;
-            this.lblApellido.Location = new System.Drawing.Point(170, 123);
-            this.lblApellido.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblApellido.Name = "lblApellido";
-            this.lblApellido.Size = new System.Drawing.Size(87, 20);
-            this.lblApellido.TabIndex = 127;
-            this.lblApellido.Text = "Apellido(s):";
-            // 
             // txtEdad
             // 
-            this.txtEdad.Location = new System.Drawing.Point(550, 162);
+            this.txtEdad.Location = new System.Drawing.Point(550, 145);
             this.txtEdad.Name = "txtEdad";
             this.txtEdad.Size = new System.Drawing.Size(77, 26);
             this.txtEdad.TabIndex = 3;
@@ -569,7 +535,7 @@
             // lblEdad
             // 
             this.lblEdad.AutoSize = true;
-            this.lblEdad.Location = new System.Drawing.Point(492, 165);
+            this.lblEdad.Location = new System.Drawing.Point(492, 148);
             this.lblEdad.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblEdad.Name = "lblEdad";
             this.lblEdad.Size = new System.Drawing.Size(51, 20);
@@ -579,7 +545,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(445, 208);
+            this.label1.Location = new System.Drawing.Point(445, 193);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(13, 20);
@@ -588,7 +554,7 @@
             // 
             // txtTelefono2
             // 
-            this.txtTelefono2.Location = new System.Drawing.Point(465, 205);
+            this.txtTelefono2.Location = new System.Drawing.Point(465, 190);
             this.txtTelefono2.Name = "txtTelefono2";
             this.txtTelefono2.Size = new System.Drawing.Size(162, 26);
             this.txtTelefono2.TabIndex = 5;
@@ -596,7 +562,7 @@
             // 
             // txtTelefono1
             // 
-            this.txtTelefono1.Location = new System.Drawing.Point(276, 205);
+            this.txtTelefono1.Location = new System.Drawing.Point(276, 190);
             this.txtTelefono1.Name = "txtTelefono1";
             this.txtTelefono1.Size = new System.Drawing.Size(162, 26);
             this.txtTelefono1.TabIndex = 4;
@@ -604,15 +570,15 @@
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(276, 78);
+            this.txtNombre.Location = new System.Drawing.Point(276, 102);
             this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(425, 26);
+            this.txtNombre.Size = new System.Drawing.Size(455, 26);
             this.txtNombre.TabIndex = 0;
             // 
             // lblTelefono
             // 
             this.lblTelefono.AutoSize = true;
-            this.lblTelefono.Location = new System.Drawing.Point(170, 208);
+            this.lblTelefono.Location = new System.Drawing.Point(170, 193);
             this.lblTelefono.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTelefono.Name = "lblTelefono";
             this.lblTelefono.Size = new System.Drawing.Size(93, 20);
@@ -622,12 +588,12 @@
             // lblNombre
             // 
             this.lblNombre.AutoSize = true;
-            this.lblNombre.Location = new System.Drawing.Point(170, 81);
+            this.lblNombre.Location = new System.Drawing.Point(170, 105);
             this.lblNombre.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNombre.Name = "lblNombre";
-            this.lblNombre.Size = new System.Drawing.Size(87, 20);
+            this.lblNombre.Size = new System.Drawing.Size(69, 20);
             this.lblNombre.TabIndex = 123;
-            this.lblNombre.Text = "Nombre(s):";
+            this.lblNombre.Text = "Nombre:";
             // 
             // Cliente
             // 
@@ -666,10 +632,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TextBox txtCedula;
         private System.Windows.Forms.Label lblCedula;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox txtApellido;
-        private System.Windows.Forms.Label lblApellido;
         private System.Windows.Forms.TextBox txtEdad;
         private System.Windows.Forms.Label lblEdad;
         private System.Windows.Forms.Label label1;

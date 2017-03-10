@@ -36,10 +36,6 @@ namespace Hotel
                             {
                                 return true;
                             }
-                            else
-                            {
-                                return false;
-                            }
                         }
                     }
                 }

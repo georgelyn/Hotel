@@ -87,12 +87,12 @@ namespace Hotel
 
             if (opcion == "cliente")
             {
-                query = "SELECT *, COUNT(r.ID) AS reservaciones FROM Clientes LEFT JOIN Reservaciones r ON Cedula = Cliente_Cedula GROUP BY Nombre ORDER BY Apellido";
+                query = "SELECT *, COUNT(r.ID) AS reservaciones FROM Clientes LEFT JOIN Reservaciones r ON Cedula = Cliente_Cedula GROUP BY Nombre ORDER BY Nombre";
                 toolStripComboBox1.SelectedIndex = 0;
             }
             else if (opcion == "actual")
             {
-                query = "SELECT *, COUNT(r.ID) AS reservaciones FROM Clientes INNER JOIN Reservaciones r ON Cedula = Cliente_Cedula GROUP BY Nombre ORDER BY Apellido";
+                query = "SELECT *, COUNT(r.ID) AS reservaciones FROM Clientes INNER JOIN Reservaciones r ON Cedula = Cliente_Cedula GROUP BY Nombre ORDER BY Nombre";
                 toolStripComboBox1.SelectedIndex = 1;
             }
             else if (opcion == "buscar")
@@ -129,7 +129,7 @@ namespace Hotel
                                 if (opcion == "cliente" || opcion == "actual" || opcion == "buscar")
                                 {
                                     item.SubItems.Add(nroClientes.ToString());
-                                    item.SubItems.Add(dr["Apellido"].ToString() + ", " + dr["Nombre"].ToString());                                
+                                    item.SubItems.Add(dr["Nombre"].ToString());                                
                                     item.SubItems.Add(dr["Cedula"].ToString());
                                     item.SubItems.Add(dr["reservaciones"].ToString());
 
@@ -140,7 +140,7 @@ namespace Hotel
                                 {
                                     item.SubItems.Add(dr["ReservacionID"].ToString());
                                     item.SubItems.Add(dr["NumeroHabitacion"].ToString());
-                                    item.SubItems.Add(dr["Nombre"].ToString() + " " + dr["Apellido"].ToString());
+                                    item.SubItems.Add(dr["Apellido"].ToString());
                                     item.SubItems.Add(dr["Cedula"].ToString());
                                     var dt = DateTime.Parse(dr["FechaIngreso"].ToString());
                                     item.SubItems.Add(dt.ToString("dd/MMM/yyyy"));
@@ -197,7 +197,6 @@ namespace Hotel
                             while (dr.Read())
                             {
                                 txtNombre.Text = dr["Nombre"].ToString();
-                                txtApellido.Text = dr["Apellido"].ToString();
                                 txtCedula.Text = dr["Cedula"].ToString();
                                 txtEdad.Text = dr["Edad"].ToString();
                                 txtTelefono1.Text = dr["Telefono"].ToString();
@@ -277,10 +276,9 @@ namespace Hotel
             {
                 using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
                 {
-                    using (SQLiteCommand cmd = new SQLiteCommand("INSERT INTO Clientes (Nombre, Apellido, Cedula, Edad, Telefono, TelefonoExtra, ClienteDesde, Notas) VALUES (@nombre, @apellido, @cedula, @edad, @telefono1, @telefono2, @clienteDesde, @notas)", conn))
+                    using (SQLiteCommand cmd = new SQLiteCommand("INSERT INTO Clientes (Nombre, Cedula, Edad, Telefono, TelefonoExtra, ClienteDesde, Notas) VALUES (@nombre, @cedula, @edad, @telefono1, @telefono2, @clienteDesde, @notas)", conn))
                     {
                         cmd.Parameters.AddWithValue("@nombre", txtNombre.Text.Trim());
-                        cmd.Parameters.AddWithValue("@apellido", txtApellido.Text.Trim());
                         cmd.Parameters.AddWithValue("@cedula", txtCedula.Text.Trim());
                         cmd.Parameters.AddWithValue("@edad", StringExtensions.NullString(txtEdad.Text.Trim()));
                         cmd.Parameters.AddWithValue("@telefono1", StringExtensions.NullString(txtTelefono1.Text.Trim()));
@@ -318,12 +316,11 @@ namespace Hotel
             {
                 using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
                 {
-                    using (SQLiteCommand cmd = new SQLiteCommand("UPDATE Clientes SET Nombre=@nombre, Apellido=@apellido, Cedula=@cedula, Edad=@edad, Telefono=@telefono1, TelefonoExtra=@telefono2, Notas=@notas WHERE ID=@id", conn))
+                    using (SQLiteCommand cmd = new SQLiteCommand("UPDATE Clientes SET Nombre=@nombre, Cedula=@cedula, Edad=@edad, Telefono=@telefono1, TelefonoExtra=@telefono2, Notas=@notas WHERE ID=@id", conn))
                     {
                         cmd.Parameters.AddWithValue("@id", id);
 
                         cmd.Parameters.AddWithValue("@nombre", txtNombre.Text.Trim());
-                        cmd.Parameters.AddWithValue("@apellido", txtApellido.Text.Trim());
                         cmd.Parameters.AddWithValue("@cedula", txtCedula.Text.Trim());
                         cmd.Parameters.AddWithValue("@edad", StringExtensions.NullString(txtEdad.Text.Trim()));
                         cmd.Parameters.AddWithValue("@telefono1", StringExtensions.NullString(txtTelefono1.Text.Trim()));
@@ -381,8 +378,8 @@ namespace Hotel
 
         public bool ValidacionCamposTexto()
         {
-            TextBox[] txtBox = { txtNombre, txtApellido, txtCedula };
-            Label[] txtLabel = { lblNombre, lblApellido, lblCedula };
+            TextBox[] txtBox = { txtNombre, txtCedula };
+            Label[] txtLabel = { lblNombre, lblCedula };
 
             for (int i = 0; i < txtBox.Length; i++)
             {
@@ -419,12 +416,12 @@ namespace Hotel
                     btnEliminar.ForeColor = Color.Black;
                     btnEliminar.BackColor = Color.Transparent;
 
-                    label5.Visible = false; // Reservaciones
-                    btnVerReservaciones.Visible = false;
-                    lblReservaciones.Visible = false;
-                    label3.Visible = false; // Vehículos almacenados
-                    btnVerVehiculos.Visible = false;
-                    lblVehiculos.Visible = false;
+                    //label5.Visible = false; // Reservaciones
+                    //btnVerReservaciones.Visible = false;
+                    //lblReservaciones.Visible = false;
+                    //label3.Visible = false; // Vehículos almacenados
+                    //btnVerVehiculos.Visible = false;
+                    //lblVehiculos.Visible = false;
                 }
                 else
                 {
@@ -433,12 +430,12 @@ namespace Hotel
                     btnEliminar.ForeColor = Color.White;
                     btnEliminar.BackColor = Color.Red;
 
-                    label5.Visible = true; // Reservaciones
-                    btnVerReservaciones.Visible = true;
-                    lblReservaciones.Visible = true;
-                    label3.Visible = true; // Vehículos almacenados
-                    btnVerVehiculos.Visible = true;
-                    lblVehiculos.Visible = true;
+                    //label5.Visible = true; // Reservaciones
+                    //btnVerReservaciones.Visible = true;
+                    //lblReservaciones.Visible = true;
+                    //label3.Visible = true; // Vehículos almacenados
+                    //btnVerVehiculos.Visible = true;
+                    //lblVehiculos.Visible = true;
                 }
             }
             else // Habitaciones ocupadas

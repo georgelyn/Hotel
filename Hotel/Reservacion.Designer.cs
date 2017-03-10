@@ -48,9 +48,6 @@
             this.listboxHabitaciones = new System.Windows.Forms.ListBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.txtApellido = new System.Windows.Forms.TextBox();
-            this.lblApellido = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblHabitacionNumero = new System.Windows.Forms.Label();
             this.lblHabitacionActual = new System.Windows.Forms.Label();
@@ -165,9 +162,6 @@
             this.panelContenedor.Controls.Add(this.panel3);
             this.panelContenedor.Controls.Add(this.label8);
             this.panelContenedor.Controls.Add(this.label7);
-            this.panelContenedor.Controls.Add(this.label6);
-            this.panelContenedor.Controls.Add(this.txtApellido);
-            this.panelContenedor.Controls.Add(this.lblApellido);
             this.panelContenedor.Controls.Add(this.panel2);
             this.panelContenedor.Controls.Add(this.label3);
             this.panelContenedor.Controls.Add(this.txtNotas);
@@ -320,40 +314,12 @@
             // 
             this.label7.AutoSize = true;
             this.label7.ForeColor = System.Drawing.Color.Red;
-            this.label7.Location = new System.Drawing.Point(627, 108);
+            this.label7.Location = new System.Drawing.Point(627, 137);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(15, 20);
             this.label7.TabIndex = 117;
             this.label7.Text = "*";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.ForeColor = System.Drawing.Color.Red;
-            this.label6.Location = new System.Drawing.Point(627, 140);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(15, 20);
-            this.label6.TabIndex = 116;
-            this.label6.Text = "*";
-            // 
-            // txtApellido
-            // 
-            this.txtApellido.Location = new System.Drawing.Point(119, 137);
-            this.txtApellido.Name = "txtApellido";
-            this.txtApellido.Size = new System.Drawing.Size(501, 26);
-            this.txtApellido.TabIndex = 1;
-            // 
-            // lblApellido
-            // 
-            this.lblApellido.AutoSize = true;
-            this.lblApellido.Location = new System.Drawing.Point(25, 140);
-            this.lblApellido.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblApellido.Name = "lblApellido";
-            this.lblApellido.Size = new System.Drawing.Size(87, 20);
-            this.lblApellido.TabIndex = 114;
-            this.lblApellido.Text = "Apellido(s):";
             // 
             // panel2
             // 
@@ -368,17 +334,17 @@
             this.panel2.Controls.Add(this.comboHabitacion);
             this.panel2.Controls.Add(this.lblFechaIngrso);
             this.panel2.Controls.Add(this.lblFechaSalida);
-            this.panel2.Location = new System.Drawing.Point(29, 13);
+            this.panel2.Location = new System.Drawing.Point(23, 13);
             this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(859, 75);
+            this.panel2.Size = new System.Drawing.Size(865, 98);
             this.panel2.TabIndex = 91;
             // 
             // lblHabitacionNumero
             // 
             this.lblHabitacionNumero.AutoSize = true;
             this.lblHabitacionNumero.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHabitacionNumero.Location = new System.Drawing.Point(168, 46);
+            this.lblHabitacionNumero.Location = new System.Drawing.Point(170, 67);
             this.lblHabitacionNumero.Name = "lblHabitacionNumero";
             this.lblHabitacionNumero.Size = new System.Drawing.Size(74, 15);
             this.lblHabitacionNumero.TabIndex = 20;
@@ -389,7 +355,7 @@
             // 
             this.lblHabitacionActual.AutoSize = true;
             this.lblHabitacionActual.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHabitacionActual.Location = new System.Drawing.Point(24, 46);
+            this.lblHabitacionActual.Location = new System.Drawing.Point(26, 67);
             this.lblHabitacionActual.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lblHabitacionActual.Name = "lblHabitacionActual";
             this.lblHabitacionActual.Size = new System.Drawing.Size(123, 15);
@@ -400,7 +366,7 @@
             // linkLblCambiarNumHab
             // 
             this.linkLblCambiarNumHab.AutoSize = true;
-            this.linkLblCambiarNumHab.Location = new System.Drawing.Point(252, 10);
+            this.linkLblCambiarNumHab.Location = new System.Drawing.Point(251, 18);
             this.linkLblCambiarNumHab.Name = "linkLblCambiarNumHab";
             this.linkLblCambiarNumHab.Size = new System.Drawing.Size(68, 20);
             this.linkLblCambiarNumHab.TabIndex = 18;
@@ -413,7 +379,7 @@
             // 
             this.dtEntrada.CustomFormat = "dd/MMM/yyyy";
             this.dtEntrada.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtEntrada.Location = new System.Drawing.Point(680, 4);
+            this.dtEntrada.Location = new System.Drawing.Point(694, 18);
             this.dtEntrada.Margin = new System.Windows.Forms.Padding(4);
             this.dtEntrada.MinDate = new System.DateTime(2004, 1, 1, 0, 0, 0, 0);
             this.dtEntrada.Name = "dtEntrada";
@@ -424,7 +390,7 @@
             // 
             this.dtSalida.CustomFormat = "dd/MMM/yyyy";
             this.dtSalida.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtSalida.Location = new System.Drawing.Point(680, 38);
+            this.dtSalida.Location = new System.Drawing.Point(692, 56);
             this.dtSalida.Margin = new System.Windows.Forms.Padding(4);
             this.dtSalida.MinDate = new System.DateTime(2004, 1, 1, 0, 0, 0, 0);
             this.dtSalida.Name = "dtSalida";
@@ -435,7 +401,7 @@
             // lblHab
             // 
             this.lblHab.AutoSize = true;
-            this.lblHab.Location = new System.Drawing.Point(28, 10);
+            this.lblHab.Location = new System.Drawing.Point(27, 18);
             this.lblHab.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lblHab.Name = "lblHab";
             this.lblHab.Size = new System.Drawing.Size(122, 20);
@@ -446,7 +412,7 @@
             // 
             this.comboHabitacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboHabitacion.FormattingEnabled = true;
-            this.comboHabitacion.Location = new System.Drawing.Point(171, 7);
+            this.comboHabitacion.Location = new System.Drawing.Point(170, 15);
             this.comboHabitacion.Margin = new System.Windows.Forms.Padding(4);
             this.comboHabitacion.Name = "comboHabitacion";
             this.comboHabitacion.Size = new System.Drawing.Size(74, 28);
@@ -455,7 +421,7 @@
             // lblFechaIngrso
             // 
             this.lblFechaIngrso.AutoSize = true;
-            this.lblFechaIngrso.Location = new System.Drawing.Point(552, 7);
+            this.lblFechaIngrso.Location = new System.Drawing.Point(566, 21);
             this.lblFechaIngrso.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lblFechaIngrso.Name = "lblFechaIngrso";
             this.lblFechaIngrso.Size = new System.Drawing.Size(117, 20);
@@ -465,7 +431,7 @@
             // lblFechaSalida
             // 
             this.lblFechaSalida.AutoSize = true;
-            this.lblFechaSalida.Location = new System.Drawing.Point(566, 41);
+            this.lblFechaSalida.Location = new System.Drawing.Point(578, 59);
             this.lblFechaSalida.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lblFechaSalida.Name = "lblFechaSalida";
             this.lblFechaSalida.Size = new System.Drawing.Size(103, 20);
@@ -714,7 +680,7 @@
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(119, 105);
+            this.txtNombre.Location = new System.Drawing.Point(119, 134);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(501, 26);
             this.txtNombre.TabIndex = 0;
@@ -732,12 +698,12 @@
             // lblNombre
             // 
             this.lblNombre.AutoSize = true;
-            this.lblNombre.Location = new System.Drawing.Point(25, 108);
+            this.lblNombre.Location = new System.Drawing.Point(43, 137);
             this.lblNombre.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNombre.Name = "lblNombre";
-            this.lblNombre.Size = new System.Drawing.Size(87, 20);
+            this.lblNombre.Size = new System.Drawing.Size(69, 20);
             this.lblNombre.TabIndex = 92;
-            this.lblNombre.Text = "Nombre(s):";
+            this.lblNombre.Text = "Nombre:";
             // 
             // Reservacion
             // 
@@ -811,11 +777,8 @@
         private System.Windows.Forms.LinkLabel linkLblCambiarNumHab;
         private System.Windows.Forms.Label lblHabitacionNumero;
         private System.Windows.Forms.Label lblHabitacionActual;
-        private System.Windows.Forms.Label lblApellido;
-        private System.Windows.Forms.TextBox txtApellido;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label6;
         internal System.Windows.Forms.TextBox txtCedula;
         private System.Windows.Forms.ComboBox comboVehiculo;
         private System.Windows.Forms.Label lblVehiculosAlmacenados;
