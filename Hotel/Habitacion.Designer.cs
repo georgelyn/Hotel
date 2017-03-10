@@ -128,7 +128,7 @@
             this.btnCancelar.Location = new System.Drawing.Point(581, 403);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(84, 29);
-            this.btnCancelar.TabIndex = 12;
+            this.btnCancelar.TabIndex = 6;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
@@ -138,7 +138,7 @@
             this.btnAceptar.Location = new System.Drawing.Point(491, 403);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(84, 29);
-            this.btnAceptar.TabIndex = 11;
+            this.btnAceptar.TabIndex = 5;
             this.btnAceptar.Text = "Guardar";
             this.btnAceptar.UseVisualStyleBackColor = true;
             this.btnAceptar.Click += new System.EventHandler(this.btnGuardar_Click);
@@ -148,7 +148,7 @@
             this.txtDescripcion.Location = new System.Drawing.Point(219, 82);
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(356, 70);
-            this.txtDescripcion.TabIndex = 10;
+            this.txtDescripcion.TabIndex = 1;
             this.txtDescripcion.Text = "";
             // 
             // label6
@@ -177,7 +177,7 @@
             this.comboEstado.Location = new System.Drawing.Point(219, 240);
             this.comboEstado.Name = "comboEstado";
             this.comboEstado.Size = new System.Drawing.Size(161, 28);
-            this.comboEstado.TabIndex = 7;
+            this.comboEstado.TabIndex = 3;
             // 
             // label4
             // 
@@ -193,7 +193,7 @@
             this.txtNotas.Location = new System.Drawing.Point(219, 299);
             this.txtNotas.Name = "txtNotas";
             this.txtNotas.Size = new System.Drawing.Size(356, 73);
-            this.txtNotas.TabIndex = 5;
+            this.txtNotas.TabIndex = 4;
             this.txtNotas.Text = "";
             // 
             // txtCosto
@@ -201,7 +201,7 @@
             this.txtCosto.Location = new System.Drawing.Point(249, 183);
             this.txtCosto.Name = "txtCosto";
             this.txtCosto.Size = new System.Drawing.Size(131, 26);
-            this.txtCosto.TabIndex = 4;
+            this.txtCosto.TabIndex = 2;
             this.txtCosto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtCosto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCosto_KeyPress);
             // 
@@ -210,7 +210,7 @@
             this.txtTipo.Location = new System.Drawing.Point(219, 25);
             this.txtTipo.Name = "txtTipo";
             this.txtTipo.Size = new System.Drawing.Size(356, 26);
-            this.txtTipo.TabIndex = 3;
+            this.txtTipo.TabIndex = 0;
             // 
             // label3
             // 
@@ -260,7 +260,7 @@
             this.btnModificar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnModificar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(84, 22);
+            this.btnModificar.Size = new System.Drawing.Size(84, 21);
             this.btnModificar.Text = "Modificar";
             this.btnModificar.ToolTipText = "Modificar el tipo de habitación seleccionado";
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
@@ -273,7 +273,7 @@
             this.btnActDesactivar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnActDesactivar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnActDesactivar.Name = "btnActDesactivar";
-            this.btnActDesactivar.Size = new System.Drawing.Size(132, 22);
+            this.btnActDesactivar.Size = new System.Drawing.Size(132, 21);
             this.btnActDesactivar.Text = "Activar/Desactivar";
             this.btnActDesactivar.ToolTipText = "Activar/Desactivar el tipo de habitación seleccionado";
             this.btnActDesactivar.Click += new System.EventHandler(this.btnActDesactivar_Click);
@@ -286,7 +286,7 @@
             this.btnEliminar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(74, 22);
+            this.btnEliminar.Size = new System.Drawing.Size(74, 21);
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.ToolTipText = "Eliminar el tipo de habitación seleccionado";
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);

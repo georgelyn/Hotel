@@ -22,6 +22,7 @@ namespace Hotel
         Msg msg;
 
         List<String> idVehiculo; // Toma valor en CargarVehiculosPorCedula
+        List<String> nombreCliente;
 
         private void CargarCedulas()
         {
@@ -32,14 +33,17 @@ namespace Hotel
 
                 using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
                 {
-                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT DISTINCT Cedula FROM Clientes INNER JOIN Vehiculos ON Cedula=Cliente_Cedula", conn))
+                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT Cedula, Nombre FROM Clientes INNER JOIN Vehiculos ON Cedula=Cliente_Cedula GROUP BY Nombre", conn))
                     {
+                        nombreCliente = new List<string>();
+                        nombreCliente.Clear();
                         conn.Open();
 
                         using (SQLiteDataReader dr = cmd.ExecuteReader())
                         {
                             while (dr.Read())
                             {
+                                nombreCliente.Add(dr["Nombre"].ToString());
                                 comboCedula.Items.Add(dr["Cedula"].ToString());
                             }
                         }
@@ -201,6 +205,7 @@ namespace Hotel
             checkCamion.Checked = false;
             btnEliminar.Visible = false;
             btnModificar.Visible = false;
+            
             //comboVehiculos.SelectedIndex = -1;
         }
 
@@ -208,17 +213,26 @@ namespace Hotel
         {
             //if (comboVehiculos.SelectedIndex >= 0)
             //{
-                CargarDatosVehiculo(idVehiculo[comboVehiculo.SelectedIndex].ToString());
-                //MessageBox.Show(idVehiculo[comboVehiculos.SelectedIndex].ToString());
 
-                btnEliminar.Visible = true;
-                btnModificar.Visible = true;
+            CargarDatosVehiculo(idVehiculo[comboVehiculo.SelectedIndex].ToString());
+            //MessageBox.Show(idVehiculo[comboVehiculos.SelectedIndex].ToString());
+
+            btnEliminar.Visible = true;
+            btnModificar.Visible = true;
             //}
         }
 
         private void comboCedula_SelectedIndexChanged(object sender, EventArgs e)
         {
             RestaurarCampos();
+            if (!lblCliente.Visible)
+            {
+                lblCliente.Visible = true;
+                lblNombreCliente.Visible = true;
+            }
+
+            lblNombreCliente.Text = nombreCliente[comboCedula.SelectedIndex];
+            
             CargarVehiculosPorCedula(comboCedula.Text, comboVehiculo);
         }
 

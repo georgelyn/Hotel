@@ -45,6 +45,8 @@
             this.comboCedula = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txtNotas = new System.Windows.Forms.RichTextBox();
+            this.lblCliente = new System.Windows.Forms.Label();
+            this.lblNombreCliente = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -73,32 +75,32 @@
             this.comboVehiculo.Location = new System.Drawing.Point(265, 69);
             this.comboVehiculo.Name = "comboVehiculo";
             this.comboVehiculo.Size = new System.Drawing.Size(266, 28);
-            this.comboVehiculo.TabIndex = 0;
+            this.comboVehiculo.TabIndex = 1;
             this.comboVehiculo.SelectedIndexChanged += new System.EventHandler(this.comboVehiculo_SelectedIndexChanged);
             // 
             // checkCamion
             // 
             this.checkCamion.AutoSize = true;
             this.checkCamion.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkCamion.Location = new System.Drawing.Point(525, 145);
+            this.checkCamion.Location = new System.Drawing.Point(525, 172);
             this.checkCamion.Name = "checkCamion";
             this.checkCamion.Size = new System.Drawing.Size(82, 24);
-            this.checkCamion.TabIndex = 49;
+            this.checkCamion.TabIndex = 4;
             this.checkCamion.Text = "Camión";
             this.checkCamion.UseVisualStyleBackColor = true;
             // 
             // txtPlaca
             // 
-            this.txtPlaca.Location = new System.Drawing.Point(330, 144);
+            this.txtPlaca.Location = new System.Drawing.Point(330, 171);
             this.txtPlaca.Name = "txtPlaca";
             this.txtPlaca.Size = new System.Drawing.Size(157, 26);
-            this.txtPlaca.TabIndex = 1;
+            this.txtPlaca.TabIndex = 3;
             // 
             // lblMarca
             // 
             this.lblMarca.AutoSize = true;
             this.lblMarca.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMarca.Location = new System.Drawing.Point(35, 146);
+            this.lblMarca.Location = new System.Drawing.Point(35, 173);
             this.lblMarca.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblMarca.Name = "lblMarca";
             this.lblMarca.Size = new System.Drawing.Size(57, 20);
@@ -107,23 +109,23 @@
             // 
             // txtModelo
             // 
-            this.txtModelo.Location = new System.Drawing.Point(103, 196);
+            this.txtModelo.Location = new System.Drawing.Point(103, 214);
             this.txtModelo.Name = "txtModelo";
             this.txtModelo.Size = new System.Drawing.Size(384, 26);
-            this.txtModelo.TabIndex = 2;
+            this.txtModelo.TabIndex = 5;
             // 
             // txtMarca
             // 
-            this.txtMarca.Location = new System.Drawing.Point(103, 143);
+            this.txtMarca.Location = new System.Drawing.Point(103, 170);
             this.txtMarca.Name = "txtMarca";
             this.txtMarca.Size = new System.Drawing.Size(156, 26);
-            this.txtMarca.TabIndex = 0;
+            this.txtMarca.TabIndex = 2;
             // 
             // lblModelo
             // 
             this.lblModelo.AutoSize = true;
             this.lblModelo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblModelo.Location = new System.Drawing.Point(35, 199);
+            this.lblModelo.Location = new System.Drawing.Point(35, 217);
             this.lblModelo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblModelo.Name = "lblModelo";
             this.lblModelo.Size = new System.Drawing.Size(65, 20);
@@ -134,7 +136,7 @@
             // 
             this.lblPlaca.AutoSize = true;
             this.lblPlaca.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPlaca.Location = new System.Drawing.Point(271, 146);
+            this.lblPlaca.Location = new System.Drawing.Point(271, 173);
             this.lblPlaca.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPlaca.Name = "lblPlaca";
             this.lblPlaca.Size = new System.Drawing.Size(52, 20);
@@ -146,7 +148,7 @@
             this.btnModificar.Location = new System.Drawing.Point(424, 6);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(95, 35);
-            this.btnModificar.TabIndex = 58;
+            this.btnModificar.TabIndex = 0;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = true;
             this.btnModificar.Visible = false;
@@ -157,7 +159,7 @@
             this.btnCancelar.Location = new System.Drawing.Point(525, 6);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(95, 35);
-            this.btnCancelar.TabIndex = 59;
+            this.btnCancelar.TabIndex = 1;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
@@ -172,7 +174,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 357);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(632, 51);
-            this.panel1.TabIndex = 60;
+            this.panel1.TabIndex = 7;
             // 
             // btnEliminar
             // 
@@ -182,7 +184,7 @@
             this.btnEliminar.Location = new System.Drawing.Point(16, 6);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(87, 34);
-            this.btnEliminar.TabIndex = 60;
+            this.btnEliminar.TabIndex = 2;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = false;
             this.btnEliminar.Visible = false;
@@ -195,14 +197,14 @@
             this.comboCedula.Location = new System.Drawing.Point(336, 25);
             this.comboCedula.Name = "comboCedula";
             this.comboCedula.Size = new System.Drawing.Size(195, 28);
-            this.comboCedula.TabIndex = 61;
+            this.comboCedula.TabIndex = 0;
             this.comboCedula.SelectedIndexChanged += new System.EventHandler(this.comboCedula_SelectedIndexChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(35, 248);
+            this.label2.Location = new System.Drawing.Point(35, 260);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(55, 20);
@@ -211,17 +213,43 @@
             // 
             // txtNotas
             // 
-            this.txtNotas.Location = new System.Drawing.Point(103, 245);
+            this.txtNotas.Location = new System.Drawing.Point(103, 257);
             this.txtNotas.Name = "txtNotas";
             this.txtNotas.Size = new System.Drawing.Size(384, 73);
-            this.txtNotas.TabIndex = 63;
+            this.txtNotas.TabIndex = 6;
             this.txtNotas.Text = "";
+            // 
+            // lblCliente
+            // 
+            this.lblCliente.AutoSize = true;
+            this.lblCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCliente.Location = new System.Drawing.Point(32, 124);
+            this.lblCliente.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblCliente.Name = "lblCliente";
+            this.lblCliente.Size = new System.Drawing.Size(60, 16);
+            this.lblCliente.TabIndex = 63;
+            this.lblCliente.Text = "Cliente:";
+            this.lblCliente.Visible = false;
+            // 
+            // lblNombreCliente
+            // 
+            this.lblNombreCliente.AutoSize = true;
+            this.lblNombreCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNombreCliente.Location = new System.Drawing.Point(100, 124);
+            this.lblNombreCliente.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblNombreCliente.Name = "lblNombreCliente";
+            this.lblNombreCliente.Size = new System.Drawing.Size(108, 16);
+            this.lblNombreCliente.TabIndex = 64;
+            this.lblNombreCliente.Text = "nombreCliente";
+            this.lblNombreCliente.Visible = false;
             // 
             // Vehiculo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(632, 408);
+            this.Controls.Add(this.lblNombreCliente);
+            this.Controls.Add(this.lblCliente);
             this.Controls.Add(this.txtNotas);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.comboCedula);
@@ -269,5 +297,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.RichTextBox txtNotas;
         internal System.Windows.Forms.ComboBox comboCedula;
+        private System.Windows.Forms.Label lblCliente;
+        private System.Windows.Forms.Label lblNombreCliente;
     }
 }
