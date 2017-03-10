@@ -23,15 +23,12 @@ namespace Hotel
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.Hide();
-            Inicio inicio = new Inicio();
-            if (inicio.ShowDialog() == DialogResult.OK)
-            {
-                this.Show();
-            }
-
+            //this.Hide();
             //Inicio inicio = new Inicio();
-            //inicio.ShowDialog();
+            //if (inicio.ShowDialog() == DialogResult.OK)
+            //{
+            //    this.Show();
+            //}
         }
 
         // Clases
@@ -42,7 +39,7 @@ namespace Hotel
         Msg msg;
 
         Color disponible = Color.Green;
-        Color inactiva = Color.LightGray;
+        Color inactiva = Color.Gainsboro;
         Color limpieza = Color.LightCyan;
         Color mantenimiento = Color.DarkKhaki;
         Color ocupada = Color.Red;
@@ -110,6 +107,7 @@ namespace Hotel
                                         {
                                             //b.FlatStyle = FlatStyle.System;
                                             b.BackColor = inactiva;
+                                            b.ForeColor = inactiva;
                                             b.Enabled = false;
                                             //b.BackColor = Color.DarkGray;
                                         }
@@ -388,6 +386,7 @@ namespace Hotel
                         if (CambiarEstadoHabitacion(true, "inactiva", btn.Name.Remove(0, 6)))
                         {
                             //btn.FlatStyle = FlatStyle.System;
+                            btn.ForeColor = inactiva;
                             btn.BackColor = inactiva;
                             btn.Enabled = false;
                         }
@@ -403,6 +402,7 @@ namespace Hotel
                 if (CambiarEstadoHabitacion(false, "inactiva", btn.Name.Remove(0, 6)))
                 {
                     //btn.FlatStyle = FlatStyle.System;
+                    btn.ForeColor = inactiva;
                     btn.BackColor = inactiva;
                     btn.Enabled = false;
                 }
@@ -430,6 +430,7 @@ namespace Hotel
                         {
                             //btn.FlatStyle = FlatStyle.Flat;
                             btn.BackColor = disponible;
+                            btn.ForeColor = Color.Black;
                             btn.Enabled = true;
                         }
                     }

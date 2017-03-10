@@ -204,7 +204,10 @@ namespace Hotel
                                 txtTelefono2.Text = dr["TelefonoExtra"].ToString();
                                 txtNotas.Text = dr["Notas"].ToString();
 
-                                dtClienteDesde.Value = Convert.ToDateTime(dr["ClienteDesde"].ToString());
+                                //dtClienteDesde.Value = Convert.ToDateTime(dr["ClienteDesde"].ToString());
+                                var dt = DateTime.Parse(dr["ClienteDesde"].ToString());
+                                lblClienteDesde.Text = dt.ToString("dd/MMM/yyyy");
+                                panelClienteDesde.Visible = true;
 
                                 if (int.Parse(dr["vehiculos"].ToString()) > 0)
                                 {
@@ -415,6 +418,13 @@ namespace Hotel
                     btnEliminar.Enabled = false;
                     btnEliminar.ForeColor = Color.Black;
                     btnEliminar.BackColor = Color.Transparent;
+
+                    label5.Visible = false; // Reservaciones
+                    btnVerReservaciones.Visible = false;
+                    lblReservaciones.Visible = false;
+                    label3.Visible = false; // Vehículos almacenados
+                    btnVerVehiculos.Visible = false;
+                    lblVehiculos.Visible = false;
                 }
                 else
                 {
@@ -422,9 +432,16 @@ namespace Hotel
                     btnEliminar.Enabled = true;
                     btnEliminar.ForeColor = Color.White;
                     btnEliminar.BackColor = Color.Red;
+
+                    label5.Visible = true; // Reservaciones
+                    btnVerReservaciones.Visible = true;
+                    lblReservaciones.Visible = true;
+                    label3.Visible = true; // Vehículos almacenados
+                    btnVerVehiculos.Visible = true;
+                    lblVehiculos.Visible = true;
                 }
             }
-            else
+            else // Habitaciones ocupadas
             {
                 btnNuevoCliente.Visible = false;
                 //btnModificar.Visible = false;
@@ -456,8 +473,11 @@ namespace Hotel
             //label9.Visible = false;
             label10.Visible = false;
             label11.Visible = false;
+            btnVerReservacion.Visible = false;
 
             listboxReservaciones.Visible = false;
+
+            panelClienteDesde.Visible = false;
 
         }
 

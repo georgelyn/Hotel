@@ -71,6 +71,10 @@ namespace Hotel
                     }
                 }
             }
+            else
+            {
+                label2.ForeColor = Color.Red;
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)

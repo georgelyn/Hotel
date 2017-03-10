@@ -652,7 +652,7 @@
             // 
             this.txtEdad.Location = new System.Drawing.Point(409, 169);
             this.txtEdad.Name = "txtEdad";
-            this.txtEdad.Size = new System.Drawing.Size(77, 26);
+            this.txtEdad.Size = new System.Drawing.Size(61, 26);
             this.txtEdad.TabIndex = 2;
             this.txtEdad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtEdad_KeyPress);
             // 
