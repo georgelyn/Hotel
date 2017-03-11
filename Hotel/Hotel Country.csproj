@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CrearBaseDatos.cs" />
     <Compile Include="ListViewColumnSorter.cs" />
     <Compile Include="Cliente.cs">
       <SubType>Form</SubType>
