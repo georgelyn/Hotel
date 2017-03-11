@@ -12,7 +12,7 @@ namespace Hotel
             InitializeComponent();
 
             // Llamada a métodos
-            ActualizarColores();
+            //ActualizarColores();
 
             foreach (Button b in tableLayoutPanel1.Controls)
             {
@@ -23,12 +23,75 @@ namespace Hotel
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //this.Hide();
-            //Inicio inicio = new Inicio();
-            //if (inicio.ShowDialog() == DialogResult.OK)
-            //{
-            //    this.Show();
-            //}
+            this.Hide();
+
+            if (OperacionesSQLite.ProbarConexion()) // Conexión exitosa
+            {
+                Inicio inicio = new Inicio();
+                if (inicio.ShowDialog() == DialogResult.OK)
+                {
+                    ActualizarColores();
+                    this.Show();
+                }
+            }
+            else // No se pudo conectar con la base de datos
+            {
+                msg = new Msg();
+
+                msg.button1.Text = "Restablecer";
+                msg.button1.Size = new Size(91, 29);
+                msg.button1.Location = new Point(242, 113);
+                msg.button2.Text = "Restaurar";
+                msg.button2.Size = new Size(89, 29);
+                msg.button2.Location = new Point(337, 113);
+
+                msg.lblMsg.Text = "No se pudo acceder a la base de datos.\n¿Desea restablecerla o restaurar una copia?";
+                DialogResult dlgres = msg.ShowDialog();
+                {
+                    if (dlgres == DialogResult.Yes) // Restablecer
+                    {
+                        if (OperacionesSQLite.CrearBaseDeDatos()) // Se puedo crear la base de datos
+                        {
+                            //MessageBox.Show("La base de datos ha sido restablecida.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            Inicio inicio = new Inicio();
+                            if (inicio.ShowDialog() == DialogResult.OK)
+                            {
+                                ActualizarColores();
+                                this.Show();
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("La aplicación se va a cerrar. Puede intentarlo nuevamente.\n\nNota: Si sigue apareciendo este mensaje, es mejor llamar a Georgelyn. :>", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            Close();
+                        }
+                    }
+                    else if (dlgres == DialogResult.No) // Restaurar una copia
+                    {
+                        OperacionesSQLite.Eliminar(); // SQLite al no encontrar el archivo, lo vuelve a crear. Así elimino el vacío.
+
+                        if (OperacionesSQLite.RestaurarCopia())
+                        {
+                            //Inicio inicio = new Inicio();
+                            //if (inicio.ShowDialog() == DialogResult.OK)
+                            //{
+                            //    ActualizarColores();
+                            //    this.Show();
+                            //}
+                            MessageBox.Show("La aplicación se cerrará. Por favor, vuelva a abrirla.", "Copia restaurada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            Close();
+                        }
+                    }
+                    else
+                    {
+                        this.Close();
+                    }
+
+                }
+            }
         }
 
         // Clases
@@ -225,7 +288,6 @@ namespace Hotel
             //MessageBox.Show(((Button)sender).Name + " was pressed!");
         }
 
-
         private void button55_Click(object sender, EventArgs e)
         {
             ActivarTimerEspera();
@@ -412,9 +474,6 @@ namespace Hotel
 
         private void tableLayoutPanel1_MouseClick(object sender, MouseEventArgs e)
         {
-            //MessageBox.Show("e.Location: " + e.Location.ToString() + "\nButton52.Location: " + button52.Location +
-            //    "\n\n Button52.ClientRectangle: " + button52.ClientRectangle + "\n\n Contains(e.Location): " + button52.ClientRectangle.Contains(e.Location));
-
             Button btn = (Button)tableLayoutPanel1.GetChildAtPoint(e.Location);
 
             if (btn != null && !btn.Enabled)
@@ -440,43 +499,6 @@ namespace Hotel
                     }
                 }
             }
-
-            //Point ubicacionClick = new Point(e.Location.X, e.Location.Y);
-            //Point ubicacionBoton = new Point(btn.Location.X, btn.Location.Y);
-
-            //int ubicacionClickX = ubicacionClick.X;
-            //int ubicacionClickY = ubicacionClick.Y;
-
-            //int ubicacionBotonX = button52.Location.X;
-            //int ubicacionBotonY = button52.Location.Y;
-
-            //if (ubicacionClickX >= ubicacionBotonX && ubicacionBotonY <= ubicacionClickY)
-            //{
-            //    if (!btn.Enabled)
-            //    {
-            //        btn.Enabled = true;
-            //    }
-
-            //}
-
-            //MessageBox.Show($"ubicacionClick: {ubicacionClick} \n\nubicaciónBoton: {ubicacionBoton}");
-
-            //if (ubicacionClick.Equals(ubicacionBoton))
-            //{
-            //    MessageBox.Show("Hola");
-            //}
-
-
-            //if (button52.ClientRectangle.Contains(button52.PointToClient(e.Location)))
-            //{
-            //    MessageBox.Show("Hola");
-            //}
-
-            //if (button53.ClientRectangle.Contains(e.Location))
-            //{
-            //    MessageBox.Show("Hola");
-            //    gridPSR.Enabled = true;
-            //}
         }
 
         private void timer2_Tick(object sender, EventArgs e)
@@ -530,6 +552,44 @@ namespace Hotel
             {
                 Seguridad seguridad = new Seguridad();
                 seguridad.ShowDialog();
+            }
+        }
+
+        private void restablecerBaseDeDatosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            msg = new Msg();
+            msg.lblMsg.Text = "Al restablecer la base de datos, perderá los datos actuales.\n¿Seguro desea hacer eso?";
+            DialogResult dlgres = msg.ShowDialog();
+            if (dlgres == DialogResult.Yes)
+            {
+                ActivarTimerEspera();
+                OperacionesSQLite.Restablecer();
+                ActualizarColores();
+            }
+        }
+
+        private void respaldarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OperacionesSQLite.HacerCopia();
+        }
+
+        private void restaurarCopiaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (OperacionesSQLite.RestaurarCopia())
+            {
+                MessageBox.Show("La aplicación se cerrará. Por favor, vuelva a abrirla.", "Copia restaurada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ActualizarColores();
+            }
+        }
+
+        private void cargoPorCamiónToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Login login = new Login();
+
+            if (login.ShowDialog() == DialogResult.OK)
+            {
+                Ajustes ajustes = new Ajustes();
+                ajustes.ShowDialog();
             }
         }
     }

@@ -108,12 +108,12 @@ namespace Hotel
             }
             else if (opcion == "buscar")
             {
-                query = "SELECT *, COUNT(r.ID) AS reservaciones FROM Clientes LEFT JOIN Reservaciones r ON Cedula = Cliente_Cedula WHERE Nombre LIKE '%" + txtBuscar.Text.Trim() + "%' OR Apellido LIKE '%" + txtBuscar.Text.Trim() + "%' OR Cedula LIKE '%" + txtBuscar.Text.Trim().Replace(".", "").Replace(",", "").Replace("-", "") + "%' GROUP BY Nombre";
+                query = "SELECT *, COUNT(r.ID) AS reservaciones FROM Clientes LEFT JOIN Reservaciones r ON Cedula = Cliente_Cedula WHERE Nombre LIKE '%" + txtBuscar.Text.Trim() + "%' OR Cedula LIKE '%" + txtBuscar.Text.Trim().Replace(".", "").Replace(",", "").Replace("-", "") + "%' GROUP BY Nombre";
                 //nombre like '%" + txtBuscar.Text.Trim()  + "% ' or apellido like '%" + txtBuscar.Text.Trim()  + "% ' or cedula like '%" + txtBuscar.Text.Trim() + "% ' GROUP BY nombre ORDER BY id";
             }
             else if (opcion == "habitacion")
             {
-                query = "SELECT Reservaciones.ID as reservacionID, Clientes.ID as id, NumeroHabitacion, Nombre, Apellido, Cedula, FechaIngreso FROM Clientes INNER JOIN Reservaciones ON Cedula = Cliente_Cedula ORDER BY NumeroHabitacion";
+                query = "SELECT Reservaciones.ID as reservacionID, Clientes.ID as id, NumeroHabitacion, Nombre, Cedula, FechaIngreso FROM Clientes INNER JOIN Reservaciones ON Cedula = Cliente_Cedula ORDER BY NumeroHabitacion";
                 toolStripComboBox1.SelectedIndex = 2;
             }
 

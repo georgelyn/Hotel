@@ -13,7 +13,7 @@ namespace Hotel
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new SQLite());
+            Application.Run(new Form1());
 
             //Inicio inicio = new Inicio();
             //if (inicio.ShowDialog() == DialogResult.OK)

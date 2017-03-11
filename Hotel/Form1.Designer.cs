@@ -53,6 +53,7 @@
             this.contraseñasDelSistemaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tiposDeHabitacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.baseDeDatosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.restablecerBaseDeDatosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.respaldarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.restaurarCopiaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -363,6 +364,7 @@
             this.cargoPorCamiónToolStripMenuItem.Name = "cargoPorCamiónToolStripMenuItem";
             this.cargoPorCamiónToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
             this.cargoPorCamiónToolStripMenuItem.Text = "Cargo por camión";
+            this.cargoPorCamiónToolStripMenuItem.Click += new System.EventHandler(this.cargoPorCamiónToolStripMenuItem_Click);
             // 
             // contraseñasDelSistemaToolStripMenuItem
             // 
@@ -381,23 +383,33 @@
             // baseDeDatosToolStripMenuItem
             // 
             this.baseDeDatosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.restablecerBaseDeDatosToolStripMenuItem,
             this.respaldarToolStripMenuItem,
             this.restaurarCopiaToolStripMenuItem});
             this.baseDeDatosToolStripMenuItem.Name = "baseDeDatosToolStripMenuItem";
             this.baseDeDatosToolStripMenuItem.Size = new System.Drawing.Size(114, 20);
             this.baseDeDatosToolStripMenuItem.Text = "&Base de datos";
             // 
+            // restablecerBaseDeDatosToolStripMenuItem
+            // 
+            this.restablecerBaseDeDatosToolStripMenuItem.Name = "restablecerBaseDeDatosToolStripMenuItem";
+            this.restablecerBaseDeDatosToolStripMenuItem.Size = new System.Drawing.Size(280, 22);
+            this.restablecerBaseDeDatosToolStripMenuItem.Text = "< Restablecer base de datos >";
+            this.restablecerBaseDeDatosToolStripMenuItem.Click += new System.EventHandler(this.restablecerBaseDeDatosToolStripMenuItem_Click);
+            // 
             // respaldarToolStripMenuItem
             // 
             this.respaldarToolStripMenuItem.Name = "respaldarToolStripMenuItem";
-            this.respaldarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.respaldarToolStripMenuItem.Size = new System.Drawing.Size(280, 22);
             this.respaldarToolStripMenuItem.Text = "Crear una copia";
+            this.respaldarToolStripMenuItem.Click += new System.EventHandler(this.respaldarToolStripMenuItem_Click);
             // 
             // restaurarCopiaToolStripMenuItem
             // 
             this.restaurarCopiaToolStripMenuItem.Name = "restaurarCopiaToolStripMenuItem";
-            this.restaurarCopiaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.restaurarCopiaToolStripMenuItem.Size = new System.Drawing.Size(280, 22);
             this.restaurarCopiaToolStripMenuItem.Text = "Restaurar copia";
+            this.restaurarCopiaToolStripMenuItem.Click += new System.EventHandler(this.restaurarCopiaToolStripMenuItem_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -1546,6 +1558,7 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.ToolStripMenuItem restablecerBaseDeDatosToolStripMenuItem;
     }
 }
 
