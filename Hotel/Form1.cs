@@ -592,5 +592,11 @@ namespace Hotel
                 ajustes.ShowDialog();
             }
         }
+
+        private void acercadeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Acerca acerca = new Acerca();
+            acerca.ShowDialog();
+        }
     }
 }

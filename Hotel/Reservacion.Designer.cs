@@ -314,7 +314,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.ForeColor = System.Drawing.Color.Red;
-            this.label7.Location = new System.Drawing.Point(627, 137);
+            this.label7.Location = new System.Drawing.Point(627, 140);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(15, 20);
@@ -681,7 +681,7 @@
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(119, 134);
+            this.txtNombre.Location = new System.Drawing.Point(119, 137);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(501, 26);
             this.txtNombre.TabIndex = 0;
@@ -699,7 +699,7 @@
             // lblNombre
             // 
             this.lblNombre.AutoSize = true;
-            this.lblNombre.Location = new System.Drawing.Point(43, 137);
+            this.lblNombre.Location = new System.Drawing.Point(43, 140);
             this.lblNombre.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNombre.Name = "lblNombre";
             this.lblNombre.Size = new System.Drawing.Size(69, 20);

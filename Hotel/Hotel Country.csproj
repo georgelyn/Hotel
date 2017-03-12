@@ -49,6 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Acerca.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Acerca.Designer.cs">
+      <DependentUpon>Acerca.cs</DependentUpon>
+    </Compile>
     <Compile Include="Ajustes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -126,6 +132,9 @@
     <Compile Include="Vehiculo.Designer.cs">
       <DependentUpon>Vehiculo.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Acerca.resx">
+      <DependentUpon>Acerca.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Ajustes.resx">
       <DependentUpon>Ajustes.cs</DependentUpon>
     </EmbeddedResource>
@@ -218,6 +227,9 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HC.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
