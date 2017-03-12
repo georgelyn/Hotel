@@ -27,12 +27,12 @@ namespace Hotel
 
             if (OperacionesSQLite.ProbarConexion()) // Conexión exitosa
             {
-                Inicio inicio = new Inicio();
-                if (inicio.ShowDialog() == DialogResult.OK)
-                {
+                //Inicio inicio = new Inicio();
+                //if (inicio.ShowDialog() == DialogResult.OK)
+                //{
                     ActualizarColores();
-                    this.Show();
-                }
+                //    this.Show();
+                //}
             }
             else // No se pudo conectar con la base de datos
             {

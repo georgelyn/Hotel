@@ -50,6 +50,8 @@ namespace Hotel
         List<String> idVehiculo; // Para almacenar los IDs de cada vehículo del cliente
         int numeroVehiculos = 0; // Útil para llevar cuenta de cuántos vehículos tiene registrado el cliente.
 
+        int diasReservados = 1;
+
         /* 
         ** METODOS
         */
@@ -776,6 +778,7 @@ namespace Hotel
                                     if (checkCamion.Checked)
                                         total += montoCamion;
                                     //txtTotal.Text = total.ToString();
+                                    total *= diasReservados;
                                     txtTotal.Text = string.Format(new CultureInfo("es-VE"), "{0:#,##0.00}", total);
                                 }
                             }
@@ -990,6 +993,45 @@ namespace Hotel
 
             lblAvisoVehiculo.Visible = false;
             linklblNuevoVehiculo.Visible = false;
+        }
+
+        private void dtSalida_ValueChanged(object sender, EventArgs e)
+        {
+            ////if (dtSalida.Value.Month == dtEntrada.Value.Month)
+            ////{
+            ////    if (dtSalida.Value.Day > dtEntrada.Value.Day)
+            ////    {
+            ////        total /= diasReservados;
+            ////        diasReservados = dtSalida.Value.Day - dtEntrada.Value.Day;
+
+            ////        total *= diasReservados;
+            ////        txtTotal.Text = String.Format(new CultureInfo("es-VE"), "{0:#,##0.00}", total);
+            ////    }
+            ////}
+
+            if (dtSalida.Value.Day > dtEntrada.Value.Day)
+            {
+                if (checkCamion.Checked) // Feo... pero funciona
+                {
+                    total -= montoCamion; // Le quito el monto, para que no lo tome en cuenta al dividir
+                }
+                total /= diasReservados;
+                diasReservados = Convert.ToInt32((dtSalida.Value - dtEntrada.Value).TotalDays);
+
+                total *= diasReservados;
+                if (checkCamion.Checked) // ^ Ahora le vuelvo a agregar el cargo por camión
+                {
+                    total += montoCamion;
+                }
+                txtTotal.Text = String.Format(new CultureInfo("es-VE"), "{0:#,##0.00}", total);
+            }
+            else // Si trata de asignar una fecha igual o inferior al de entrada, no le dejo
+            {
+                dtSalida.Value = dtEntrada.Value.AddDays(1);
+            }
+
+
+
         }
     }
 }

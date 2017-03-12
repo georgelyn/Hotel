@@ -397,6 +397,7 @@
             this.dtSalida.Size = new System.Drawing.Size(149, 26);
             this.dtSalida.TabIndex = 17;
             this.dtSalida.Value = new System.DateTime(2017, 2, 16, 14, 0, 0, 0);
+            this.dtSalida.ValueChanged += new System.EventHandler(this.dtSalida_ValueChanged);
             // 
             // lblHab
             // 
