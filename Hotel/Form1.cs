@@ -119,7 +119,6 @@ namespace Hotel
 
             try
             {
-
                 using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
                 {
                     using (SQLiteCommand cmd = new SQLiteCommand("SELECT NumeroHabitacion, Estado FROM Habitaciones", conn))
@@ -597,6 +596,12 @@ namespace Hotel
         {
             Acerca acerca = new Acerca();
             acerca.ShowDialog();
+        }
+
+        private void timer3_Tick(object sender, EventArgs e)
+        {
+            ActualizarColores();
+            timer3.Start();
         }
     }
 }
