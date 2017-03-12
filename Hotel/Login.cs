@@ -70,6 +70,7 @@ namespace Hotel
             else
             {
                 label2.ForeColor = Color.Red;
+                txtContrasena.Select();
             }
         }
 

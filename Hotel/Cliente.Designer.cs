@@ -118,10 +118,11 @@
             // 
             // btnModificar
             // 
+            this.btnModificar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.btnModificar.Image = ((System.Drawing.Image)(resources.GetObject("btnModificar.Image")));
             this.btnModificar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(93, 24);
+            this.btnModificar.Size = new System.Drawing.Size(77, 24);
             this.btnModificar.Text = "Modificar";
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
@@ -241,7 +242,7 @@
             this.btnNuevaReservacion.ForeColor = System.Drawing.Color.White;
             this.btnNuevaReservacion.Location = new System.Drawing.Point(17, 7);
             this.btnNuevaReservacion.Name = "btnNuevaReservacion";
-            this.btnNuevaReservacion.Size = new System.Drawing.Size(163, 36);
+            this.btnNuevaReservacion.Size = new System.Drawing.Size(161, 36);
             this.btnNuevaReservacion.TabIndex = 8;
             this.btnNuevaReservacion.Text = "Nueva reservación";
             this.btnNuevaReservacion.UseVisualStyleBackColor = false;
@@ -603,6 +604,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Cliente";

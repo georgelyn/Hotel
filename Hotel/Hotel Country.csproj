@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Bed.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -188,9 +191,6 @@
     <None Include="Resources\eye-icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\warning-icon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\search16.png" />
   </ItemGroup>
   <ItemGroup>
@@ -230,6 +230,48 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\HC.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\browser16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\door-icon16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\car16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Source-Code-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tools-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\key-icon16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Database-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\compose-icon32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\door-icon32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\browser32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\messagebox_warning.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\key-icon32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\car48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Bed.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

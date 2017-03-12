@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Transactions;
-//using System.Globalization;
-//using System.Threading;
 using System.Data.SQLite;
 using System.Drawing;
 using System.Text.RegularExpressions;
@@ -20,7 +18,9 @@ namespace Hotel
             //Thread.CurrentThread.CurrentCulture = new CultureInfo("es-VE");
             InitializeComponent();
 
-            //dtSalida.Value = DateTime.Now.AddDays(1);
+            //dtEntrada.Value = DateTime.UtcNow; // Ocurría un error son esto... 
+            // A las 12 am, el ValueChanged del dtSalida tenía un desajuste en la fecha, como si fuera un día más.
+            // Usando TimeSpan en lugar de TotalDays parece solucionarlo... pero antes me daba la cuenta mal... Seguir probando
 
             // Un día después de fecha actual, con hora 2:00 pm
             DateTime fechaSalida = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 14, 0, 0);
@@ -1016,7 +1016,12 @@ namespace Hotel
                     total -= montoCamion; // Le quito el monto, para que no lo tome en cuenta al dividir
                 }
                 total /= diasReservados;
-                diasReservados = Convert.ToInt32((dtSalida.Value - dtEntrada.Value).TotalDays);
+
+                TimeSpan ts = dtSalida.Value - dtEntrada.Value;
+                diasReservados = ts.Days;
+                //MessageBox.Show(ts.Days.ToString());
+
+                //diasReservados = Convert.ToInt32((dtSalida.Value - dtEntrada.Value).TotalDays);
 
                 total *= diasReservados;
                 if (checkCamion.Checked) // ^ Ahora le vuelvo a agregar el cargo por camión
@@ -1029,7 +1034,6 @@ namespace Hotel
             {
                 dtSalida.Value = dtEntrada.Value.AddDays(1);
             }
-
 
 
         }

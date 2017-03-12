@@ -47,7 +47,9 @@
             this.txtNotas = new System.Windows.Forms.RichTextBox();
             this.lblCliente = new System.Windows.Forms.Label();
             this.lblNombreCliente = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -243,11 +245,21 @@
             this.lblNombreCliente.Text = "nombreCliente";
             this.lblNombreCliente.Visible = false;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::Hotel.Properties.Resources.car48;
+            this.pictureBox1.Location = new System.Drawing.Point(25, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(50, 49);
+            this.pictureBox1.TabIndex = 65;
+            this.pictureBox1.TabStop = false;
+            // 
             // Vehiculo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(632, 408);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.lblNombreCliente);
             this.Controls.Add(this.lblCliente);
             this.Controls.Add(this.txtNotas);
@@ -270,9 +282,11 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Vehiculo";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Vehículos almacenados";
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -299,5 +313,6 @@
         internal System.Windows.Forms.ComboBox comboCedula;
         private System.Windows.Forms.Label lblCliente;
         private System.Windows.Forms.Label lblNombreCliente;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

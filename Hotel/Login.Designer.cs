@@ -37,7 +37,6 @@
             this.lblUsuario = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.linklblAyuda = new System.Windows.Forms.LinkLabel();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -84,11 +83,14 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(197, 7);
+            this.button1.Image = global::Hotel.Properties.Resources.key_icon16;
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button1.Location = new System.Drawing.Point(191, 7);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(85, 30);
+            this.button1.Size = new System.Drawing.Size(91, 30);
             this.button1.TabIndex = 0;
             this.button1.Text = "Aceptar";
+            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -128,24 +130,12 @@
             this.panel3.Size = new System.Drawing.Size(10, 136);
             this.panel3.TabIndex = 5;
             // 
-            // linklblAyuda
-            // 
-            this.linklblAyuda.AutoSize = true;
-            this.linklblAyuda.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linklblAyuda.Location = new System.Drawing.Point(296, 12);
-            this.linklblAyuda.Name = "linklblAyuda";
-            this.linklblAyuda.Size = new System.Drawing.Size(47, 16);
-            this.linklblAyuda.TabIndex = 6;
-            this.linklblAyuda.TabStop = true;
-            this.linklblAyuda.Text = "Ayuda";
-            // 
             // Login
             // 
             this.AcceptButton = this.button1;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(385, 206);
-            this.Controls.Add(this.linklblAyuda);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.lblUsuario);
@@ -178,6 +168,5 @@
         private System.Windows.Forms.Label lblUsuario;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.LinkLabel linklblAyuda;
     }
 }

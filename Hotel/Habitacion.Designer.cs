@@ -241,52 +241,55 @@
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAgregar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnAgregar.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAgregar.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregar.Image")));
             this.btnAgregar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnAgregar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnAgregar.Size = new System.Drawing.Size(86, 21);
+            this.btnAgregar.Size = new System.Drawing.Size(67, 24);
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.ToolTipText = "Agregar un nuevo tipo de habitación";
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // btnModificar
             // 
+            this.btnModificar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.btnModificar.Enabled = false;
-            this.btnModificar.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnModificar.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnModificar.Image = ((System.Drawing.Image)(resources.GetObject("btnModificar.Image")));
             this.btnModificar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnModificar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(84, 21);
+            this.btnModificar.Size = new System.Drawing.Size(77, 24);
             this.btnModificar.Text = "Modificar";
             this.btnModificar.ToolTipText = "Modificar el tipo de habitación seleccionado";
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
             // btnActDesactivar
             // 
+            this.btnActDesactivar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.btnActDesactivar.Enabled = false;
-            this.btnActDesactivar.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnActDesactivar.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnActDesactivar.Image = ((System.Drawing.Image)(resources.GetObject("btnActDesactivar.Image")));
             this.btnActDesactivar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnActDesactivar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnActDesactivar.Name = "btnActDesactivar";
-            this.btnActDesactivar.Size = new System.Drawing.Size(132, 21);
+            this.btnActDesactivar.Size = new System.Drawing.Size(134, 24);
             this.btnActDesactivar.Text = "Activar/Desactivar";
             this.btnActDesactivar.ToolTipText = "Activar/Desactivar el tipo de habitación seleccionado";
             this.btnActDesactivar.Click += new System.EventHandler(this.btnActDesactivar_Click);
             // 
             // btnEliminar
             // 
+            this.btnEliminar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.btnEliminar.Enabled = false;
-            this.btnEliminar.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEliminar.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEliminar.Image = ((System.Drawing.Image)(resources.GetObject("btnEliminar.Image")));
             this.btnEliminar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnEliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(74, 21);
+            this.btnEliminar.Size = new System.Drawing.Size(67, 24);
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.ToolTipText = "Eliminar el tipo de habitación seleccionado";
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
@@ -302,7 +305,7 @@
             this.btnMostrarHabitaciones.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnMostrarHabitaciones.Name = "btnMostrarHabitaciones";
             this.btnMostrarHabitaciones.Padding = new System.Windows.Forms.Padding(0, 0, 50, 0);
-            this.btnMostrarHabitaciones.Size = new System.Drawing.Size(186, 21);
+            this.btnMostrarHabitaciones.Size = new System.Drawing.Size(186, 24);
             this.btnMostrarHabitaciones.Text = "Mostrar habitaciones";
             this.btnMostrarHabitaciones.ToolTipText = "Mostrar todos los tipos de habitaciones";
             this.btnMostrarHabitaciones.Click += new System.EventHandler(this.btnMostrarHabitaciones_Click);
@@ -319,8 +322,8 @@
             this.btnMostrarHabitaciones});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 5, 5, 10);
-            this.toolStrip1.Size = new System.Drawing.Size(723, 39);
+            this.toolStrip1.Padding = new System.Windows.Forms.Padding(2, 5, 5, 10);
+            this.toolStrip1.Size = new System.Drawing.Size(723, 42);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -333,6 +336,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Habitacion";
