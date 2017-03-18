@@ -119,7 +119,7 @@ namespace Hotel
                                 "('Cuádruple', '20000', '1'), ('Séxtuple', '25000', '1'), ('Mini-Suite', '25000', '1')";
                             cmd.ExecuteNonQuery();
 
-                            cmd.CommandText = "INSERT INTO Seguridad (User, Password) VALUES ('admin','ra0408'), ('usuario', '2506'), ('admin', 'emergencia')";
+                            cmd.CommandText = "INSERT INTO Seguridad (User, Password) VALUES ('admin','ra0408'), ('usuario', '5093'), ('admin', 'emergencia')";
                             cmd.ExecuteNonQuery();
                         }
 

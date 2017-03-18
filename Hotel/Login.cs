@@ -62,6 +62,7 @@ namespace Hotel
                     if (!errorConexion)
                     {
                         MessageBox.Show("La contraseña ingresada es incorrecta. Por favor, intente nuevamente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        txtContrasena.Clear();
                         txtContrasena.Select();
                         this.DialogResult = DialogResult.None;
                     }

@@ -27,12 +27,12 @@ namespace Hotel
 
             if (OperacionesSQLite.ProbarConexion()) // Conexión exitosa
             {
-                //Inicio inicio = new Inicio();
-                //if (inicio.ShowDialog() == DialogResult.OK)
-                //{
+                Inicio inicio = new Inicio();
+                if (inicio.ShowDialog() == DialogResult.OK)
+                {
                     ActualizarColores();
-                //    this.Show();
-                //}
+                    this.Show();
+                }
             }
             else // No se pudo conectar con la base de datos
             {
@@ -183,8 +183,15 @@ namespace Hotel
             }
             catch (SQLiteException ex)
             {
-                MessageBox.Show("No se pudo conectar con la base de datos. \nDescripción del error: \n\n>> " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
+                //if (ex.ErrorCode == 10) // Disk I/O Error
+                //{
+                //    ActivarTimerEspera();
+                //    ActualizarColores();
+                //}
+                //else
+                //{
+                    MessageBox.Show("No se pudo conectar con la base de datos. \nDescripción del error: \n\n>> " + +ex.ErrorCode + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //}
                 //MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }

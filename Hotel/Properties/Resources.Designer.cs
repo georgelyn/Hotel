@@ -63,9 +63,9 @@ namespace Hotel.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _251_hotel_country_1045 {
+        internal static System.Drawing.Bitmap _20170317_3 {
             get {
-                object obj = ResourceManager.GetObject("251_hotel_country_1045", resourceCulture);
+                object obj = ResourceManager.GetObject("20170317_3", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
