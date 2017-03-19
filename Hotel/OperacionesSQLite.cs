@@ -75,7 +75,7 @@ namespace Hotel
         {
             using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
             {
-                using (SQLiteCommand cmd = new SQLiteCommand("SELECT name FROM sqlite_master WHERE type = 'table' AND name = 'Clientes'", conn))
+                using (SQLiteCommand cmd = new SQLiteCommand("SELECT name FROM sqlite_master WHERE type = 'table' AND name = 'TipoHabitacion'", conn))
                 {
                     conn.Open();
 
@@ -278,7 +278,7 @@ namespace Hotel
             {
                 using (SQLiteConnection conn = new SQLiteConnection(nuevaConexion))
                 {
-                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT name FROM sqlite_master WHERE type = 'table' AND name = 'Clientes'", conn))
+                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT name FROM sqlite_master WHERE type = 'table' AND name = 'TipoHabitacion'", conn))
                     {
                         conn.Open();
 
@@ -307,29 +307,29 @@ namespace Hotel
             return false;
         } 
 
-        private static bool ActualizarConexion(string ubicacion)
-        {
-            try
-            {
-                string stringConnection = "Data Source=" + ubicacion + ";Version=3;New=True;Compress=True;Foreign Keys=ON";
+        //private static bool ActualizarConexion(string ubicacion) // Ya no tengo que actualizarla. El archivo restaurado siempre reemplazará el anterior
+        //{
+        //    try
+        //    {
+        //        string stringConnection = "Data Source=" + ubicacion + ";Version=3;New=True;Compress=True;Foreign Keys=ON";
 
-                Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+        //        Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
 
-                config.ConnectionStrings.ConnectionStrings["connstring"].ConnectionString = stringConnection;
+        //        config.ConnectionStrings.ConnectionStrings["connstring"].ConnectionString = stringConnection;
 
-                config.Save(ConfigurationSaveMode.Modified);
+        //        config.Save(ConfigurationSaveMode.Modified);
 
-                ConfigurationManager.RefreshSection("connectionStrings");
+        //        ConfigurationManager.RefreshSection("connectionStrings");
 
-                return true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("La base de datos no fue restaurada.\n\nDetalles: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+        //        return true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show("La base de datos no fue restaurada.\n\nDetalles: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    }
 
-            return false;
-        }
+        //    return false;
+        //}
 
         public static bool RestaurarCopia()
         {
@@ -353,18 +353,35 @@ namespace Hotel
                     {
                         Msg msg = new Msg();
 
-                        msg.lblMsg.Text = $"¿Está seguro de que desea restaurar la copia?\nNota: Los datos actuales se perderán.";
+                        msg.lblMsg.Text = "¿Está seguro de que desea restaurar la copia?\nNota: Los datos actuales se perderán.";
                         DialogResult dlgres = msg.ShowDialog(new Form() { TopMost = true });
                         {
                             if (dlgres == DialogResult.Yes)
                             {
-                                if (ActualizarConexion(respaldo)) // Se cambiaron los datos
-                                {
-                                    //MessageBox.Show("La base de datos ha sido restaurada.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                    return true;
-                                }
+                                //if (File.Exists(Application.StartupPath + "\\HotelCountry.db"))
+                                //{
+                                //    FileInfo archivoAnterior = new FileInfo(Application.StartupPath + "\\HotelCountry.db");
+                                //    archivoAnterior.CopyTo(Application.StartupPath + "\\HotelCountry-anterior.db", true);
+                                //}
+
+                                FileInfo respaldoBaseDatos = new FileInfo(respaldo);
+                                respaldoBaseDatos.CopyTo(Application.StartupPath + "\\HotelCountry.db", true);
+
+                                MessageBox.Show("La base de datos ha sido restaurada.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                                return true;
+
+                                //if (ActualizarConexion(respaldo)) // Se cambiaron los datos
+                                //{
+                                //    //MessageBox.Show("La base de datos ha sido restaurada.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                //    return true;
+                                //}
                             }
                         }
+                    }
+                    else
+                    {
+                        MessageBox.Show("No es un archivo válido. Verifique e intente nuevanemente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
 
