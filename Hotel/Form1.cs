@@ -78,7 +78,8 @@ namespace Hotel
                             //    ActualizarColores();
                             //    this.Show();
                             //}
-                            MessageBox.Show("La aplicación se cerrará. Por favor, vuelva a abrirla.", "Copia restaurada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("La base de datos ha sido restaurada.\nLa aplicación se cerrará. Por favor, vuelva a abrirla.", "Copia restaurada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            Close();
                         }
                         else
                         {
@@ -583,8 +584,9 @@ namespace Hotel
         {
             if (OperacionesSQLite.RestaurarCopia())
             {
-                MessageBox.Show("La aplicación se cerrará. Por favor, vuelva a abrirla.", "Copia restaurada", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                ActualizarColores();
+                MessageBox.Show("La base de datos ha sido restaurada.\nLa aplicación se cerrará. Por favor, vuelva a abrirla.", "Copia restaurada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Close();
+                //ActualizarColores();
             }
         }
 

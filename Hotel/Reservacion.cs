@@ -18,15 +18,21 @@ namespace Hotel
             //Thread.CurrentThread.CurrentCulture = new CultureInfo("es-VE");
             InitializeComponent();
 
-            dtEntrada.Value = DateTime.UtcNow; // Ocurría un error son esto... 
+            /*dtEntrada.Value = DateTime.UtcNow; */// Ocurría un error son esto... 
             // A las 12 am, el ValueChanged del dtSalida tenía un desajuste en la fecha, como si fuera un día más.
             // Usando TimeSpan en lugar de TotalDays parece solucionarlo... pero antes me daba la cuenta mal... Seguir probando
             // Volví a agregarlo... ya que antes de las 12 no cargaba los montos al cambiar tipo habitación. Seguir probando...
+            // ^ Seguía pasando. Ver *
 
             // Un día después de fecha actual, con hora 2:00 pm
-            DateTime fechaSalida = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 14, 0, 0);
-            fechaSalida = fechaSalida.AddDays(1);
-            dtSalida.Value = fechaSalida;
+            //DateTime fechaSalida = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 14, 0, 0);
+            //fechaSalida = fechaSalida.AddDays(1);
+            //dtSalida.Value = fechaSalida;
+
+            // * Mejor solución, olvidando lo de las 2:00 pm
+
+            dtEntrada.Value = DateTime.Now;
+            dtSalida.Value = dtEntrada.Value.AddDays(1);
 
             // Llamada a métodos
             CargarNumHabitaciones("disponible");

@@ -278,7 +278,7 @@ namespace Hotel
             {
                 using (SQLiteConnection conn = new SQLiteConnection(nuevaConexion))
                 {
-                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT Nombre FROM Clientes", conn))
+                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT name FROM sqlite_master WHERE type = 'table' AND name = 'Clientes'", conn))
                     {
                         conn.Open();
 
@@ -297,7 +297,7 @@ namespace Hotel
             {
                 if (ex.Message.Contains("not a database"))
                 {
-                    MessageBox.Show(new Form() { TopMost = true },"El archivo de base de datos no es válido. Por favor, verifique.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(new Form() { TopMost = true }, "El archivo de base de datos no es válido.\nPor favor, verifique e intente nuevamente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
@@ -347,7 +347,7 @@ namespace Hotel
                 if (dr == DialogResult.OK)
                 {
                     string respaldo = openFileDialog1.FileName;
-                    string nuevaConexion = "Data Source=" + respaldo + ";Version=3;New=True;Compress=True;Foreign Keys=ON";
+                    string nuevaConexion = @"Data Source=" + respaldo + ";Version=3;New=True;Compress=True;Foreign Keys=ON";
 
                     if (ConexionExitosa(nuevaConexion)) // Es un archivo de base de datos válido
                     {
@@ -360,7 +360,7 @@ namespace Hotel
                             {
                                 if (ActualizarConexion(respaldo)) // Se cambiaron los datos
                                 {
-                                    MessageBox.Show("La base de datos ha sido restaurada.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    //MessageBox.Show("La base de datos ha sido restaurada.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                     return true;
                                 }
                             }
