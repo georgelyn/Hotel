@@ -269,6 +269,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Bed.ico" />
+    <None Include="Resources\folder-icon.png" />
     <None Include="Resources\HC20170317_093108.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

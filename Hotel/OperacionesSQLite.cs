@@ -10,6 +10,8 @@ namespace Hotel
 {
     class OperacionesSQLite
     {
+        private static string carpetaRespaldos = ConfigurationManager.AppSettings["CarpetaRespaldos"];
+
         #region Query para crear la base de datos
         private static string queryCrearBaseDatos = @"CREATE TABLE IF NOT EXISTS [Clientes] (
                           [ID] INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -248,11 +250,21 @@ namespace Hotel
 
         public static void HacerCopia()
         {
+            if (String.IsNullOrEmpty(carpetaRespaldos))
+            {
+                carpetaRespaldos = Application.StartupPath;
+
+                if (Directory.Exists(Application.StartupPath + "\\Respaldos"))
+                {
+                    carpetaRespaldos = Application.StartupPath + "\\Respaldos";
+                }
+            }
+
             string fechaActual = DateTime.Now.ToString("yyyy-MM-dd_HH-mm");
             string nombre = "HotelBD-" + fechaActual + ".db";
 
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.InitialDirectory = Application.StartupPath + "\\Respaldos";
+            saveFileDialog1.InitialDirectory = carpetaRespaldos; //Application.StartupPath + "\\Respaldos";
             saveFileDialog1.Filter = "Archivo de base de datos|*.db";
             saveFileDialog1.Title = "Guardar copia de seguridad";
             saveFileDialog1.FileName = nombre;
@@ -340,13 +352,23 @@ namespace Hotel
 
         public static bool RestaurarCopia()
         {
+            if (String.IsNullOrEmpty(carpetaRespaldos))
+            {
+                carpetaRespaldos = Application.StartupPath;
+
+                if (Directory.Exists(Application.StartupPath + "\\Respaldos"))
+                {
+                    carpetaRespaldos = Application.StartupPath + "\\Respaldos";
+                }
+            }
+
             try
             {
                 OpenFileDialog openFileDialog1 = new OpenFileDialog();
 
                 openFileDialog1.Filter = "Archivo de base da datos (*.db, *.sqlite, *.sqlite3) | *.db; *.sqlite; *.sqlite3";
                 openFileDialog1.FilterIndex = 1;
-                openFileDialog1.InitialDirectory = Application.StartupPath + "\\Respaldos";
+                openFileDialog1.InitialDirectory = carpetaRespaldos; //Application.StartupPath + "\\Respaldos";
 
                 openFileDialog1.Multiselect = false;
 
