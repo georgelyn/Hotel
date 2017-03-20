@@ -1029,7 +1029,7 @@ namespace Hotel
                 }
                 total /= diasReservados;
 
-                TimeSpan ts = dtSalida.Value - dtEntrada.Value;
+                TimeSpan ts = dtSalida.Value.Date - dtEntrada.Value.Date; // Sin Date, a una cierta hora (1:00, y 12:00?) no lo cuenta como otro día.
                 diasReservados = ts.Days;
                 //MessageBox.Show(ts.Days.ToString());
 

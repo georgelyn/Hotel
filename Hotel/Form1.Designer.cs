@@ -342,7 +342,7 @@
             this.cargoPorCamiónToolStripMenuItem.Image = global::Hotel.Properties.Resources.tools_icon;
             this.cargoPorCamiónToolStripMenuItem.Name = "cargoPorCamiónToolStripMenuItem";
             this.cargoPorCamiónToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
-            this.cargoPorCamiónToolStripMenuItem.Text = "&Cargo por camión";
+            this.cargoPorCamiónToolStripMenuItem.Text = "&Configuración";
             this.cargoPorCamiónToolStripMenuItem.Click += new System.EventHandler(this.cargoPorCamiónToolStripMenuItem_Click);
             // 
             // contraseñasDelSistemaToolStripMenuItem
