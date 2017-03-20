@@ -84,6 +84,7 @@
             this.txtContrasena.PasswordChar = '*';
             this.txtContrasena.Size = new System.Drawing.Size(146, 26);
             this.txtContrasena.TabIndex = 0;
+            this.txtContrasena.UseSystemPasswordChar = true;
             // 
             // label1
             // 
@@ -119,7 +120,7 @@
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(508, 394);
+            this.label2.Location = new System.Drawing.Point(477, 372);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(184, 14);
             this.label2.TabIndex = 4;
@@ -131,7 +132,7 @@
             this.AcceptButton = this.button2;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::Hotel.Properties.Resources._20170317_3;
+            this.BackgroundImage = global::Hotel.Properties.Resources.HC20170317_093108;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(713, 419);
             this.Controls.Add(this.panel4);

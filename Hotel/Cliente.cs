@@ -27,6 +27,8 @@ namespace Hotel
         ListView lst;
         Vehiculo vehiculo;
         Reservacion reservacion;
+        Form1 f1 = (Form1)Application.OpenForms["Form1"];
+
 
         Font font_verdana = new Font("Verdana", 12);
 
@@ -627,6 +629,8 @@ namespace Hotel
 
         private void lst_MouseDoubleClick(object sender, MouseEventArgs e)
         {
+            f1.ActivarTimerEspera();
+
             if (opcion == "cliente" || opcion == "actual" || opcion == "buscar")
             {
                 btnModificar_Click(null, null);
@@ -673,6 +677,7 @@ namespace Hotel
 
         private void btnVerVehiculos_Click(object sender, EventArgs e)
         {
+
             vehiculo = new Vehiculo();
             //vehiculo.CargarVehiculosPorCedula(txtCedula.Text);
             vehiculo.comboCedula.Text = txtCedula.Text;
@@ -687,6 +692,8 @@ namespace Hotel
             }
             else
             {
+                f1.ActivarTimerEspera();
+
                 CargarReservacionCliente(txtCedula.Text.Trim());
                 label10.Visible = true;
                 label11.Visible = true;
@@ -697,6 +704,8 @@ namespace Hotel
 
         private void listboxReservaciones_MouseDoubleClick(object sender, MouseEventArgs e)
         {
+            f1.ActivarTimerEspera();
+        
             reservacion = new Reservacion();
 
             reservacion.CargarReservacion(int.Parse(listboxReservaciones.Text), "ocupada");
@@ -708,6 +717,8 @@ namespace Hotel
 
         private void btnNuevaReservacion_Click(object sender, EventArgs e)
         {
+            f1.ActivarTimerEspera();
+
             reservacion = new Reservacion();
 
             reservacion.txtCedula.Text = txtCedula.Text.Trim();

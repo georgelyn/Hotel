@@ -63,16 +63,6 @@ namespace Hotel.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _20170317_3 {
-            get {
-                object obj = ResourceManager.GetObject("20170317_3", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap browser16 {
             get {
                 object obj = ResourceManager.GetObject("browser16", resourceCulture);
@@ -176,6 +166,16 @@ namespace Hotel.Properties {
         internal static System.Drawing.Bitmap HC {
             get {
                 object obj = ResourceManager.GetObject("HC", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap HC20170317_093108 {
+            get {
+                object obj = ResourceManager.GetObject("HC20170317_093108", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

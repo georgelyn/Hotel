@@ -462,7 +462,7 @@
             this.tableLayoutPanel1.Controls.Add(this.button1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.button56, 8, 5);
             this.tableLayoutPanel1.Controls.Add(this.button57, 7, 5);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(56, 140);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(55, 140);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 6;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
@@ -1403,7 +1403,7 @@
             this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.panel3.BackColor = System.Drawing.Color.Teal;
-            this.panel3.Location = new System.Drawing.Point(18, 123);
+            this.panel3.Location = new System.Drawing.Point(14, 123);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(10, 495);
             this.panel3.TabIndex = 59;
@@ -1423,9 +1423,9 @@
             this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel5.BackColor = System.Drawing.Color.Teal;
-            this.panel5.Location = new System.Drawing.Point(18, 613);
+            this.panel5.Location = new System.Drawing.Point(14, 613);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(978, 70);
+            this.panel5.Size = new System.Drawing.Size(982, 70);
             this.panel5.TabIndex = 60;
             // 
             // timer3

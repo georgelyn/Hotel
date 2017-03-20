@@ -191,6 +191,13 @@ namespace Hotel
                 //}
                 //else
                 //{
+                //if (ex.Message.Contains("unable to connect"))
+                //{
+                //    MessageBox.Show("No se puede acceder a la base de datos. El programa se cerrará.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //    Close();
+                //}
+                //else
+                //{
                     MessageBox.Show("No se pudo conectar con la base de datos. \nDescripción del error: \n\n>> " + +ex.ErrorCode + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 //}
                 //MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -348,7 +355,7 @@ namespace Hotel
             {
                 msg = new Msg();
 
-                msg.lblMsg.Text = "Al cambiar su estado a limpieza, se eliminará la reservación actual.\n\n¿Seguro desea hacer eso?";
+                msg.lblMsg.Text = "Al cambiar su estado a limpieza, se eliminará la reservación actual.\n\n¿Desea continuar?";
                 msg.Text = $"Confirmación | Habitación {btn.Name.Remove(0, 6)}";
                 DialogResult dlgres = msg.ShowDialog();
                 {
@@ -385,7 +392,7 @@ namespace Hotel
             {
                 msg = new Msg();
 
-                msg.lblMsg.Text = "Al cambiar su estado a disponible, se eliminará la reservación actual.\n\n¿Seguro desea hacer eso?";
+                msg.lblMsg.Text = "Al cambiar su estado a disponible, se eliminará la reservación actual.\n\n¿Desea continuar?";
                 msg.Text = $"Confirmación | Habitación {btn.Name.Remove(0, 6)}";
                 DialogResult dlgres = msg.ShowDialog();
                 {
@@ -412,7 +419,7 @@ namespace Hotel
             {
                 msg = new Msg();
 
-                msg.lblMsg.Text = "Al cambiar su estado a mantenimiento, se eliminará la reservación actual.\n\n¿Seguro desea hacer eso?";
+                msg.lblMsg.Text = "Al cambiar su estado a mantenimiento, se eliminará la reservación actual.\n\n¿Desea continuar?";
                 msg.Text = $"Confirmación | Habitación {btn.Name.Remove(0, 6)}";
                 DialogResult dlgres = msg.ShowDialog();
                 {
@@ -446,7 +453,7 @@ namespace Hotel
             {
                 msg = new Msg();
 
-                msg.lblMsg.Text = "Al desactivar la habitación, se eliminará la reservación actual.\n\n¿Seguro desea hacer eso?";
+                msg.lblMsg.Text = "Al desactivar la habitación, se eliminará la reservación actual.\n\n¿Desea continuar?";
                 msg.Text = $"Confirmación | Habitación {btn.Name.Remove(0, 6)}";
                 DialogResult dlgres = msg.ShowDialog();
                 {
@@ -565,7 +572,7 @@ namespace Hotel
         private void restablecerBaseDeDatosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             msg = new Msg();
-            msg.lblMsg.Text = "Al restablecer la base de datos, perderá los datos actuales.\n¿Seguro desea hacer eso?";
+            msg.lblMsg.Text = "Al restablecer la base de datos, perderá los datos actuales.\n¿Desea continuar?";
             DialogResult dlgres = msg.ShowDialog();
             if (dlgres == DialogResult.Yes)
             {
@@ -610,8 +617,19 @@ namespace Hotel
 
         private void timer3_Tick(object sender, EventArgs e)
         {
-            ActualizarColores();
+            if (OperacionesSQLite.ProbarConexion())
+            {
+                ActivarTimerEspera();
+                ActualizarColores();
+            }
+            else
+            {
+                MessageBox.Show("No se puede acceder a la base de datos. El programa se cerrará.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Application.Exit();
+            }
+
             timer3.Start();
+
         }
     }
 }

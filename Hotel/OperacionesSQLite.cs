@@ -73,22 +73,29 @@ namespace Hotel
 
         public static bool ProbarConexion()
         {
-            using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
+            try
             {
-                using (SQLiteCommand cmd = new SQLiteCommand("SELECT name FROM sqlite_master WHERE type = 'table' AND name = 'TipoHabitacion'", conn))
+                using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
                 {
-                    conn.Open();
-
-                    using (SQLiteDataReader dr = cmd.ExecuteReader())
+                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT name FROM sqlite_master WHERE type = 'table' AND name = 'TipoHabitacion'", conn))
                     {
-                        if (dr.HasRows) // Si no existe/hay un problema
-                        {
-                            return true;
-                        }
-                    }
+                        conn.Open();
 
-                    return false;
+                        using (SQLiteDataReader dr = cmd.ExecuteReader())
+                        {
+                            if (dr.HasRows) // Si no existe/hay un problema
+                            {
+                                return true;
+                            }
+                        }
+
+                        return false;
+                    }
                 }
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
 
@@ -241,7 +248,7 @@ namespace Hotel
 
         public static void HacerCopia()
         {
-            string fechaActual = DateTime.Now.ToString("yyyy-MM-dd_hh-mm");
+            string fechaActual = DateTime.Now.ToString("yyyy-MM-dd_HH-mm");
             string nombre = "HotelBD-" + fechaActual + ".db";
 
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();

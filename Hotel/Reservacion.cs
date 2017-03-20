@@ -8,6 +8,7 @@ using System.Text;
 using System.Configuration;
 using System.Collections.Generic;
 using System.Globalization;
+//using System.Threading;
 
 namespace Hotel
 {
@@ -436,7 +437,7 @@ namespace Hotel
                             x = cmd.ExecuteNonQuery();
                             transactionScope.Complete();
 
-                            MessageBox.Show("Datos ingresados correctamente.");
+                            MessageBox.Show("Los datos han sido ingresados.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                             Close();
 
@@ -458,6 +459,7 @@ namespace Hotel
 
             if (x > 0) // Se complettó la transacción
             {
+                f1.ActivarTimerEspera();
                 f1.ActualizarColores();
             }
 
@@ -560,7 +562,7 @@ namespace Hotel
                             x = cmd.ExecuteNonQuery();
                             transactionScope.Complete();
 
-                            MessageBox.Show("Datos modificados correctamente.");
+                            MessageBox.Show("Los datos han sido modificados.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                             Close();
                         }
@@ -719,7 +721,7 @@ namespace Hotel
 
             if (comboHabitacion.SelectedIndex == -1)
             {
-                MessageBox.Show(this, "No ha seleccionado el número de habitación.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, "No ha seleccionado el número de habitación.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 lblHab.ForeColor = Color.Red;
                 comboHabitacion.DroppedDown = true;
                 return false;
@@ -735,7 +737,7 @@ namespace Hotel
 
                 if (String.IsNullOrEmpty(text.Trim()))
                 {                   
-                    MessageBox.Show(this, $"El campo de texto \"{txtLabel[i].Text.Replace(":", "")}\" no puede estar vacío.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(this, $"El campo de texto \"{txtLabel[i].Text.Replace(":", "")}\" no puede estar vacío.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     txtBox[i].Clear();
                     txtBox[i].Select();
                     txtLabel[i].ForeColor = Color.Red;
@@ -813,6 +815,8 @@ namespace Hotel
 
         private void btnCheckCedula_Click(object sender, EventArgs e)
         {
+            f1.ActivarTimerEspera();
+
             if (!String.IsNullOrEmpty(txtCedula.Text.Trim()))
             {
                 txtCedula.Text = txtCedula.Text.Replace(".", "").Trim();
@@ -870,6 +874,7 @@ namespace Hotel
                 {
                     if (dlgres == DialogResult.Yes)
                     {
+                        f1.ActivarTimerEspera();
                         ModificarReservacion();
                     }
                     else
