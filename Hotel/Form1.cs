@@ -103,11 +103,11 @@ namespace Hotel
         Habitacion habitacion;
         Msg msg;
 
-        Color disponible = Color.Green;
-        Color inactiva = Color.Gainsboro;
-        Color limpieza = Color.LightCyan;
-        Color mantenimiento = Color.DarkKhaki;
-        Color ocupada = Color.Red;
+        Color disponible = Color.LimeGreen;
+        Color inactiva = Color.DarkGray;
+        Color limpieza = Color.White;
+        Color mantenimiento = Color.LightBlue;
+        Color ocupada = Color.IndianRed;
 
         public void ActivarTimerEspera()
         {
@@ -137,7 +137,6 @@ namespace Hotel
                                     {
                                         if (dr["NumeroHabitacion"].ToString() == b.Name.Remove(0, 6)) //b.Text) // Remove 0,6 -> button
                                         {
-                                            //b.FlatStyle = FlatStyle.Flat;
                                             b.BackColor = disponible;
                                         }
                                     }
@@ -145,7 +144,6 @@ namespace Hotel
                                     {
                                         if (dr["NumeroHabitacion"].ToString() == b.Name.Remove(0, 6))
                                         {
-                                            //b.FlatStyle = FlatStyle.Flat;
                                             b.BackColor = ocupada;
                                         }
                                     }
@@ -153,7 +151,6 @@ namespace Hotel
                                     {
                                         if (dr["NumeroHabitacion"].ToString() == b.Name.Remove(0, 6))
                                         {
-                                            //b.FlatStyle = FlatStyle.Flat;
                                             b.BackColor = limpieza;
                                         }
                                     }
@@ -161,7 +158,6 @@ namespace Hotel
                                     {
                                         if (dr["NumeroHabitacion"].ToString() == b.Name.Remove(0, 6))
                                         {
-                                            //b.FlatStyle = FlatStyle.Flat;
                                             b.BackColor = mantenimiento;
                                         }
                                     }
@@ -169,11 +165,9 @@ namespace Hotel
                                     {
                                         if (dr["NumeroHabitacion"].ToString() == b.Name.Remove(0, 6))
                                         {
-                                            //b.FlatStyle = FlatStyle.System;
                                             b.BackColor = inactiva;
                                             b.ForeColor = inactiva;
                                             b.Enabled = false;
-                                            //b.BackColor = Color.DarkGray;
                                         }
                                     }
                                 }
@@ -238,30 +232,31 @@ namespace Hotel
             return false; // Hubo un problema
         }
 
-        private void button53_Click(object sender, EventArgs e)
+        private void button53_Click(object sender, EventArgs e) // Nueva reservación
         {
             ActivarTimerEspera();
 
-            //if (habitaciones == null || habitaciones.IsDisposed)
-            //{
-                reservacion = new Reservacion();
-                reservacion.ShowDialog();
-            //}
-            //else
-            //{
-            //    habitaciones.Activate();
-            //}
+            foreach (Button b in tableLayoutPanel1.Controls) // Verifica si hay al menos una habitación disponible
+            {
+                if (b.BackColor == disponible)
+                {
+                    reservacion = new Reservacion();
+                    reservacion.ShowDialog();
+                    return;
+                }
+            }
 
-
+            MessageBox.Show("No hay ninguna habitación disponible.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (((Button)sender).BackColor == limpieza)
+            if (((Button)sender).BackColor == limpieza || ((Button)sender).BackColor == mantenimiento)
             {
                 msg = new Msg();
 
                 msg.lblMsg.Text = "¿Desea cambiar el estado a disponible?";
+                msg.Text = $"Confirmación | Habitación {((Button)sender).Name.Remove(0, 6)}";
                 DialogResult dlgres = msg.ShowDialog();
                 {
                     if (dlgres == DialogResult.Yes)
@@ -300,10 +295,9 @@ namespace Hotel
 
                 reservacion.ShowDialog();
             }
-            //MessageBox.Show(((Button)sender).Name + " was pressed!");
         }
 
-        private void button55_Click(object sender, EventArgs e)
+        private void button55_Click(object sender, EventArgs e) // Habitaciones ocupadas
         {
             ActivarTimerEspera();
 
@@ -319,7 +313,7 @@ namespace Hotel
             }
         }
 
-        private void button54_Click(object sender, EventArgs e)
+        private void button54_Click(object sender, EventArgs e) // Lista de clientes
         {
             ActivarTimerEspera();
 
@@ -535,16 +529,8 @@ namespace Hotel
         private void vehículosAlmacenadosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ActivarTimerEspera();
-
-            if (vehiculo == null || vehiculo.IsDisposed)
-            {
-                vehiculo = new Vehiculo();
-                vehiculo.Show();
-            }
-            else
-            {
-                vehiculo.Activate();
-            }
+            vehiculo = new Vehiculo();
+            vehiculo.ShowDialog();          
         }
 
         private void tiposDeHabitacionesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -618,9 +604,11 @@ namespace Hotel
 
         private void timer3_Tick(object sender, EventArgs e)
         {
+            //timer3.Start();
+
             if (OperacionesSQLite.ProbarConexion())
             {
-                //ActivarTimerEspera();
+                ActivarTimerEspera();
                 ActualizarColores();
             }
             else
@@ -629,8 +617,16 @@ namespace Hotel
                 Application.Exit();
             }
 
-            timer3.Start();
+        }
 
+        private void Form1_Activated(object sender, EventArgs e)
+        {
+            timer3.Start();
+        }
+
+        private void Form1_Deactivate(object sender, EventArgs e)
+        {
+            timer3.Stop();
         }
     }
 }

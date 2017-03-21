@@ -91,6 +91,7 @@
             this.Controls.Add(this.lblMsg);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(800, 600);
             this.MinimizeBox = false;
             this.Name = "Msg";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

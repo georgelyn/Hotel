@@ -594,7 +594,7 @@ namespace Hotel
                 {
                     msg = new Msg();
 
-                    msg.lblMsg.Text = $"¿Está seguro de que desea eliminar el registro? \nAdvertencia: Se eliminarán todos los datos asociados (reservaciones y vehículos). \n\nCliente a eliminar: \"{lst.SelectedItems[0].SubItems[1].Text}\" - Cédula: \"{lst.SelectedItems[0].SubItems[2].Text}\".";
+                    msg.lblMsg.Text = $"¿Está seguro de que desea eliminar el registro? \nAdvertencia: Se eliminarán todos los datos asociados (reservaciones y vehículos). \n\nCliente a eliminar: \"{lst.SelectedItems[0].SubItems[2].Text}\" \nCédula: \"{lst.SelectedItems[0].SubItems[3].Text}\".";
                     DialogResult dlgres = msg.ShowDialog();
                     {
                         if (dlgres == DialogResult.Yes)

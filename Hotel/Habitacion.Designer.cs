@@ -340,6 +340,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Habitacion";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tipos de habitaciones";
             this.panel1.ResumeLayout(false);

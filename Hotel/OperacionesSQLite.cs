@@ -367,6 +367,7 @@ namespace Hotel
                 OpenFileDialog openFileDialog1 = new OpenFileDialog();
 
                 openFileDialog1.Filter = "Archivo de base da datos (*.db, *.sqlite, *.sqlite3) | *.db; *.sqlite; *.sqlite3";
+                openFileDialog1.Title = "Restaurar copia de seguridad";
                 openFileDialog1.FilterIndex = 1;
                 openFileDialog1.InitialDirectory = carpetaRespaldos; //Application.StartupPath + "\\Respaldos";
 

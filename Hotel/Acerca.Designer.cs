@@ -81,9 +81,9 @@
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(91, 131);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(141, 16);
+            this.label2.Size = new System.Drawing.Size(144, 16);
             this.label2.TabIndex = 2;
-            this.label2.Text = "© 2017 Georgelyn A.R.";
+            this.label2.Text = "© 2017 Georgelyn A. R.";
             // 
             // label5
             // 
@@ -161,6 +161,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Acerca";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Acerca del programa";
             this.panel1.ResumeLayout(false);

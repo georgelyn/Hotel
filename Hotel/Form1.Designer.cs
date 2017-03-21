@@ -43,16 +43,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.verToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.clientesAlmacenadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.habitacionesOcupadasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.vehículosAlmacenadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.acercadeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.administraciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cargoPorCamiónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.contraseñasDelSistemaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tiposDeHabitacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.baseDeDatosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.restablecerBaseDeDatosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.respaldarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.restaurarCopiaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -114,9 +106,6 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblHora = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.button55 = new System.Windows.Forms.Button();
-            this.button54 = new System.Windows.Forms.Button();
-            this.button53 = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.marcarComoDisponibleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -131,6 +120,17 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.timer3 = new System.Windows.Forms.Timer(this.components);
+            this.button55 = new System.Windows.Forms.Button();
+            this.button54 = new System.Windows.Forms.Button();
+            this.button53 = new System.Windows.Forms.Button();
+            this.clientesAlmacenadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.habitacionesOcupadasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.vehículosAlmacenadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.acercadeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cargoPorCamiónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contraseñasDelSistemaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tiposDeHabitacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.restablecerBaseDeDatosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -142,7 +142,7 @@
             // panel1
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.BackColor = System.Drawing.Color.SkyBlue;
+            this.panel1.BackColor = System.Drawing.Color.Black;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.label9);
             this.panel1.Controls.Add(this.label10);
@@ -154,9 +154,9 @@
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Location = new System.Drawing.Point(521, 10);
+            this.panel1.Location = new System.Drawing.Point(517, 10);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(251, 64);
+            this.panel1.Size = new System.Drawing.Size(255, 64);
             this.panel1.TabIndex = 54;
             // 
             // label9
@@ -164,7 +164,7 @@
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.DarkGray;
-            this.label9.Location = new System.Drawing.Point(118, 37);
+            this.label9.Location = new System.Drawing.Point(124, 37);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(15, 13);
             this.label9.TabIndex = 10;
@@ -173,11 +173,11 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.Color.DarkGray;
-            this.label10.Location = new System.Drawing.Point(136, 37);
+            this.label10.Location = new System.Drawing.Point(136, 35);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(53, 13);
+            this.label10.Size = new System.Drawing.Size(56, 15);
             this.label10.TabIndex = 9;
             this.label10.Text = "Inactiva";
             // 
@@ -185,7 +185,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.DarkKhaki;
+            this.label7.ForeColor = System.Drawing.Color.SkyBlue;
             this.label7.Location = new System.Drawing.Point(3, 37);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(15, 13);
@@ -195,11 +195,11 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.Color.DarkKhaki;
-            this.label8.Location = new System.Drawing.Point(21, 37);
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.SkyBlue;
+            this.label8.Location = new System.Drawing.Point(15, 35);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(89, 13);
+            this.label8.Size = new System.Drawing.Size(103, 15);
             this.label8.TabIndex = 7;
             this.label8.Text = "Mantenimiento";
             // 
@@ -207,7 +207,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.LightCyan;
+            this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(174, 10);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(15, 13);
@@ -217,11 +217,11 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.LightCyan;
-            this.label6.Location = new System.Drawing.Point(191, 10);
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.White;
+            this.label6.Location = new System.Drawing.Point(184, 8);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(56, 13);
+            this.label6.Size = new System.Drawing.Size(66, 15);
             this.label6.TabIndex = 5;
             this.label6.Text = "Limpieza";
             // 
@@ -229,7 +229,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.Green;
+            this.label5.ForeColor = System.Drawing.Color.LimeGreen;
             this.label5.Location = new System.Drawing.Point(85, 10);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(15, 13);
@@ -240,7 +240,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.Red;
+            this.label4.ForeColor = System.Drawing.Color.IndianRed;
             this.label4.Location = new System.Drawing.Point(3, 10);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(15, 13);
@@ -250,22 +250,22 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.Green;
-            this.label3.Location = new System.Drawing.Point(102, 10);
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.LimeGreen;
+            this.label3.Location = new System.Drawing.Point(97, 8);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(66, 13);
+            this.label3.Size = new System.Drawing.Size(76, 15);
             this.label3.TabIndex = 2;
             this.label3.Text = "Disponible";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.Red;
-            this.label2.Location = new System.Drawing.Point(21, 10);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.IndianRed;
+            this.label2.Location = new System.Drawing.Point(15, 8);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(58, 13);
+            this.label2.Size = new System.Drawing.Size(64, 15);
             this.label2.TabIndex = 1;
             this.label2.Text = "Ocupada";
             // 
@@ -294,38 +294,6 @@
             this.verToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
             this.verToolStripMenuItem.Text = "&Ver";
             // 
-            // clientesAlmacenadosToolStripMenuItem
-            // 
-            this.clientesAlmacenadosToolStripMenuItem.Image = global::Hotel.Properties.Resources.browser16;
-            this.clientesAlmacenadosToolStripMenuItem.Name = "clientesAlmacenadosToolStripMenuItem";
-            this.clientesAlmacenadosToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
-            this.clientesAlmacenadosToolStripMenuItem.Text = "&Clientes almacenados";
-            this.clientesAlmacenadosToolStripMenuItem.Click += new System.EventHandler(this.clientesAlmacenadosToolStripMenuItem_Click);
-            // 
-            // habitacionesOcupadasToolStripMenuItem
-            // 
-            this.habitacionesOcupadasToolStripMenuItem.Image = global::Hotel.Properties.Resources.door_icon16;
-            this.habitacionesOcupadasToolStripMenuItem.Name = "habitacionesOcupadasToolStripMenuItem";
-            this.habitacionesOcupadasToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
-            this.habitacionesOcupadasToolStripMenuItem.Text = "&Habitaciones ocupadas";
-            this.habitacionesOcupadasToolStripMenuItem.Click += new System.EventHandler(this.habitacionesOcupadasToolStripMenuItem_Click);
-            // 
-            // vehículosAlmacenadosToolStripMenuItem
-            // 
-            this.vehículosAlmacenadosToolStripMenuItem.Image = global::Hotel.Properties.Resources.car16;
-            this.vehículosAlmacenadosToolStripMenuItem.Name = "vehículosAlmacenadosToolStripMenuItem";
-            this.vehículosAlmacenadosToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
-            this.vehículosAlmacenadosToolStripMenuItem.Text = "&Vehículos almacenados";
-            this.vehículosAlmacenadosToolStripMenuItem.Click += new System.EventHandler(this.vehículosAlmacenadosToolStripMenuItem_Click);
-            // 
-            // acercadeToolStripMenuItem
-            // 
-            this.acercadeToolStripMenuItem.Image = global::Hotel.Properties.Resources.Source_Code_16;
-            this.acercadeToolStripMenuItem.Name = "acercadeToolStripMenuItem";
-            this.acercadeToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
-            this.acercadeToolStripMenuItem.Text = "Acerca &de";
-            this.acercadeToolStripMenuItem.Click += new System.EventHandler(this.acercadeToolStripMenuItem_Click);
-            // 
             // administraciónToolStripMenuItem
             // 
             this.administraciónToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -336,30 +304,6 @@
             this.administraciónToolStripMenuItem.Size = new System.Drawing.Size(115, 20);
             this.administraciónToolStripMenuItem.Text = "&Administración";
             // 
-            // cargoPorCamiónToolStripMenuItem
-            // 
-            this.cargoPorCamiónToolStripMenuItem.Image = global::Hotel.Properties.Resources.tools_icon;
-            this.cargoPorCamiónToolStripMenuItem.Name = "cargoPorCamiónToolStripMenuItem";
-            this.cargoPorCamiónToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
-            this.cargoPorCamiónToolStripMenuItem.Text = "&Configuración";
-            this.cargoPorCamiónToolStripMenuItem.Click += new System.EventHandler(this.cargoPorCamiónToolStripMenuItem_Click);
-            // 
-            // contraseñasDelSistemaToolStripMenuItem
-            // 
-            this.contraseñasDelSistemaToolStripMenuItem.Image = global::Hotel.Properties.Resources.key_icon16;
-            this.contraseñasDelSistemaToolStripMenuItem.Name = "contraseñasDelSistemaToolStripMenuItem";
-            this.contraseñasDelSistemaToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
-            this.contraseñasDelSistemaToolStripMenuItem.Text = "Contraseñas del &sistema";
-            this.contraseñasDelSistemaToolStripMenuItem.Click += new System.EventHandler(this.contraseñasDelSistemaToolStripMenuItem_Click);
-            // 
-            // tiposDeHabitacionesToolStripMenuItem
-            // 
-            this.tiposDeHabitacionesToolStripMenuItem.Image = global::Hotel.Properties.Resources.door_icon16;
-            this.tiposDeHabitacionesToolStripMenuItem.Name = "tiposDeHabitacionesToolStripMenuItem";
-            this.tiposDeHabitacionesToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
-            this.tiposDeHabitacionesToolStripMenuItem.Text = "&Tipos de habitaciones";
-            this.tiposDeHabitacionesToolStripMenuItem.Click += new System.EventHandler(this.tiposDeHabitacionesToolStripMenuItem_Click);
-            // 
             // baseDeDatosToolStripMenuItem
             // 
             this.baseDeDatosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -369,14 +313,6 @@
             this.baseDeDatosToolStripMenuItem.Name = "baseDeDatosToolStripMenuItem";
             this.baseDeDatosToolStripMenuItem.Size = new System.Drawing.Size(114, 20);
             this.baseDeDatosToolStripMenuItem.Text = "&Base de datos";
-            // 
-            // restablecerBaseDeDatosToolStripMenuItem
-            // 
-            this.restablecerBaseDeDatosToolStripMenuItem.Image = global::Hotel.Properties.Resources.Database_icon;
-            this.restablecerBaseDeDatosToolStripMenuItem.Name = "restablecerBaseDeDatosToolStripMenuItem";
-            this.restablecerBaseDeDatosToolStripMenuItem.Size = new System.Drawing.Size(280, 22);
-            this.restablecerBaseDeDatosToolStripMenuItem.Text = "< &Restablecer base de datos >";
-            this.restablecerBaseDeDatosToolStripMenuItem.Click += new System.EventHandler(this.restablecerBaseDeDatosToolStripMenuItem_Click);
             // 
             // respaldarToolStripMenuItem
             // 
@@ -1209,7 +1145,7 @@
             this.button56.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button56.BackColor = System.Drawing.Color.LightCyan;
+            this.button56.BackColor = System.Drawing.Color.Green;
             this.button56.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button56.Location = new System.Drawing.Point(651, 333);
             this.button56.Name = "button56";
@@ -1224,7 +1160,7 @@
             this.button57.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button57.BackColor = System.Drawing.Color.Gainsboro;
+            this.button57.BackColor = System.Drawing.Color.SkyBlue;
             this.button57.Enabled = false;
             this.button57.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button57.Location = new System.Drawing.Point(570, 333);
@@ -1249,12 +1185,14 @@
             // 
             // toolStripStatusLabel1
             // 
+            this.toolStripStatusLabel1.BackColor = System.Drawing.Color.White;
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(730, 17);
             this.toolStripStatusLabel1.Spring = true;
             // 
             // lblHora
             // 
+            this.lblHora.BackColor = System.Drawing.Color.White;
             this.lblHora.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHora.Name = "lblHora";
             this.lblHora.Size = new System.Drawing.Size(39, 17);
@@ -1272,6 +1210,110 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(784, 83);
             this.panel2.TabIndex = 58;
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.marcarComoDisponibleToolStripMenuItem,
+            this.toolStripSeparator4,
+            this.enLimpiezaToolStripMenuItem,
+            this.toolStripSeparator3,
+            this.marcarMantenimientoToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.toolStripSeparator1,
+            this.marcarInactivaToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(208, 116);
+            // 
+            // marcarComoDisponibleToolStripMenuItem
+            // 
+            this.marcarComoDisponibleToolStripMenuItem.BackColor = System.Drawing.Color.LimeGreen;
+            this.marcarComoDisponibleToolStripMenuItem.Name = "marcarComoDisponibleToolStripMenuItem";
+            this.marcarComoDisponibleToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
+            this.marcarComoDisponibleToolStripMenuItem.Text = "Marcar > Disponible";
+            this.marcarComoDisponibleToolStripMenuItem.Click += new System.EventHandler(this.marcarComoDisponibleToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.ForeColor = System.Drawing.Color.Transparent;
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(204, 6);
+            // 
+            // enLimpiezaToolStripMenuItem
+            // 
+            this.enLimpiezaToolStripMenuItem.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.enLimpiezaToolStripMenuItem.Name = "enLimpiezaToolStripMenuItem";
+            this.enLimpiezaToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
+            this.enLimpiezaToolStripMenuItem.Text = "Marcar > Limpieza";
+            this.enLimpiezaToolStripMenuItem.Click += new System.EventHandler(this.enLimpiezaToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.ForeColor = System.Drawing.Color.Transparent;
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(204, 6);
+            // 
+            // marcarMantenimientoToolStripMenuItem
+            // 
+            this.marcarMantenimientoToolStripMenuItem.BackColor = System.Drawing.Color.SkyBlue;
+            this.marcarMantenimientoToolStripMenuItem.Name = "marcarMantenimientoToolStripMenuItem";
+            this.marcarMantenimientoToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
+            this.marcarMantenimientoToolStripMenuItem.Text = "Marcar > Mantenimiento";
+            this.marcarMantenimientoToolStripMenuItem.Click += new System.EventHandler(this.marcarMantenimientoToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.ForeColor = System.Drawing.Color.Transparent;
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(204, 6);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.ForeColor = System.Drawing.Color.Transparent;
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(204, 6);
+            // 
+            // marcarInactivaToolStripMenuItem
+            // 
+            this.marcarInactivaToolStripMenuItem.BackColor = System.Drawing.Color.DarkGray;
+            this.marcarInactivaToolStripMenuItem.Name = "marcarInactivaToolStripMenuItem";
+            this.marcarInactivaToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
+            this.marcarInactivaToolStripMenuItem.Text = "Marcar > Inactiva";
+            this.marcarInactivaToolStripMenuItem.Click += new System.EventHandler(this.marcarInactivaToolStripMenuItem_Click);
+            // 
+            // timer2
+            // 
+            this.timer2.Enabled = true;
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            // 
+            // panel3
+            // 
+            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel3.BackColor = System.Drawing.Color.SkyBlue;
+            this.panel3.Location = new System.Drawing.Point(4, 117);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(10, 410);
+            this.panel3.TabIndex = 59;
+            // 
+            // panel4
+            // 
+            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel4.BackColor = System.Drawing.Color.SkyBlue;
+            this.panel4.Location = new System.Drawing.Point(770, 117);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(10, 410);
+            this.panel4.TabIndex = 60;
+            // 
+            // timer3
+            // 
+            this.timer3.Interval = 20000;
+            this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
             // 
             // button55
             // 
@@ -1318,116 +1360,75 @@
             this.button53.UseVisualStyleBackColor = false;
             this.button53.Click += new System.EventHandler(this.button53_Click);
             // 
-            // timer1
+            // clientesAlmacenadosToolStripMenuItem
             // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.clientesAlmacenadosToolStripMenuItem.Image = global::Hotel.Properties.Resources.browser16;
+            this.clientesAlmacenadosToolStripMenuItem.Name = "clientesAlmacenadosToolStripMenuItem";
+            this.clientesAlmacenadosToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.clientesAlmacenadosToolStripMenuItem.Text = "&Clientes almacenados";
+            this.clientesAlmacenadosToolStripMenuItem.Click += new System.EventHandler(this.clientesAlmacenadosToolStripMenuItem_Click);
             // 
-            // contextMenuStrip1
+            // habitacionesOcupadasToolStripMenuItem
             // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.marcarComoDisponibleToolStripMenuItem,
-            this.toolStripSeparator4,
-            this.enLimpiezaToolStripMenuItem,
-            this.toolStripSeparator3,
-            this.marcarMantenimientoToolStripMenuItem,
-            this.toolStripSeparator2,
-            this.toolStripSeparator1,
-            this.marcarInactivaToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(208, 116);
+            this.habitacionesOcupadasToolStripMenuItem.Image = global::Hotel.Properties.Resources.door_icon16;
+            this.habitacionesOcupadasToolStripMenuItem.Name = "habitacionesOcupadasToolStripMenuItem";
+            this.habitacionesOcupadasToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.habitacionesOcupadasToolStripMenuItem.Text = "&Habitaciones ocupadas";
+            this.habitacionesOcupadasToolStripMenuItem.Click += new System.EventHandler(this.habitacionesOcupadasToolStripMenuItem_Click);
             // 
-            // marcarComoDisponibleToolStripMenuItem
+            // vehículosAlmacenadosToolStripMenuItem
             // 
-            this.marcarComoDisponibleToolStripMenuItem.BackColor = System.Drawing.Color.Green;
-            this.marcarComoDisponibleToolStripMenuItem.Name = "marcarComoDisponibleToolStripMenuItem";
-            this.marcarComoDisponibleToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
-            this.marcarComoDisponibleToolStripMenuItem.Text = "Marcar > Disponible";
-            this.marcarComoDisponibleToolStripMenuItem.Click += new System.EventHandler(this.marcarComoDisponibleToolStripMenuItem_Click);
+            this.vehículosAlmacenadosToolStripMenuItem.Image = global::Hotel.Properties.Resources.car16;
+            this.vehículosAlmacenadosToolStripMenuItem.Name = "vehículosAlmacenadosToolStripMenuItem";
+            this.vehículosAlmacenadosToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.vehículosAlmacenadosToolStripMenuItem.Text = "&Vehículos almacenados";
+            this.vehículosAlmacenadosToolStripMenuItem.Click += new System.EventHandler(this.vehículosAlmacenadosToolStripMenuItem_Click);
             // 
-            // toolStripSeparator4
+            // acercadeToolStripMenuItem
             // 
-            this.toolStripSeparator4.ForeColor = System.Drawing.Color.Transparent;
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(204, 6);
+            this.acercadeToolStripMenuItem.Image = global::Hotel.Properties.Resources.Source_Code_16;
+            this.acercadeToolStripMenuItem.Name = "acercadeToolStripMenuItem";
+            this.acercadeToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.acercadeToolStripMenuItem.Text = "Acerca &de";
+            this.acercadeToolStripMenuItem.Click += new System.EventHandler(this.acercadeToolStripMenuItem_Click);
             // 
-            // enLimpiezaToolStripMenuItem
+            // cargoPorCamiónToolStripMenuItem
             // 
-            this.enLimpiezaToolStripMenuItem.BackColor = System.Drawing.Color.LightCyan;
-            this.enLimpiezaToolStripMenuItem.Name = "enLimpiezaToolStripMenuItem";
-            this.enLimpiezaToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
-            this.enLimpiezaToolStripMenuItem.Text = "Marcar > Limpieza";
-            this.enLimpiezaToolStripMenuItem.Click += new System.EventHandler(this.enLimpiezaToolStripMenuItem_Click);
+            this.cargoPorCamiónToolStripMenuItem.Image = global::Hotel.Properties.Resources.tools_icon;
+            this.cargoPorCamiónToolStripMenuItem.Name = "cargoPorCamiónToolStripMenuItem";
+            this.cargoPorCamiónToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
+            this.cargoPorCamiónToolStripMenuItem.Text = "&Configuración";
+            this.cargoPorCamiónToolStripMenuItem.Click += new System.EventHandler(this.cargoPorCamiónToolStripMenuItem_Click);
             // 
-            // toolStripSeparator3
+            // contraseñasDelSistemaToolStripMenuItem
             // 
-            this.toolStripSeparator3.ForeColor = System.Drawing.Color.Transparent;
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(204, 6);
+            this.contraseñasDelSistemaToolStripMenuItem.Image = global::Hotel.Properties.Resources.key_icon16;
+            this.contraseñasDelSistemaToolStripMenuItem.Name = "contraseñasDelSistemaToolStripMenuItem";
+            this.contraseñasDelSistemaToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
+            this.contraseñasDelSistemaToolStripMenuItem.Text = "Contraseñas del &sistema";
+            this.contraseñasDelSistemaToolStripMenuItem.Click += new System.EventHandler(this.contraseñasDelSistemaToolStripMenuItem_Click);
             // 
-            // marcarMantenimientoToolStripMenuItem
+            // tiposDeHabitacionesToolStripMenuItem
             // 
-            this.marcarMantenimientoToolStripMenuItem.BackColor = System.Drawing.Color.DarkKhaki;
-            this.marcarMantenimientoToolStripMenuItem.Name = "marcarMantenimientoToolStripMenuItem";
-            this.marcarMantenimientoToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
-            this.marcarMantenimientoToolStripMenuItem.Text = "Marcar > Mantenimiento";
-            this.marcarMantenimientoToolStripMenuItem.Click += new System.EventHandler(this.marcarMantenimientoToolStripMenuItem_Click);
+            this.tiposDeHabitacionesToolStripMenuItem.Image = global::Hotel.Properties.Resources.door_icon16;
+            this.tiposDeHabitacionesToolStripMenuItem.Name = "tiposDeHabitacionesToolStripMenuItem";
+            this.tiposDeHabitacionesToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
+            this.tiposDeHabitacionesToolStripMenuItem.Text = "&Tipos de habitaciones";
+            this.tiposDeHabitacionesToolStripMenuItem.Click += new System.EventHandler(this.tiposDeHabitacionesToolStripMenuItem_Click);
             // 
-            // toolStripSeparator2
+            // restablecerBaseDeDatosToolStripMenuItem
             // 
-            this.toolStripSeparator2.ForeColor = System.Drawing.Color.Transparent;
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(204, 6);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.ForeColor = System.Drawing.Color.Transparent;
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(204, 6);
-            // 
-            // marcarInactivaToolStripMenuItem
-            // 
-            this.marcarInactivaToolStripMenuItem.BackColor = System.Drawing.Color.LightGray;
-            this.marcarInactivaToolStripMenuItem.Name = "marcarInactivaToolStripMenuItem";
-            this.marcarInactivaToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
-            this.marcarInactivaToolStripMenuItem.Text = "Marcar > Inactiva";
-            this.marcarInactivaToolStripMenuItem.Click += new System.EventHandler(this.marcarInactivaToolStripMenuItem_Click);
-            // 
-            // timer2
-            // 
-            this.timer2.Enabled = true;
-            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
-            // 
-            // panel3
-            // 
-            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.panel3.BackColor = System.Drawing.Color.Teal;
-            this.panel3.Location = new System.Drawing.Point(4, 123);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(10, 403);
-            this.panel3.TabIndex = 59;
-            // 
-            // panel4
-            // 
-            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel4.BackColor = System.Drawing.Color.Teal;
-            this.panel4.Location = new System.Drawing.Point(770, 123);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(10, 404);
-            this.panel4.TabIndex = 60;
-            // 
-            // timer3
-            // 
-            this.timer3.Enabled = true;
-            this.timer3.Interval = 20000;
-            this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
+            this.restablecerBaseDeDatosToolStripMenuItem.Image = global::Hotel.Properties.Resources.Database_icon;
+            this.restablecerBaseDeDatosToolStripMenuItem.Name = "restablecerBaseDeDatosToolStripMenuItem";
+            this.restablecerBaseDeDatosToolStripMenuItem.Size = new System.Drawing.Size(280, 22);
+            this.restablecerBaseDeDatosToolStripMenuItem.Text = "< &Restablecer base de datos >";
+            this.restablecerBaseDeDatosToolStripMenuItem.Click += new System.EventHandler(this.restablecerBaseDeDatosToolStripMenuItem_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
+            this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(784, 561);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
@@ -1441,6 +1442,8 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Hotel Country";
+            this.Activated += new System.EventHandler(this.Form1_Activated);
+            this.Deactivate += new System.EventHandler(this.Form1_Deactivate);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
