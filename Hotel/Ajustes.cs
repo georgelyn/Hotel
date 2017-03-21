@@ -17,7 +17,7 @@ namespace Hotel
         {
             InitializeComponent();
 
-            double monto = Convert.ToDouble(ConfigurationManager.AppSettings["MontoCamion"]);
+            double monto = Convert.ToDouble(ConfigurationManager.AppSettings["MontoCamion"], new CultureInfo("es-VE")); // Esto quita error de "Input string was not in a correct format" si la cultura es una diferente (como en-US)
 
             txtMontoCamion.Text = String.Format(new CultureInfo("es-VE"), "{0:#,##0.00}", monto);
 
@@ -111,7 +111,7 @@ namespace Hotel
 
             }
 
-            Close();
+            return;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -121,9 +121,36 @@ namespace Hotel
 
         private void txtMontoCamion_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != 13 && e.KeyChar != '.' && e.KeyChar != ',')
+            if (String.IsNullOrEmpty(txtMontoCamion.Text.Trim()))
             {
-                e.Handled = true;
+                if (e.KeyChar == '.' || e.KeyChar == ',')
+                {
+                    e.Handled = true;
+                }
+            }
+            else
+            {
+                if (txtMontoCamion.Text.Contains("."))
+                {
+                    if (e.KeyChar == '.')
+                    {
+                        e.Handled = true;
+                    }
+                }
+
+                if (txtMontoCamion.Text.Contains(","))
+                {
+                    if (e.KeyChar == ',')
+                    {
+                        e.Handled = true;
+                    }
+                }
+
+                if (!char.IsDigit(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != 13 && e.KeyChar != '.' && e.KeyChar != ',') // 8 = backspace, 13 = enter
+                {
+                    e.Handled = true;
+                }
+
             }
 
         }

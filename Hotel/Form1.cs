@@ -619,7 +619,7 @@ namespace Hotel
         {
             if (OperacionesSQLite.ProbarConexion())
             {
-                ActivarTimerEspera();
+                //ActivarTimerEspera();
                 ActualizarColores();
             }
             else

@@ -421,9 +421,35 @@ namespace Hotel
 
         private void txtCosto_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != 13 && e.KeyChar != '.' && e.KeyChar != ',')
+            if (String.IsNullOrEmpty(txtCosto.Text.Trim()))
             {
-                e.Handled = true;
+                if (e.KeyChar == '.' || e.KeyChar == ',' || e.KeyChar == 8)
+                {
+                    e.Handled = true;
+                }
+            }
+            else
+            {
+                if (txtCosto.Text.Contains("."))
+                {
+                    if (e.KeyChar == '.')
+                    {
+                        e.Handled = true;
+                    }
+                }
+
+                if (txtCosto.Text.Contains(","))
+                {
+                    if (e.KeyChar == ',')
+                    {
+                        e.Handled = true;
+                    }
+                }
+
+                if (!char.IsDigit(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != 13 && e.KeyChar != '.' && e.KeyChar != ',')
+                {
+                    e.Handled = true;
+                }
             }
         }
 

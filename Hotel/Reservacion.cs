@@ -39,6 +39,7 @@ namespace Hotel
             CargarNumHabitaciones("disponible");
             CargarTipoHabitacion();
             PanelCedula(true);
+            //AsignarMonto();
         }
 
         Form1 f1 = (Form1)Application.OpenForms["Form1"];
@@ -50,7 +51,7 @@ namespace Hotel
         */
 
         double total; // El total a pagar
-        double montoCamion = double.Parse(ConfigurationManager.AppSettings["MontoCamion"]);
+        double montoCamion = double.Parse(ConfigurationManager.AppSettings["MontoCamion"], new CultureInfo("es-VE")); // Aquí le estoy diciendo qué formato esperar en app.config
 
         bool vehiculoAlmacenado = false; // Se evalúa al cargar reservación (si tiene vehículo agregado). Útil para query de modificar reservación
         int habitacionActual = 0; // Toma su valor en CargarHuespedPorHabitacion. Útil para cambiar habitación en Modificar Reservación
@@ -63,6 +64,18 @@ namespace Hotel
         /* 
         ** METODOS
         */
+
+        //private void AsignarMonto()
+        //{
+        //    try
+        //    {
+        //        montoCamion = double.Parse(ConfigurationManager.AppSettings["MontoCamion"]);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show("Se ha presentado un problema con el monto del camión.\nDetalles: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    }
+        //}
 
         public void CargarNumHabitaciones(string estado)
         {
@@ -957,9 +970,35 @@ namespace Hotel
 
             if (txtTotal.Focused)
             {
-                if (!char.IsDigit(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != 13 && e.KeyChar != '.' && e.KeyChar != ',')
+                if (String.IsNullOrEmpty(txtTotal.Text.Trim()))
                 {
-                    e.Handled = true;  
+                    if (e.KeyChar == '.' || e.KeyChar == ',')
+                    {
+                        e.Handled = true;
+                    }
+                }
+                else
+                {
+                    if (txtTotal.Text.Contains("."))
+                    {
+                        if (e.KeyChar == '.')
+                        {
+                            e.Handled = true;
+                        }
+                    }
+
+                    if (txtTotal.Text.Contains(","))
+                    {
+                        if (e.KeyChar == ',')
+                        {
+                            e.Handled = true;
+                        }
+                    }
+
+                    if (!char.IsDigit(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != 13 && e.KeyChar != '.' && e.KeyChar != ',')
+                    {
+                        e.Handled = true;
+                    }
                 }
             }
         }
