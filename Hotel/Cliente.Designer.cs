@@ -50,6 +50,7 @@
             this.lblClienteDesde = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.btnVerReservacion = new System.Windows.Forms.Button();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.panelListboxHabitaciones = new System.Windows.Forms.Panel();
             this.listboxReservaciones = new System.Windows.Forms.ListBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -59,7 +60,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
-            this.panel4 = new System.Windows.Forms.Panel();
             this.btnVerVehiculos = new System.Windows.Forms.Button();
             this.lblVehiculos = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -190,7 +190,7 @@
             this.btnBuscar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(23, 24);
-            this.btnBuscar.Text = "toolStripButton1";
+            this.btnBuscar.Text = "Buscar";
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // panel1
@@ -326,6 +326,14 @@
             this.btnVerReservacion.Visible = false;
             this.btnVerReservacion.Click += new System.EventHandler(this.btnVerReservacion_Click);
             // 
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.Color.LightBlue;
+            this.panel4.Location = new System.Drawing.Point(754, 24);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(10, 418);
+            this.panel4.TabIndex = 141;
+            // 
             // panelListboxHabitaciones
             // 
             this.panelListboxHabitaciones.BackColor = System.Drawing.Color.Teal;
@@ -421,14 +429,6 @@
             this.label4.Size = new System.Drawing.Size(15, 20);
             this.label4.TabIndex = 142;
             this.label4.Text = "*";
-            // 
-            // panel4
-            // 
-            this.panel4.BackColor = System.Drawing.Color.LightBlue;
-            this.panel4.Location = new System.Drawing.Point(754, 24);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(10, 418);
-            this.panel4.TabIndex = 141;
             // 
             // btnVerVehiculos
             // 

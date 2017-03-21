@@ -66,10 +66,10 @@ namespace Hotel
             {
                 lst.Columns.Add("IDCliente", 0, HorizontalAlignment.Left);
                 lst.Columns.Add("IDHab", 0, HorizontalAlignment.Left);
-                lst.Columns.Add("Nro. Habitación", 150, HorizontalAlignment.Center);
-                lst.Columns.Add("Cliente", 400, HorizontalAlignment.Left);
+                lst.Columns.Add("Habitación", 100, HorizontalAlignment.Center);
+                lst.Columns.Add("Cliente", 350, HorizontalAlignment.Left);
                 lst.Columns.Add("Cédula", 150, HorizontalAlignment.Left);
-                lst.Columns.Add("Fecha de entrada", 180, HorizontalAlignment.Left);
+                lst.Columns.Add("Fecha de entrada", 180, HorizontalAlignment.Center);
             }
 
             panel1.Controls.Add(lst);
@@ -493,9 +493,33 @@ namespace Hotel
 
         }
 
+        private void ClienteNuevo(bool verdadero) // Si verdadero, se ocultan labels de Reservaciones, Vehículos, btnNuevaReservacion
+        {
+            if (verdadero)
+            {
+                label3.Visible = false; // Vehículos registrados
+                btnVerVehiculos.Visible = false;
+                label5.Visible = false; // Reservaciones activas
+                btnVerReservaciones.Visible = false;
+                lblReservaciones.Visible = false;
+                lblVehiculos.Visible = false;
+                btnNuevaReservacion.Visible = false;
+            }
+            else
+            {
+                label3.Visible = true; // Vehículos registrados
+                label5.Visible = true; // Reservaciones activas
+                lblReservaciones.Visible = true;
+                lblVehiculos.Visible = true;
+                btnNuevaReservacion.Visible = true;
+            }
+        }
+
         private void btnNuevoCliente_Click(object sender, EventArgs e)
         {
             nuevoCliente = true;
+            ClienteNuevo(true); // Ocultar labels y btn NuevaReservación
+
             //btnNuevaReservacion.Visible = false;
 
             if (!panel2.Visible)
@@ -536,6 +560,7 @@ namespace Hotel
         private void btnModificar_Click(object sender, EventArgs e)
         {
             nuevoCliente = false;
+            ClienteNuevo(false); // Mostrar labels Reservaciones, Vehículos y btnNuevaReservación
 
             if (lst.SelectedItems.Count > 0)
             {
