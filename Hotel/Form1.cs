@@ -32,6 +32,7 @@ namespace Hotel
                 {
                     ActualizarColores();
                     this.Show();
+                    this.WindowState = FormWindowState.Maximized;
                 }
             }
             else // No se pudo conectar con la base de datos

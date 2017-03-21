@@ -167,7 +167,7 @@ namespace Hotel
                 PanelCedula(false);
                 txtCedula.Enabled = false;
 
-                btnModificar.Location = new Point(704, 10);
+                btnModificar.Location = new Point(589, 11);
                 btnModificar.Visible = true;
                 btnAceptar.Visible = false;
 
@@ -297,9 +297,9 @@ namespace Hotel
             // Estado por default // if (visible)
 
             panelCedula.Visible = true;
-            lblCedula.Location = new Point(13, 41);
+            lblCedula.Location = new Point(24, 37);
             panelCedula.Controls.Add(lblCedula);
-            txtCedula.Location = new Point(83, 38);
+            txtCedula.Location = new Point(94, 34);
             panelCedula.Controls.Add(txtCedula);
 
             txtCedula.Select();
@@ -307,8 +307,8 @@ namespace Hotel
 
             if (!visible)
             {
-                lblCedula.Location = new Point(49, 172);
-                txtCedula.Location = new Point(119, 169);
+                lblCedula.Location = new Point(39, 155);
+                txtCedula.Location = new Point(109, 152);
                 panelContenedor.Controls.Add(lblCedula);
                 panelContenedor.Controls.Add(txtCedula);
 

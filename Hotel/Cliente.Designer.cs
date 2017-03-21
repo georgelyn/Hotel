@@ -50,7 +50,6 @@
             this.lblClienteDesde = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.btnVerReservacion = new System.Windows.Forms.Button();
-            this.dtClienteDesde = new System.Windows.Forms.DateTimePicker();
             this.panelListboxHabitaciones = new System.Windows.Forms.Panel();
             this.listboxReservaciones = new System.Windows.Forms.ListBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -104,7 +103,7 @@
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 5, 5);
-            this.toolStrip1.Size = new System.Drawing.Size(903, 34);
+            this.toolStrip1.Size = new System.Drawing.Size(777, 34);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -136,7 +135,7 @@
             "Clientes actuales",
             "Habitaciones ocupadas"});
             this.toolStripComboBox1.Name = "toolStripComboBox1";
-            this.toolStripComboBox1.Size = new System.Drawing.Size(200, 27);
+            this.toolStripComboBox1.Size = new System.Drawing.Size(180, 27);
             this.toolStripComboBox1.SelectedIndexChanged += new System.EventHandler(this.toolStripComboBox1_SelectedIndexChanged);
             // 
             // toolStripLabel1
@@ -180,7 +179,7 @@
             // 
             this.txtBuscar.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBuscar.Name = "txtBuscar";
-            this.txtBuscar.Size = new System.Drawing.Size(180, 27);
+            this.txtBuscar.Size = new System.Drawing.Size(150, 27);
             this.txtBuscar.ToolTipText = "Buscar cliente por nombre o cédula";
             this.txtBuscar.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBuscar_KeyPress);
             // 
@@ -200,7 +199,7 @@
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Location = new System.Drawing.Point(0, 29);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(903, 528);
+            this.panel1.Size = new System.Drawing.Size(777, 528);
             this.panel1.TabIndex = 1;
             // 
             // panel5
@@ -212,12 +211,12 @@
             this.panel5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panel5.Location = new System.Drawing.Point(0, 475);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(909, 50);
+            this.panel5.Size = new System.Drawing.Size(777, 50);
             this.panel5.TabIndex = 153;
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(800, 7);
+            this.btnCancelar.Location = new System.Drawing.Point(674, 7);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(91, 36);
             this.btnCancelar.TabIndex = 11;
@@ -227,7 +226,7 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(700, 7);
+            this.btnGuardar.Location = new System.Drawing.Point(577, 7);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(91, 36);
             this.btnGuardar.TabIndex = 10;
@@ -252,7 +251,7 @@
             // 
             this.panel2.Controls.Add(this.panelClienteDesde);
             this.panel2.Controls.Add(this.btnVerReservacion);
-            this.panel2.Controls.Add(this.dtClienteDesde);
+            this.panel2.Controls.Add(this.panel4);
             this.panel2.Controls.Add(this.panelListboxHabitaciones);
             this.panel2.Controls.Add(this.label10);
             this.panel2.Controls.Add(this.label11);
@@ -261,7 +260,6 @@
             this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.panel3);
             this.panel2.Controls.Add(this.label4);
-            this.panel2.Controls.Add(this.panel4);
             this.panel2.Controls.Add(this.btnVerVehiculos);
             this.panel2.Controls.Add(this.lblVehiculos);
             this.panel2.Controls.Add(this.label3);
@@ -281,7 +279,7 @@
             this.panel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panel2.Location = new System.Drawing.Point(3, 4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(900, 521);
+            this.panel2.Size = new System.Drawing.Size(774, 521);
             this.panel2.TabIndex = 0;
             this.panel2.Visible = false;
             // 
@@ -289,7 +287,7 @@
             // 
             this.panelClienteDesde.Controls.Add(this.lblClienteDesde);
             this.panelClienteDesde.Controls.Add(this.label8);
-            this.panelClienteDesde.Location = new System.Drawing.Point(602, 16);
+            this.panelClienteDesde.Location = new System.Drawing.Point(498, 24);
             this.panelClienteDesde.Name = "panelClienteDesde";
             this.panelClienteDesde.Size = new System.Drawing.Size(240, 34);
             this.panelClienteDesde.TabIndex = 158;
@@ -320,7 +318,7 @@
             // btnVerReservacion
             // 
             this.btnVerReservacion.Image = global::Hotel.Properties.Resources.eye_icon;
-            this.btnVerReservacion.Location = new System.Drawing.Point(838, 376);
+            this.btnVerReservacion.Location = new System.Drawing.Point(704, 380);
             this.btnVerReservacion.Name = "btnVerReservacion";
             this.btnVerReservacion.Size = new System.Drawing.Size(34, 28);
             this.btnVerReservacion.TabIndex = 156;
@@ -328,24 +326,11 @@
             this.btnVerReservacion.Visible = false;
             this.btnVerReservacion.Click += new System.EventHandler(this.btnVerReservacion_Click);
             // 
-            // dtClienteDesde
-            // 
-            this.dtClienteDesde.CustomFormat = "dd/MMM/yyyy";
-            this.dtClienteDesde.Enabled = false;
-            this.dtClienteDesde.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtClienteDesde.Location = new System.Drawing.Point(78, 24);
-            this.dtClienteDesde.Margin = new System.Windows.Forms.Padding(4);
-            this.dtClienteDesde.MinDate = new System.DateTime(2004, 1, 1, 0, 0, 0, 0);
-            this.dtClienteDesde.Name = "dtClienteDesde";
-            this.dtClienteDesde.Size = new System.Drawing.Size(131, 26);
-            this.dtClienteDesde.TabIndex = 155;
-            this.dtClienteDesde.Visible = false;
-            // 
             // panelListboxHabitaciones
             // 
             this.panelListboxHabitaciones.BackColor = System.Drawing.Color.Teal;
             this.panelListboxHabitaciones.Controls.Add(this.listboxReservaciones);
-            this.panelListboxHabitaciones.Location = new System.Drawing.Point(723, 348);
+            this.panelListboxHabitaciones.Location = new System.Drawing.Point(590, 354);
             this.panelListboxHabitaciones.Name = "panelListboxHabitaciones";
             this.panelListboxHabitaciones.Size = new System.Drawing.Size(109, 84);
             this.panelListboxHabitaciones.TabIndex = 152;
@@ -366,18 +351,18 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(353, 410);
+            this.label10.Location = new System.Drawing.Point(311, 414);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(364, 20);
+            this.label10.Size = new System.Drawing.Size(274, 20);
             this.label10.TabIndex = 151;
-            this.label10.Text = "|---------------------------------------------------------------------|";
+            this.label10.Text = "|---------------------------------------------------|";
             this.label10.Visible = false;
             // 
             // label11
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(728, 330);
+            this.label11.Location = new System.Drawing.Point(595, 336);
             this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(95, 15);
@@ -388,7 +373,7 @@
             // btnVerReservaciones
             // 
             this.btnVerReservaciones.Image = global::Hotel.Properties.Resources.eye_icon;
-            this.btnVerReservaciones.Location = new System.Drawing.Point(299, 406);
+            this.btnVerReservaciones.Location = new System.Drawing.Point(258, 410);
             this.btnVerReservaciones.Name = "btnVerReservaciones";
             this.btnVerReservaciones.Size = new System.Drawing.Size(47, 28);
             this.btnVerReservaciones.TabIndex = 7;
@@ -401,7 +386,7 @@
             // 
             this.lblReservaciones.AutoSize = true;
             this.lblReservaciones.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblReservaciones.Location = new System.Drawing.Point(258, 410);
+            this.lblReservaciones.Location = new System.Drawing.Point(217, 414);
             this.lblReservaciones.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblReservaciones.Name = "lblReservaciones";
             this.lblReservaciones.Size = new System.Drawing.Size(20, 22);
@@ -411,7 +396,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(74, 410);
+            this.label5.Location = new System.Drawing.Point(33, 414);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(171, 20);
@@ -421,7 +406,7 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.LightBlue;
-            this.panel3.Location = new System.Drawing.Point(14, 24);
+            this.panel3.Location = new System.Drawing.Point(9, 24);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(10, 418);
             this.panel3.TabIndex = 140;
@@ -430,7 +415,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.ForeColor = System.Drawing.Color.Red;
-            this.label4.Location = new System.Drawing.Point(461, 148);
+            this.label4.Location = new System.Drawing.Point(386, 140);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(15, 20);
@@ -440,7 +425,7 @@
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.LightBlue;
-            this.panel4.Location = new System.Drawing.Point(878, 24);
+            this.panel4.Location = new System.Drawing.Point(754, 24);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(10, 418);
             this.panel4.TabIndex = 141;
@@ -448,7 +433,7 @@
             // btnVerVehiculos
             // 
             this.btnVerVehiculos.Image = global::Hotel.Properties.Resources.eye_icon;
-            this.btnVerVehiculos.Location = new System.Drawing.Point(299, 372);
+            this.btnVerVehiculos.Location = new System.Drawing.Point(258, 376);
             this.btnVerVehiculos.Name = "btnVerVehiculos";
             this.btnVerVehiculos.Size = new System.Drawing.Size(47, 28);
             this.btnVerVehiculos.TabIndex = 9;
@@ -461,7 +446,7 @@
             // 
             this.lblVehiculos.AutoSize = true;
             this.lblVehiculos.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblVehiculos.Location = new System.Drawing.Point(258, 376);
+            this.lblVehiculos.Location = new System.Drawing.Point(217, 380);
             this.lblVehiculos.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVehiculos.Name = "lblVehiculos";
             this.lblVehiculos.Size = new System.Drawing.Size(20, 22);
@@ -471,7 +456,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(74, 376);
+            this.label3.Location = new System.Drawing.Point(33, 380);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(165, 20);
@@ -480,7 +465,7 @@
             // 
             // txtNotas
             // 
-            this.txtNotas.Location = new System.Drawing.Point(276, 234);
+            this.txtNotas.Location = new System.Drawing.Point(201, 226);
             this.txtNotas.Name = "txtNotas";
             this.txtNotas.Size = new System.Drawing.Size(455, 67);
             this.txtNotas.TabIndex = 6;
@@ -489,7 +474,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(170, 244);
+            this.label2.Location = new System.Drawing.Point(95, 236);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(55, 20);
@@ -498,7 +483,7 @@
             // 
             // txtCedula
             // 
-            this.txtCedula.Location = new System.Drawing.Point(276, 145);
+            this.txtCedula.Location = new System.Drawing.Point(201, 137);
             this.txtCedula.Name = "txtCedula";
             this.txtCedula.Size = new System.Drawing.Size(180, 26);
             this.txtCedula.TabIndex = 2;
@@ -507,7 +492,7 @@
             // lblCedula
             // 
             this.lblCedula.AutoSize = true;
-            this.lblCedula.Location = new System.Drawing.Point(170, 148);
+            this.lblCedula.Location = new System.Drawing.Point(95, 140);
             this.lblCedula.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCedula.Name = "lblCedula";
             this.lblCedula.Size = new System.Drawing.Size(63, 20);
@@ -518,7 +503,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.ForeColor = System.Drawing.Color.Red;
-            this.label6.Location = new System.Drawing.Point(738, 105);
+            this.label6.Location = new System.Drawing.Point(663, 97);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(15, 20);
@@ -527,7 +512,7 @@
             // 
             // txtEdad
             // 
-            this.txtEdad.Location = new System.Drawing.Point(550, 145);
+            this.txtEdad.Location = new System.Drawing.Point(475, 137);
             this.txtEdad.Name = "txtEdad";
             this.txtEdad.Size = new System.Drawing.Size(77, 26);
             this.txtEdad.TabIndex = 3;
@@ -536,7 +521,7 @@
             // lblEdad
             // 
             this.lblEdad.AutoSize = true;
-            this.lblEdad.Location = new System.Drawing.Point(492, 148);
+            this.lblEdad.Location = new System.Drawing.Point(417, 140);
             this.lblEdad.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblEdad.Name = "lblEdad";
             this.lblEdad.Size = new System.Drawing.Size(51, 20);
@@ -546,7 +531,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(445, 193);
+            this.label1.Location = new System.Drawing.Point(370, 185);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(13, 20);
@@ -555,7 +540,7 @@
             // 
             // txtTelefono2
             // 
-            this.txtTelefono2.Location = new System.Drawing.Point(465, 190);
+            this.txtTelefono2.Location = new System.Drawing.Point(390, 182);
             this.txtTelefono2.Name = "txtTelefono2";
             this.txtTelefono2.Size = new System.Drawing.Size(162, 26);
             this.txtTelefono2.TabIndex = 5;
@@ -563,7 +548,7 @@
             // 
             // txtTelefono1
             // 
-            this.txtTelefono1.Location = new System.Drawing.Point(276, 190);
+            this.txtTelefono1.Location = new System.Drawing.Point(201, 182);
             this.txtTelefono1.Name = "txtTelefono1";
             this.txtTelefono1.Size = new System.Drawing.Size(162, 26);
             this.txtTelefono1.TabIndex = 4;
@@ -571,7 +556,7 @@
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(276, 102);
+            this.txtNombre.Location = new System.Drawing.Point(201, 94);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(455, 26);
             this.txtNombre.TabIndex = 0;
@@ -579,7 +564,7 @@
             // lblTelefono
             // 
             this.lblTelefono.AutoSize = true;
-            this.lblTelefono.Location = new System.Drawing.Point(170, 193);
+            this.lblTelefono.Location = new System.Drawing.Point(95, 185);
             this.lblTelefono.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTelefono.Name = "lblTelefono";
             this.lblTelefono.Size = new System.Drawing.Size(93, 20);
@@ -589,7 +574,7 @@
             // lblNombre
             // 
             this.lblNombre.AutoSize = true;
-            this.lblNombre.Location = new System.Drawing.Point(170, 105);
+            this.lblNombre.Location = new System.Drawing.Point(95, 97);
             this.lblNombre.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNombre.Name = "lblNombre";
             this.lblNombre.Size = new System.Drawing.Size(69, 20);
@@ -600,7 +585,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(903, 555);
+            this.ClientSize = new System.Drawing.Size(777, 555);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -669,7 +654,6 @@
         private System.Windows.Forms.Panel panelListboxHabitaciones;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.DateTimePicker dtClienteDesde;
         private System.Windows.Forms.ToolStripSeparator toolStripButton1;
         private System.Windows.Forms.Button btnVerReservacion;
         private System.Windows.Forms.Label lblClienteDesde;
