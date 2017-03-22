@@ -44,7 +44,7 @@ namespace Hotel
 
         Form1 f1 = (Form1)Application.OpenForms["Form1"];
         Msg msg;
-        Vehiculo vehiculo;
+        VerVehiculo vehiculo;
 
         /* 
         ** VARIABLES
@@ -838,7 +838,7 @@ namespace Hotel
                     if (TieneVehiculo(txtCedula.Text))
                     {
                         comboVehiculo.Visible = true;
-                        vehiculo = new Vehiculo();
+                        vehiculo = new VerVehiculo();
                         idVehiculo = vehiculo.CargarVehiculosPorCedula(txtCedula.Text, comboVehiculo);
                     }
 

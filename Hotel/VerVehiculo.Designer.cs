@@ -1,6 +1,6 @@
 ﻿namespace Hotel
 {
-    partial class Vehiculo
+    partial class VerVehiculo
     {
         /// <summary>
         /// Required designer variable.
@@ -254,7 +254,7 @@
             this.pictureBox1.TabIndex = 65;
             this.pictureBox1.TabStop = false;
             // 
-            // Vehiculo
+            // VerVehiculo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -281,11 +281,10 @@
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Vehiculo";
+            this.Name = "VerVehiculo";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Vehículos almacenados";
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
@@ -297,7 +296,6 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox comboVehiculo;
         private System.Windows.Forms.CheckBox checkCamion;
         private System.Windows.Forms.TextBox txtPlaca;
         private System.Windows.Forms.Label lblMarca;
@@ -315,5 +313,6 @@
         private System.Windows.Forms.Label lblCliente;
         private System.Windows.Forms.Label lblNombreCliente;
         private System.Windows.Forms.PictureBox pictureBox1;
+        public System.Windows.Forms.ComboBox comboVehiculo;
     }
 }

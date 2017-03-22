@@ -64,6 +64,12 @@
     <Compile Include="Ajustes.Designer.cs">
       <DependentUpon>Ajustes.cs</DependentUpon>
     </Compile>
+    <Compile Include="ListaVehiculos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ListaVehiculos.Designer.cs">
+      <DependentUpon>ListaVehiculos.cs</DependentUpon>
+    </Compile>
     <Compile Include="ListViewColumnSorter.cs" />
     <Compile Include="Cliente.cs">
       <SubType>Form</SubType>
@@ -129,11 +135,11 @@
     <Compile Include="TemporalPrueba.Designer.cs">
       <DependentUpon>TemporalPrueba.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vehiculo.cs">
+    <Compile Include="VerVehiculo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vehiculo.Designer.cs">
-      <DependentUpon>Vehiculo.cs</DependentUpon>
+    <Compile Include="VerVehiculo.Designer.cs">
+      <DependentUpon>VerVehiculo.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Acerca.resx">
       <DependentUpon>Acerca.cs</DependentUpon>
@@ -152,6 +158,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListaVehiculos.resx">
+      <DependentUpon>ListaVehiculos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
@@ -173,8 +182,8 @@
     <EmbeddedResource Include="TemporalPrueba.resx">
       <DependentUpon>TemporalPrueba.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Vehiculo.resx">
-      <DependentUpon>Vehiculo.cs</DependentUpon>
+    <EmbeddedResource Include="VerVehiculo.resx">
+      <DependentUpon>VerVehiculo.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">
@@ -269,6 +278,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Bed.ico" />
+    <None Include="Resources\carSee.png" />
     <None Include="Resources\imagen_hotel.jpg" />
     <None Include="Resources\folder-icon.png" />
   </ItemGroup>

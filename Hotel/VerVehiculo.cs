@@ -9,9 +9,9 @@ using System.Data.SQLite;
 
 namespace Hotel
 {
-    public partial class Vehiculo : Form
+    public partial class VerVehiculo : Form
     {
-        public Vehiculo()
+        public VerVehiculo()
         {
             InitializeComponent();
 
@@ -78,7 +78,10 @@ namespace Hotel
                             while (dr.Read())
                             {
                                 idVehiculo.Add(dr["ID"].ToString());
-                                combo.Items.Add(dr["Marca"].ToString() + " - " + dr["Modelo"].ToString());
+                                if (combo != null)
+                                {
+                                    combo.Items.Add(dr["Marca"].ToString() + " - " + dr["Modelo"].ToString());
+                                }
                                 //comboVehiculo.Items.Add(dr["marca"].ToString() + " - " + dr["modelo"].ToString());
                             }
                         }
@@ -131,7 +134,7 @@ namespace Hotel
             }
         }
 
-        private void ModificarVehiculo(string id)
+        private bool ModificarVehiculo(string id)
         {
             try
             {
@@ -157,6 +160,7 @@ namespace Hotel
                         cmd.ExecuteNonQuery();
 
                         MessageBox.Show("Los datos del vehículo han sido modificados.");
+                        return true;
                     }
                 }
             }
@@ -164,6 +168,7 @@ namespace Hotel
             {
                 MessageBox.Show("Se ha presentado un error.\nDetalles:\n\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            return false;
         }
 
         private void EliminarVehiculo(string id)
@@ -238,7 +243,24 @@ namespace Hotel
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            ModificarVehiculo(idVehiculo[comboVehiculo.SelectedIndex].ToString());
+            if (String.IsNullOrEmpty(txtMarca.Text.Trim()) && String.IsNullOrEmpty(txtModelo.Text.Trim()))
+            {
+                MessageBox.Show("Los campos de texto no pueden estar vacíos.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtMarca.Select();
+            }
+            else
+            {
+                if (ModificarVehiculo(idVehiculo[comboVehiculo.SelectedIndex].ToString()))
+                {
+                    if (((ListaVehiculos)Application.OpenForms["ListaVehiculos"]) != null)
+                    {
+                        ListaVehiculos vehiculos = (ListaVehiculos)Application.OpenForms["ListaVehiculos"];
+                        vehiculos.CargarVehiculos(false);
+                    }
+
+                    this.Close();
+                }
+            }
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -260,7 +282,7 @@ namespace Hotel
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            Close();
+            this.Close();
         }
     }
 }

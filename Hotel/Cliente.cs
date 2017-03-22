@@ -25,7 +25,7 @@ namespace Hotel
 
         Msg msg;
         ListView lst;
-        Vehiculo vehiculo;
+        VerVehiculo vehiculo;
         Reservacion reservacion;
         Form1 f1 = (Form1)Application.OpenForms["Form1"];
 
@@ -703,7 +703,7 @@ namespace Hotel
         private void btnVerVehiculos_Click(object sender, EventArgs e)
         {
 
-            vehiculo = new Vehiculo();
+            vehiculo = new VerVehiculo();
             //vehiculo.CargarVehiculosPorCedula(txtCedula.Text);
             vehiculo.comboCedula.Text = txtCedula.Text;
             vehiculo.ShowDialog();

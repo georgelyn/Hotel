@@ -133,11 +133,11 @@
   <data name="car16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\car16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="folder-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\folder-icon.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="compose-icon32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\compose-icon32.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="imagen_hotel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imagen_hotel.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="door-icon32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\door-icon32.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -169,10 +169,13 @@
   <data name="key-icon32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\key-icon32.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="folder-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\folder-icon.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Source-Code-16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Source-Code-16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="imagen_hotel" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\imagen_hotel.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="carSee" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\carSee.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

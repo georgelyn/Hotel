@@ -103,6 +103,16 @@ namespace Hotel.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap carSee {
+            get {
+                object obj = ResourceManager.GetObject("carSee", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap compose_icon32 {
             get {
                 object obj = ResourceManager.GetObject("compose-icon32", resourceCulture);

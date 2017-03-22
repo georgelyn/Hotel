@@ -99,7 +99,7 @@ namespace Hotel
         // Clases
         Reservacion reservacion;
         Cliente cliente;
-        Vehiculo vehiculo;
+        ListaVehiculos vehiculos;
         Habitacion habitacion;
         Msg msg;
 
@@ -529,8 +529,15 @@ namespace Hotel
         private void vehículosAlmacenadosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ActivarTimerEspera();
-            vehiculo = new Vehiculo();
-            vehiculo.ShowDialog();          
+            if (vehiculos == null || vehiculos.IsDisposed)
+            {
+                vehiculos = new ListaVehiculos();
+                vehiculos.Show();
+            }
+            else
+            {
+                vehiculos.Activate();
+            }          
         }
 
         private void tiposDeHabitacionesToolStripMenuItem_Click(object sender, EventArgs e)
