@@ -26,6 +26,8 @@ namespace Hotel
         Msg msg;
         ListView lst;
 
+        Form1 f1 = (Form1)Application.OpenForms["Form1"];
+
         Font font_verdana = new Font("Verdana", 12);
 
         bool habitacionExiste = false; // Para controlar si se está modificando un tipo de habitación existente, o agregando uno nuevo
@@ -382,6 +384,8 @@ namespace Hotel
         {
             if (panel2.Visible)
             {
+                f1.ActivarTimerEspera();
+
                 CargarListViewHabitaciones();
             }
         }
@@ -400,6 +404,8 @@ namespace Hotel
             }
             else
             {
+                f1.ActivarTimerEspera();
+
                 if (!habitacionExiste)
                 {
                     AgregarHabitacion();

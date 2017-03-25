@@ -94,6 +94,7 @@
             this.MaximumSize = new System.Drawing.Size(800, 600);
             this.MinimizeBox = false;
             this.Name = "Msg";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Confirmación";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

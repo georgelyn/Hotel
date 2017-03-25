@@ -60,7 +60,7 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.FloralWhite;
+            this.panel1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Location = new System.Drawing.Point(0, 37);
             this.panel1.Name = "panel1";
@@ -125,7 +125,7 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(581, 403);
+            this.btnCancelar.Location = new System.Drawing.Point(591, 403);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(84, 29);
             this.btnCancelar.TabIndex = 6;
@@ -135,7 +135,7 @@
             // 
             // btnAceptar
             // 
-            this.btnAceptar.Location = new System.Drawing.Point(491, 403);
+            this.btnAceptar.Location = new System.Drawing.Point(501, 403);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(84, 29);
             this.btnAceptar.TabIndex = 5;

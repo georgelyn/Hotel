@@ -33,8 +33,8 @@ namespace Hotel
                     ActualizarColores();
                     this.Show();
                     this.WindowState = FormWindowState.Maximized;
-                }
             }
+        }
             else // No se pudo conectar con la base de datos
             {
                 msg = new Msg();
@@ -106,7 +106,7 @@ namespace Hotel
         Color disponible = Color.LimeGreen;
         Color inactiva = Color.DarkGray;
         Color limpieza = Color.White;
-        Color mantenimiento = Color.LightBlue;
+        Color mantenimiento = Color.SkyBlue;
         Color ocupada = Color.IndianRed;
 
         public void ActivarTimerEspera()

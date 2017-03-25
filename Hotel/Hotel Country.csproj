@@ -129,12 +129,6 @@
       <DependentUpon>Seguridad.cs</DependentUpon>
     </Compile>
     <Compile Include="StringExtensions.cs" />
-    <Compile Include="TemporalPrueba.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TemporalPrueba.Designer.cs">
-      <DependentUpon>TemporalPrueba.cs</DependentUpon>
-    </Compile>
     <Compile Include="VerVehiculo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -178,9 +172,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Seguridad.resx">
       <DependentUpon>Seguridad.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TemporalPrueba.resx">
-      <DependentUpon>TemporalPrueba.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VerVehiculo.resx">
       <DependentUpon>VerVehiculo.cs</DependentUpon>
@@ -278,6 +269,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Bed.ico" />
+    <None Include="Resources\car64.png" />
     <None Include="Resources\carSee.png" />
     <None Include="Resources\imagen_hotel.jpg" />
     <None Include="Resources\folder-icon.png" />

@@ -47,8 +47,12 @@
             this.txtNotas = new System.Windows.Forms.RichTextBox();
             this.lblCliente = new System.Windows.Forms.Label();
             this.lblNombreCliente = new System.Windows.Forms.Label();
+            this.panelListboxVehiculoHabitacion = new System.Windows.Forms.Panel();
+            this.listboxVehiculoHabitacion = new System.Windows.Forms.ListBox();
+            this.lblVehiculoHabitacion = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
+            this.panelListboxVehiculoHabitacion.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -245,12 +249,46 @@
             this.lblNombreCliente.Text = "nombreCliente";
             this.lblNombreCliente.Visible = false;
             // 
+            // panelListboxVehiculoHabitacion
+            // 
+            this.panelListboxVehiculoHabitacion.BackColor = System.Drawing.Color.Teal;
+            this.panelListboxVehiculoHabitacion.Controls.Add(this.listboxVehiculoHabitacion);
+            this.panelListboxVehiculoHabitacion.Location = new System.Drawing.Point(511, 246);
+            this.panelListboxVehiculoHabitacion.Name = "panelListboxVehiculoHabitacion";
+            this.panelListboxVehiculoHabitacion.Size = new System.Drawing.Size(109, 84);
+            this.panelListboxVehiculoHabitacion.TabIndex = 154;
+            this.panelListboxVehiculoHabitacion.Visible = false;
+            // 
+            // listboxVehiculoHabitacion
+            // 
+            this.listboxVehiculoHabitacion.FormattingEnabled = true;
+            this.listboxVehiculoHabitacion.ItemHeight = 20;
+            this.listboxVehiculoHabitacion.Location = new System.Drawing.Point(8, 0);
+            this.listboxVehiculoHabitacion.Name = "listboxVehiculoHabitacion";
+            this.listboxVehiculoHabitacion.Size = new System.Drawing.Size(92, 84);
+            this.listboxVehiculoHabitacion.TabIndex = 146;
+            this.listboxVehiculoHabitacion.Visible = false;
+            this.listboxVehiculoHabitacion.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listboxVehiculoHabitacion_MouseDoubleClick);
+            // 
+            // lblVehiculoHabitacion
+            // 
+            this.lblVehiculoHabitacion.AutoSize = true;
+            this.lblVehiculoHabitacion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblVehiculoHabitacion.Location = new System.Drawing.Point(514, 228);
+            this.lblVehiculoHabitacion.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblVehiculoHabitacion.Name = "lblVehiculoHabitacion";
+            this.lblVehiculoHabitacion.Size = new System.Drawing.Size(95, 15);
+            this.lblVehiculoHabitacion.TabIndex = 153;
+            this.lblVehiculoHabitacion.Text = "Habitaciones:";
+            this.lblVehiculoHabitacion.Visible = false;
+            // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::Hotel.Properties.Resources.car48;
+            this.pictureBox1.Image = global::Hotel.Properties.Resources.car64;
             this.pictureBox1.Location = new System.Drawing.Point(25, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(50, 49);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 65;
             this.pictureBox1.TabStop = false;
             // 
@@ -259,6 +297,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(632, 408);
+            this.Controls.Add(this.panelListboxVehiculoHabitacion);
+            this.Controls.Add(this.lblVehiculoHabitacion);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.lblNombreCliente);
             this.Controls.Add(this.lblCliente);
@@ -286,6 +326,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.panel1.ResumeLayout(false);
+            this.panelListboxVehiculoHabitacion.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -314,5 +355,8 @@
         private System.Windows.Forms.Label lblNombreCliente;
         private System.Windows.Forms.PictureBox pictureBox1;
         public System.Windows.Forms.ComboBox comboVehiculo;
+        private System.Windows.Forms.Panel panelListboxVehiculoHabitacion;
+        private System.Windows.Forms.ListBox listboxVehiculoHabitacion;
+        private System.Windows.Forms.Label lblVehiculoHabitacion;
     }
 }

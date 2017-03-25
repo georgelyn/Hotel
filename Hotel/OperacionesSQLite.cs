@@ -85,7 +85,7 @@ namespace Hotel
 
                         using (SQLiteDataReader dr = cmd.ExecuteReader())
                         {
-                            if (dr.HasRows) // Si no existe/hay un problema
+                            if (dr.HasRows) // Si existe/no hay problemas
                             {
                                 return true;
                             }
@@ -115,7 +115,7 @@ namespace Hotel
                         {
                             cmd.ExecuteNonQuery();
 
-                            // Insertar los valores predeterminados
+                            // Insertar los valores predeterminados/originales
 
                             for (int i = 1; i <= 52; i++)
                             {
@@ -260,7 +260,7 @@ namespace Hotel
                 }
             }
 
-            string fechaActual = DateTime.Now.ToString("yyyy-MM-dd_HH-mm");
+            string fechaActual = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
             string nombre = "HotelBD-" + fechaActual + ".db";
 
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
@@ -306,6 +306,10 @@ namespace Hotel
                             if (dr.HasRows)
                             {
                                 return true;
+                            }
+                            else
+                            {
+                                MessageBox.Show("No es un archivo válido. Verifique e intente nuevanemente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
                     }
@@ -409,10 +413,10 @@ namespace Hotel
                             }
                         }
                     }
-                    else
-                    {
-                        MessageBox.Show("No es un archivo válido. Verifique e intente nuevanemente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                    //else
+                    //{
+                    //    MessageBox.Show("No es un archivo válido. Verifique e intente nuevanemente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    //}
                 }
 
             }

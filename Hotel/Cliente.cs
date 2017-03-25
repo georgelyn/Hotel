@@ -58,7 +58,7 @@ namespace Hotel
                 lst.Columns.Add("Nro.", 50, HorizontalAlignment.Center);
                 lst.Columns.Add("Nombre completo", 350, HorizontalAlignment.Left);
                 lst.Columns.Add("Cédula", 150, HorizontalAlignment.Left);
-                lst.Columns.Add("Reservaciones activas", 220, HorizontalAlignment.Center);
+                lst.Columns.Add("Reserv. Activas", 150, HorizontalAlignment.Center);
                 lst.Columns.Add("Cliente desde", 126, HorizontalAlignment.Left);
             }
 

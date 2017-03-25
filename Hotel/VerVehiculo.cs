@@ -20,6 +20,7 @@ namespace Hotel
         }
 
         Msg msg;
+        Form1 f1 = (Form1)Application.OpenForms["Form1"];
 
         List<String> idVehiculo; // Toma valor en CargarVehiculosPorCedula
         List<String> nombreCliente;
@@ -134,6 +135,54 @@ namespace Hotel
             }
         }
 
+        private void EncontrarReservacion(string id)
+        {
+            listboxVehiculoHabitacion.Items.Clear();
+
+            try
+            {
+                using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
+                {
+                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT NumeroHabitacion, Vehiculo_ID FROM Reservaciones WHERE Vehiculo_ID=@id", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@id", id);
+                        conn.Open();
+
+                        using (SQLiteDataReader dr = cmd.ExecuteReader())
+                        {
+                            if (dr.HasRows)
+                            {
+                                lblVehiculoHabitacion.Visible = true;
+                                panelListboxVehiculoHabitacion.Visible = true;
+                                listboxVehiculoHabitacion.Visible = true;
+
+                                while (dr.Read())
+                                {
+                                    listboxVehiculoHabitacion.Items.Add(dr["NumeroHabitacion"].ToString());
+
+                                    //if (dr["ID_Vehiculo"] != DBNull.Value)
+                                    //{
+
+                                    //}
+                                }
+                            }
+                            else
+                            {
+                                lblVehiculoHabitacion.Visible = false;
+                                panelListboxVehiculoHabitacion.Visible = false;
+                                listboxVehiculoHabitacion.Visible = false;
+
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Se ha encontrado un problema.\nDetalles: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private bool ModificarVehiculo(string id)
         {
             try
@@ -220,6 +269,7 @@ namespace Hotel
             //{
 
             CargarDatosVehiculo(idVehiculo[comboVehiculo.SelectedIndex].ToString());
+            EncontrarReservacion(idVehiculo[comboVehiculo.SelectedIndex].ToString());
             //MessageBox.Show(idVehiculo[comboVehiculos.SelectedIndex].ToString());
 
             btnEliminar.Visible = true;
@@ -272,6 +322,16 @@ namespace Hotel
                 if (dlgres == DialogResult.Yes)
                 {
                     EliminarVehiculo(idVehiculo[comboVehiculo.SelectedIndex].ToString());
+
+                    lblCliente.Visible = false;
+                    lblNombreCliente.Visible = false;
+
+                    if (listboxVehiculoHabitacion.Visible)
+                    {
+                        lblVehiculoHabitacion.Visible = false;
+                        panelListboxVehiculoHabitacion.Visible = false;
+                        listboxVehiculoHabitacion.Visible = false;
+                    }
                 }
                 else
                 {
@@ -283,6 +343,16 @@ namespace Hotel
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void listboxVehiculoHabitacion_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            f1.ActivarTimerEspera();
+
+            Reservacion reservacion = new Reservacion();
+
+            reservacion.CargarReservacion(int.Parse(listboxVehiculoHabitacion.Text), "ocupada");
+            reservacion.ShowDialog();
         }
     }
 }

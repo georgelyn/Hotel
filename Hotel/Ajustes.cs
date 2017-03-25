@@ -85,7 +85,6 @@ namespace Hotel
 
         private void button1_Click(object sender, EventArgs e)
         {
-
             if (montoActual != txtMontoCamion.Text || carpetaRespaldos != txtRespaldos.Text)
             {
                 Msg msg = new Msg();
@@ -111,7 +110,7 @@ namespace Hotel
 
             }
 
-            return;
+            Close();
         }
 
         private void button2_Click(object sender, EventArgs e)

@@ -19,6 +19,11 @@ namespace Hotel
             //Thread.CurrentThread.CurrentCulture = new CultureInfo("es-VE");
             InitializeComponent();
 
+            if (ResolucionPantalla800x600())
+            {
+                this.WindowState = FormWindowState.Maximized;
+            }
+
             /*dtEntrada.Value = DateTime.UtcNow; */// Ocurría un error son esto... 
             // A las 12 am, el ValueChanged del dtSalida tenía un desajuste en la fecha, como si fuera un día más.
             // Usando TimeSpan en lugar de TotalDays parece solucionarlo... pero antes me daba la cuenta mal... Seguir probando
@@ -76,6 +81,19 @@ namespace Hotel
         //        MessageBox.Show("Se ha presentado un problema con el monto del camión.\nDetalles: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         //    }
         //}
+
+        private bool ResolucionPantalla800x600()
+        {
+            var ancho = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
+            var alto = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
+
+            if (ancho <= 900 && alto <= 700)/*(ancho == 800 && alto == 600)*/
+            {
+                return true;
+            }
+
+            return false;
+        }
 
         public void CargarNumHabitaciones(string estado)
         {
