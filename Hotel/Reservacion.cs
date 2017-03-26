@@ -1078,7 +1078,7 @@ namespace Hotel
             ////    }
             ////}
 
-            if (dtSalida.Value.Day > dtEntrada.Value.Day)
+            if (dtSalida.Value.Date > dtEntrada.Value.Date)
             {
                 if (checkCamion.Checked) // Feo... pero funciona
                 {
@@ -1088,6 +1088,9 @@ namespace Hotel
 
                 TimeSpan ts = dtSalida.Value.Date - dtEntrada.Value.Date; // Sin Date, a una cierta hora (1:00, y 12:00?) no lo cuenta como otro día.
                 diasReservados = ts.Days;
+
+                lblDiasReservados.Text = diasReservados.ToString();
+
                 //MessageBox.Show(ts.Days.ToString());
 
                 //diasReservados = Convert.ToInt32((dtSalida.Value - dtEntrada.Value).TotalDays);
@@ -1105,6 +1108,36 @@ namespace Hotel
             }
 
 
+        }
+
+        private void dtEntrada_ValueChanged(object sender, EventArgs e)
+        {
+            if (dtEntrada.Value.Date > dtSalida.Value.Date)
+            {
+                dtSalida.Value = dtEntrada.Value.AddDays(1);
+            }
+
+            if (checkCamion.Checked) // Feo... pero funciona
+            {
+                total -= montoCamion; // Le quito el monto, para que no lo tome en cuenta al dividir
+            }
+            total /= diasReservados;
+
+            TimeSpan ts = dtSalida.Value.Date - dtEntrada.Value.Date; // Sin Date, a una cierta hora (1:00, y 12:00?) no lo cuenta como otro día.
+            diasReservados = ts.Days;
+
+            lblDiasReservados.Text = diasReservados.ToString();
+
+            //MessageBox.Show(ts.Days.ToString());
+
+            //diasReservados = Convert.ToInt32((dtSalida.Value - dtEntrada.Value).TotalDays);
+
+            total *= diasReservados;
+            if (checkCamion.Checked) // ^ Ahora le vuelvo a agregar el cargo por camión
+            {
+                total += montoCamion;
+            }
+            txtTotal.Text = String.Format(new CultureInfo("es-VE"), "{0:#,##0.00}", total);
         }
     }
 }

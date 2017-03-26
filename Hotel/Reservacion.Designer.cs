@@ -85,6 +85,8 @@
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.lblTelefono = new System.Windows.Forms.Label();
             this.lblNombre = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.lblDiasReservados = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panelContenedor.SuspendLayout();
             this.panelCedula.SuspendLayout();
@@ -104,7 +106,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 506);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(784, 55);
-            this.panel1.TabIndex = 54;
+            this.panel1.TabIndex = 1;
             // 
             // btnEliminar
             // 
@@ -114,7 +116,7 @@
             this.btnEliminar.Location = new System.Drawing.Point(24, 11);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(87, 34);
-            this.btnEliminar.TabIndex = 58;
+            this.btnEliminar.TabIndex = 3;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = false;
             this.btnEliminar.Visible = false;
@@ -125,7 +127,7 @@
             this.btnModificar.Location = new System.Drawing.Point(497, 11);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(87, 34);
-            this.btnModificar.TabIndex = 1;
+            this.btnModificar.TabIndex = 0;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = true;
             this.btnModificar.Visible = false;
@@ -136,7 +138,7 @@
             this.btnAceptar.Location = new System.Drawing.Point(589, 11);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(87, 34);
-            this.btnAceptar.TabIndex = 0;
+            this.btnAceptar.TabIndex = 1;
             this.btnAceptar.Text = "Aceptar";
             this.btnAceptar.UseVisualStyleBackColor = true;
             this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
@@ -153,9 +155,9 @@
             // 
             // panelContenedor
             // 
+            this.panelContenedor.Controls.Add(this.panelCedula);
             this.panelContenedor.Controls.Add(this.lblX);
             this.panelContenedor.Controls.Add(this.txtTipoHabitacion);
-            this.panelContenedor.Controls.Add(this.panelCedula);
             this.panelContenedor.Controls.Add(this.label9);
             this.panelContenedor.Controls.Add(this.label5);
             this.panelContenedor.Controls.Add(this.txtDestino);
@@ -272,14 +274,14 @@
             this.txtDestino.Location = new System.Drawing.Point(384, 184);
             this.txtDestino.Name = "txtDestino";
             this.txtDestino.Size = new System.Drawing.Size(193, 26);
-            this.txtDestino.TabIndex = 4;
+            this.txtDestino.TabIndex = 3;
             // 
             // txtOrigen
             // 
             this.txtOrigen.Location = new System.Drawing.Point(109, 184);
             this.txtOrigen.Name = "txtOrigen";
             this.txtOrigen.Size = new System.Drawing.Size(193, 26);
-            this.txtOrigen.TabIndex = 3;
+            this.txtOrigen.TabIndex = 2;
             // 
             // panel3
             // 
@@ -297,7 +299,7 @@
             this.listboxHabitaciones.Location = new System.Drawing.Point(9, 0);
             this.listboxHabitaciones.Name = "listboxHabitaciones";
             this.listboxHabitaciones.Size = new System.Drawing.Size(166, 164);
-            this.listboxHabitaciones.TabIndex = 109;
+            this.listboxHabitaciones.TabIndex = 0;
             this.listboxHabitaciones.SelectedIndexChanged += new System.EventHandler(this.listboxHabitaciones_SelectedIndexChanged);
             // 
             // label8
@@ -326,6 +328,8 @@
             // 
             this.panel2.BackColor = System.Drawing.Color.LightBlue;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.lblDiasReservados);
+            this.panel2.Controls.Add(this.label6);
             this.panel2.Controls.Add(this.lblHabitacionNumero);
             this.panel2.Controls.Add(this.lblHabitacionActual);
             this.panel2.Controls.Add(this.linkLblCambiarNumHab);
@@ -380,18 +384,19 @@
             // 
             this.dtEntrada.CustomFormat = "dd/MMM/yyyy";
             this.dtEntrada.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtEntrada.Location = new System.Drawing.Point(578, 12);
+            this.dtEntrada.Location = new System.Drawing.Point(587, 4);
             this.dtEntrada.Margin = new System.Windows.Forms.Padding(4);
             this.dtEntrada.MinDate = new System.DateTime(2004, 1, 1, 0, 0, 0, 0);
             this.dtEntrada.Name = "dtEntrada";
             this.dtEntrada.Size = new System.Drawing.Size(149, 26);
             this.dtEntrada.TabIndex = 16;
+            this.dtEntrada.ValueChanged += new System.EventHandler(this.dtEntrada_ValueChanged);
             // 
             // dtSalida
             // 
             this.dtSalida.CustomFormat = "dd/MMM/yyyy";
             this.dtSalida.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtSalida.Location = new System.Drawing.Point(578, 45);
+            this.dtSalida.Location = new System.Drawing.Point(587, 37);
             this.dtSalida.Margin = new System.Windows.Forms.Padding(4);
             this.dtSalida.MinDate = new System.DateTime(2004, 1, 1, 0, 0, 0, 0);
             this.dtSalida.Name = "dtSalida";
@@ -423,7 +428,7 @@
             // lblFechaIngrso
             // 
             this.lblFechaIngrso.AutoSize = true;
-            this.lblFechaIngrso.Location = new System.Drawing.Point(450, 15);
+            this.lblFechaIngrso.Location = new System.Drawing.Point(459, 7);
             this.lblFechaIngrso.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lblFechaIngrso.Name = "lblFechaIngrso";
             this.lblFechaIngrso.Size = new System.Drawing.Size(117, 20);
@@ -433,7 +438,7 @@
             // lblFechaSalida
             // 
             this.lblFechaSalida.AutoSize = true;
-            this.lblFechaSalida.Location = new System.Drawing.Point(464, 48);
+            this.lblFechaSalida.Location = new System.Drawing.Point(473, 40);
             this.lblFechaSalida.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lblFechaSalida.Name = "lblFechaSalida";
             this.lblFechaSalida.Size = new System.Drawing.Size(103, 20);
@@ -455,7 +460,7 @@
             this.txtNotas.Location = new System.Drawing.Point(109, 444);
             this.txtNotas.Name = "txtNotas";
             this.txtNotas.Size = new System.Drawing.Size(402, 56);
-            this.txtNotas.TabIndex = 8;
+            this.txtNotas.TabIndex = 7;
             this.txtNotas.Text = "";
             // 
             // label2
@@ -497,7 +502,7 @@
             this.groupBox1.Location = new System.Drawing.Point(13, 255);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(540, 176);
-            this.groupBox1.TabIndex = 7;
+            this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Información sobre el vehículo";
             // 
@@ -534,7 +539,7 @@
             this.comboVehiculo.Location = new System.Drawing.Point(231, 23);
             this.comboVehiculo.Name = "comboVehiculo";
             this.comboVehiculo.Size = new System.Drawing.Size(264, 26);
-            this.comboVehiculo.TabIndex = 119;
+            this.comboVehiculo.TabIndex = 0;
             this.comboVehiculo.Visible = false;
             this.comboVehiculo.SelectedIndexChanged += new System.EventHandler(this.comboVehiculo_SelectedIndexChanged);
             // 
@@ -557,7 +562,7 @@
             this.checkCamion.Location = new System.Drawing.Point(443, 101);
             this.checkCamion.Name = "checkCamion";
             this.checkCamion.Size = new System.Drawing.Size(82, 24);
-            this.checkCamion.TabIndex = 0;
+            this.checkCamion.TabIndex = 4;
             this.checkCamion.Text = "Camión";
             this.checkCamion.UseVisualStyleBackColor = true;
             this.checkCamion.Click += new System.EventHandler(this.checkCamion_Click);
@@ -567,7 +572,7 @@
             this.txtPlaca.Location = new System.Drawing.Point(384, 62);
             this.txtPlaca.Name = "txtPlaca";
             this.txtPlaca.Size = new System.Drawing.Size(141, 24);
-            this.txtPlaca.TabIndex = 1;
+            this.txtPlaca.TabIndex = 2;
             // 
             // lblMarca
             // 
@@ -585,14 +590,14 @@
             this.txtModelo.Location = new System.Drawing.Point(96, 99);
             this.txtModelo.Name = "txtModelo";
             this.txtModelo.Size = new System.Drawing.Size(269, 24);
-            this.txtModelo.TabIndex = 2;
+            this.txtModelo.TabIndex = 3;
             // 
             // txtMarca
             // 
             this.txtMarca.Location = new System.Drawing.Point(96, 62);
             this.txtMarca.Name = "txtMarca";
             this.txtMarca.Size = new System.Drawing.Size(193, 24);
-            this.txtMarca.TabIndex = 0;
+            this.txtMarca.TabIndex = 1;
             // 
             // lblModelo
             // 
@@ -621,7 +626,7 @@
             this.txtEdad.Location = new System.Drawing.Point(384, 152);
             this.txtEdad.Name = "txtEdad";
             this.txtEdad.Size = new System.Drawing.Size(61, 26);
-            this.txtEdad.TabIndex = 2;
+            this.txtEdad.TabIndex = 1;
             this.txtEdad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtEdad_KeyPress);
             // 
             // lblEdad
@@ -638,8 +643,9 @@
             // 
             this.txtTotal.Location = new System.Drawing.Point(630, 465);
             this.txtTotal.Name = "txtTotal";
+            this.txtTotal.ReadOnly = true;
             this.txtTotal.Size = new System.Drawing.Size(120, 26);
-            this.txtTotal.TabIndex = 9;
+            this.txtTotal.TabIndex = 8;
             this.txtTotal.Text = "0";
             this.txtTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtTotal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtEdad_KeyPress);
@@ -669,7 +675,7 @@
             this.txtTelefono2.Location = new System.Drawing.Point(384, 216);
             this.txtTelefono2.Name = "txtTelefono2";
             this.txtTelefono2.Size = new System.Drawing.Size(193, 26);
-            this.txtTelefono2.TabIndex = 6;
+            this.txtTelefono2.TabIndex = 5;
             this.txtTelefono2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtEdad_KeyPress);
             // 
             // txtTelefono1
@@ -677,7 +683,7 @@
             this.txtTelefono1.Location = new System.Drawing.Point(109, 216);
             this.txtTelefono1.Name = "txtTelefono1";
             this.txtTelefono1.Size = new System.Drawing.Size(193, 26);
-            this.txtTelefono1.TabIndex = 5;
+            this.txtTelefono1.TabIndex = 4;
             this.txtTelefono1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtEdad_KeyPress);
             // 
             // txtNombre
@@ -706,6 +712,28 @@
             this.lblNombre.Size = new System.Drawing.Size(69, 20);
             this.lblNombre.TabIndex = 92;
             this.lblNombre.Text = "Nombre:";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(531, 67);
+            this.label6.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(114, 15);
+            this.label6.TabIndex = 21;
+            this.label6.Text = "Días reservados:";
+            // 
+            // lblDiasReservados
+            // 
+            this.lblDiasReservados.AutoSize = true;
+            this.lblDiasReservados.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblDiasReservados.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDiasReservados.Location = new System.Drawing.Point(656, 67);
+            this.lblDiasReservados.Name = "lblDiasReservados";
+            this.lblDiasReservados.Size = new System.Drawing.Size(17, 17);
+            this.lblDiasReservados.TabIndex = 22;
+            this.lblDiasReservados.Text = "1";
             // 
             // Reservacion
             // 
@@ -796,5 +824,7 @@
         private System.Windows.Forms.TextBox txtOrigen;
         private System.Windows.Forms.TextBox txtTipoHabitacion;
         private System.Windows.Forms.Label lblX;
+        private System.Windows.Forms.Label lblDiasReservados;
+        private System.Windows.Forms.Label label6;
     }
 }

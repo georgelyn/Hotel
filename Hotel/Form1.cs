@@ -565,15 +565,21 @@ namespace Hotel
 
         private void restablecerBaseDeDatosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            msg = new Msg();
-            msg.lblMsg.Text = "Al restablecer la base de datos, perderá los datos actuales.\n¿Desea continuar?";
-            DialogResult dlgres = msg.ShowDialog();
-            if (dlgres == DialogResult.Yes)
+            Login login = new Login();
+
+            if (login.ShowDialog() == DialogResult.OK)
             {
-                ActivarTimerEspera();
-                OperacionesSQLite.Restablecer();
-                ActualizarColores();
+                msg = new Msg();
+                msg.lblMsg.Text = "Al restablecer la base de datos, perderá los datos actuales.\n¿Desea continuar?";
+                DialogResult dlgres = msg.ShowDialog();
+                if (dlgres == DialogResult.Yes)
+                {
+                    ActivarTimerEspera();
+                    OperacionesSQLite.Restablecer();
+                    ActualizarColores();
+                }
             }
+            
         }
 
         private void respaldarToolStripMenuItem_Click(object sender, EventArgs e)
@@ -583,13 +589,19 @@ namespace Hotel
 
         private void restaurarCopiaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (OperacionesSQLite.RestaurarCopia())
+            Login login = new Login();
+
+            if (login.ShowDialog() == DialogResult.OK)
             {
-                //MessageBox.Show("La base de datos ha sido restaurada.\nLa aplicación se cerrará. Por favor, vuelva a abrirla.", "Copia restaurada", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                //Close();
-                ActivarTimerEspera();
-                ActualizarColores();
+                if (OperacionesSQLite.RestaurarCopia())
+                {
+                    //MessageBox.Show("La base de datos ha sido restaurada.\nLa aplicación se cerrará. Por favor, vuelva a abrirla.", "Copia restaurada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //Close();
+                    ActivarTimerEspera();
+                    ActualizarColores();
+                }
             }
+            
         }
 
         private void cargoPorCamiónToolStripMenuItem_Click(object sender, EventArgs e)
