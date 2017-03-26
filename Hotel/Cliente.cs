@@ -293,13 +293,13 @@ namespace Hotel
                 {
                     using (SQLiteCommand cmd = new SQLiteCommand("INSERT INTO Clientes (Nombre, Cedula, Edad, Telefono, TelefonoExtra, ClienteDesde, Notas) VALUES (@nombre, @cedula, @edad, @telefono1, @telefono2, @clienteDesde, @notas)", conn))
                     {
-                        cmd.Parameters.AddWithValue("@nombre", StringExtensions.FirstLetterToUpper(txtNombre.Text.Trim()));
+                        cmd.Parameters.AddWithValue("@nombre", StringExtensions.ToTitleCase(txtNombre.Text.Trim()));
                         cmd.Parameters.AddWithValue("@cedula", txtCedula.Text.Trim());
                         cmd.Parameters.AddWithValue("@edad", StringExtensions.NullString(txtEdad.Text.Trim()));
                         cmd.Parameters.AddWithValue("@telefono1", StringExtensions.NullString(txtTelefono1.Text.Trim()));
                         cmd.Parameters.AddWithValue("@telefono2", StringExtensions.NullString(txtTelefono2.Text.Trim()));
                         cmd.Parameters.AddWithValue("@clienteDesde", clienteDesde);
-                        cmd.Parameters.AddWithValue("@notas", StringExtensions.NullString(txtNotas.Text.Trim()));
+                        cmd.Parameters.AddWithValue("@notas", StringExtensions.NullString(StringExtensions.FirstLetterToUpper(txtNotas.Text.Trim())));
 
                         conn.Open();
                         cmd.ExecuteNonQuery();
@@ -335,12 +335,12 @@ namespace Hotel
                     {
                         cmd.Parameters.AddWithValue("@id", id);
 
-                        cmd.Parameters.AddWithValue("@nombre", StringExtensions.FirstLetterToUpper(txtNombre.Text.Trim()));
+                        cmd.Parameters.AddWithValue("@nombre", StringExtensions.ToTitleCase(txtNombre.Text.Trim()));
                         cmd.Parameters.AddWithValue("@cedula", txtCedula.Text.Trim());
                         cmd.Parameters.AddWithValue("@edad", StringExtensions.NullString(txtEdad.Text.Trim()));
                         cmd.Parameters.AddWithValue("@telefono1", StringExtensions.NullString(txtTelefono1.Text.Trim()));
                         cmd.Parameters.AddWithValue("@telefono2", StringExtensions.NullString(txtTelefono2.Text.Trim()));
-                        cmd.Parameters.AddWithValue("@notas", StringExtensions.NullString(txtNotas.Text.Trim()));
+                        cmd.Parameters.AddWithValue("@notas", StringExtensions.NullString(StringExtensions.FirstLetterToUpper(txtNotas.Text.Trim())));
 
                         conn.Open();
                         cmd.ExecuteNonQuery();
@@ -629,7 +629,23 @@ namespace Hotel
                 if (nuevoCliente)
                     AgregarCliente();
                 else
-                    ModificarCliente(idCliente);
+                {
+                    msg = new Msg();
+
+                    msg.lblMsg.Text = "¿Está seguro de que desea modificar el registro?";
+                    DialogResult dlgres = msg.ShowDialog();
+                    {
+                        if (dlgres == DialogResult.Yes)
+                        {
+                            f1.ActivarTimerEspera();
+                            ModificarCliente(idCliente);
+                        }
+                        else
+                        {
+                            return;
+                        }
+                    }
+                }
             }
 
         }

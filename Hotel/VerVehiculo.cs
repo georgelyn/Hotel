@@ -200,10 +200,10 @@ namespace Hotel
 
                         cmd.Parameters.AddWithValue("@esCamion", esCamion);
 
-                        cmd.Parameters.AddWithValue("@marca", StringExtensions.NullString(txtMarca.Text.Trim()));
-                        cmd.Parameters.AddWithValue("@modelo", StringExtensions.NullString(txtModelo.Text.Trim()));
-                        cmd.Parameters.AddWithValue("@placa", StringExtensions.NullString(txtPlaca.Text.Trim()));
-                        cmd.Parameters.AddWithValue("@notas", StringExtensions.NullString(txtNotas.Text.Trim()));
+                        cmd.Parameters.AddWithValue("@marca", StringExtensions.NullString(StringExtensions.ToTitleCase(txtMarca.Text.Trim())));
+                        cmd.Parameters.AddWithValue("@modelo", StringExtensions.NullString(StringExtensions.ToTitleCase(txtModelo.Text.Trim())));
+                        cmd.Parameters.AddWithValue("@placa", StringExtensions.NullString(txtPlaca.Text.Trim().ToUpper()));
+                        cmd.Parameters.AddWithValue("@notas", StringExtensions.NullString(StringExtensions.FirstLetterToUpper(txtNotas.Text.Trim())));
 
                         conn.Open();
                         cmd.ExecuteNonQuery();
@@ -300,15 +300,28 @@ namespace Hotel
             }
             else
             {
-                if (ModificarVehiculo(idVehiculo[comboVehiculo.SelectedIndex].ToString()))
-                {
-                    if (((ListaVehiculos)Application.OpenForms["ListaVehiculos"]) != null)
-                    {
-                        ListaVehiculos vehiculos = (ListaVehiculos)Application.OpenForms["ListaVehiculos"];
-                        vehiculos.CargarVehiculos(false);
-                    }
+                msg = new Msg();
 
-                    this.Close();
+                msg.lblMsg.Text = "¿Está seguro de que desea modificar el registro?";
+                DialogResult dlgres = msg.ShowDialog();
+                {
+                    if (dlgres == DialogResult.Yes)
+                    {
+                        if (ModificarVehiculo(idVehiculo[comboVehiculo.SelectedIndex].ToString()))
+                        {
+                            if (((ListaVehiculos)Application.OpenForms["ListaVehiculos"]) != null)
+                            {
+                                ListaVehiculos vehiculos = (ListaVehiculos)Application.OpenForms["ListaVehiculos"];
+                                vehiculos.CargarVehiculos(false);
+                            }
+
+                            this.Close();
+                        }
+                    }
+                    else
+                    {
+                        return;
+                    }
                 }
             }
         }

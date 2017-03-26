@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace Hotel
 {
@@ -18,6 +19,11 @@ namespace Hotel
                 return char.ToUpper(str[0]) + str.Substring(1);
 
             return str.ToUpper();
+        }
+
+        public static string ToTitleCase(string str)
+        {
+            return CultureInfo.InvariantCulture.TextInfo.ToTitleCase(str.ToLower());
         }
 
     }

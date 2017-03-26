@@ -402,7 +402,7 @@ namespace Hotel
                         {
                             #region Clientes
 
-                            cmd.Parameters.AddWithValue("@nombre", StringExtensions.FirstLetterToUpper(txtNombre.Text.Trim()));
+                            cmd.Parameters.AddWithValue("@nombre", StringExtensions.ToTitleCase(txtNombre.Text.Trim()));//FirstLetterToUpper(txtNombre.Text.Trim()));
                             cmd.Parameters.AddWithValue("@cedula", txtCedula.Text.Replace(".", "").Trim());
                             cmd.Parameters.AddWithValue("@edad", StringExtensions.NullString(txtEdad.Text.Trim()));
                             cmd.Parameters.AddWithValue("@telefono1", StringExtensions.NullString(txtTelefono1.Text.Trim()));
@@ -425,13 +425,13 @@ namespace Hotel
 
                             cmd.Parameters.AddWithValue("@numeroHabitacion", comboHabitacion.Text);
                             //cmd.Parameters.AddWithValue("@cedula_cliente", txtCedula.Text.Trim().Replace(".", ""));
-                            cmd.Parameters.AddWithValue("@ciudadOrigen", StringExtensions.NullString(txtOrigen.Text.Trim()));
-                            cmd.Parameters.AddWithValue("@ciudadDestino", StringExtensions.NullString(txtDestino.Text.Trim()));
+                            cmd.Parameters.AddWithValue("@ciudadOrigen", StringExtensions.NullString(StringExtensions.ToTitleCase(txtOrigen.Text.Trim())));
+                            cmd.Parameters.AddWithValue("@ciudadDestino", StringExtensions.NullString(StringExtensions.ToTitleCase(txtDestino.Text.Trim())));
                             cmd.Parameters.AddWithValue("@fechaIngreso", dtEntrada.Value);//.ToString("dd-MM-yyyy h:mm tt", CultureInfo.InvariantCulture));
                             cmd.Parameters.AddWithValue("@fechaSalida", dtSalida.Value);//.ToString("yyyy-MM-dd h:mm tt", CultureInfo.InvariantCulture));
                             cmd.Parameters.AddWithValue("@tipoHabitacion", listboxHabitaciones.Text);
                             cmd.Parameters.AddWithValue("@costoTotal", txtTotal.Text.Trim().Replace(".", "").Replace(",", "."));
-                            cmd.Parameters.AddWithValue("@notasReservacion", StringExtensions.NullString(txtNotas.Text.Trim()));
+                            cmd.Parameters.AddWithValue("@notasReservacion", StringExtensions.NullString(StringExtensions.FirstLetterToUpper(txtNotas.Text.Trim())));
 
                             #endregion
 
@@ -452,9 +452,9 @@ namespace Hotel
                                     esCamion = true;
 
                                 cmd.Parameters.AddWithValue("@camion", esCamion);
-                                cmd.Parameters.AddWithValue("@marca", StringExtensions.NullString(txtMarca.Text.Trim()));
-                                cmd.Parameters.AddWithValue("@modelo", StringExtensions.NullString(txtModelo.Text.Trim()));
-                                cmd.Parameters.AddWithValue("@placa", StringExtensions.NullString(txtPlaca.Text.Trim()));
+                                cmd.Parameters.AddWithValue("@marca", StringExtensions.NullString(StringExtensions.ToTitleCase(txtMarca.Text.Trim())));
+                                cmd.Parameters.AddWithValue("@modelo", StringExtensions.NullString(StringExtensions.ToTitleCase(txtModelo.Text.Trim())));
+                                cmd.Parameters.AddWithValue("@placa", StringExtensions.NullString(txtPlaca.Text.Trim().ToUpper()));
 
                             }
                            
@@ -546,7 +546,7 @@ namespace Hotel
                         {
                             // CLIENTE
 
-                            cmd.Parameters.AddWithValue("@nombre", StringExtensions.FirstLetterToUpper(txtNombre.Text.Trim()));
+                            cmd.Parameters.AddWithValue("@nombre", StringExtensions.ToTitleCase(txtNombre.Text.Trim()));
                             cmd.Parameters.AddWithValue("@cedula", txtCedula.Text.Replace(".", "").Trim());
                             cmd.Parameters.AddWithValue("@edad", StringExtensions.NullString(txtEdad.Text.Trim()));
                             cmd.Parameters.AddWithValue("@telefono1", StringExtensions.NullString(txtTelefono1.Text.Trim()));
@@ -556,8 +556,8 @@ namespace Hotel
 
                             cmd.Parameters.AddWithValue("@numeroHabitacion", comboHabitacion.Text);
                             cmd.Parameters.AddWithValue("@habitacionActual", habitacionActual);
-                            cmd.Parameters.AddWithValue("@ciudadOrigen", StringExtensions.NullString(txtOrigen.Text.Trim()));
-                            cmd.Parameters.AddWithValue("@ciudadDestino", StringExtensions.NullString(txtDestino.Text.Trim()));
+                            cmd.Parameters.AddWithValue("@ciudadOrigen", StringExtensions.NullString(StringExtensions.ToTitleCase(txtOrigen.Text.Trim())));
+                            cmd.Parameters.AddWithValue("@ciudadDestino", StringExtensions.NullString(StringExtensions.ToTitleCase(txtDestino.Text.Trim())));
                             cmd.Parameters.AddWithValue("@fechaIngreso", dtEntrada.Value);
                             cmd.Parameters.AddWithValue("@fechaSalida", dtSalida.Value);
 
@@ -571,7 +571,7 @@ namespace Hotel
                             }
 
                             cmd.Parameters.AddWithValue("@costoTotal", txtTotal.Text.Trim().Replace(".", "").Replace(",", "."));
-                            cmd.Parameters.AddWithValue("@notasReservacion", StringExtensions.NullString(txtNotas.Text.Trim()));
+                            cmd.Parameters.AddWithValue("@notasReservacion", StringExtensions.NullString(StringExtensions.FirstLetterToUpper(txtNotas.Text.Trim())));
 
                             // VEHICULO
 
@@ -583,9 +583,9 @@ namespace Hotel
                                     esCamion = true;
 
                                 cmd.Parameters.AddWithValue("@camion", esCamion);
-                                cmd.Parameters.AddWithValue("@marca", StringExtensions.NullString(txtMarca.Text.Trim()));
-                                cmd.Parameters.AddWithValue("@modelo", StringExtensions.NullString(txtModelo.Text.Trim()));
-                                cmd.Parameters.AddWithValue("@placa", StringExtensions.NullString(txtPlaca.Text.Trim()));
+                                cmd.Parameters.AddWithValue("@marca", StringExtensions.NullString(StringExtensions.ToTitleCase(txtMarca.Text.Trim())));
+                                cmd.Parameters.AddWithValue("@modelo", StringExtensions.NullString(StringExtensions.ToTitleCase(txtModelo.Text.Trim())));
+                                cmd.Parameters.AddWithValue("@placa", StringExtensions.NullString(txtPlaca.Text.Trim().ToUpper()));
 
                             }
 

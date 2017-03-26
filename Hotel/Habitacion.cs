@@ -162,10 +162,10 @@ namespace Hotel
                 {
                     using (SQLiteCommand cmd = new SQLiteCommand("INSERT INTO TipoHabitacion (Tipo, Descripcion, Costo, Notas, Activa) VALUES (@tipo, @descripcion, @costo, @notas, @estado)", conn))
                     {
-                        cmd.Parameters.AddWithValue("@tipo", txtTipo.Text.Trim());
-                        cmd.Parameters.AddWithValue("@descripcion", StringExtensions.NullString(txtDescripcion.Text.Trim()));
+                        cmd.Parameters.AddWithValue("@tipo", StringExtensions.ToTitleCase(txtTipo.Text.Trim()));
+                        cmd.Parameters.AddWithValue("@descripcion", StringExtensions.NullString(StringExtensions.FirstLetterToUpper(txtDescripcion.Text.Trim())));
                         cmd.Parameters.AddWithValue("@costo", txtCosto.Text.Trim().Replace(".", "").Replace(",", "."));
-                        cmd.Parameters.AddWithValue("@notas", StringExtensions.NullString(txtNotas.Text.Trim()));
+                        cmd.Parameters.AddWithValue("@notas", StringExtensions.NullString(StringExtensions.FirstLetterToUpper(txtNotas.Text.Trim())));
                         if (comboEstado.Text == "Activa")
                         {
                             cmd.Parameters.AddWithValue("@estado", "1");
@@ -197,10 +197,10 @@ namespace Hotel
                     using (SQLiteCommand cmd = new SQLiteCommand("UPDATE TipoHabitacion SET Tipo=@tipo, Descripcion=@descripcion, Costo=@costo, Notas=@notas, Activa=@estado WHERE ID=@id", conn))
                     {
                         cmd.Parameters.AddWithValue("@id", id);
-                        cmd.Parameters.AddWithValue("@tipo", txtTipo.Text.Trim());
-                        cmd.Parameters.AddWithValue("@descripcion", StringExtensions.NullString(txtDescripcion.Text.Trim()));
+                        cmd.Parameters.AddWithValue("@tipo", StringExtensions.ToTitleCase(txtTipo.Text.Trim()));
+                        cmd.Parameters.AddWithValue("@descripcion", StringExtensions.NullString(StringExtensions.FirstLetterToUpper(txtDescripcion.Text.Trim())));
                         cmd.Parameters.AddWithValue("@costo", txtCosto.Text.Trim().Replace(".", "").Replace(",", "."));
-                        cmd.Parameters.AddWithValue("@notas", StringExtensions.NullString(txtNotas.Text.Trim()));
+                        cmd.Parameters.AddWithValue("@notas", StringExtensions.NullString(StringExtensions.FirstLetterToUpper(txtNotas.Text.Trim())));
                         if (comboEstado.Text == "Activa")
                         {
                             cmd.Parameters.AddWithValue("@estado", "1");
