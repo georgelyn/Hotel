@@ -44,7 +44,8 @@ namespace Hotel
             CargarNumHabitaciones("disponible");
             CargarTipoHabitacion();
             PanelCedula(true);
-            //AsignarMonto();
+
+            montoCamion = CargarMontoCamion();
         }
 
         Form1 f1 = (Form1)Application.OpenForms["Form1"];
@@ -56,7 +57,8 @@ namespace Hotel
         */
 
         double total; // El total a pagar
-        double montoCamion = double.Parse(ConfigurationManager.AppSettings["MontoCamion"], new CultureInfo("es-ES")); // Aquí le estoy diciendo qué formato esperar en app.config
+        //double montoCamion = double.Parse(ConfigurationManager.AppSettings["MontoCamion"], new CultureInfo("es-ES")); // Aquí le estoy diciendo qué formato esperar en app.config
+        double montoCamion = 0.00; // Inicializo para evitar problemas potenciales. Aunque siempre, aún cuando haya un error, debería tomar un valor cuando se carga el método
 
         bool vehiculoAlmacenado = false; // Se evalúa al cargar reservación (si tiene vehículo agregado). Útil para query de modificar reservación
         int habitacionActual = 0; // Toma su valor en CargarHuespedPorHabitacion. Útil para cambiar habitación en Modificar Reservación
@@ -70,18 +72,6 @@ namespace Hotel
         ** METODOS
         */
 
-        //private void AsignarMonto()
-        //{
-        //    try
-        //    {
-        //        montoCamion = double.Parse(ConfigurationManager.AppSettings["MontoCamion"]);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show("Se ha presentado un problema con el monto del camión.\nDetalles: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //    }
-        //}
-
         private bool ResolucionPantalla800x600()
         {
             var ancho = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
@@ -93,6 +83,36 @@ namespace Hotel
             }
 
             return false;
+        }
+
+        private double CargarMontoCamion()
+        {
+            try
+            {
+                using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
+                {
+                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT MontoCamion FROM Ajustes", conn))
+                    {
+                        conn.Open();
+                        using (SQLiteDataReader dr = cmd.ExecuteReader())
+                        {
+                            if (dr.HasRows)
+                            {
+                                if (dr.Read())
+                                {
+                                    return Convert.ToDouble(dr["MontoCamion"]);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("No se ha podido cargar el monto extra por camión.\nDetalles: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            return 0.00; // Si ocurre el error, regresa un valor de 0.
         }
 
         public void CargarNumHabitaciones(string estado)
@@ -815,10 +835,11 @@ namespace Hotel
                                 if (dr.Read())
                                 {
                                     total = Convert.ToDouble(dr["Costo"].ToString());
+                                    total *= diasReservados; // Debo multiplicar primero, para que no se tome en cuenta el cargo por camión y haga mal el cálculo
                                     if (checkCamion.Checked)
                                         total += montoCamion;
                                     //txtTotal.Text = total.ToString();
-                                    total *= diasReservados;
+                                    //total *= diasReservados;
                                     txtTotal.Text = string.Format(new CultureInfo("es-ES"), "{0:#,##0.00}", total);
                                 }
                             }

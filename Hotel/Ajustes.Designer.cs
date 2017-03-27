@@ -61,6 +61,7 @@
             this.txtMontoCamion.TabIndex = 5;
             this.txtMontoCamion.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtMontoCamion.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMontoCamion_KeyPress);
+            this.txtMontoCamion.Leave += new System.EventHandler(this.txtMontoCamion_Leave);
             // 
             // label2
             // 

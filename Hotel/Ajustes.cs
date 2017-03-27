@@ -8,6 +8,7 @@ using System.Globalization;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
+using System.Data.SQLite;
 
 namespace Hotel
 {
@@ -17,100 +18,171 @@ namespace Hotel
         {
             InitializeComponent();
 
-            double monto = Convert.ToDouble(ConfigurationManager.AppSettings["MontoCamion"], new CultureInfo("es-ES")); // Esto quita error de "Input string was not in a correct format" si la cultura es una diferente (como en-US)
-
-            txtMontoCamion.Text = String.Format(new CultureInfo("es-ES"), "{0:#,##0.00}", monto);
-
-            if (String.IsNullOrEmpty(carpetaRespaldos))
-            {
-                if (Directory.Exists(Application.StartupPath + "\\Respaldos"))
-                {
-                    txtRespaldos.Text = Application.StartupPath + "\\Respaldos";
-                }
-                else
-                {
-                    txtRespaldos.Text = Application.StartupPath;
-                }
-            }
-            else
-            {
-                txtRespaldos.Text = carpetaRespaldos;
-            }
-
+            CargarAjustes();
             txtRespaldos.SelectionStart = txtRespaldos.TextLength;
+
+            #region Viejo - Con app.config
+            //double monto = Convert.ToDouble(ConfigurationManager.AppSettings["MontoCamion"], new CultureInfo("es-ES")); // Esto quita error de "Input string was not in a correct format" si la cultura es una diferente (como en-US)
+
+            //txtMontoCamion.Text = String.Format(new CultureInfo("es-ES"), "{0:#,##0.00}", monto);
+
+            //if (String.IsNullOrEmpty(carpetaRespaldos))
+            //{
+            //    if (Directory.Exists(Application.StartupPath + "\\Respaldos"))
+            //    {
+            //        txtRespaldos.Text = Application.StartupPath + "\\Respaldos";
+            //    }
+            //    else
+            //    {
+            //        txtRespaldos.Text = Application.StartupPath;
+            //    }
+            //}
+            //else
+            //{
+            //    txtRespaldos.Text = carpetaRespaldos;
+            //}
+
+            //txtRespaldos.SelectionStart = txtRespaldos.TextLength;
+            #endregion
         }
 
-        string montoActual = ConfigurationManager.AppSettings["MontoCamion"];
-        string carpetaRespaldos = ConfigurationManager.AppSettings["CarpetaRespaldos"];
+        //string montoActual = ConfigurationManager.AppSettings["MontoCamion"];
+        //string carpetaRespaldos = ConfigurationManager.AppSettings["CarpetaRespaldos"];
 
-        private void CambiarCargoPorCamion()
+        private void CargarAjustes()
         {
             try
             {
-                Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
+                {
+                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM Ajustes", conn))
+                    {
+                        conn.Open();
 
-                config.AppSettings.Settings["MontoCamion"].Value = txtMontoCamion.Text.Trim();
+                        using (SQLiteDataReader dr = cmd.ExecuteReader())
+                        {
+                            if (dr.HasRows)
+                            {
+                                if (dr.Read())
+                                {
+                                    txtMontoCamion.Text = String.Format(new CultureInfo("es-ES"), "{0:#,##0.00}", dr["MontoCamion"]);
 
-                config.Save(ConfigurationSaveMode.Modified);
-                ConfigurationManager.RefreshSection("appSettings");
-
-                MessageBox.Show("Monto actualizado", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Close();
+                                    if (dr["CarpetaRespaldos"] == DBNull.Value)
+                                    {
+                                        if (Directory.Exists(Application.StartupPath + "\\Respaldos"))
+                                        {
+                                            txtRespaldos.Text = Application.StartupPath + "\\Respaldos";
+                                        }
+                                        else
+                                        {
+                                            txtRespaldos.Text = Application.StartupPath;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        txtRespaldos.Text = dr["CarpetaRespaldos"].ToString();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
-            catch (Exception ex)
+            catch (SQLiteException ex)
             {
-                MessageBox.Show("Se ha presentado un error. " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Se ha presentado un problema.\nDetalles: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void CambiarCarpetaRespaldos()
+        private bool CambiarDatos()
         {
             try
             {
-                Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
+                {
+                    using (SQLiteCommand cmd = new SQLiteCommand("UPDATE Ajustes SET MontoCamion=@monto, CarpetaRespaldos=@ubicacion", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@monto", txtMontoCamion.Text.Replace(".", "").Replace(",", "."));
+                        cmd.Parameters.AddWithValue("@ubicacion", txtRespaldos.Text);
 
-                config.AppSettings.Settings["CarpetaRespaldos"].Value = txtRespaldos.Text;
-
-                config.Save(ConfigurationSaveMode.Modified);
-                ConfigurationManager.RefreshSection("appSettings");
-
-                //MessageBox.Show("Monto actualizado", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Close();
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                        return true;
+                    }
+                }
             }
-            catch (Exception ex)
+            catch (SQLiteException ex)
             {
-                MessageBox.Show("Se ha presentado un error. " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Se ha presentado un problema.\nDetalles: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            return false;
+
+            #region Viejo - Con app.config
+            //try
+            //{
+            //    Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            //    config.AppSettings.Settings["MontoCamion"].Value = txtMontoCamion.Text.Trim();
+
+            //    config.Save(ConfigurationSaveMode.Modified);
+            //    ConfigurationManager.RefreshSection("appSettings");
+
+            //    MessageBox.Show("Monto actualizado", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //    Close();
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show("Se ha presentado un error. " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //}
+            #endregion
         }
+
+        //private void CambiarCarpetaRespaldos()
+        //{         
+        //    #region Viejo - Con app.config
+        //    //try
+        //    //{
+        //    //    Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+        //    //    config.AppSettings.Settings["CarpetaRespaldos"].Value = txtRespaldos.Text;
+
+        //    //    config.Save(ConfigurationSaveMode.Modified);
+        //    //    ConfigurationManager.RefreshSection("appSettings");
+
+        //    //    //MessageBox.Show("Monto actualizado", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //    //    Close();
+        //    //}
+        //    //catch (Exception ex)
+        //    //{
+        //    //    MessageBox.Show("Se ha presentado un error. " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    //}
+        //    #endregion
+        //}
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (montoActual != txtMontoCamion.Text || carpetaRespaldos != txtRespaldos.Text)
+            Msg msg = new Msg();
+
+            msg.lblMsg.Text = "¿Está seguro de que desea cambiar los datos?";
+            DialogResult dlgres = msg.ShowDialog();
+            if (dlgres == DialogResult.Yes)
             {
-                Msg msg = new Msg();
+                //if (!String.IsNullOrEmpty(txtMontoCamion.Text.Trim()))
+                //{
+                //    CambiarCargoPorCamion();
+                //}
 
-                msg.lblMsg.Text = "¿Está seguro de que desea cambiar los datos?";
-                DialogResult dlgres = msg.ShowDialog();
-                if (dlgres == DialogResult.Yes)
+
+                //CambiarCarpetaRespaldos();
+
+                if (CambiarDatos())
                 {
-                    if (montoActual != txtMontoCamion.Text)
-                    {
-                        if (!String.IsNullOrEmpty(txtMontoCamion.Text.Trim()))
-                        {
-                            CambiarCargoPorCamion();
-                        }
-                    }
-                    if (carpetaRespaldos != txtRespaldos.Text)
-                    {
-                        CambiarCarpetaRespaldos();
-                    }
-
+                    MessageBox.Show("Los datos han sido cambiados.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Close();
                 }
-
             }
 
-            Close();
+            return;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -161,6 +233,14 @@ namespace Hotel
             if (result == DialogResult.OK)
             {
                 txtRespaldos.Text = carpetaRespaldos.SelectedPath;
+            }
+        }
+
+        private void txtMontoCamion_Leave(object sender, EventArgs e)
+        {
+            if (String.IsNullOrEmpty(txtMontoCamion.Text))
+            {
+                txtMontoCamion.Text = "0,00";
             }
         }
     }

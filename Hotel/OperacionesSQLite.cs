@@ -65,10 +65,16 @@ namespace Hotel
                         [Activa] BOOLEAN
                     );
 
-                        CREATE TABLE IF NOT EXISTS Seguridad (
+                        CREATE TABLE IF NOT EXISTS [Seguridad] (
                         [ID] INTEGER PRIMARY KEY AUTOINCREMENT,
                         [User] VARCHAR,
                         [Password] VARCHAR
+                    );
+
+                        CREATE TABLE IF NOT EXISTS [Ajustes] (
+                        [ID] INTEGER PRIMARY KEY AUTOINCREMENT,
+                        [MontoCamion] DECIMAL DEFAULT (0),
+                        [CarpetaRespaldos] VARCHAR (5000)
                     )";
 
         #endregion
@@ -129,6 +135,9 @@ namespace Hotel
                             cmd.ExecuteNonQuery();
 
                             cmd.CommandText = "INSERT INTO Seguridad (User, Password) VALUES ('admin','ra0408'), ('usuario', '5093'), ('admin', 'emergencia')";
+                            cmd.ExecuteNonQuery();
+
+                            cmd.CommandText = "INSERT INTO Ajustes (MontoCamion, CarpetaRespaldos) VALUES (0, NULL)";
                             cmd.ExecuteNonQuery();
                         }
 

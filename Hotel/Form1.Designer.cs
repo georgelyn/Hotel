@@ -131,6 +131,7 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.timer3 = new System.Windows.Forms.Timer(this.components);
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -1238,6 +1239,7 @@
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel2,
             this.toolStripStatusLabel1,
             this.lblHora});
             this.statusStrip1.Location = new System.Drawing.Point(0, 539);
@@ -1251,7 +1253,7 @@
             // 
             this.toolStripStatusLabel1.BackColor = System.Drawing.Color.White;
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(730, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(360, 17);
             this.toolStripStatusLabel1.Spring = true;
             // 
             // lblHora
@@ -1368,7 +1370,7 @@
             // 
             // marcarMantenimientoToolStripMenuItem
             // 
-            this.marcarMantenimientoToolStripMenuItem.BackColor = System.Drawing.Color.SkyBlue;
+            this.marcarMantenimientoToolStripMenuItem.BackColor = System.Drawing.Color.Yellow;
             this.marcarMantenimientoToolStripMenuItem.Name = "marcarMantenimientoToolStripMenuItem";
             this.marcarMantenimientoToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
             this.marcarMantenimientoToolStripMenuItem.Text = "Marcar > Mantenimiento";
@@ -1423,6 +1425,14 @@
             // 
             this.timer3.Interval = 20000;
             this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.BackColor = System.Drawing.Color.White;
+            this.toolStripStatusLabel2.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(339, 17);
+            this.toolStripStatusLabel2.Text = "Click derecho sobre la habitación para cambiar su estado.";
             // 
             // Form1
             // 
@@ -1561,6 +1571,7 @@
         private System.Windows.Forms.ToolStripMenuItem restablecerBaseDeDatosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem acercadeToolStripMenuItem;
         private System.Windows.Forms.Timer timer3;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
     }
 }
 
