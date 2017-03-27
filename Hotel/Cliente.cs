@@ -311,7 +311,7 @@ namespace Hotel
             }
             catch (SQLiteException ex)
             {
-                if (ex.Message.Contains("cedula"))
+                if (ex.Message.Contains("Clientes.Cedula"))
                 {
                     MessageBox.Show("El número de cédula ingresado ya existe en el sistema. \nPor favor, verifique.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txtCedula.Select();

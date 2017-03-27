@@ -168,7 +168,7 @@
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(15, 13);
             this.label9.TabIndex = 10;
-            this.label9.Text = "";
+            this.label9.Text = "[]";
             // 
             // label10
             // 
@@ -185,18 +185,18 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.SkyBlue;
+            this.label7.ForeColor = System.Drawing.Color.Yellow;
             this.label7.Location = new System.Drawing.Point(3, 37);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(15, 13);
             this.label7.TabIndex = 8;
-            this.label7.Text = "";
+            this.label7.Text = "[]";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.Color.SkyBlue;
+            this.label8.ForeColor = System.Drawing.Color.Yellow;
             this.label8.Location = new System.Drawing.Point(15, 35);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(103, 15);
@@ -212,7 +212,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(15, 13);
             this.label1.TabIndex = 6;
-            this.label1.Text = "";
+            this.label1.Text = "[]";
             // 
             // label6
             // 
@@ -234,7 +234,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(15, 13);
             this.label5.TabIndex = 4;
-            this.label5.Text = "";
+            this.label5.Text = "[]";
             // 
             // label4
             // 
@@ -245,7 +245,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(15, 13);
             this.label4.TabIndex = 3;
-            this.label4.Text = "";
+            this.label4.Text = "[]";
             // 
             // label3
             // 

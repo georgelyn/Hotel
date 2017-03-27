@@ -97,7 +97,7 @@ namespace Hotel
                                 item.SubItems.Add(dr["Tipo"].ToString());
                                 item.SubItems.Add(dr["Descripcion"].ToString());
                                 //item.SubItems.Add(string.Format("{0:#,##}", costo).Replace(",", "."));
-                                item.SubItems.Add("Bs. " + string.Format(new CultureInfo("es-VE"), "{0:#,##0.00}", dr["Costo"]));
+                                item.SubItems.Add("Bs. " + string.Format(new CultureInfo("es-ES"), "{0:#,##0.00}", dr["Costo"]));
                                 if (Convert.ToBoolean(dr["Activa"]) == true)
                                 {
                                     item.SubItems.Add("Activa");
@@ -137,7 +137,7 @@ namespace Hotel
                             {
                                 txtTipo.Text = dr["Tipo"].ToString();
                                 txtDescripcion.Text = dr["Descripcion"].ToString();
-                                txtCosto.Text = string.Format(new CultureInfo("es-VE"), "{0:#,##0.00}", dr["Costo"]);
+                                txtCosto.Text = string.Format(new CultureInfo("es-ES"), "{0:#,##0.00}", dr["Costo"]);
                                 if (Convert.ToBoolean(dr["Activa"]) == true)
                                     comboEstado.Text = "Activa";
                                 else

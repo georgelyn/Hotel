@@ -106,7 +106,7 @@ namespace Hotel
         Color disponible = Color.LimeGreen;
         Color inactiva = Color.DarkGray;
         Color limpieza = Color.White;
-        Color mantenimiento = Color.SkyBlue;
+        Color mantenimiento = Color.Yellow;
         Color ocupada = Color.IndianRed;
 
         public void ActivarTimerEspera()
@@ -177,8 +177,10 @@ namespace Hotel
 
                 }
             }
-            catch (SQLiteException ex)
+            catch (SQLiteException)
             {
+                return; // No muestres mensaje de error
+
                 //if (ex.ErrorCode == 10) // Disk I/O Error
                 //{
                 //    ActivarTimerEspera();
@@ -193,7 +195,7 @@ namespace Hotel
                 //}
                 //else
                 //{
-                    MessageBox.Show("No se pudo conectar con la base de datos. \nDescripción del error: \n\n>> " + +ex.ErrorCode + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ////MessageBox.Show("No se pudo conectar con la base de datos. \nDescripción del error: \n\n>> " + +ex.ErrorCode + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 //}
                 //MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -577,6 +579,15 @@ namespace Hotel
                     ActivarTimerEspera();
                     OperacionesSQLite.Restablecer();
                     ActualizarColores();
+
+                    foreach (Button btn in tableLayoutPanel1.Controls)
+                    {
+                        if (!btn.Enabled)
+                        {
+                            btn.Enabled = true;
+                            btn.ForeColor = default(Color);
+                        }
+                    }
                 }
             }
             

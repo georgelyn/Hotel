@@ -56,7 +56,7 @@ namespace Hotel
         */
 
         double total; // El total a pagar
-        double montoCamion = double.Parse(ConfigurationManager.AppSettings["MontoCamion"], new CultureInfo("es-VE")); // Aquí le estoy diciendo qué formato esperar en app.config
+        double montoCamion = double.Parse(ConfigurationManager.AppSettings["MontoCamion"], new CultureInfo("es-ES")); // Aquí le estoy diciendo qué formato esperar en app.config
 
         bool vehiculoAlmacenado = false; // Se evalúa al cargar reservación (si tiene vehículo agregado). Útil para query de modificar reservación
         int habitacionActual = 0; // Toma su valor en CargarHuespedPorHabitacion. Útil para cambiar habitación en Modificar Reservación
@@ -250,7 +250,7 @@ namespace Hotel
                                 }
 
                                 //txtTotal.Text = dr["CostoTotal"].ToString();
-                                txtTotal.Text = string.Format(new CultureInfo("es-VE"), "{0:#,##0.00}", dr["CostoTotal"]);
+                                txtTotal.Text = string.Format(new CultureInfo("es-ES"), "{0:#,##0.00}", dr["CostoTotal"]);
 
                                 total = double.Parse(dr["CostoTotal"].ToString());
                                     //total = double.Parse(txtTotal.Text);
@@ -819,7 +819,7 @@ namespace Hotel
                                         total += montoCamion;
                                     //txtTotal.Text = total.ToString();
                                     total *= diasReservados;
-                                    txtTotal.Text = string.Format(new CultureInfo("es-VE"), "{0:#,##0.00}", total);
+                                    txtTotal.Text = string.Format(new CultureInfo("es-ES"), "{0:#,##0.00}", total);
                                 }
                             }
                         }
@@ -965,7 +965,7 @@ namespace Hotel
             }
 
             //txtTotal.Text = total.ToString();
-            txtTotal.Text = string.Format(new CultureInfo("es-VE"), "{0:#,##0.00}", total);
+            txtTotal.Text = string.Format(new CultureInfo("es-ES"), "{0:#,##0.00}", total);
         }
 
         private void txtEdad_KeyPress(object sender, KeyPressEventArgs e)
@@ -1100,7 +1100,7 @@ namespace Hotel
                 {
                     total += montoCamion;
                 }
-                txtTotal.Text = String.Format(new CultureInfo("es-VE"), "{0:#,##0.00}", total);
+                txtTotal.Text = String.Format(new CultureInfo("es-ES"), "{0:#,##0.00}", total);
             }
             else // Si trata de asignar una fecha igual o inferior al de entrada, no le dejo
             {
@@ -1112,7 +1112,7 @@ namespace Hotel
 
         private void dtEntrada_ValueChanged(object sender, EventArgs e)
         {
-            if (dtEntrada.Value.Date > dtSalida.Value.Date)
+            if (dtEntrada.Value.Date >= dtSalida.Value.Date)
             {
                 dtSalida.Value = dtEntrada.Value.AddDays(1);
             }
@@ -1137,7 +1137,7 @@ namespace Hotel
             {
                 total += montoCamion;
             }
-            txtTotal.Text = String.Format(new CultureInfo("es-VE"), "{0:#,##0.00}", total);
+            txtTotal.Text = String.Format(new CultureInfo("es-ES"), "{0:#,##0.00}", total);
         }
     }
 }

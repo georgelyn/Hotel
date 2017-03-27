@@ -17,9 +17,9 @@ namespace Hotel
         {
             InitializeComponent();
 
-            double monto = Convert.ToDouble(ConfigurationManager.AppSettings["MontoCamion"], new CultureInfo("es-VE")); // Esto quita error de "Input string was not in a correct format" si la cultura es una diferente (como en-US)
+            double monto = Convert.ToDouble(ConfigurationManager.AppSettings["MontoCamion"], new CultureInfo("es-ES")); // Esto quita error de "Input string was not in a correct format" si la cultura es una diferente (como en-US)
 
-            txtMontoCamion.Text = String.Format(new CultureInfo("es-VE"), "{0:#,##0.00}", monto);
+            txtMontoCamion.Text = String.Format(new CultureInfo("es-ES"), "{0:#,##0.00}", monto);
 
             if (String.IsNullOrEmpty(carpetaRespaldos))
             {
