@@ -35,12 +35,12 @@
             this.btnAceptar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.panelContenedor = new System.Windows.Forms.Panel();
-            this.lblX = new System.Windows.Forms.Label();
-            this.txtTipoHabitacion = new System.Windows.Forms.TextBox();
             this.panelCedula = new System.Windows.Forms.Panel();
             this.btnCheckCedula = new System.Windows.Forms.Button();
             this.lblCedula = new System.Windows.Forms.Label();
             this.txtCedula = new System.Windows.Forms.TextBox();
+            this.lblX = new System.Windows.Forms.Label();
+            this.txtTipoHabitacion = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.txtDestino = new System.Windows.Forms.TextBox();
@@ -50,6 +50,8 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.lblDiasReservados = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.lblHabitacionNumero = new System.Windows.Forms.Label();
             this.lblHabitacionActual = new System.Windows.Forms.Label();
             this.linkLblCambiarNumHab = new System.Windows.Forms.LinkLabel();
@@ -85,8 +87,6 @@
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.lblTelefono = new System.Windows.Forms.Label();
             this.lblNombre = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.lblDiasReservados = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panelContenedor.SuspendLayout();
             this.panelCedula.SuspendLayout();
@@ -186,28 +186,6 @@
             this.panelContenedor.Size = new System.Drawing.Size(784, 510);
             this.panelContenedor.TabIndex = 0;
             // 
-            // lblX
-            // 
-            this.lblX.AutoSize = true;
-            this.lblX.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblX.ForeColor = System.Drawing.Color.Red;
-            this.lblX.Location = new System.Drawing.Point(564, 360);
-            this.lblX.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.lblX.Name = "lblX";
-            this.lblX.Size = new System.Drawing.Size(16, 15);
-            this.lblX.TabIndex = 121;
-            this.lblX.Text = "X";
-            this.lblX.Visible = false;
-            // 
-            // txtTipoHabitacion
-            // 
-            this.txtTipoHabitacion.Enabled = false;
-            this.txtTipoHabitacion.Location = new System.Drawing.Point(588, 354);
-            this.txtTipoHabitacion.Name = "txtTipoHabitacion";
-            this.txtTipoHabitacion.Size = new System.Drawing.Size(185, 26);
-            this.txtTipoHabitacion.TabIndex = 124;
-            this.txtTipoHabitacion.Visible = false;
-            // 
             // panelCedula
             // 
             this.panelCedula.BackColor = System.Drawing.Color.LightBlue;
@@ -248,6 +226,28 @@
             this.txtCedula.Size = new System.Drawing.Size(193, 26);
             this.txtCedula.TabIndex = 97;
             this.txtCedula.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtEdad_KeyPress);
+            // 
+            // lblX
+            // 
+            this.lblX.AutoSize = true;
+            this.lblX.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblX.ForeColor = System.Drawing.Color.Red;
+            this.lblX.Location = new System.Drawing.Point(564, 360);
+            this.lblX.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.lblX.Name = "lblX";
+            this.lblX.Size = new System.Drawing.Size(16, 15);
+            this.lblX.TabIndex = 121;
+            this.lblX.Text = "X";
+            this.lblX.Visible = false;
+            // 
+            // txtTipoHabitacion
+            // 
+            this.txtTipoHabitacion.Enabled = false;
+            this.txtTipoHabitacion.Location = new System.Drawing.Point(588, 354);
+            this.txtTipoHabitacion.Name = "txtTipoHabitacion";
+            this.txtTipoHabitacion.Size = new System.Drawing.Size(185, 26);
+            this.txtTipoHabitacion.TabIndex = 124;
+            this.txtTipoHabitacion.Visible = false;
             // 
             // label9
             // 
@@ -345,6 +345,28 @@
             this.panel2.Size = new System.Drawing.Size(756, 92);
             this.panel2.TabIndex = 91;
             // 
+            // lblDiasReservados
+            // 
+            this.lblDiasReservados.AutoSize = true;
+            this.lblDiasReservados.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblDiasReservados.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDiasReservados.Location = new System.Drawing.Point(656, 67);
+            this.lblDiasReservados.Name = "lblDiasReservados";
+            this.lblDiasReservados.Size = new System.Drawing.Size(17, 17);
+            this.lblDiasReservados.TabIndex = 22;
+            this.lblDiasReservados.Text = "1";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(531, 67);
+            this.label6.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(114, 15);
+            this.label6.TabIndex = 21;
+            this.label6.Text = "Días reservados:";
+            // 
             // lblHabitacionNumero
             // 
             this.lblHabitacionNumero.AutoSize = true;
@@ -382,27 +404,27 @@
             // 
             // dtEntrada
             // 
-            this.dtEntrada.CustomFormat = "dd/MMM/yyyy";
+            this.dtEntrada.CustomFormat = "dd/MMM/yyyy | hh:mm tt";
             this.dtEntrada.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtEntrada.Location = new System.Drawing.Point(587, 4);
+            this.dtEntrada.Location = new System.Drawing.Point(519, 4);
             this.dtEntrada.Margin = new System.Windows.Forms.Padding(4);
             this.dtEntrada.MinDate = new System.DateTime(2004, 1, 1, 0, 0, 0, 0);
             this.dtEntrada.Name = "dtEntrada";
-            this.dtEntrada.Size = new System.Drawing.Size(149, 26);
+            this.dtEntrada.Size = new System.Drawing.Size(217, 26);
             this.dtEntrada.TabIndex = 16;
             this.dtEntrada.ValueChanged += new System.EventHandler(this.dtEntrada_ValueChanged);
             // 
             // dtSalida
             // 
-            this.dtSalida.CustomFormat = "dd/MMM/yyyy";
+            this.dtSalida.CustomFormat = "            dd/MMM/yyyy";
             this.dtSalida.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtSalida.Location = new System.Drawing.Point(587, 37);
+            this.dtSalida.Location = new System.Drawing.Point(519, 37);
             this.dtSalida.Margin = new System.Windows.Forms.Padding(4);
             this.dtSalida.MinDate = new System.DateTime(2004, 1, 1, 0, 0, 0, 0);
             this.dtSalida.Name = "dtSalida";
-            this.dtSalida.Size = new System.Drawing.Size(149, 26);
+            this.dtSalida.Size = new System.Drawing.Size(217, 26);
             this.dtSalida.TabIndex = 17;
-            this.dtSalida.Value = new System.DateTime(2017, 2, 16, 14, 0, 0, 0);
+            this.dtSalida.Value = new System.DateTime(2017, 2, 16, 13, 0, 0, 0);
             this.dtSalida.ValueChanged += new System.EventHandler(this.dtSalida_ValueChanged);
             // 
             // lblHab
@@ -428,7 +450,7 @@
             // lblFechaIngrso
             // 
             this.lblFechaIngrso.AutoSize = true;
-            this.lblFechaIngrso.Location = new System.Drawing.Point(459, 7);
+            this.lblFechaIngrso.Location = new System.Drawing.Point(393, 7);
             this.lblFechaIngrso.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lblFechaIngrso.Name = "lblFechaIngrso";
             this.lblFechaIngrso.Size = new System.Drawing.Size(117, 20);
@@ -438,7 +460,7 @@
             // lblFechaSalida
             // 
             this.lblFechaSalida.AutoSize = true;
-            this.lblFechaSalida.Location = new System.Drawing.Point(473, 40);
+            this.lblFechaSalida.Location = new System.Drawing.Point(407, 40);
             this.lblFechaSalida.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lblFechaSalida.Name = "lblFechaSalida";
             this.lblFechaSalida.Size = new System.Drawing.Size(103, 20);
@@ -513,10 +535,10 @@
             this.lblAvisoVehiculo.Location = new System.Drawing.Point(8, 134);
             this.lblAvisoVehiculo.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lblAvisoVehiculo.Name = "lblAvisoVehiculo";
-            this.lblAvisoVehiculo.Size = new System.Drawing.Size(351, 30);
+            this.lblAvisoVehiculo.Size = new System.Drawing.Size(349, 30);
             this.lblAvisoVehiculo.TabIndex = 120;
-            this.lblAvisoVehiculo.Text = "Se han cargado los datos de un vehículo existente,\r\n si en su lugar se quiere reg" +
-    "istrar uno nuevo, click en:";
+            this.lblAvisoVehiculo.Text = "Se han cargado los datos de un vehículo existente.\r\nSi en su lugar se quiere regi" +
+    "strar uno nuevo, click en:";
             this.lblAvisoVehiculo.Visible = false;
             // 
             // linklblNuevoVehiculo
@@ -712,28 +734,6 @@
             this.lblNombre.Size = new System.Drawing.Size(69, 20);
             this.lblNombre.TabIndex = 92;
             this.lblNombre.Text = "Nombre:";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(531, 67);
-            this.label6.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(114, 15);
-            this.label6.TabIndex = 21;
-            this.label6.Text = "Días reservados:";
-            // 
-            // lblDiasReservados
-            // 
-            this.lblDiasReservados.AutoSize = true;
-            this.lblDiasReservados.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblDiasReservados.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDiasReservados.Location = new System.Drawing.Point(656, 67);
-            this.lblDiasReservados.Name = "lblDiasReservados";
-            this.lblDiasReservados.Size = new System.Drawing.Size(17, 17);
-            this.lblDiasReservados.TabIndex = 22;
-            this.lblDiasReservados.Text = "1";
             // 
             // Reservacion
             // 

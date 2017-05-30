@@ -33,8 +33,8 @@ namespace Hotel
                     ActualizarColores();
                     this.Show();
                     this.WindowState = FormWindowState.Maximized;
+                }
             }
-        }
             else // No se pudo conectar con la base de datos
             {
                 msg = new Msg();
@@ -652,11 +652,13 @@ namespace Hotel
         private void Form1_Activated(object sender, EventArgs e)
         {
             timer3.Start();
+            timer2.Start();
         }
 
         private void Form1_Deactivate(object sender, EventArgs e)
         {
             timer3.Stop();
+            timer2.Stop();
         }
     }
 }

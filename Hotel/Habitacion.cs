@@ -464,6 +464,7 @@ namespace Hotel
             if (lst.SelectedItems.Count > 0)
             {
                 ActivarBotones(true);
+                lst.ContextMenuStrip = contextMenuStrip1;
                 //btnModificar.Enabled = true;
                 //btnEliminar.Enabled = true;
                 //btnEliminar.ForeColor = Color.White;
@@ -473,6 +474,7 @@ namespace Hotel
             else
             {
                 ActivarBotones(false);
+                lst.ContextMenuStrip = null;
                 //btnModificar.Enabled = false;
                 //btnEliminar.Enabled = false;
                 //btnEliminar.ForeColor = Color.Black;
@@ -487,6 +489,21 @@ namespace Hotel
 
             //MessageBox.Show(Ci);
             //MessageBox.Show(lst.SelectedItems[0].SubItems[0].Text);
+        }
+
+        private void activarDesactivarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            btnActDesactivar_Click(null, null);
+        }
+
+        private void modificarHabitaciónToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            btnModificar_Click(null, null);
+        }
+
+        private void eliminarHabitaciónToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            btnEliminar_Click(null, null);
         }
     }
 }

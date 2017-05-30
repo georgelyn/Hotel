@@ -8,7 +8,6 @@ using System.Text;
 using System.Configuration;
 using System.Collections.Generic;
 using System.Globalization;
-//using System.Threading;
 
 namespace Hotel
 {
@@ -16,7 +15,6 @@ namespace Hotel
     {
         public Reservacion()
         {
-            //Thread.CurrentThread.CurrentCulture = new CultureInfo("es-VE");
             InitializeComponent();
 
             if (ResolucionPantalla800x600())
@@ -24,21 +22,14 @@ namespace Hotel
                 this.WindowState = FormWindowState.Maximized;
             }
 
-            /*dtEntrada.Value = DateTime.UtcNow; */// Ocurría un error son esto... 
-            // A las 12 am, el ValueChanged del dtSalida tenía un desajuste en la fecha, como si fuera un día más.
-            // Usando TimeSpan en lugar de TotalDays parece solucionarlo... pero antes me daba la cuenta mal... Seguir probando
-            // Volví a agregarlo... ya que antes de las 12 no cargaba los montos al cambiar tipo habitación. Seguir probando...
-            // ^ Seguía pasando. Ver *
-
-            // Un día después de fecha actual, con hora 2:00 pm
-            //DateTime fechaSalida = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 14, 0, 0);
-            //fechaSalida = fechaSalida.AddDays(1);
-            //dtSalida.Value = fechaSalida;
-
-            // * Mejor solución, olvidando lo de las 2:00 pm
-
             dtEntrada.Value = DateTime.Now;
-            dtSalida.Value = dtEntrada.Value.AddDays(1);
+            //dtSalida.Value = dtEntrada.Value.AddDays(1);
+
+            // Hago esto y modifiqué los eventos de cuando se cambian los DateTimePicker para reflejar este cambio...
+            // ... pero por ahora no mostraré/haré uso de la hora de salida.
+            DateTime fechaSalida = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 13, 0, 0);
+            fechaSalida = fechaSalida.AddDays(1);
+            dtSalida.Value = fechaSalida;
 
             // Llamada a métodos
             CargarNumHabitaciones("disponible");
@@ -183,24 +174,24 @@ namespace Hotel
             listboxHabitaciones.SelectedIndex = 0;
         }
 
-        public void CargarReservacion(int numero_hab, string estado)
+        public void CargarReservacion(int numeroHab, string estado)
         {
             PanelCedula(true);
 
             //CargarNumHabitaciones("disponible");
             //CargarNumHabitaciones("todas"); // Cargar todas las habitaciones
             //comboHabitacion.SelectedIndex = (numero_hab - 1);
-            comboHabitacion.Text = numero_hab.ToString();
+            comboHabitacion.Text = numeroHab.ToString();
 
             if (estado == "ocupada")
             {
                 linkLblCambiarNumHab.Visible = true;
                 comboHabitacion.Enabled = false;
-                habitacionActual = numero_hab;
+                habitacionActual = numeroHab;
 
                 //CargarNumHabitaciones("disponible"); // No es necesario. Ya se carga al iniciar el formulario
-                comboHabitacion.Items.Add(habitacionActual); // Agregar tambbién la habitación actual
-                comboHabitacion.Text = numero_hab.ToString();
+                comboHabitacion.Items.Add(habitacionActual); // Agregar también la habitación actual
+                comboHabitacion.Text = numeroHab.ToString();
 
                 PanelCedula(false);
                 txtCedula.Enabled = false;
@@ -222,7 +213,7 @@ namespace Hotel
                         " r.ID, r.NumeroHabitacion, r.Notas, CiudadOrigen, CiudadDestino, FechaIngreso, FechaSalida, TipoHabitacion, CostoTotal, Marca, Modelo, Placa, EsCamion " + 
                         " FROM Clientes INNER JOIN Reservaciones r ON Cedula = r.Cliente_Cedula" + 
                         " LEFT JOIN Vehiculos v ON r.Vehiculo_ID = v.ID "+ 
-                        " WHERE r.NumeroHabitacion='" + numero_hab + "'", conn))
+                        " WHERE r.NumeroHabitacion='" + numeroHab + "'", conn))
                     {
                         conn.Open();
 
@@ -269,12 +260,9 @@ namespace Hotel
                                     listboxHabitaciones.SelectedIndex = -1;
                                 }
 
-                                //txtTotal.Text = dr["CostoTotal"].ToString();
                                 txtTotal.Text = string.Format(new CultureInfo("es-ES"), "{0:#,##0.00}", dr["CostoTotal"]);
 
                                 total = double.Parse(dr["CostoTotal"].ToString());
-                                    //total = double.Parse(txtTotal.Text);
-
                             }
                         }
                     }
@@ -297,7 +285,6 @@ namespace Hotel
                 using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
                 {
                     using (SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM Clientes WHERE Cedula ='" + cedula + "'", conn))
-                    //"SELECT cliente.*, modelo, marca, es_camion, placa FROM cliente INNER JOIN vehiculo on cedula = cedula_cliente WHERE cedula ='" + cedula + "'", conn))
                     {
                         conn.Open();
 
@@ -310,16 +297,6 @@ namespace Hotel
                                 txtEdad.Text = dr["Edad"].ToString();
                                 txtTelefono1.Text = dr["Telefono"].ToString();
                                 txtTelefono2.Text = dr["TelefonoExtra"].ToString();
-
-                                ////// Implementar de otra manera. Permitiendo elegir entre varios vehículos
-
-                                //if (Convert.ToBoolean(dr["es_camion"]) == true)
-                                //    checkCamion.Checked = true;
-
-                                //txtMarca.Text = dr["marca"].ToString();
-                                //txtModelo.Text = dr["modelo"].ToString();
-                                //txtPlaca.Text = dr["placa"].ToString();
-
                             }
                         }
                     }
@@ -476,11 +453,7 @@ namespace Hotel
                                 cmd.Parameters.AddWithValue("@modelo", StringExtensions.NullString(StringExtensions.ToTitleCase(txtModelo.Text.Trim())));
                                 cmd.Parameters.AddWithValue("@placa", StringExtensions.NullString(txtPlaca.Text.Trim().ToUpper()));
 
-                            }
-                           
-                            //cmd.Parameters.AddWithValue("@marca", txtMarca.Text.Trim().NullString());
-                            //cmd.Parameters.AddWithValue("@modelo", txtModelo.Text.Trim().NullString());
-                            //cmd.Parameters.AddWithValue("@placa", txtPlaca.Text.Trim().NullString());
+                            }                      
 
                             #endregion
 
@@ -597,10 +570,13 @@ namespace Hotel
 
                             if (conVehiculo)
                             {
-                                bool esCamion = false;
 
-                                if (checkCamion.Checked)
-                                    esCamion = true;
+                                bool esCamion = checkCamion.Checked ? true : false;
+
+                                // bool esCamion = false;
+
+                                // if (checkCamion.Checked)
+                                //     esCamion = true;
 
                                 cmd.Parameters.AddWithValue("@camion", esCamion);
                                 cmd.Parameters.AddWithValue("@marca", StringExtensions.NullString(StringExtensions.ToTitleCase(txtMarca.Text.Trim())));
@@ -894,11 +870,6 @@ namespace Hotel
 
 
                     CargarDatosCliente(txtCedula.Text);//.Replace(".", "").Trim());
-                    //btnModificar.Location = new Point(704, 10);
-                    //btnModificar.Visible = true;
-                    //btnAceptar.Visible = false;
-
-                    // No... Nada con botón Modificar. Más bien debo modificar la parte de ingreso para que sea update en lugar de insert
                 }
 
                 PanelCedula(false);
@@ -985,7 +956,6 @@ namespace Hotel
                 total -= montoCamion;
             }
 
-            //txtTotal.Text = total.ToString();
             txtTotal.Text = string.Format(new CultureInfo("es-ES"), "{0:#,##0.00}", total);
         }
 
@@ -1065,8 +1035,6 @@ namespace Hotel
 
                 vehiculoAlmacenado = true; // El vehículo se encuentra almacenado.
             }
-
-            //MessageBox.Show(idVehiculo[comboVehiculo.SelectedIndex].ToString());
         }
 
         private void linklblNuevoVehiculo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -1087,18 +1055,6 @@ namespace Hotel
 
         private void dtSalida_ValueChanged(object sender, EventArgs e)
         {
-            ////if (dtSalida.Value.Month == dtEntrada.Value.Month)
-            ////{
-            ////    if (dtSalida.Value.Day > dtEntrada.Value.Day)
-            ////    {
-            ////        total /= diasReservados;
-            ////        diasReservados = dtSalida.Value.Day - dtEntrada.Value.Day;
-
-            ////        total *= diasReservados;
-            ////        txtTotal.Text = String.Format(new CultureInfo("es-VE"), "{0:#,##0.00}", total);
-            ////    }
-            ////}
-
             if (dtSalida.Value.Date > dtEntrada.Value.Date)
             {
                 if (checkCamion.Checked) // Feo... pero funciona
@@ -1112,10 +1068,6 @@ namespace Hotel
 
                 lblDiasReservados.Text = diasReservados.ToString();
 
-                //MessageBox.Show(ts.Days.ToString());
-
-                //diasReservados = Convert.ToInt32((dtSalida.Value - dtEntrada.Value).TotalDays);
-
                 total *= diasReservados;
                 if (checkCamion.Checked) // ^ Ahora le vuelvo a agregar el cargo por camión
                 {
@@ -1125,7 +1077,11 @@ namespace Hotel
             }
             else // Si trata de asignar una fecha igual o inferior al de entrada, no le dejo
             {
-                dtSalida.Value = dtEntrada.Value.AddDays(1);
+                DateTime fechaSalida = new DateTime(dtEntrada.Value.Year, dtEntrada.Value.Month, dtEntrada.Value.Day, 13, 0, 0);
+                fechaSalida = fechaSalida.AddDays(1);
+                dtSalida.Value = fechaSalida;
+
+                //dtSalida.Value = dtEntrada.Value.AddDays(1);
             }
 
 
@@ -1135,7 +1091,11 @@ namespace Hotel
         {
             if (dtEntrada.Value.Date >= dtSalida.Value.Date)
             {
-                dtSalida.Value = dtEntrada.Value.AddDays(1);
+                DateTime fechaSalida = new DateTime(dtEntrada.Value.Year, dtEntrada.Value.Month, dtEntrada.Value.Day, 13, 0, 0);
+                fechaSalida = fechaSalida.AddDays(1);
+                dtSalida.Value = fechaSalida;
+
+               // dtSalida.Value = dtEntrada.Value.AddDays(1);
             }
 
             if (checkCamion.Checked) // Feo... pero funciona
@@ -1148,10 +1108,6 @@ namespace Hotel
             diasReservados = ts.Days;
 
             lblDiasReservados.Text = diasReservados.ToString();
-
-            //MessageBox.Show(ts.Days.ToString());
-
-            //diasReservados = Convert.ToInt32((dtSalida.Value - dtEntrada.Value).TotalDays);
 
             total *= diasReservados;
             if (checkCamion.Checked) // ^ Ahora le vuelvo a agregar el cargo por camión
