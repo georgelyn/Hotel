@@ -3,9 +3,6 @@ using System.Windows.Forms;
 using System.Transactions;
 using System.Data.SQLite;
 using System.Drawing;
-using System.Text.RegularExpressions;
-using System.Text;
-using System.Configuration;
 using System.Collections.Generic;
 using System.Globalization;
 
@@ -172,6 +169,36 @@ namespace Hotel
             }
 
             listboxHabitaciones.SelectedIndex = 0;
+        }
+
+        public bool HayReserva(int numeroHab) // Chequear si la reserva existe, útil en caso de que la habitación aparezca como disponible 
+                                  // pero aún se encuentre la reserva en la base de datos
+        {
+            try
+            {
+                using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
+                {
+                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT NumeroHabitacion FROM Reservaciones WHERE NumeroHabitacion='" +  numeroHab + "'", conn))
+                    {
+                        conn.Open();
+                                      
+                        using (SQLiteDataReader dr = cmd.ExecuteReader())
+                        {
+                            if (dr.HasRows)
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Se ha presentado un problema. \nDetalles: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            return false;
         }
 
         public void CargarReservacion(int numeroHab, string estado)

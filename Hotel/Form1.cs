@@ -281,18 +281,23 @@ namespace Hotel
             {
                 ActivarTimerEspera();
 
-                int numero_habitacion = int.Parse(((Button)sender).Text);
+                int numeroHabitacion = int.Parse(((Button)sender).Name.Remove(0, 6));//Text);
                 reservacion = new Reservacion();
 
                 reservacion.PanelCedula(false);
 
                 if (((Button)sender).BackColor == ocupada)
                 {
-                    reservacion.CargarReservacion(numero_habitacion, "ocupada");
+                    reservacion.CargarReservacion(numeroHabitacion, "ocupada");
                 }
                 else if (((Button)sender).BackColor == disponible)
                 {
-                    reservacion.CargarReservacion(numero_habitacion, "disponible");
+                    if (reservacion.HayReserva(numeroHabitacion)) // Aparece como disponible pero aún tiene datos de reserva almacenados
+                    {
+                        CambiarEstadoHabitacion(true, "disponible", numeroHabitacion.ToString());
+                    }
+
+                    reservacion.CargarReservacion(numeroHabitacion, "disponible");
                 }
 
                 reservacion.ShowDialog();
@@ -377,7 +382,15 @@ namespace Hotel
         {
             Button btn = (Button)contextMenuStrip1.SourceControl;
 
-            if (btn.BackColor == limpieza || btn.BackColor == mantenimiento) // Estaba en limpieza o en mantenimiento
+            if (btn.BackColor == disponible) // La habitación aparece disponible pero aún están los datos de la reserva en la base de datos
+            {
+                if (CambiarEstadoHabitacion(true, "disponible", btn.Name.Remove(0, 6)))
+                {
+                    btn.BackColor = disponible;
+                }
+            }
+
+            else if (btn.BackColor == limpieza || btn.BackColor == mantenimiento) // Estaba en limpieza o en mantenimiento
             {
                 if (CambiarEstadoHabitacion(false, "disponible", btn.Name.Remove(0, 6)))
                 {

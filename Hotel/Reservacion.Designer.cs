@@ -350,7 +350,7 @@
             this.lblDiasReservados.AutoSize = true;
             this.lblDiasReservados.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblDiasReservados.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDiasReservados.Location = new System.Drawing.Point(656, 67);
+            this.lblDiasReservados.Location = new System.Drawing.Point(675, 67);
             this.lblDiasReservados.Name = "lblDiasReservados";
             this.lblDiasReservados.Size = new System.Drawing.Size(17, 17);
             this.lblDiasReservados.TabIndex = 22;
@@ -360,7 +360,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(531, 67);
+            this.label6.Location = new System.Drawing.Point(550, 67);
             this.label6.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(114, 15);
