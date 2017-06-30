@@ -51,6 +51,7 @@ namespace Hotel
         bool vehiculoAlmacenado = false; // Se evalúa al cargar reservación (si tiene vehículo agregado). Útil para query de modificar reservación
         int habitacionActual = 0; // Toma su valor en CargarHuespedPorHabitacion. Útil para cambiar habitación en Modificar Reservación
 
+        int idVehiculoReserva; // ID almacenado en la reserva, para cargar el elemento correspondiente en el ComboBox en Cargar Reservación
         List<String> idVehiculo; // Para almacenar los IDs de cada vehículo del cliente
         int numeroVehiculos = 0; // Útil para llevar cuenta de cuántos vehículos tiene registrado el cliente.
 
@@ -195,9 +196,7 @@ namespace Hotel
             catch (Exception ex)
             {
                 MessageBox.Show("Se ha presentado un problema. \nDetalles: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
             }
-
             return false;
         }
 
@@ -254,6 +253,28 @@ namespace Hotel
                                 txtTelefono1.Text = dr["Telefono"].ToString();
                                 txtTelefono2.Text = dr["TelefonoExtra"].ToString();
 
+                                // VEHICULOS
+                                #region Vehiculos
+
+                                if (TieneVehiculo(txtCedula.Text))
+                                {
+                                    comboVehiculo.Visible = true;
+                                    vehiculo = new VerVehiculo();
+                                    idVehiculo = vehiculo.CargarVehiculosPorCedula(txtCedula.Text, comboVehiculo);
+                                }
+
+                                lblVehiculosAlmacenados.Visible = true;
+
+                                if (numeroVehiculos == 0 || numeroVehiculos > 1)
+                                {
+                                    lblVehiculosAlmacenados.Text = $"[{numeroVehiculos}] vehículos almacenados.";
+                                }
+                                else
+                                {
+                                    lblVehiculosAlmacenados.Text = $"[{numeroVehiculos}] vehículo almacenado.";
+                                }
+
+
                                 if (dr["EsCamion"] != DBNull.Value)
                                 {
                                     if (Convert.ToBoolean(dr["EsCamion"]) == true)
@@ -262,6 +283,14 @@ namespace Hotel
                                     vehiculoAlmacenado = true;
                                     //MessageBox.Show("No es null");
                                 }
+
+
+                                if (ReservaTieneVehiculo(numeroHab))
+                                {
+                                    comboVehiculo.SelectedIndex = idVehiculoReserva;
+                                }
+
+                                #endregion
 
                                 txtMarca.Text = dr["Marca"].ToString();
                                 txtModelo.Text = dr["Modelo"].ToString();
@@ -412,7 +441,7 @@ namespace Hotel
                     {
                         if (vehiculoAlmacenado) // Si el vehículo ya está almacenado
                         {
-                            query += "; UPDATE Vehiculos SET EsCamion=@camion, marca=@marca, modelo=@modelo, placa=@placa WHERE ID=@id; UPDATE Reservaciones SET Vehiculo_ID=@id WHERE NumeroHabitacion=@numeroHabitacion";
+                            query += "; UPDATE Vehiculos SET EsCamion=@camion, Marca=@marca, Modelo=@modelo, Placa=@placa WHERE ID=@id; UPDATE Reservaciones SET Vehiculo_ID=@id WHERE NumeroHabitacion=@numeroHabitacion";
                         }
                         else
                         {
@@ -546,7 +575,7 @@ namespace Hotel
                     {
                         if (vehiculoAlmacenado)
                         {
-                            query += "; UPDATE Vehiculos SET EsCamion=@camion, Marca=@marca, Modelo=@modelo, Placa=@placa WHERE ID=(SELECT Vehiculo_ID FROM Reservaciones WHERE NumeroHabitacion=@numeroHabitacion)";
+                            query += "; UPDATE Vehiculos SET EsCamion=@camion, Marca=@marca, Modelo=@modelo, Placa=@placa WHERE ID=@id; UPDATE Reservaciones SET Vehiculo_ID=@id WHERE NumeroHabitacion=@numeroHabitacion";
                         }
                         else
                         {
@@ -597,6 +626,10 @@ namespace Hotel
 
                             if (conVehiculo)
                             {
+                                if (vehiculoAlmacenado)
+                                {
+                                    cmd.Parameters.AddWithValue("@id", idVehiculo[comboVehiculo.SelectedIndex].ToString());
+                                }
 
                                 bool esCamion = checkCamion.Checked ? true : false;
 
@@ -697,7 +730,7 @@ namespace Hotel
             return false; // CLiente no existe
         }
 
-        private bool TieneVehiculo(string cedula)
+        private bool TieneVehiculo(string cedula) // Si el CLIENTE tiene vehículos almacenados
         {
             try
             {
@@ -731,6 +764,59 @@ namespace Hotel
                 MessageBox.Show("Se ha presentado un problema.\nDetalles:\n\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+            return false;
+        }
+
+        private bool ReservaTieneVehiculo(int numeroHab)
+        {
+            try
+            {
+                using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
+                {
+                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT Vehiculo_ID FROM Reservaciones WHERE NumeroHabitacion=@numeroHab", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@numeroHab", numeroHab);
+                        conn.Open();
+
+                        using (SQLiteDataReader dr = cmd.ExecuteReader())
+                        {
+                            if (dr.Read())
+                            {
+                                if (dr["Vehiculo_ID"] != DBNull.Value)
+                                {
+                                    //idVehiculoReserva = int.Parse(dr["Vehiculo_ID"].ToString());
+                                    // return true;
+
+                                    /*for (var i = 0; i < idVehiculo.Count; i++)
+                                    {
+                                        if (dr["Vehiculo_ID"].ToString() == idVehiculo[i])
+                                        {
+                                            MessageBox.Show(idVehiculo[i]);
+                                            idVehiculoReserva = idVehiculo.IndexOf(i.ToString());
+                                            MessageBox.Show(idVehiculoReserva.ToString());
+                                            break;
+                                        }
+                                    }*/
+
+                                    foreach (var id in idVehiculo)
+                                    {
+                                        if (dr["Vehiculo_ID"].ToString() == id)
+                                        {
+                                            idVehiculoReserva = idVehiculo.IndexOf(id);
+                                        }
+                                    }
+
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Se ha presentado un problema.\nDetalles:\n\n" + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             return false;
         }
 

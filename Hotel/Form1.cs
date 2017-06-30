@@ -63,7 +63,7 @@ namespace Hotel
                         }
                         else
                         {
-                            MessageBox.Show("La aplicación se va a cerrar. Puede intentarlo nuevamente.\n\nNota: Si sigue apareciendo este mensaje, es mejor llamar a Georgelyn. :>", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            MessageBox.Show("La aplicación se va a cerrar. Puede intentarlo nuevamente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             Close();
                         }
                     }
@@ -274,9 +274,8 @@ namespace Hotel
                         return;
                     }
                 }
-                //MessageBox.Show("Limpieza - Falta implementar o.ó");
-                ////MessageBox.Show(((Button)sender).Name.Remove(0, 6).ToString());
             }
+
             if (((Button)sender).BackColor == disponible || (((Button)sender).BackColor == ocupada))
             {
                 ActivarTimerEspera();
