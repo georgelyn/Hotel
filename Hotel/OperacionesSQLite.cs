@@ -153,6 +153,25 @@ namespace Hotel
             return false; // No se pudo crear la base de datos
         }
 
+        /*public static void DB_Version()
+        {
+            try
+            {
+                using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
+                {
+                    conn.Open();
+
+                    using (SQLiteCommand cmd = new SQLiteCommand("PRAGMA user_version;"))
+                    {
+                        var valorDB = (long)cmd.ExecuteScalar();
+                    }
+                }
+            } catch (Exception ex)
+            {
+
+            }
+        }*/
+
         //public static void ExisteBaseDeDatos()
         //{
         //    bool crearBaseDatos = true;

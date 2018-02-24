@@ -38,6 +38,10 @@ namespace Hotel
         string idCliente;
         string opcion = ""; // Para que al dar click en Cancelar, cargue el último ListView creado según la opción dada. Toma valor en CargarListview
 
+        public string motivo = ""; // Si está en lista negra.
+        string nombre = "";
+        string cedula = "";
+
         private void CrearListView(string opcion)
         {
             lst = new ListView();
@@ -143,6 +147,11 @@ namespace Hotel
 
                                 if (opcion == "cliente" || opcion == "actual" || opcion == "buscar")
                                 {
+                                    if (dr["Baneado_ID"] != DBNull.Value)
+                                    {
+                                        item.SubItems[0].BackColor = Color.LightGray;
+                                    }
+
                                     item.SubItems.Add(nroClientes.ToString());
                                     item.SubItems.Add(dr["Nombre"].ToString());                                
                                     item.SubItems.Add(dr["Cedula"].ToString());
@@ -200,9 +209,15 @@ namespace Hotel
         {
             try
             {
+                if (!btnNuevaReservacion.Enabled)
+                {
+                    ActivarListaNegra(false);
+                    //btnNuevaReservacion.Enabled = true;
+                }
+
                 using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
                 {
-                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT *, COUNT(distinct v.ID) AS vehiculos, COUNT(distinct r.ID) AS reservaciones FROM Clientes LEFT JOIN Vehiculos v ON Cedula=v.Cliente_Cedula LEFT JOIN Reservaciones r ON Cedula=r.Cliente_Cedula WHERE Clientes.ID=@id", conn))
+                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT *, COUNT(distinct v.ID) AS vehiculos, COUNT(distinct r.ID) AS reservaciones FROM Clientes LEFT JOIN Vehiculos v ON Cedula=v.Cliente_Cedula LEFT JOIN Reservaciones r ON Cedula=r.Cliente_Cedula LEFT JOIN Baneados b ON Cedula=b.Cliente_Cedula WHERE Clientes.ID=@id", conn))
                     {
                         cmd.Parameters.AddWithValue("@id", id);
                         conn.Open();
@@ -213,6 +228,7 @@ namespace Hotel
                             {
                                 txtNombre.Text = dr["Nombre"].ToString();
                                 txtCedula.Text = dr["Cedula"].ToString();
+                                cedula = dr["Cedula"].ToString();
                                 txtEdad.Text = dr["Edad"].ToString();
                                 txtTelefono1.Text = dr["Telefono"].ToString();
                                 txtTelefono2.Text = dr["TelefonoExtra"].ToString();
@@ -242,6 +258,17 @@ namespace Hotel
                                     btnVerReservaciones.Visible = false;
                                 }
                                 lblReservaciones.Text = dr["reservaciones"].ToString();
+
+                                if (dr["Baneado_ID"] != DBNull.Value)
+                                {
+                                    ActivarListaNegra(true);
+
+                                    nombre = dr["Nombre"].ToString();
+                                    motivo = dr["Motivo"].ToString();
+
+                                    var dtLN = DateTime.Parse(dr["Fecha"].ToString());
+                                    lblFechaListaNegra.Text = dtLN.ToString("dd/MMM/yyyy");
+                                }
                             }
                         }
                     }
@@ -251,6 +278,16 @@ namespace Hotel
             {
                 MessageBox.Show("Se ha presentado un problema.\nDetalles:\n\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void ActivarListaNegra(bool opcion)
+        {
+            panelListaNegra.Visible = opcion;
+            /*lblListaNegra.Visible = opcion;
+            lblAgregadoLista.Visible = opcion;
+            lblFechaListaNegra.Visible = opcion;
+            lblDetalles.Visible = opcion;*/
+            btnNuevaReservacion.Enabled = !opcion;
         }
 
         private void CargarReservacionCliente(string cedula)
@@ -391,6 +428,35 @@ namespace Hotel
             }
         }
 
+        public bool EnListaNegra(string cedula)
+        {
+            try
+            {
+                using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
+                {
+                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT Cedula FROM Clientes WHERE Cedula=@cedula AND Baneado_ID IS NOT NULL", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@cedula", cedula);
+                        conn.Open();
+
+                        using (SQLiteDataReader dr = cmd.ExecuteReader())
+                        {
+                            if (dr.HasRows)
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Se ha presentado un problema.\n\n>> " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return false;
+        }
+
         public bool ValidacionCamposTexto()
         {
             TextBox[] txtBox = { txtNombre, txtCedula };
@@ -490,6 +556,8 @@ namespace Hotel
             listboxReservaciones.Visible = false;
 
             panelClienteDesde.Visible = false;
+
+            panelListaNegra.Visible = false;
 
         }
 
@@ -839,6 +907,61 @@ namespace Hotel
                 btnVerReservacion.Visible = true;
             }
         }
+
+        private void lblDetalles_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            AgregarListaNegra agregarListaNegra;
+            using (agregarListaNegra = new AgregarListaNegra())
+            {
+                agregarListaNegra.txtMotivo.Text = motivo;
+                agregarListaNegra.Text = "";
+                agregarListaNegra.btnAgregar.Text = "Modificar";
+
+                agregarListaNegra.lblCliente.Text = nombre;
+                agregarListaNegra.cedula = cedula;
+
+                agregarListaNegra.ShowDialog();
+
+                motivo = agregarListaNegra.txtMotivo.Text; // Actualizar motivo desde el textbox
+
+                /*DialogResult dlgres = agregarListaNegra.ShowDialog();
+                if (dlgres == DialogResult.Yes)
+                {
+                    if (!String.IsNullOrEmpty(agregarListaNegra.txtMotivo.Text))
+                    {
+                        ModificarMotivoListaNegra();
+                    }
+                }
+                else
+                {
+                    return;
+                }*/
+            }
+        }
+
+
+        /*private void ModificarMotivoListaNegra()
+        {
+            try
+            {
+                using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
+                {
+                    using (SQLiteCommand cmd = new SQLiteCommand("UPDATE Baneados SET Motivo=@motivo WHERE Cliente_Cedula=@cedula", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@motivo", motivo);
+                        cmd.Parameters.AddWithValue("@cedula", cedula);
+
+                        conn.Open();
+
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Se presentó un error.\n\n>> " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }*/
     }
 }
 

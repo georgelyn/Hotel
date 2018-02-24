@@ -58,11 +58,23 @@
     <Compile Include="Acerca.Designer.cs">
       <DependentUpon>Acerca.cs</DependentUpon>
     </Compile>
+    <Compile Include="AgregarListaNegra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AgregarListaNegra.Designer.cs">
+      <DependentUpon>AgregarListaNegra.cs</DependentUpon>
+    </Compile>
     <Compile Include="Ajustes.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Ajustes.Designer.cs">
       <DependentUpon>Ajustes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ListaNegra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ListaNegra.Designer.cs">
+      <DependentUpon>ListaNegra.cs</DependentUpon>
     </Compile>
     <Compile Include="ListaVehiculos.cs">
       <SubType>Form</SubType>
@@ -138,6 +150,9 @@
     <EmbeddedResource Include="Acerca.resx">
       <DependentUpon>Acerca.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AgregarListaNegra.resx">
+      <DependentUpon>AgregarListaNegra.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Ajustes.resx">
       <DependentUpon>Ajustes.cs</DependentUpon>
     </EmbeddedResource>
@@ -152,6 +167,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListaNegra.resx">
+      <DependentUpon>ListaNegra.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ListaVehiculos.resx">
       <DependentUpon>ListaVehiculos.cs</DependentUpon>
@@ -269,6 +287,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Bed.ico" />
+    <None Include="Resources\add-icon.png" />
     <None Include="Resources\car64.png" />
     <None Include="Resources\carSee.png" />
     <None Include="Resources\imagen_hotel.jpg" />

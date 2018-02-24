@@ -222,6 +222,7 @@ namespace Hotel
                         conn.Open();
                         cmd.ExecuteNonQuery();
 
+                        //MessageBox.Show(numeroHabitacion);
                         return true; // Se completó sin problemas
                     }
                 }
@@ -232,6 +233,39 @@ namespace Hotel
             }
 
             return false; // Hubo un problema
+        }
+
+        public void ComprobarReservas()
+        {
+            using (reservacion = new Reservacion())
+            {
+                foreach (Button b in tableLayoutPanel1.Controls)
+                {
+                    if (b.BackColor == ocupada)
+                    {
+                        if (!reservacion.HayReserva(int.Parse(b.Name.Remove(0, 6))))
+                        {
+                            //MessageBox.Show(b.Name.Remove(0, 6));
+                            CambiarEstadoHabitacion(false, "disponible", b.Name.Remove(0, 6));
+                            b.BackColor = disponible;
+                            //ActualizarColores();
+
+                        }
+                    }
+
+                    /*if (b.BackColor == disponible)
+                    {
+                        if (reservacion.HayReserva(int.Parse(b.Name.Remove(0, 6))))
+                        {
+                            //MessageBox.Show(b.Name.Remove(0, 6));
+                            CambiarEstadoHabitacion(true, "ocupada", b.Name.Remove(0, 6));
+                            b.BackColor = ocupada;
+                            //ActualizarColores();
+
+                        }
+                    }*/
+                }
+            }
         }
 
         private void button53_Click(object sender, EventArgs e) // Nueva reservación
@@ -287,6 +321,12 @@ namespace Hotel
 
                 if (((Button)sender).BackColor == ocupada)
                 {
+                    if (!reservacion.HayReserva(numeroHabitacion)) // Aparece como ocupada pero NO tiene datos de reserva almacenados
+                    {
+                        CambiarEstadoHabitacion(false, "disponible", numeroHabitacion.ToString());
+                        ActualizarColores();
+                        return;
+                    }
                     reservacion.CargarReservacion(numeroHabitacion, "ocupada");
                 }
                 else if (((Button)sender).BackColor == disponible)
@@ -671,6 +711,12 @@ namespace Hotel
         {
             timer3.Stop();
             timer2.Stop();
+        }
+
+        private void listaNegraToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ListaNegra negra = new ListaNegra();
+            negra.ShowDialog();
         }
     }
 }

@@ -667,10 +667,18 @@ namespace Hotel
             }
         }
 
-        public void EliminarReservacion()
+        public void EliminarReservacion(string cedula)
         {
+            bool comprobar = false;
+
             string query = "DELETE FROM Reservaciones WHERE NumeroHabitacion=@numeroHabitacion;" +
-                "UPDATE Habitaciones SET Estado='disponible' WHERE NumeroHabitacion=@numeroHabitacion";
+                "UPDATE Habitaciones SET Estado = 'disponible' WHERE NumeroHabitacion = @numeroHabitacion";
+
+            if (!String.IsNullOrEmpty(cedula))
+            {
+                //MessageBox.Show(cedula);
+                query = "DELETE FROM Reservaciones WHERE Cliente_Cedula = @cedula";
+            }
 
             try
             {
@@ -678,12 +686,22 @@ namespace Hotel
                 {
                     using (SQLiteCommand cmd = new SQLiteCommand(query, conn))
                     {
+                        if (!String.IsNullOrEmpty(cedula))
+                        {
+                            cmd.Parameters.AddWithValue("@cedula", cedula);
+                            comprobar = true;
+                        }
                         cmd.Parameters.AddWithValue("@numeroHabitacion", habitacionActual);
 
                         conn.Open();
                         cmd.ExecuteNonQuery();
 
                         MessageBox.Show("Datos eliminados correctamente.");
+
+                        if (comprobar)
+                        {
+                            f1.ComprobarReservas();
+                        }
 
                         f1.ActualizarColores();
 
@@ -728,6 +746,35 @@ namespace Hotel
             }
 
             return false; // CLiente no existe
+        }
+
+        public bool TieneReserva(string cedula)
+        {
+            try
+            {
+                using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
+                {
+                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT Nombre FROM CLientes INNER JOIN Reservaciones ON Cedula = Cliente_Cedula WHERE Cedula=@cedula", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@cedula", cedula);
+                        conn.Open();
+
+                        using (SQLiteDataReader dr = cmd.ExecuteReader())
+                        {
+                            if (dr.HasRows)
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Se ha presentado un problema.\nDetalles:\n\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return false;
         }
 
         private bool TieneVehiculo(string cedula) // Si el CLIENTE tiene vehículos almacenados
@@ -963,12 +1010,20 @@ namespace Hotel
                 txtCedula.Text = txtCedula.Text.Replace(".", "").Trim();
                 if (BuscarPorCedula(txtCedula.Text))//.Replace(".", ""))) // Si existe el número de cédula (cliente)
                 {
-                    if (TieneVehiculo(txtCedula.Text))
+                    using (Cliente cliente = new Cliente())
                     {
-                        comboVehiculo.Visible = true;
-                        vehiculo = new VerVehiculo();
-                        idVehiculo = vehiculo.CargarVehiculosPorCedula(txtCedula.Text, comboVehiculo);
+                        if (cliente.EnListaNegra(txtCedula.Text))
+                        {
+                            MessageBox.Show("El cliente se encuentra en la lista negra.", "ATENCIÓN", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                            return;
+                        }
                     }
+                        if (TieneVehiculo(txtCedula.Text))
+                        {
+                            comboVehiculo.Visible = true;
+                            vehiculo = new VerVehiculo();
+                            idVehiculo = vehiculo.CargarVehiculosPorCedula(txtCedula.Text, comboVehiculo);
+                        }
 
                     lblVehiculosAlmacenados.Visible = true;
 
@@ -1049,7 +1104,7 @@ namespace Hotel
             {
                 if (dlgres == DialogResult.Yes)
                 {
-                    EliminarReservacion();
+                    EliminarReservacion("");
                 }
                 else
                 {

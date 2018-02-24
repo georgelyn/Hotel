@@ -43,16 +43,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.verToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.clientesAlmacenadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.habitacionesOcupadasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.vehículosAlmacenadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.acercadeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.administraciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cargoPorCamiónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.contraseñasDelSistemaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tiposDeHabitacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.baseDeDatosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.restablecerBaseDeDatosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.respaldarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.restaurarCopiaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -115,9 +107,6 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblHora = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.button55 = new System.Windows.Forms.Button();
-            this.button54 = new System.Windows.Forms.Button();
-            this.button53 = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.marcarComoDisponibleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -132,6 +121,18 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.timer3 = new System.Windows.Forms.Timer(this.components);
+            this.listaNegraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.button55 = new System.Windows.Forms.Button();
+            this.button54 = new System.Windows.Forms.Button();
+            this.button53 = new System.Windows.Forms.Button();
+            this.clientesAlmacenadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.habitacionesOcupadasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.vehículosAlmacenadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.acercadeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cargoPorCamiónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contraseñasDelSistemaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tiposDeHabitacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.restablecerBaseDeDatosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -295,71 +296,16 @@
             this.verToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
             this.verToolStripMenuItem.Text = "&Ver";
             // 
-            // clientesAlmacenadosToolStripMenuItem
-            // 
-            this.clientesAlmacenadosToolStripMenuItem.Image = global::Hotel.Properties.Resources.browser16;
-            this.clientesAlmacenadosToolStripMenuItem.Name = "clientesAlmacenadosToolStripMenuItem";
-            this.clientesAlmacenadosToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
-            this.clientesAlmacenadosToolStripMenuItem.Text = "&Clientes almacenados";
-            this.clientesAlmacenadosToolStripMenuItem.Click += new System.EventHandler(this.clientesAlmacenadosToolStripMenuItem_Click);
-            // 
-            // habitacionesOcupadasToolStripMenuItem
-            // 
-            this.habitacionesOcupadasToolStripMenuItem.Image = global::Hotel.Properties.Resources.door_icon16;
-            this.habitacionesOcupadasToolStripMenuItem.Name = "habitacionesOcupadasToolStripMenuItem";
-            this.habitacionesOcupadasToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
-            this.habitacionesOcupadasToolStripMenuItem.Text = "&Habitaciones ocupadas";
-            this.habitacionesOcupadasToolStripMenuItem.Click += new System.EventHandler(this.habitacionesOcupadasToolStripMenuItem_Click);
-            // 
-            // vehículosAlmacenadosToolStripMenuItem
-            // 
-            this.vehículosAlmacenadosToolStripMenuItem.Image = global::Hotel.Properties.Resources.car16;
-            this.vehículosAlmacenadosToolStripMenuItem.Name = "vehículosAlmacenadosToolStripMenuItem";
-            this.vehículosAlmacenadosToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
-            this.vehículosAlmacenadosToolStripMenuItem.Text = "&Vehículos almacenados";
-            this.vehículosAlmacenadosToolStripMenuItem.Click += new System.EventHandler(this.vehículosAlmacenadosToolStripMenuItem_Click);
-            // 
-            // acercadeToolStripMenuItem
-            // 
-            this.acercadeToolStripMenuItem.Image = global::Hotel.Properties.Resources.Source_Code_16;
-            this.acercadeToolStripMenuItem.Name = "acercadeToolStripMenuItem";
-            this.acercadeToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
-            this.acercadeToolStripMenuItem.Text = "Acerca &de";
-            this.acercadeToolStripMenuItem.Click += new System.EventHandler(this.acercadeToolStripMenuItem_Click);
-            // 
             // administraciónToolStripMenuItem
             // 
             this.administraciónToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cargoPorCamiónToolStripMenuItem,
             this.contraseñasDelSistemaToolStripMenuItem,
-            this.tiposDeHabitacionesToolStripMenuItem});
+            this.tiposDeHabitacionesToolStripMenuItem,
+            this.listaNegraToolStripMenuItem});
             this.administraciónToolStripMenuItem.Name = "administraciónToolStripMenuItem";
             this.administraciónToolStripMenuItem.Size = new System.Drawing.Size(115, 20);
             this.administraciónToolStripMenuItem.Text = "&Administración";
-            // 
-            // cargoPorCamiónToolStripMenuItem
-            // 
-            this.cargoPorCamiónToolStripMenuItem.Image = global::Hotel.Properties.Resources.tools_icon;
-            this.cargoPorCamiónToolStripMenuItem.Name = "cargoPorCamiónToolStripMenuItem";
-            this.cargoPorCamiónToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
-            this.cargoPorCamiónToolStripMenuItem.Text = "&Configuración";
-            this.cargoPorCamiónToolStripMenuItem.Click += new System.EventHandler(this.cargoPorCamiónToolStripMenuItem_Click);
-            // 
-            // contraseñasDelSistemaToolStripMenuItem
-            // 
-            this.contraseñasDelSistemaToolStripMenuItem.Image = global::Hotel.Properties.Resources.key_icon16;
-            this.contraseñasDelSistemaToolStripMenuItem.Name = "contraseñasDelSistemaToolStripMenuItem";
-            this.contraseñasDelSistemaToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
-            this.contraseñasDelSistemaToolStripMenuItem.Text = "Contraseñas del &sistema";
-            this.contraseñasDelSistemaToolStripMenuItem.Click += new System.EventHandler(this.contraseñasDelSistemaToolStripMenuItem_Click);
-            // 
-            // tiposDeHabitacionesToolStripMenuItem
-            // 
-            this.tiposDeHabitacionesToolStripMenuItem.Image = global::Hotel.Properties.Resources.door_icon16;
-            this.tiposDeHabitacionesToolStripMenuItem.Name = "tiposDeHabitacionesToolStripMenuItem";
-            this.tiposDeHabitacionesToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
-            this.tiposDeHabitacionesToolStripMenuItem.Text = "&Tipos de habitaciones";
-            this.tiposDeHabitacionesToolStripMenuItem.Click += new System.EventHandler(this.tiposDeHabitacionesToolStripMenuItem_Click);
             // 
             // baseDeDatosToolStripMenuItem
             // 
@@ -370,14 +316,6 @@
             this.baseDeDatosToolStripMenuItem.Name = "baseDeDatosToolStripMenuItem";
             this.baseDeDatosToolStripMenuItem.Size = new System.Drawing.Size(114, 20);
             this.baseDeDatosToolStripMenuItem.Text = "&Base de datos";
-            // 
-            // restablecerBaseDeDatosToolStripMenuItem
-            // 
-            this.restablecerBaseDeDatosToolStripMenuItem.Image = global::Hotel.Properties.Resources.Database_icon;
-            this.restablecerBaseDeDatosToolStripMenuItem.Name = "restablecerBaseDeDatosToolStripMenuItem";
-            this.restablecerBaseDeDatosToolStripMenuItem.Size = new System.Drawing.Size(280, 22);
-            this.restablecerBaseDeDatosToolStripMenuItem.Text = "< &Restablecer base de datos >";
-            this.restablecerBaseDeDatosToolStripMenuItem.Click += new System.EventHandler(this.restablecerBaseDeDatosToolStripMenuItem_Click);
             // 
             // respaldarToolStripMenuItem
             // 
@@ -1285,51 +1223,6 @@
             this.panel2.Size = new System.Drawing.Size(784, 83);
             this.panel2.TabIndex = 58;
             // 
-            // button55
-            // 
-            this.button55.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.button55.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button55.Image = global::Hotel.Properties.Resources.door_icon32;
-            this.button55.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button55.Location = new System.Drawing.Point(350, 10);
-            this.button55.Name = "button55";
-            this.button55.Size = new System.Drawing.Size(133, 64);
-            this.button55.TabIndex = 60;
-            this.button55.Text = "Habitaciones Ocupadas";
-            this.button55.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button55.UseVisualStyleBackColor = false;
-            this.button55.Click += new System.EventHandler(this.button55_Click);
-            // 
-            // button54
-            // 
-            this.button54.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.button54.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button54.Image = global::Hotel.Properties.Resources.browser32;
-            this.button54.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button54.Location = new System.Drawing.Point(191, 10);
-            this.button54.Name = "button54";
-            this.button54.Size = new System.Drawing.Size(153, 64);
-            this.button54.TabIndex = 59;
-            this.button54.Text = "Lista de Clientes";
-            this.button54.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button54.UseVisualStyleBackColor = false;
-            this.button54.Click += new System.EventHandler(this.button54_Click);
-            // 
-            // button53
-            // 
-            this.button53.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.button53.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button53.Image = global::Hotel.Properties.Resources.compose_icon32;
-            this.button53.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button53.Location = new System.Drawing.Point(12, 10);
-            this.button53.Name = "button53";
-            this.button53.Size = new System.Drawing.Size(173, 64);
-            this.button53.TabIndex = 52;
-            this.button53.Text = "Nueva Reservación";
-            this.button53.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button53.UseVisualStyleBackColor = false;
-            this.button53.Click += new System.EventHandler(this.button53_Click);
-            // 
             // timer1
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
@@ -1432,6 +1325,122 @@
             // 
             this.timer3.Interval = 20000;
             this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
+            // 
+            // listaNegraToolStripMenuItem
+            // 
+            this.listaNegraToolStripMenuItem.Name = "listaNegraToolStripMenuItem";
+            this.listaNegraToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
+            this.listaNegraToolStripMenuItem.Text = "Lista negra";
+            this.listaNegraToolStripMenuItem.Click += new System.EventHandler(this.listaNegraToolStripMenuItem_Click);
+            // 
+            // button55
+            // 
+            this.button55.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.button55.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button55.Image = global::Hotel.Properties.Resources.door_icon32;
+            this.button55.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button55.Location = new System.Drawing.Point(350, 10);
+            this.button55.Name = "button55";
+            this.button55.Size = new System.Drawing.Size(133, 64);
+            this.button55.TabIndex = 60;
+            this.button55.Text = "Habitaciones Ocupadas";
+            this.button55.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button55.UseVisualStyleBackColor = false;
+            this.button55.Click += new System.EventHandler(this.button55_Click);
+            // 
+            // button54
+            // 
+            this.button54.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.button54.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button54.Image = global::Hotel.Properties.Resources.browser32;
+            this.button54.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button54.Location = new System.Drawing.Point(191, 10);
+            this.button54.Name = "button54";
+            this.button54.Size = new System.Drawing.Size(153, 64);
+            this.button54.TabIndex = 59;
+            this.button54.Text = "Lista de Clientes";
+            this.button54.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button54.UseVisualStyleBackColor = false;
+            this.button54.Click += new System.EventHandler(this.button54_Click);
+            // 
+            // button53
+            // 
+            this.button53.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.button53.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button53.Image = global::Hotel.Properties.Resources.compose_icon32;
+            this.button53.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button53.Location = new System.Drawing.Point(12, 10);
+            this.button53.Name = "button53";
+            this.button53.Size = new System.Drawing.Size(173, 64);
+            this.button53.TabIndex = 52;
+            this.button53.Text = "Nueva Reservación";
+            this.button53.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button53.UseVisualStyleBackColor = false;
+            this.button53.Click += new System.EventHandler(this.button53_Click);
+            // 
+            // clientesAlmacenadosToolStripMenuItem
+            // 
+            this.clientesAlmacenadosToolStripMenuItem.Image = global::Hotel.Properties.Resources.browser16;
+            this.clientesAlmacenadosToolStripMenuItem.Name = "clientesAlmacenadosToolStripMenuItem";
+            this.clientesAlmacenadosToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.clientesAlmacenadosToolStripMenuItem.Text = "&Clientes almacenados";
+            this.clientesAlmacenadosToolStripMenuItem.Click += new System.EventHandler(this.clientesAlmacenadosToolStripMenuItem_Click);
+            // 
+            // habitacionesOcupadasToolStripMenuItem
+            // 
+            this.habitacionesOcupadasToolStripMenuItem.Image = global::Hotel.Properties.Resources.door_icon16;
+            this.habitacionesOcupadasToolStripMenuItem.Name = "habitacionesOcupadasToolStripMenuItem";
+            this.habitacionesOcupadasToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.habitacionesOcupadasToolStripMenuItem.Text = "&Habitaciones ocupadas";
+            this.habitacionesOcupadasToolStripMenuItem.Click += new System.EventHandler(this.habitacionesOcupadasToolStripMenuItem_Click);
+            // 
+            // vehículosAlmacenadosToolStripMenuItem
+            // 
+            this.vehículosAlmacenadosToolStripMenuItem.Image = global::Hotel.Properties.Resources.car16;
+            this.vehículosAlmacenadosToolStripMenuItem.Name = "vehículosAlmacenadosToolStripMenuItem";
+            this.vehículosAlmacenadosToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.vehículosAlmacenadosToolStripMenuItem.Text = "&Vehículos almacenados";
+            this.vehículosAlmacenadosToolStripMenuItem.Click += new System.EventHandler(this.vehículosAlmacenadosToolStripMenuItem_Click);
+            // 
+            // acercadeToolStripMenuItem
+            // 
+            this.acercadeToolStripMenuItem.Image = global::Hotel.Properties.Resources.Source_Code_16;
+            this.acercadeToolStripMenuItem.Name = "acercadeToolStripMenuItem";
+            this.acercadeToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.acercadeToolStripMenuItem.Text = "Acerca &de";
+            this.acercadeToolStripMenuItem.Click += new System.EventHandler(this.acercadeToolStripMenuItem_Click);
+            // 
+            // cargoPorCamiónToolStripMenuItem
+            // 
+            this.cargoPorCamiónToolStripMenuItem.Image = global::Hotel.Properties.Resources.tools_icon;
+            this.cargoPorCamiónToolStripMenuItem.Name = "cargoPorCamiónToolStripMenuItem";
+            this.cargoPorCamiónToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
+            this.cargoPorCamiónToolStripMenuItem.Text = "&Configuración";
+            this.cargoPorCamiónToolStripMenuItem.Click += new System.EventHandler(this.cargoPorCamiónToolStripMenuItem_Click);
+            // 
+            // contraseñasDelSistemaToolStripMenuItem
+            // 
+            this.contraseñasDelSistemaToolStripMenuItem.Image = global::Hotel.Properties.Resources.key_icon16;
+            this.contraseñasDelSistemaToolStripMenuItem.Name = "contraseñasDelSistemaToolStripMenuItem";
+            this.contraseñasDelSistemaToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
+            this.contraseñasDelSistemaToolStripMenuItem.Text = "Contraseñas del &sistema";
+            this.contraseñasDelSistemaToolStripMenuItem.Click += new System.EventHandler(this.contraseñasDelSistemaToolStripMenuItem_Click);
+            // 
+            // tiposDeHabitacionesToolStripMenuItem
+            // 
+            this.tiposDeHabitacionesToolStripMenuItem.Image = global::Hotel.Properties.Resources.door_icon16;
+            this.tiposDeHabitacionesToolStripMenuItem.Name = "tiposDeHabitacionesToolStripMenuItem";
+            this.tiposDeHabitacionesToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
+            this.tiposDeHabitacionesToolStripMenuItem.Text = "&Tipos de habitaciones";
+            this.tiposDeHabitacionesToolStripMenuItem.Click += new System.EventHandler(this.tiposDeHabitacionesToolStripMenuItem_Click);
+            // 
+            // restablecerBaseDeDatosToolStripMenuItem
+            // 
+            this.restablecerBaseDeDatosToolStripMenuItem.Image = global::Hotel.Properties.Resources.Database_icon;
+            this.restablecerBaseDeDatosToolStripMenuItem.Name = "restablecerBaseDeDatosToolStripMenuItem";
+            this.restablecerBaseDeDatosToolStripMenuItem.Size = new System.Drawing.Size(280, 22);
+            this.restablecerBaseDeDatosToolStripMenuItem.Text = "< &Restablecer base de datos >";
+            this.restablecerBaseDeDatosToolStripMenuItem.Click += new System.EventHandler(this.restablecerBaseDeDatosToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -1571,6 +1580,7 @@
         private System.Windows.Forms.ToolStripMenuItem acercadeToolStripMenuItem;
         private System.Windows.Forms.Timer timer3;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripMenuItem listaNegraToolStripMenuItem;
     }
 }
 

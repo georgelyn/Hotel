@@ -76,12 +76,18 @@
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.lblTelefono = new System.Windows.Forms.Label();
             this.lblNombre = new System.Windows.Forms.Label();
+            this.lblListaNegra = new System.Windows.Forms.Label();
+            this.lblDetalles = new System.Windows.Forms.LinkLabel();
+            this.lblAgregadoLista = new System.Windows.Forms.Label();
+            this.lblFechaListaNegra = new System.Windows.Forms.Label();
+            this.panelListaNegra = new System.Windows.Forms.Panel();
             this.toolStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panelClienteDesde.SuspendLayout();
             this.panelListboxHabitaciones.SuspendLayout();
+            this.panelListaNegra.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -249,6 +255,7 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.panelListaNegra);
             this.panel2.Controls.Add(this.panelClienteDesde);
             this.panel2.Controls.Add(this.btnVerReservacion);
             this.panel2.Controls.Add(this.panel4);
@@ -581,6 +588,68 @@
             this.lblNombre.TabIndex = 123;
             this.lblNombre.Text = "Nombre:";
             // 
+            // lblListaNegra
+            // 
+            this.lblListaNegra.AutoSize = true;
+            this.lblListaNegra.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblListaNegra.ForeColor = System.Drawing.Color.Red;
+            this.lblListaNegra.Location = new System.Drawing.Point(20, 9);
+            this.lblListaNegra.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblListaNegra.Name = "lblListaNegra";
+            this.lblListaNegra.Size = new System.Drawing.Size(284, 16);
+            this.lblListaNegra.TabIndex = 159;
+            this.lblListaNegra.Text = "El cliente se encuentra en la lista negra.";
+            // 
+            // lblDetalles
+            // 
+            this.lblDetalles.AutoSize = true;
+            this.lblDetalles.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDetalles.Location = new System.Drawing.Point(311, 9);
+            this.lblDetalles.Name = "lblDetalles";
+            this.lblDetalles.Size = new System.Drawing.Size(85, 16);
+            this.lblDetalles.TabIndex = 160;
+            this.lblDetalles.TabStop = true;
+            this.lblDetalles.Text = "Más detalles";
+            this.lblDetalles.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblDetalles_LinkClicked);
+            // 
+            // lblAgregadoLista
+            // 
+            this.lblAgregadoLista.AutoSize = true;
+            this.lblAgregadoLista.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAgregadoLista.ForeColor = System.Drawing.Color.Red;
+            this.lblAgregadoLista.Location = new System.Drawing.Point(20, 35);
+            this.lblAgregadoLista.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblAgregadoLista.Name = "lblAgregadoLista";
+            this.lblAgregadoLista.Size = new System.Drawing.Size(157, 16);
+            this.lblAgregadoLista.TabIndex = 161;
+            this.lblAgregadoLista.Text = "Agregado a la lista el";
+            // 
+            // lblFechaListaNegra
+            // 
+            this.lblFechaListaNegra.AutoSize = true;
+            this.lblFechaListaNegra.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFechaListaNegra.ForeColor = System.Drawing.Color.Red;
+            this.lblFechaListaNegra.Location = new System.Drawing.Point(176, 35);
+            this.lblFechaListaNegra.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblFechaListaNegra.Name = "lblFechaListaNegra";
+            this.lblFechaListaNegra.Size = new System.Drawing.Size(104, 16);
+            this.lblFechaListaNegra.TabIndex = 162;
+            this.lblFechaListaNegra.Text = "dd/MMM/yyyy";
+            // 
+            // panelListaNegra
+            // 
+            this.panelListaNegra.BackColor = System.Drawing.Color.DarkGray;
+            this.panelListaNegra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelListaNegra.Controls.Add(this.lblListaNegra);
+            this.panelListaNegra.Controls.Add(this.lblAgregadoLista);
+            this.panelListaNegra.Controls.Add(this.lblFechaListaNegra);
+            this.panelListaNegra.Controls.Add(this.lblDetalles);
+            this.panelListaNegra.Location = new System.Drawing.Point(39, 13);
+            this.panelListaNegra.Name = "panelListaNegra";
+            this.panelListaNegra.Size = new System.Drawing.Size(404, 66);
+            this.panelListaNegra.TabIndex = 163;
+            this.panelListaNegra.Visible = false;
+            // 
             // Cliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -603,6 +672,8 @@
             this.panelClienteDesde.ResumeLayout(false);
             this.panelClienteDesde.PerformLayout();
             this.panelListboxHabitaciones.ResumeLayout(false);
+            this.panelListaNegra.ResumeLayout(false);
+            this.panelListaNegra.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -657,5 +728,10 @@
         private System.Windows.Forms.Button btnVerReservacion;
         private System.Windows.Forms.Label lblClienteDesde;
         private System.Windows.Forms.Panel panelClienteDesde;
+        private System.Windows.Forms.LinkLabel lblDetalles;
+        private System.Windows.Forms.Label lblListaNegra;
+        private System.Windows.Forms.Label lblFechaListaNegra;
+        private System.Windows.Forms.Label lblAgregadoLista;
+        private System.Windows.Forms.Panel panelListaNegra;
     }
 }
