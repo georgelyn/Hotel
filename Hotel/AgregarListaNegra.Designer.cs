@@ -78,9 +78,9 @@
             // btnAgregar
             // 
             this.btnAgregar.DialogResult = System.Windows.Forms.DialogResult.Yes;
-            this.btnAgregar.Location = new System.Drawing.Point(239, 255);
+            this.btnAgregar.Location = new System.Drawing.Point(236, 251);
             this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(84, 30);
+            this.btnAgregar.Size = new System.Drawing.Size(87, 34);
             this.btnAgregar.TabIndex = 4;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
@@ -89,9 +89,9 @@
             // btnCancelar
             // 
             this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancelar.Location = new System.Drawing.Point(329, 255);
+            this.btnCancelar.Location = new System.Drawing.Point(329, 251);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(84, 30);
+            this.btnCancelar.Size = new System.Drawing.Size(84, 34);
             this.btnCancelar.TabIndex = 5;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
@@ -119,9 +119,12 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(443, 335);
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(443, 335);
             this.Name = "AgregarListaNegra";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

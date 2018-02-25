@@ -19,7 +19,6 @@ namespace Hotel
         public Cliente()
         {
             InitializeComponent();
-
             //CargarListView("cliente");
         }
 
@@ -34,7 +33,7 @@ namespace Hotel
 
         private ListViewColumnSorter lvwColumnSorter;
 
-        bool nuevoCliente = true; // Controlar si estoy agregando un nuevo cliente, o modificando uno existente
+        public bool nuevoCliente = true; // Controlar si estoy agregando un nuevo cliente, o modificando uno existente
         string idCliente;
         string opcion = ""; // Para que al dar click en Cancelar, cargue el último ListView creado según la opción dada. Toma valor en CargarListview
 
@@ -55,14 +54,17 @@ namespace Hotel
             lst.Dock = DockStyle.Fill;
             lst.Font = font_verdana;
 
-            if (opcion == "cliente" || opcion == "actual" || opcion == "buscar")
+            if (opcion == "cliente" || opcion == "actual" || opcion == "buscar" || opcion == "lista_negra")
             {
                 lst.Columns.Add("ID", 0, HorizontalAlignment.Left);
 
                 lst.Columns.Add("Nro.", 50, HorizontalAlignment.Center);
                 lst.Columns.Add("Nombre completo", 350, HorizontalAlignment.Left);
                 lst.Columns.Add("Cédula", 150, HorizontalAlignment.Left);
-                lst.Columns.Add("Reserv. Activas", 150, HorizontalAlignment.Center);
+                if (opcion != "lista_negra")
+                {
+                    lst.Columns.Add("Reserv. Activas", 150, HorizontalAlignment.Center);
+                }
                 lst.Columns.Add("Cliente desde", 126, HorizontalAlignment.Left);
             }
 
@@ -104,23 +106,28 @@ namespace Hotel
 
             if (opcion == "cliente")
             {
-                query = "SELECT *, COUNT(r.ID) AS reservaciones FROM Clientes LEFT JOIN Reservaciones r ON Cedula = Cliente_Cedula GROUP BY Nombre ORDER BY Nombre";
+                query = "SELECT *, COUNT(r.ID) AS reservaciones FROM Clientes LEFT JOIN Reservaciones r ON Cedula = Cliente_Cedula GROUP BY Cedula ORDER BY Nombre";
                 toolStripComboBox1.SelectedIndex = 0;
             }
             else if (opcion == "actual")
             {
-                query = "SELECT *, COUNT(r.ID) AS reservaciones FROM Clientes INNER JOIN Reservaciones r ON Cedula = Cliente_Cedula GROUP BY Nombre ORDER BY Nombre";
+                query = "SELECT *, COUNT(r.ID) AS reservaciones FROM Clientes INNER JOIN Reservaciones r ON Cedula = Cliente_Cedula GROUP BY Cedula ORDER BY Nombre";
                 toolStripComboBox1.SelectedIndex = 1;
             }
             else if (opcion == "buscar")
             {
-                query = "SELECT *, COUNT(r.ID) AS reservaciones FROM Clientes LEFT JOIN Reservaciones r ON Cedula = Cliente_Cedula WHERE Nombre LIKE '%" + txtBuscar.Text.Trim() + "%' OR Cedula LIKE '%" + txtBuscar.Text.Trim().Replace(".", "").Replace(",", "").Replace("-", "") + "%' GROUP BY Nombre";
+                query = "SELECT *, COUNT(r.ID) AS reservaciones FROM Clientes LEFT JOIN Reservaciones r ON Cedula = Cliente_Cedula WHERE Nombre LIKE '%" + txtBuscar.Text.Trim() + "%' OR Cedula LIKE '%" + txtBuscar.Text.Trim().Replace(".", "").Replace(",", "").Replace("-", "") + "%' GROUP BY Cedula";
                 //nombre like '%" + txtBuscar.Text.Trim()  + "% ' or apellido like '%" + txtBuscar.Text.Trim()  + "% ' or cedula like '%" + txtBuscar.Text.Trim() + "% ' GROUP BY nombre ORDER BY id";
             }
             else if (opcion == "habitacion")
             {
                 query = "SELECT Reservaciones.ID as reservacionID, Clientes.ID as id, NumeroHabitacion, Nombre, Cedula, FechaIngreso FROM Clientes INNER JOIN Reservaciones ON Cedula = Cliente_Cedula ORDER BY NumeroHabitacion";
                 toolStripComboBox1.SelectedIndex = 2;
+            }
+            else if (opcion == "lista_negra")
+            {
+                query = "SELECT * FROM Clientes WHERE Baneado_ID IS NOT NULL";
+                toolStripComboBox1.SelectedIndex = 3;
             }
 
             try
@@ -145,18 +152,21 @@ namespace Hotel
                             {
                                 ListViewItem item = new ListViewItem(dr["id"].ToString());
 
-                                if (opcion == "cliente" || opcion == "actual" || opcion == "buscar")
+                                if (opcion == "cliente" || opcion == "actual" || opcion == "buscar" || opcion == "lista_negra")
                                 {
                                     if (dr["Baneado_ID"] != DBNull.Value)
                                     {
-                                        item.SubItems[0].BackColor = Color.LightGray;
+                                        item.SubItems[0].BackColor = Color.Red;
+                                        item.SubItems[0].ForeColor = Color.White;
                                     }
 
                                     item.SubItems.Add(nroClientes.ToString());
                                     item.SubItems.Add(dr["Nombre"].ToString());                                
                                     item.SubItems.Add(dr["Cedula"].ToString());
-                                    item.SubItems.Add(dr["reservaciones"].ToString());
-
+                                    if (opcion != "lista_negra")
+                                    {
+                                        item.SubItems.Add(dr["reservaciones"].ToString());
+                                    }
                                     var dt = DateTime.Parse(dr["ClienteDesde"].ToString());
                                     item.SubItems.Add(dt.ToString("dd/MMM/yyyy"));
                                 }
@@ -205,21 +215,25 @@ namespace Hotel
             }
         }
 
-        private void CargarCliente(string id)
+        public void CargarCliente(string id)
         {
             try
             {
-                if (!btnNuevaReservacion.Enabled)
+                ActivarListaNegra(false);
+
+                /*if (!btnNuevaReservacion.Enabled)
                 {
                     ActivarListaNegra(false);
                     //btnNuevaReservacion.Enabled = true;
-                }
+                }*/
 
                 using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
                 {
                     using (SQLiteCommand cmd = new SQLiteCommand("SELECT *, COUNT(distinct v.ID) AS vehiculos, COUNT(distinct r.ID) AS reservaciones FROM Clientes LEFT JOIN Vehiculos v ON Cedula=v.Cliente_Cedula LEFT JOIN Reservaciones r ON Cedula=r.Cliente_Cedula LEFT JOIN Baneados b ON Cedula=b.Cliente_Cedula WHERE Clientes.ID=@id", conn))
                     {
                         cmd.Parameters.AddWithValue("@id", id);
+                        idCliente = id; // Ahora se carga. Así cuando llame el método viniendo desde Lista Negra, está almacenado el ID
+
                         conn.Open();
 
                         using (SQLiteDataReader dr = cmd.ExecuteReader())
@@ -227,6 +241,9 @@ namespace Hotel
                             while (dr.Read())
                             {
                                 txtNombre.Text = dr["Nombre"].ToString();
+
+                                nombre = dr["Nombre"].ToString();
+
                                 txtCedula.Text = dr["Cedula"].ToString();
                                 cedula = dr["Cedula"].ToString();
                                 txtEdad.Text = dr["Edad"].ToString();
@@ -263,7 +280,7 @@ namespace Hotel
                                 {
                                     ActivarListaNegra(true);
 
-                                    nombre = dr["Nombre"].ToString();
+                                    //nombre = dr["Nombre"].ToString();
                                     motivo = dr["Motivo"].ToString();
 
                                     var dtLN = DateTime.Parse(dr["Fecha"].ToString());
@@ -283,6 +300,7 @@ namespace Hotel
         private void ActivarListaNegra(bool opcion)
         {
             panelListaNegra.Visible = opcion;
+            btnAgregarListaNegra.Visible = !opcion;
             /*lblListaNegra.Visible = opcion;
             lblAgregadoLista.Visible = opcion;
             lblFechaListaNegra.Visible = opcion;
@@ -561,7 +579,7 @@ namespace Hotel
 
         }
 
-        private void ClienteNuevo(bool verdadero) // Si verdadero, se ocultan labels de Reservaciones, Vehículos, btnNuevaReservacion
+        public void ClienteNuevo(bool verdadero) // Si verdadero, se ocultan labels de Reservaciones, Vehículos, btnNuevaReservacion
         {
             if (verdadero)
             {
@@ -572,6 +590,8 @@ namespace Hotel
                 lblReservaciones.Visible = false;
                 lblVehiculos.Visible = false;
                 btnNuevaReservacion.Visible = false;
+
+                btnAgregarListaNegra.Visible = false;
             }
             else
             {
@@ -638,27 +658,38 @@ namespace Hotel
                 {
                     CargarCliente(idCliente);
 
-                    panel1.Controls.Remove(lst);
-                    btnNuevoCliente.Enabled = false;
-                    btnModificar.Enabled = false;
-                    btnEliminar.Enabled = true;
-
-                    btnBuscar.Visible = false;
-                    txtBuscar.Visible = false;
-                    lblBuscar.Visible = false;
-
-                    panel2.Visible = true;
-                    //panel2.BringToFront();
-                    txtNombre.Focus();
+                    PanelCargarCliente();
                 }
             }
+        }
+
+        public void PanelCargarCliente()
+        {
+            panel1.Controls.Remove(lst);
+            btnNuevoCliente.Enabled = false;
+            btnModificar.Enabled = false;
+            if (!EnListaNegra(cedula))
+            {
+                btnEliminar.Enabled = true;
+            }
+            else
+            {
+                btnEliminar.Enabled = false;
+            }
+            btnBuscar.Visible = false;
+            txtBuscar.Visible = false;
+            lblBuscar.Visible = false;
+
+            panel2.Visible = true;
+            //panel2.BringToFront();
+            txtNombre.Focus();
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             if (lst.SelectedItems.Count > 0)
             {
-                if (opcion == "cliente" || opcion == "actual")
+                if (opcion == "cliente" || opcion == "actual" || opcion == "lista_negra")
                 {
                     msg = new Msg();
 
@@ -720,15 +751,29 @@ namespace Hotel
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            CargarListView(opcion);
-            OcultarListbox();
+            if (this.Text != "") // Cuando es llamado desde ListaNegra
+            {
+                CargarListView(opcion);
+                OcultarListbox();
+            }
+            else
+            {
+                Close();
+            }
         }
 
         private void lst_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (lst.SelectedItems.Count > 0)
             {
-                ActivarBotones(true);
+                if (lst.SelectedItems[0].BackColor != Color.Red)
+                {
+                    ActivarBotones(true);
+                }
+                else
+                {
+                    btnModificar.Enabled = true;
+                }
             }
             else
             {
@@ -740,7 +785,7 @@ namespace Hotel
         {
             f1.ActivarTimerEspera();
 
-            if (opcion == "cliente" || opcion == "actual" || opcion == "buscar")
+            if (opcion == "cliente" || opcion == "actual" || opcion == "buscar" || opcion == "lista_negra")
             {
                 btnModificar_Click(null, null);
             }
@@ -832,6 +877,7 @@ namespace Hotel
 
             reservacion.txtCedula.Text = txtCedula.Text.Trim();
             reservacion.ShowDialog();
+            CargarCliente(idCliente);
             //Hide();
 
             //MessageBox.Show("De momento da error el método de Actualizar Colores porque Form1 no está activa. Verificar si sigue siendo el caso una vez que cambie Application.Run a Form1 nuevamente.");
@@ -867,9 +913,13 @@ namespace Hotel
             {
                 CargarListView("actual");
             }
-            else // Habitación
+            else if (toolStripComboBox1.SelectedIndex == 2) // Habitación
             {
                 CargarListView("habitacion");
+            }
+            else // Lista negra
+            {
+                CargarListView("lista_negra");
             }
 
             OcultarListbox();
@@ -936,6 +986,62 @@ namespace Hotel
                 {
                     return;
                 }*/
+            }
+        }
+
+        private void btnAgregarListaNegra_Click(object sender, EventArgs e)
+        {
+            msg = new Msg();
+
+            msg.lblMsg.Text = "¿Está seguro de que desea agregar al cliente a la lista negra?";
+            DialogResult dlgres = msg.ShowDialog();
+            {
+                if (dlgres == DialogResult.Yes)
+                {
+                    using (AgregarListaNegra agregarListaNegra = new AgregarListaNegra())
+                    {
+                        agregarListaNegra.lblCliente.Text = nombre;
+                        DialogResult agregar = agregarListaNegra.ShowDialog();
+
+                        if (agregar == DialogResult.Yes)
+                        {
+                            using (ListaNegra lista = new ListaNegra())
+                            {
+                                lista.AgregarLista(cedula, agregarListaNegra.txtMotivo.Text.Trim());
+                                using (Reservacion reserva = new Reservacion())
+                                {
+                                    if (reserva.TieneReserva(cedula))
+                                    {
+                                        reserva.EliminarReservacion(cedula);
+                                    }
+                                }
+                                f1.ActivarTimerEspera();
+
+                                // Desactivar botón de Eliminar cuando agrego a alguien a la lista
+                                btnEliminar.Enabled = false;
+                                btnEliminar.ForeColor = Color.Black;
+                                btnEliminar.BackColor = Color.Transparent;
+
+                                if (this.Text != "") // Como cuando se llama desde ListaNegra
+                                {
+                                    CargarCliente(idCliente);
+                                }
+                                else
+                                {
+                                    Close();
+                                }
+                            }
+                        }
+                        else
+                        {
+                            return;
+                        }
+                    }
+                }
+                else
+                {
+                    return;
+                }
             }
         }
 

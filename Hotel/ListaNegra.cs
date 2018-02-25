@@ -26,6 +26,8 @@ namespace Hotel
         string cedula;
         string motivo = "";
 
+        string cliente_ID;
+
 
         private void CrearListView()
         {
@@ -99,6 +101,7 @@ namespace Hotel
                                 while (dr.Read())
                                 {
                                     ListViewItem item = new ListViewItem(dr["ID"].ToString());
+                                    //cliente_ID = dr["ID"].ToString();
 
                                     item.SubItems.Add(numero.ToString());
                                     item.SubItems.Add(dr["Nombre"].ToString());
@@ -141,7 +144,7 @@ namespace Hotel
 
         }
 
-        private void AgregarLista()
+        public void AgregarLista(string cedula, string motivo)
         {
             string query = "INSERT INTO Baneados (Cliente_Cedula, Fecha, Motivo) VALUES (@cedula, @fecha, @motivo);" +
                 "UPDATE Clientes SET Baneado_ID=last_insert_rowid() WHERE Cedula = @cedula";
@@ -209,7 +212,27 @@ namespace Hotel
 
         private void lst_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            throw new NotImplementedException();
+            using (Cliente cliente = new Cliente())
+            {
+                cliente.nuevoCliente = false;
+                cliente.ClienteNuevo(false);
+                cliente.PanelCargarCliente();
+                cliente_ID = lst.SelectedItems[0].SubItems[0].Text.ToString();
+                cliente.CargarCliente(cliente_ID);
+                cliente.toolStrip1.Visible = false; // Panel con botón eliminar, búsqueda...
+                cliente.Text = ""; // Controlar desde Clientes cuando es llamado desde aquí
+                cliente.ShowDialog();
+                CargarListView("lista_negra");
+                if (btnAgregar.Visible)
+                {
+                    btnAgregar.Visible = false;
+                }
+            }
+                    
+
+                //MessageBox.Show("No lo he implementado. >.< !", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            //throw new NotImplementedException();
 
             // Ver ficha cliente
 
@@ -276,7 +299,7 @@ namespace Hotel
                         if (agregarResult == DialogResult.Yes)
                         {
                             motivo = confirmar.txtMotivo.Text;
-                            AgregarLista();
+                            AgregarLista(cedula, motivo);
                             if (reserva.TieneReserva(cedula))
                             {
                                 reserva.EliminarReservacion(cedula);
