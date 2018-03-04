@@ -93,7 +93,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(32, 16);
             this.label5.TabIndex = 6;
-            this.label5.Text = "v1.2";
+            this.label5.Text = "v2.0";
             // 
             // panel2
             // 

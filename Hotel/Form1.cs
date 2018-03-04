@@ -69,19 +69,28 @@ namespace Hotel
                     }
                     else if (dlgres == DialogResult.No) // Restaurar una copia
                     {
+                        //int x = 0;
+
                         OperacionesSQLite.Eliminar(); // SQLite al no encontrar el archivo, lo vuelve a crear. Así elimino el vacío.
 
-                        if (OperacionesSQLite.RestaurarCopia())
-                        {
-                            Inicio inicio = new Inicio();
-                            if (inicio.ShowDialog() == DialogResult.OK)
+                        //if (OperacionesSQLite.RestaurarCopia())
+                        //do
+                        //{
+                            if (OperacionesSQLite.RestaurarCopia())
                             {
-                                ActualizarColores();
-                                this.Show();
+                                //x = 1;
+                                Inicio inicio = new Inicio();
+                                if (inicio.ShowDialog() == DialogResult.OK)
+                                {
+                                    ActualizarColores();
+                                    this.Show();
+                                    this.WindowState = FormWindowState.Maximized;
+                                    //break;
+                                }
                             }
                             //MessageBox.Show("La base de datos ha sido restaurada.\nLa aplicación se cerrará. Por favor, vuelva a abrirla.", "Copia restaurada", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             //Close();
-                        }
+                        //} while (x == 0 || dlgres == DialogResult.Cancel); //(!OperacionesSQLite.RestaurarCopia());
                         else
                         {
                             Close();
@@ -718,5 +727,27 @@ namespace Hotel
             ListaNegra negra = new ListaNegra();
             negra.ShowDialog();
         }
+
+        /*private void button56_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
+                {
+                    using (SQLiteCommand cmd = new SQLiteCommand("DELETE FROM Baneados", conn))
+                    {
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+
+                        MessageBox.Show("Lista negra eliminada.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error " + ex.Message);
+            }
+
+        }*/
     }
 }

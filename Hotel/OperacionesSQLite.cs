@@ -12,9 +12,12 @@ namespace Hotel
     {
         private static string carpetaRespaldos = ConfigurationManager.AppSettings["CarpetaRespaldos"];
 
+        private static bool versionNueva;
+
         #region Query para crear la base de datos
         private static string queryCrearBaseDatos = @"CREATE TABLE IF NOT EXISTS [Clientes] (
                           [ID] INTEGER PRIMARY KEY AUTOINCREMENT,
+                        [Baneado_ID] INTEGER REFERENCES Baneados (ID) ON DELETE SET NULL,
                         [Nombre] VARCHAR (300) NOT NULL,
                         [Cedula] VARCHAR(100) NOT NULL UNIQUE,
                         [Edad] VARCHAR(10),
@@ -22,6 +25,13 @@ namespace Hotel
                         [TelefonoExtra] VARCHAR(50),
                         [ClienteDesde] DATE,
                         [Notas] VARCHAR(500)
+                    );
+
+                        CREATE TABLE IF NOT EXISTS [Baneados] (
+                        [ID] INTEGER PRIMARY KEY AUTOINCREMENT,
+                        [Cliente_Cedula] VARCHAR (100) REFERENCES Clientes (Cedula) ON UPDATE CASCADE,
+                        [Fecha] DATE,
+                        [Motivo] VARCHAR (500) 
                     );
 
                         CREATE TABLE IF NOT EXISTS [Habitaciones] (
@@ -85,26 +95,45 @@ namespace Hotel
             {
                 using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
                 {
-                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT name FROM sqlite_master WHERE type = 'table' AND name = 'TipoHabitacion'", conn))
+                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT name FROM sqlite_master WHERE type = 'table' AND name = 'Baneados'", conn))
                     {
                         conn.Open();
 
-                        using (SQLiteDataReader dr = cmd.ExecuteReader())
+                        using (SQLiteDataReader dr = cmd.ExecuteReader()) 
                         {
                             if (dr.HasRows) // Si existe/no hay problemas
                             {
+                                /*if (!VersionNueva(conn.ConnectionString)) // Si no es la vrsión nueva (con Baneados)
+                                {
+                                    //MessageBox.Show("vieja"); // NO SE EJECUTA >.< MEMORIA?
+                                    if (ActualizarBaseDatos(conn.ConnectionString)) // Se realizan los cambios necesarios automáticamente
+                                    {
+                                        return true;
+                                    }
+                                }*/
+
                                 return true;
                             }
+                            else
+                            {
+                                if (ConexionExitosa(conn.ConnectionString, false)) // Si el de arriba falla pero la base de datos es válida, sólo vieja
+                                { // Y si no es válida, no muestres ese mensaje - porque igual saltará la ventana para restaurar o restablecer
+                                    if (ActualizarBaseDatos(conn.ConnectionString)) // Se realizan los cambios necesarios automáticamente
+                                    {
+                                        return true;
+                                    }
+                                }
+                            }
                         }
-
-                        return false;
                     }
                 }
             }
             catch (Exception)
             {
-                return false;
+               // return false;
             }
+
+            return false;
         }
 
         public static bool CrearBaseDeDatos()
@@ -207,7 +236,7 @@ namespace Hotel
             {
                 using (SQLiteConnection conn = new SQLiteConnection(ConexionBD.connstring))
                 {
-                    using (SQLiteCommand cmd = new SQLiteCommand("DELETE FROM Clientes; DELETE FROM SQLITE_SEQUENCE WHERE name='Clientes'; DELETE FROM Reservaciones; DELETE FROM SQLITE_SEQUENCE WHERE name='Reservaciones'; DELETE FROM Vehiculos; DELETE FROM SQLITE_SEQUENCE WHERE name='Vehiculos'; UPDATE Habitaciones SET Estado='disponible'", conn))
+                    using (SQLiteCommand cmd = new SQLiteCommand("DELETE FROM Baneados; DELETE FROM SQLITE_SEQUENCE WHERE name='Baneados'; DELETE FROM Clientes; DELETE FROM SQLITE_SEQUENCE WHERE name='Clientes'; DELETE FROM Reservaciones; DELETE FROM SQLITE_SEQUENCE WHERE name='Reservaciones'; DELETE FROM Vehiculos; DELETE FROM SQLITE_SEQUENCE WHERE name='Vehiculos'; UPDATE Habitaciones SET Estado='disponible'", conn))
                     {
                         conn.Open();
                         cmd.ExecuteNonQuery();
@@ -319,7 +348,7 @@ namespace Hotel
             }
         }
 
-        private static bool ConexionExitosa(string nuevaConexion) // Para evitar que se intente restaurar una base de datos no válida
+        private static bool ConexionExitosa(string nuevaConexion, bool mostrarMensaje) // Para evitar que se intente restaurar una base de datos no válida
         {
             try
             {
@@ -333,11 +362,15 @@ namespace Hotel
                         {
                             if (dr.HasRows)
                             {
+                                versionNueva = VersionNueva(nuevaConexion);
                                 return true;
                             }
                             else
                             {
-                                MessageBox.Show("No es un archivo válido. Verifique e intente nuevanemente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                if (mostrarMensaje)
+                                {
+                                    MessageBox.Show(new Form() { TopMost = true }, "No es un archivo válido. Verifique e intente nuevanemente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }
                             }
                         }
                     }
@@ -357,6 +390,71 @@ namespace Hotel
             }
             return false;
         } 
+
+        private static bool VersionNueva(string conexion)
+        {
+            try
+            {
+                using (SQLiteConnection conn = new SQLiteConnection(conexion))
+                {
+                    using (SQLiteCommand cmd = new SQLiteCommand("SELECT name FROM sqlite_master WHERE type = 'table' AND name = 'Baneados'", conn))
+                    {
+                        conn.Open();
+
+                        using (SQLiteDataReader dr = cmd.ExecuteReader())
+                        {
+                            if (dr.HasRows)
+                            {
+                                return true;
+                            }
+                        }
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(new Form() { TopMost = true }, "Se ha presentado un problema.\n\nDetalles: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return false;
+        }
+
+        private static bool ActualizarBaseDatos(string conexion)
+        {
+            try
+            {
+                using (SQLiteConnection conn = new SQLiteConnection(conexion))
+                {
+                    conn.Open();
+
+                    using (SQLiteTransaction transaction = conn.BeginTransaction())
+                    {
+                        using (SQLiteCommand cmd = new SQLiteCommand(@"CREATE TABLE [Baneados] (
+                        [ID] INTEGER PRIMARY KEY AUTOINCREMENT,
+                        [Cliente_Cedula] VARCHAR(100) REFERENCES Clientes(Cedula) ON UPDATE CASCADE,
+                        [Fecha] DATE,
+                        [Motivo] VARCHAR(500));", conn))
+                        {
+                            cmd.ExecuteNonQuery();
+                            cmd.CommandText = "ALTER TABLE Clientes ADD COLUMN Baneado_ID INTEGER REFERENCES Baneados (ID) ON DELETE SET NULL";
+                            cmd.ExecuteNonQuery();
+
+                            transaction.Commit();
+                            MessageBox.Show(new Form() { TopMost = true }, "Se ha actualizado la base de datos.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            return true;
+
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(new Form() { TopMost = true }, "Se ha presentado un problema.\n\nDetalles: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return false;
+        }
 
         //private static bool ActualizarConexion(string ubicacion) // Ya no tengo que actualizarla. El archivo restaurado siempre reemplazará el anterior
         //{
@@ -411,7 +509,7 @@ namespace Hotel
                     string respaldo = openFileDialog1.FileName;
                     string nuevaConexion = @"Data Source=" + respaldo + ";Version=3;New=True;Compress=True;Foreign Keys=ON";
 
-                    if (ConexionExitosa(nuevaConexion)) // Es un archivo de base de datos válido
+                    if (ConexionExitosa(nuevaConexion, true)) // Es un archivo de base de datos válido
                     {
                         Msg msg = new Msg();
 
@@ -420,6 +518,14 @@ namespace Hotel
                         {
                             if (dlgres == DialogResult.Yes)
                             {
+                                if (!versionNueva)
+                                {
+                                    if (!ActualizarBaseDatos(nuevaConexion)) // No se hicieron los cambios correctamente
+                                    {
+                                        return false; // Termina
+                                    }
+                                }
+
                                 //if (File.Exists(Application.StartupPath + "\\HotelCountry.db"))
                                 //{
                                 //    FileInfo archivoAnterior = new FileInfo(Application.StartupPath + "\\HotelCountry.db");
@@ -441,12 +547,11 @@ namespace Hotel
                             }
                         }
                     }
-                    //else
-                    //{
-                    //    MessageBox.Show("No es un archivo válido. Verifique e intente nuevanemente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    //}
+                    /*else
+                    {
+                        MessageBox.Show("No es un archivo válido. Verifique e intente nuevanemente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }*/
                 }
-
             }
             catch (Exception ex)
             {

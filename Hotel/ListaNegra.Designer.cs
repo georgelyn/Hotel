@@ -29,13 +29,14 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ListaNegra));
             this.txtBuscar = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblListaClientes = new System.Windows.Forms.Label();
-            this.btnAgregar = new System.Windows.Forms.Button();
             this.panelLista = new System.Windows.Forms.Panel();
-            this.btnBuscar = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.btnAgregar = new System.Windows.Forms.Button();
+            this.btnBuscar = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,7 +60,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(488, 454);
+            this.panel1.Size = new System.Drawing.Size(492, 458);
             this.panel1.TabIndex = 4;
             // 
             // lblListaClientes
@@ -70,6 +71,21 @@
             this.lblListaClientes.Name = "lblListaClientes";
             this.lblListaClientes.Size = new System.Drawing.Size(0, 16);
             this.lblListaClientes.TabIndex = 4;
+            // 
+            // panelLista
+            // 
+            this.panelLista.BackColor = System.Drawing.Color.White;
+            this.panelLista.Location = new System.Drawing.Point(13, 107);
+            this.panelLista.Name = "panelLista";
+            this.panelLista.Size = new System.Drawing.Size(466, 336);
+            this.panelLista.TabIndex = 0;
+            // 
+            // toolTip1
+            // 
+            this.toolTip1.AutomaticDelay = 100;
+            this.toolTip1.AutoPopDelay = 3000;
+            this.toolTip1.InitialDelay = 100;
+            this.toolTip1.ReshowDelay = 20;
             // 
             // btnAgregar
             // 
@@ -87,14 +103,6 @@
             this.btnAgregar.Visible = false;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
-            // panelLista
-            // 
-            this.panelLista.BackColor = System.Drawing.Color.White;
-            this.panelLista.Location = new System.Drawing.Point(13, 107);
-            this.panelLista.Name = "panelLista";
-            this.panelLista.Size = new System.Drawing.Size(466, 336);
-            this.panelLista.TabIndex = 0;
-            // 
             // btnBuscar
             // 
             this.btnBuscar.Image = global::Hotel.Properties.Resources.search16;
@@ -106,13 +114,6 @@
             this.btnBuscar.UseVisualStyleBackColor = true;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
-            // toolTip1
-            // 
-            this.toolTip1.AutomaticDelay = 100;
-            this.toolTip1.AutoPopDelay = 3000;
-            this.toolTip1.InitialDelay = 100;
-            this.toolTip1.ReshowDelay = 20;
-            // 
             // ListaNegra
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -121,12 +122,14 @@
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(508, 497);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(508, 497);
             this.Name = "ListaNegra";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Clientes en lista negra";
             this.panel1.ResumeLayout(false);

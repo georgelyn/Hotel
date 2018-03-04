@@ -993,7 +993,7 @@ namespace Hotel
         {
             msg = new Msg();
 
-            msg.lblMsg.Text = "¿Está seguro de que desea agregar al cliente a la lista negra?";
+            msg.lblMsg.Text = "¿Está seguro de que desea agregar al cliente a la lista negra? \nNota: Cualquier reserva activa se eliminará.";
             DialogResult dlgres = msg.ShowDialog();
             {
                 if (dlgres == DialogResult.Yes)

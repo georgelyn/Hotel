@@ -101,16 +101,16 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.LightBlue;
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 138);
+            this.panel1.Location = new System.Drawing.Point(0, 134);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(427, 158);
+            this.panel1.Size = new System.Drawing.Size(423, 158);
             this.panel1.TabIndex = 6;
             // 
             // AgregarListaNegra
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(427, 296);
+            this.ClientSize = new System.Drawing.Size(423, 292);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.txtMotivo);
@@ -127,6 +127,7 @@
             this.MinimumSize = new System.Drawing.Size(443, 335);
             this.Name = "AgregarListaNegra";
             this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Confirmación";
             this.ResumeLayout(false);

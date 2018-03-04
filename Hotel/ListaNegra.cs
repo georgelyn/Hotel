@@ -73,7 +73,7 @@ namespace Hotel
 
             if (opcion == "buscar")
             {
-                query = "SELECT ID, Baneado_ID, Nombre, Cedula FROM Clientes WHERE Nombre LIKE '%" + txtBuscar.Text.Trim() + "%' OR Cedula LIKE '%" + txtBuscar.Text.Trim().Replace(".", "").Replace(",", "").Replace("-", "") + "%' GROUP BY Nombre";
+                query = "SELECT ID, Baneado_ID, Nombre, Cedula FROM Clientes WHERE Nombre LIKE '%" + txtBuscar.Text.Trim() + "%' OR Cedula LIKE '%" + txtBuscar.Text.Trim().Replace(".", "").Replace(",", "").Replace("-", "") + "%' GROUP BY Cedula";
                 //lblListaClientes.Visible = false;
             }
             else
@@ -286,7 +286,7 @@ namespace Hotel
             {
                 msg = new Msg();
 
-                msg.lblMsg.Text = $"¿Está seguro de que desea agregar al cliente a la lista negra? \n\nCliente: \"{lst.SelectedItems[0].SubItems[2].Text}\" \nCédula: \"{lst.SelectedItems[0].SubItems[3].Text}\".";
+                msg.lblMsg.Text = $"¿Está seguro de que desea agregar al cliente a la lista negra? \nNota: Cualquier reserva activa se eliminará. \n\nCliente: \"{lst.SelectedItems[0].SubItems[2].Text}\" \nCédula: \"{lst.SelectedItems[0].SubItems[3].Text}\".";
                 DialogResult dlgres = msg.ShowDialog();
                 {
                     if (dlgres == DialogResult.Yes)
