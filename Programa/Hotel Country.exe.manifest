@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="Hotel Country.exe" version="2.0.0.0" publicKeyToken="75aad4bbbaa43f6d" language="neutral" processorArchitecture="x86" type="win32" />
+  <description asmv2:iconFile="Bed.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="Hotel Country" version="2.0.0.0" language="neutral" processorArchitecture="x86" />
+    <commandLine file="Hotel Country.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          UAC Manifest Options
+          If you want to change the Windows User Account Control level replace the 
+          requestedExecutionLevel node with one of the following.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+         If you want to utilize File and Registry Virtualization for backward 
+         compatibility then delete the requestedExecutionLevel node.
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="4" minorVersion="10" buildNumber="0" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="2.0.50727.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Office.Interop.Excel" version="12.0.0.0" publicKeyToken="71E9BCE111E9429C" language="neutral" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Vbe.Interop" version="12.0.0.0" publicKeyToken="71E9BCE111E9429C" language="neutral" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="office" version="12.0.0.0" publicKeyToken="71E9BCE111E9429C" language="neutral" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Hotel Country.exe" size="1484072">
+      <assemblyIdentity name="Hotel Country" version="2.0.0.0" language="neutral" processorArchitecture="x86" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>hQg3xPbjaftrA8Ov09aYhYQhq0M=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="System.Data.SQLite.dll" size="327680">
+      <assemblyIdentity name="System.Data.SQLite" version="1.0.104.0" publicKeyToken="DB937BC2D44FF139" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>AeGWtvFdYLVEPmK3NQ3+D3JUlbg=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="Bed.ico" size="167884">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>LECtj86Wl5Bgs7gbIVoxwofJmHk=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Hotel Country.exe.config" size="467">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>1DSUqDGNmu4L8eE6FfaogP75Adk=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="SQLite.Interop.dll" size="1023488">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>Qj/SXdMf/bLmgq0BUeC8lRuQ14o=</dsig:DigestValue>
+    </hash>
+  </file>
+<publisherIdentity name="CN=Georgelyn" issuerKeyHash="a84e3717df374d0a9ce520180ce7d429af5b20ab" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><DigestValue>SmNawGx4hknjrvFwwtc4ciULDxs=</DigestValue></Reference></SignedInfo><SignatureValue>Q+cT2n4i3H8rxu5XWVnOcpoz0ZicYdBizAWlqrA3Mucnhom6sh3Jh5SWom/ik8lUrk4sYORD2cp6tmVnlTxwb9bGv6mkUwF0f6dj/tE8DIbjKzDEHpltprtmxUhUwqO9FSBu6eHAMHXmIDWFYBEouMENn0H+flnJkCu4EfTaTOUjOAzmld0XNscB6zONCdSAsVnEU12vWMsibqFagRuro4Zg7AYelpwDqRtjhkJpR6M0fjRp+FPTjJ+B6aalby+HrmsSjijFi40UjLOZzBqKZe60KHwGAes2mgQKssfq0I97LjA60ZKqA599mqaJzIjPv5e2iiMeKVzyyUYpb2AZMw==</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>rmW1bqevo7PdBzMA/izQw62/BkSkRWfy3Z70c3nPtZqdYAYybMe2KqaA5zVNXYDndH96HUEEDiOasJejtjMhHoNqcrkolesHDCSV2kjw36ZGmWzMheopKaqoO4/ftXJe8uESaCfeXnIchRRDhuxNqALXLNhv0ITgixMi0Ju3YyryPxGourWoJ3o898OuIVxuM7uj3Os+8NDJUF7gFB3dYjhW9EkhKh5olB5NT2RRmFMq0DVMR2IRXLlx4pllgqwi4KaAzDHUqihN/xH66dfHgeNzhWjI8VSq1bpMQNtpOwM/yV026mHAzOVMePHJ+N/j8nCPX7b0as0VL0zWFPrFEw==</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="1b0f0b257238d7c270f1aee34986786cc05a634a" Description="" Url=""><as:assemblyIdentity name="Hotel Country.exe" version="2.0.0.0" publicKeyToken="75aad4bbbaa43f6d" language="neutral" processorArchitecture="x86" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=Georgelyn</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><DigestValue>NKXeXjZzU/JRODWm48/rOa1UOOc=</DigestValue></Reference></SignedInfo><SignatureValue>Id2ZUVTdtNhy+jX+gfwg7jAvwbeU8+cAgORlqbCrLATIiF9efU6+cl9nz58+NwPC4Y4RSCNygthbBNVgvZIwUCrjAxSst5UEu65fiTQO1si8m9bcXf5VuXbeXTO1txFCI7MKJDYTWScB7Vkq2ldsD4By1mRudWyq019wEvETEMFoddA/YK2x1yi9C+PIcIpi/rPLOXmmWOyVCfYQMVMLH20iXbfAJ6jjS0qaMPHldnDFJafx2qhDbfCS3JJliLkEfxEzKH5h6M1GEX4cuOI9gRn4kSyD1J3CI7Hph6SJXNp1n/FaGSqHFDYRVPZiXr9K7tqDA3WTVLdVyxWgWT2K2g==</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>rmW1bqevo7PdBzMA/izQw62/BkSkRWfy3Z70c3nPtZqdYAYybMe2KqaA5zVNXYDndH96HUEEDiOasJejtjMhHoNqcrkolesHDCSV2kjw36ZGmWzMheopKaqoO4/ftXJe8uESaCfeXnIchRRDhuxNqALXLNhv0ITgixMi0Ju3YyryPxGourWoJ3o898OuIVxuM7uj3Os+8NDJUF7gFB3dYjhW9EkhKh5olB5NT2RRmFMq0DVMR2IRXLlx4pllgqwi4KaAzDHUqihN/xH66dfHgeNzhWjI8VSq1bpMQNtpOwM/yV026mHAzOVMePHJ+N/j8nCPX7b0as0VL0zWFPrFEw==</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIC9TCCAeGgAwIBAgIQSTnpVFLJaZ1KY5wi6gHHTzAJBgUrDgMCHQUAMBQxEjAQBgNVBAMTCUdlb3JnZWx5bjAgFw0xNzAzMjcwNDAwMDBaGA8yMTAwMTIzMTA0MDAwMFowFDESMBAGA1UEAxMJR2VvcmdlbHluMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArmW1bqevo7PdBzMA/izQw62/BkSkRWfy3Z70c3nPtZqdYAYybMe2KqaA5zVNXYDndH96HUEEDiOasJejtjMhHoNqcrkolesHDCSV2kjw36ZGmWzMheopKaqoO4/ftXJe8uESaCfeXnIchRRDhuxNqALXLNhv0ITgixMi0Ju3YyryPxGourWoJ3o898OuIVxuM7uj3Os+8NDJUF7gFB3dYjhW9EkhKh5olB5NT2RRmFMq0DVMR2IRXLlx4pllgqwi4KaAzDHUqihN/xH66dfHgeNzhWjI8VSq1bpMQNtpOwM/yV026mHAzOVMePHJ+N/j8nCPX7b0as0VL0zWFPrFEwIDAQABo0kwRzBFBgNVHQEEPjA8gBDZfqYmARpUc00NpE3lwo5NoRYwFDESMBAGA1UEAxMJR2VvcmdlbHlughBJOelUUslpnUpjnCLqAcdPMAkGBSsOAwIdBQADggEBAKPDXzZpSyLTPZETZwSQjDr41kYV3f+4RPobBkcWRKsBFZ+EJv4fMN5Bee8sjV04GWgwNevwGXRq32A9CsGYjhfhwpBUh9+hug0VCMFL4hMnVADaLk6FSaZbh5rrHeBQ2cdxOmofGInE7FEWbNm4uxb2HH+RFqmZJNfaIvWZ8LCm2irtMiVy2whKSshk3ZWTWdb7tloRwwwf+TUdqybifYBbCZcyFx7TnHGfv438Lsp9aOzGSCB1QCfXG3mw5mJL+yU1viuOztarkfYJgTgd9jMpgZMsFDMmIibIiHyTF7G+rsTcEV0RBvHsuh0Jw/I9pQdO5eCWV9nruKi3/dIGjOs=</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>
